@@ -27,13 +27,13 @@ class UserController extends Controller
     $selectedUsers = User::whereIn('id', $request->users)->get();
 
     // Enviar el correo a cada usuario seleccionado
-    foreach ($selectedUsers as $usuario) {
+    foreach ($selectedUsers as $user) {
       $data = [
-        'nombre'  => $usuario->name,
+        'nombre'  => $user->name,
         'mensaje' => 'Este es un mensaje para ti.',
       ];
 
-      Mail::to($usuario->email)->send(new SendBulkMail($data));
+      Mail::to($user->email)->send(new SendBulkMail($data));
     }
 
     return redirect()->back()->with('success', 'Correos enviados exitosamente');
