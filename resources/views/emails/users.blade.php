@@ -22,6 +22,7 @@
 
       p {
         text-align: justify;
+        font-size: 1.5rem;
       }
 
       .p_inline {
@@ -37,8 +38,8 @@
   <body>
     <div style="font-family: Georgia, serif;">
       <h1>Hola {{ $data['nombre'] }}</h1>
-      
-      <p>{{ $data['mensaje'] }}</p>
+
+      <p class="text-left rtl:text-right text-gray-500 dark:text-gray-400">{{ $data['mensaje'] }}</p>
     </div>
   </body>
 </html>
