@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,3 +19,6 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('usuarios', [UserController::class, 'index'])->name('seleccionar.usuarios');
+Route::post('/enviar-correos', [UserController::class, 'enviarCorreosMasivos'])->name('enviar.correos');
