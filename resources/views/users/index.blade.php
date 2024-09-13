@@ -23,7 +23,7 @@
             </div>
           @endif
 
-          <form action="{{ route('enviar.correos') }}" method="POST">
+          <form action="{{ route('enviar.correos') }}" method="POST" onsubmit="return confirmSubmission();">
             @csrf
             
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -32,9 +32,9 @@
                   <tr>
                     <th scope="col" class="p-4">
                       <div class="flex items-center">
-                        <input id="checkbox-all-search" type="checkbox"
+                        <input type="checkbox" onclick="toggleCheckboxes(this);" id="checkbox-all-search"
                           class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="checkbox-all-search" class="sr-only">Seleccionar</label>
+                        <label for="checkbox-all-search" class="sr-only">Seleccionar Todos</label>
                       </div>
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -72,32 +72,32 @@
               </table>
             </div>
 
-
-            {{-- <table>
-              <thead>
-                <tr>
-                  <th>Seleccionar</th>
-                  <th>Nombre</th>
-                  <th>Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($usuarios as $usuario)
-                  <tr>
-                    <td>
-                      <input type="checkbox" name="usuarios[]" value="{{ $usuario->id }}">
-                    </td>
-                    <td>{{ $usuario->name }}</td>
-                    <td>{{ $usuario->email }}</td>
-                  </tr>
-                @endforeach
-              </tbody>
-            </table> --}}
-
             <x-button-red type="submit">Enviar Correos</x-button-red>
           </form>
         </div>
       </div>
     </div>
   </div>
+
+  @push('scripts')
+    <script>
+      // toggleCheckboxes(source): Esta función se llama cuando el checkbox "Seleccionar Todos" es clicado. Cambia el estado de todos los checkboxes individuales según el estado del checkbox "Seleccionar Todos".
+      function toggleCheckboxes(source) {
+        const checkboxes = document.querySelectorAll('input[name="usuarios[]"]');
+        checkboxes.forEach((checkbox) => {
+          checkbox.checked = source.checked;
+        });
+      }
+
+      // confirmSubmission(): Esta función se llama al enviar el formulario. Verifica si al menos un checkbox está seleccionado. Si no hay ninguno seleccionado, muestra un mensaje de alerta y evita el envío del formulario. Si hay al menos uno seleccionado, muestra un cuadro de confirmación para que el usuario confirme si realmente desea enviar el correo.
+      function confirmSubmission() {
+        const checkboxes = document.querySelectorAll('input[name="usuarios[]"]:checked');
+        if (checkboxes.length === 0) {
+          alert('Por favor, selecciona al menos un usuario para enviar el correo.');
+          return false; // Evita el envío del formulario
+        }
+        return confirm('¿Estás seguro de que deseas enviar el correo a los usuarios seleccionados?');
+      }
+    </script>
+  @endpush
 </x-app-layout>
