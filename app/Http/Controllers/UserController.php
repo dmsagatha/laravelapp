@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Mail\SendBulkMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use Exception;
 
 class UserController extends Controller
 {
@@ -26,16 +27,21 @@ class UserController extends Controller
     // Obtener los usuarios seleccionados
     $selectedUsers = User::whereIn('id', $request->users)->get();
 
-    // Enviar el correo a cada usuario seleccionado
-    foreach ($selectedUsers as $user) {
-      $data = [
-        'nombre'  => $user->name,
-        'mensaje' => 'Este es un mensaje para ti.',
-      ];
+    // Enviar el correo a cada usuario seleccionado y verificar si hubo fallos en el envío
+    try {
+      foreach ($selectedUsers as $user) {
+        $data = [
+          'nombre'  => $user->name,
+          'mensaje' => 'Este es un mensaje para ti.',
+        ];
 
-      Mail::to($user->email)->send(new SendBulkMail($data));
+        Mail::to($user->email)->send(new SendBulkMail($data));
+      }
+
+      return redirect()->back()->with('success', 'Correos enviados exitosamente');
+    } catch (Exception $e) {
+      // Manejo de errores
+      return response()->json(['status' => 'fail', 'message' => 'Error al enviar el correo: ' . $e->getMessage()]);
     }
-
-    return redirect()->back()->with('success', 'Correos enviados exitosamente');
   }
 }
