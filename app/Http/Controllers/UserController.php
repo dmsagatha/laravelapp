@@ -11,23 +11,23 @@ class UserController extends Controller
 {
   public function index()
   {
-    $usuarios = User::all();
+    $users = User::all();
     
-    return view('users.index', compact('usuarios'));
+    return view('users.index', compact('users'));
   }
 
-  public function enviarCorreosMasivos(Request $request)
+  public function sendBulkEmails(Request $request)
   {
     $request->validate([
-      'usuarios'   => 'required|array',
-      'usuarios.*' => 'exists:users,id', // Asegúrate de que los IDs existan
+      'users'   => 'required|array',
+      'users.*' => 'exists:users,id', // Asegurarse de que los IDs existan
     ]);
 
     // Obtener los usuarios seleccionados
-    $usuariosSeleccionados = User::whereIn('id', $request->usuarios)->get();
+    $selectedUsers = User::whereIn('id', $request->users)->get();
 
     // Enviar el correo a cada usuario seleccionado
-    foreach ($usuariosSeleccionados as $usuario) {
+    foreach ($selectedUsers as $usuario) {
       $data = [
         'nombre'  => $usuario->name,
         'mensaje' => 'Este es un mensaje para ti.',

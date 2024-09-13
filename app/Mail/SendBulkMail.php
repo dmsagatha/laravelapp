@@ -26,7 +26,7 @@ class SendBulkMail extends Mailable
   public function envelope(): Envelope
   {
     return new Envelope(
-      subject: 'enviar correos masivos',
+      subject: 'Enviar correos masivos',
     );
   }
 

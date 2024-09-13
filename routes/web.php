@@ -20,5 +20,10 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('usuarios', [UserController::class, 'index'])->name('seleccionar.usuarios');
-Route::post('/enviar-correos', [UserController::class, 'enviarCorreosMasivos'])->name('enviar.correos');
+Route::group(['middleware' => ['auth', 'verified']], function ()
+{
+  Route::prefix('usuarios')->name('user.')->controller(UserController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('enviar-correos', 'sendBulkEmails')->name('send.emails');
+  });
+});

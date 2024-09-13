@@ -23,7 +23,7 @@
             </div>
           @endif
 
-          <form action="{{ route('enviar.correos') }}" method="POST" onsubmit="return confirmSubmission();">
+          <form action="{{ route('user.send.emails') }}" method="POST" onsubmit="return confirmSubmission();">
             @csrf
             
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -49,19 +49,18 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($usuarios as $usuario)
+                  @foreach ($users as $item)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                       <td class="w-4 p-4">
                         <div class="flex items-center">
-                          <input type="checkbox" name="usuarios[]" value="{{ $usuario->id }}" id="checkbox-table-search-1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                          <input type="checkbox" name="users[]" value="{{ $item->id }}" id="checkbox-table-search-1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                           <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
-                          {{-- <input type="checkbox" name="usuarios[]" value="{{ $usuario->id }}"> --}}
                         </div>
                       </td>
                       <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ $usuario->name }}
+                        {{ $item->name }}
                       </th>
-                      <td class="px-6 py-4">{{ $usuario->email }}</td>
+                      <td class="px-6 py-4">{{ $item->email }}</td>
                       <td class="flex items-center px-6 py-4">
                         <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
                         <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Eliminar</a>
@@ -83,7 +82,7 @@
     <script>
       // toggleCheckboxes(source): Esta función se llama cuando el checkbox "Seleccionar Todos" es clicado. Cambia el estado de todos los checkboxes individuales según el estado del checkbox "Seleccionar Todos".
       function toggleCheckboxes(source) {
-        const checkboxes = document.querySelectorAll('input[name="usuarios[]"]');
+        const checkboxes = document.querySelectorAll('input[name="users[]"]');
         checkboxes.forEach((checkbox) => {
           checkbox.checked = source.checked;
         });
@@ -91,7 +90,7 @@
 
       // confirmSubmission(): Esta función se llama al enviar el formulario. Verifica si al menos un checkbox está seleccionado. Si no hay ninguno seleccionado, muestra un mensaje de alerta y evita el envío del formulario. Si hay al menos uno seleccionado, muestra un cuadro de confirmación para que el usuario confirme si realmente desea enviar el correo.
       function confirmSubmission() {
-        const checkboxes = document.querySelectorAll('input[name="usuarios[]"]:checked');
+        const checkboxes = document.querySelectorAll('input[name="users[]"]:checked');
         if (checkboxes.length === 0) {
           alert('Por favor, selecciona al menos un usuario para enviar el correo.');
           return false; // Evita el envío del formulario
