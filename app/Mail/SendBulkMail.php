@@ -18,7 +18,7 @@ class SendBulkMail extends Mailable
    */
   public function __construct(
     public $data
-  )  {}
+  ) {}
 
   /**
    * Get the message envelope.
