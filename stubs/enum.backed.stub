@@ -4,5 +4,4 @@ namespace {{ namespace }};
 
 enum {{ class }}: {{ type }}
 {
-    //
 }
