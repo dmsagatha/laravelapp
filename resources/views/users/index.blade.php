@@ -23,7 +23,7 @@
             </div>
           @endif
 
-          <form action="{{ route('user.send.emails') }}" method="POST" onsubmit="return confirmSubmission();">
+          <form action="{{ route('users.send.emails') }}" method="POST" onsubmit="return confirmSubmission();">
             @csrf
             
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">

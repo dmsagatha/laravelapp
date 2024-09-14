@@ -22,7 +22,7 @@ require __DIR__.'/auth.php';
 
 Route::group(['middleware' => ['auth', 'verified']], function ()
 {
-  Route::prefix('usuarios')->name('user.')->controller(UserController::class)->group(function () {
+  Route::prefix('usuarios')->name('users.')->controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::post('enviar-correos', 'sendBulkEmails')->name('send.emails');
   });
