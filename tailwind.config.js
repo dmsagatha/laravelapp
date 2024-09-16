@@ -10,7 +10,7 @@ export default {
     "./node_modules/flowbite/**/*.js"
   ],
   // darkMode: 'media',
-  darkMode: 'class',    // Con Switch
+  darkMode: 'class',    // How to add dark mode in Laravel (with toggle button)
 
   theme: {
     extend: {
