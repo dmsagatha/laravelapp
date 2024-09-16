@@ -16,11 +16,17 @@
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans text-gray-900 antialiased">
+<body class="font-sans text-gray-900 antialiased"
+    x-data="{ darkMode: localStorage.getItem('dark') === 'true'}"
+    x-init="$watch('darkMode', val => localStorage.setItem('dark', val))"
+    x-bind:class="{'dark': darkMode}"
+    x-cloak
+  >
   <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
 
 
     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+      <x-theme-switcher />
       <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 theme-manager-btn">
         <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
@@ -83,34 +89,6 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
-
-  <script>
-    /* A simple js file for managing the desired layout theme. */
-
-    /* Apply a theme to the document & save the preference to local storage. */
-    function applyTheme(theme) {
-      document.body.classList.toggle('dark', theme === 'dark');
-      document.body.classList.toggle('light', theme === 'light');
-      localStorage.setItem('theme', theme);
-    }
-
-    /* listen for the page load & apply the saved theme if it exists. */
-    document.addEventListener('DOMContentLoaded', () => {
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      applyTheme(savedTheme);
-      document.body.style.display = '';
-    });
-
-
-    /* add event listeners for each theme manager button */
-    let themeBtns = document.getElementsByClassName('theme-manager-btn');
-
-    for (let i = 0; i < themeBtns.length; i++) {
-      themeBtns[i].addEventListener('click', () => {
-        applyTheme(document.body.classList.contains('dark') ? 'light' : 'dark');
-      });
-    }
-  </script>
 
   @stack('scripts')
 </body>

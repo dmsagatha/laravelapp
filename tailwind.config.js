@@ -9,8 +9,8 @@ export default {
     './resources/views/**/*.blade.php',
     "./node_modules/flowbite/**/*.js"
   ],
-  // darkMode: 'media',
-  darkMode: 'class',    // How to add dark mode in Laravel (with toggle button)
+  
+  darkMode: 'class',    // Laravel Breeze: [7] Cambiador de temas
 
   theme: {
     extend: {
