@@ -9,7 +9,8 @@ export default {
     './resources/views/**/*.blade.php',
     "./node_modules/flowbite/**/*.js"
   ],
-  darkMode: 'media',
+  // darkMode: 'media',
+  darkMode: 'class',    // Con Switch
 
   theme: {
     extend: {
