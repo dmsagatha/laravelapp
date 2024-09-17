@@ -19,7 +19,7 @@
       </div>
 
       <div class="flex items-center">
-        <x-theme-select />
+        <x-theme-switcher />
 
         <!-- Settings Dropdown -->
         <div class="hidden sm:flex sm:items-center sm:ms-6">
