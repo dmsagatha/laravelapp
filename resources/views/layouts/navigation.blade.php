@@ -19,7 +19,6 @@
       </div>
 
       <div class="flex items-center">
-        <!-- Botón con íconos de sol y luna -->
         <x-theme-select />
 
         <!-- Settings Dropdown -->
