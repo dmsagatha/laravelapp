@@ -6,10 +6,12 @@ export default {
   content: [
     './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
     './storage/framework/views/*.php',
-    './resources/views/**/*.blade.php',
+    "./resources/**/*.blade.php",
+    "./resources/**/*.js",
     "./node_modules/flowbite/**/*.js"
   ],
-  darkMode: 'media',
+  
+  darkMode: 'class',    // Laravel Breeze: [7] Cambiador de temas
 
   theme: {
     extend: {
@@ -21,6 +23,7 @@ export default {
 
   plugins: [
     forms,
-    require('flowbite/plugin')
+    require('flowbite/plugin'),
+    require('@tailwindcss/typography'),
   ],
 };
