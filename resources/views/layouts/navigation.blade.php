@@ -19,7 +19,8 @@
       </div>
 
       <div class="flex items-center">
-        <x-theme-switcher />
+        <!-- Botón con íconos de sol y luna -->
+        <x-theme-select />
 
         <!-- Settings Dropdown -->
         <div class="hidden sm:flex sm:items-center sm:ms-6">
