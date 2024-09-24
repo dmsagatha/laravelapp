@@ -9,9 +9,7 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-slate-50 dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 text-slate-900 dark:text-slate-100">
-          <h1 class="text-center text-xl text-slate-900 dark:text-slate-50 pb-2">Listado de Usuarios</h1>
-
-          <div class="px-4 py-16 mx-auto sm:py-24 sm:px-6 lg:px-8">
+          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <div class="bg-slate-50 dark:bg-slate-700">
               <div class="px-4 py-12 mx-auto text-center max-w-7xl sm:px-6 lg:py-16 lg:px-8">
                 <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
@@ -213,7 +211,9 @@
             </div>
           </div>
 
-          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+          {{-- <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <h1 class="py-5 text-center text-xl text-slate-900 dark:text-slate-50 pb-2">Listado de Usuarios</h1>
+
             <table class="w-full text-sm text-left rtl:text-right text-slate-500 dark:text-slate-400">
               <thead class="text-xs text-slate-700 uppercase bg-slate-50 dark:bg-slate-700 dark:text-slate-400">
                 <tr>
@@ -249,7 +249,7 @@
                 @endforeach
               </tbody>
             </table>
-          </div>
+          </div> --}}
         </div>
       </div>
     </div>
@@ -278,11 +278,10 @@
             return this.show === true
           },
 
-          // Initializing component 
+          // Inicializando componente
           init() {
             const options = document.getElementById(this.elementId).options;
             for (let i = 0; i < options.length; i++) {
-
               this.options.push({
                 value: options[i].value,
                 text: options[i].innerText,
@@ -295,7 +294,7 @@
               }
             }
 
-            // searching for the given value
+            // Buscando el valor dado
             this.$watch("search", (e => {
               this.options = []
               const options = document.getElementById(this.elementId).options;
@@ -316,11 +315,11 @@
 
             }));
           },
-          // clear search field
+          // Borrar campo de búsqueda
           clear() {
             this.search = ''
           },
-          // deselect selected options
+          // Deseleccionar opciones seleccionadas
           deselect() {
             setTimeout(() => {
               this.selected = []
@@ -330,7 +329,7 @@
               })
             }, 100)
           },
-          // select given option
+          // Seleccionar opción dada
           select(index, event) {
             if (!this.options[index].selected) {
               this.options[index].selected = true;
@@ -350,7 +349,7 @@
               })
             }
           },
-          // remove from selected option
+          // Eliminar de la opción seleccionada
           remove(index, option) {
             this.selectedElms.splice(index, 1);
             Object.keys(this.options).forEach((key) => {
@@ -364,11 +363,11 @@
               }
             })
           },
-          // filter out selected elements
+          // Filtrando elementos seleccionados
           selectedElements() {
             return this.options.filter(op => op.selected === true)
           },
-          // get selected values
+          // Obteniendo valores seleccionados
           selectedValues() {
             return this.options.filter(op => op.selected === true).map(el => el.value)
           }
