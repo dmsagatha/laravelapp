@@ -1,9 +1,11 @@
-import Alpine from 'alpinejs';
-import 'flowbite';
+import Alpine from 'alpinejs'
+import focus from '@alpinejs/focus'
+import 'flowbite'
 
-window.Alpine = Alpine;
+window.Alpine = Alpine
 
-Alpine.start();
+Alpine.plugin(focus)
+Alpine.start()
 
 // Tailwind CSS Dark/Light Mode
 const themeToggleBtn = document.getElementById('theme-toggle');
