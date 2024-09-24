@@ -284,10 +284,7 @@
                   selected: Object.values(this.selected).includes(el.value)
                 }
                 this.options.push(newel);
-
               })
-
-
             }));
           },
           // Borrar campo de búsqueda
