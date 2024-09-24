@@ -30,7 +30,6 @@
               <div class="flex justify-center mt-8">
                 <!-- Define component with preselected options -->
                 <div class="w-full" x-data="alpineMuliSelect({ selected: ['te_11', 'te_12'], elementId: 'multSelect' })">
-
                   <!-- Select Options -->
                   <select class="hidden" id="multSelect">
                     @foreach ($users as $user)
@@ -46,18 +45,18 @@
                   </div>
 
                   <div class="w-full flex flex-col items-center h-64 mx-auto" @keyup.alt="toggle">
-                    <!-- Selected Teams -->
-                    <input name="teams[]" type="hidden" x-bind:value="selectedValues()">
+                    <!-- Selected Users -->
+                    <input name="users[]" type="hidden" x-bind:value="selectedValues()">
 
                     <div class="inline-block relative w-full">
                       <div class="flex flex-col items-center relative">
                         <!-- Selected elements container -->
                         <div class="w-full">
-                          <div class="my-2 p-1 flex border border-slate-200 bg-slate-50 rounded-md">
+                          <div class="my-2 p-1 flex border border-slate-200 bg-slate-50 dark:bg-slate-800 rounded-md">
                             <div class="flex flex-auto flex-wrap" x-on:click="open">
-                              <!-- iterating over selected elements -->
+                              <!-- Iterating over selected elements -->
                               <template x-for="(option,index) in selectedElms" :key="option.value">
-                                <div x-show="index < 2" class="flex justify-center items-center m-1 font-medium py-1 px-2 rounded-full text-indigo-700 bg-indigo-100 border border-indigo-300 ">
+                                <div x-show="index < 2" class="flex justify-center items-center m-1 font-medium py-1 px-2 rounded-full text-indigo-700 bg-indigo-100 dark:text-indigo-50 dark:bg-indigo-800 border border-indigo-300 ">
                                   <div class="text-xs font-normal leading-none max-w-full flex-initial"
                                     x-model="selectedElms[option]" x-text="option.text"></div>
                                   <div class="flex flex-auto flex-row-reverse">
@@ -70,13 +69,12 @@
                                 </div>
                               </template>
                               <!-- More than two items selected -->
-                              <div x-show="selectedElms.length > 2"
-                                class="flex justify-center items-center m-1 font-medium py-1 px-2 rounded-full text-indigo-700 bg-indigo-100 border border-indigo-300 ">
+                              <div x-show="selectedElms.length > 2" class="flex justify-center items-center m-1 font-medium py-1 px-2 rounded-full text-indigo-700 bg-indigo-100 dark:text-indigo-50 dark:bg-indigo-800 border border-indigo-300 ">
                                 <div class="text-xs font-normal h-6 flex justify-center items-center leading-none max-w-full flex-initial">
-                                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-indigo-200 text-pink-800 mr-2">
+                                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium text-pink-800 bg-indigo-200 mr-2">
                                     <span x-text="selectedElms.length -2"></span>
                                   </span>
-                                  more selected
+                                  Mas seleccionados
                                 </div>
                               </div>
                               <!-- None items selected -->
