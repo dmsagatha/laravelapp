@@ -57,16 +57,13 @@
                             <div class="flex flex-auto flex-wrap" x-on:click="open">
                               <!-- iterating over selected elements -->
                               <template x-for="(option,index) in selectedElms" :key="option.value">
-                                <div x-show="index < 2"
-                                  class="flex justify-center items-center m-1 font-medium py-1 px-2 rounded-full text-indigo-700 bg-indigo-100 border border-indigo-300 ">
+                                <div x-show="index < 2" class="flex justify-center items-center m-1 font-medium py-1 px-2 rounded-full text-indigo-700 bg-indigo-100 border border-indigo-300 ">
                                   <div class="text-xs font-normal leading-none max-w-full flex-initial"
                                     x-model="selectedElms[option]" x-text="option.text"></div>
                                   <div class="flex flex-auto flex-row-reverse">
                                     <div x-on:click.stop="remove(index,option)">
-                                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                       </svg>
                                     </div>
                                   </div>
@@ -75,10 +72,8 @@
                               <!-- More than two items selected -->
                               <div x-show="selectedElms.length > 2"
                                 class="flex justify-center items-center m-1 font-medium py-1 px-2 rounded-full text-indigo-700 bg-indigo-100 border border-indigo-300 ">
-                                <div
-                                  class="text-xs font-normal h-6 flex justify-center items-center leading-none max-w-full flex-initial">
-                                  <span
-                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-indigo-200 text-pink-800 mr-2">
+                                <div class="text-xs font-normal h-6 flex justify-center items-center leading-none max-w-full flex-initial">
+                                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-indigo-200 text-pink-800 mr-2">
                                     <span x-text="selectedElms.length -2"></span>
                                   </span>
                                   more selected
@@ -86,18 +81,14 @@
                               </div>
                               <!-- None items selected -->
                               <div x-show="selectedElms.length == 0" class="flex-1">
-                                <input placeholder="Seleccionar usuarios"
-                                  class="bg-transparent p-1 px-2 appearance-none outline-none h-full w-full text-slate-800"
-                                  x-bind:value="selectedElements()">
+                                <input placeholder="Seleccionar usuarios" class="bg-transparent p-1 px-2 appearance-none outline-none h-full w-full text-slate-800" x-bind:value="selectedElements()">
                               </div>
                             </div>
                             <!-- Drop down toogle with icons-->
-                            <div
-                              class="text-slate-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-slate-200">
+                            <div class="text-slate-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-slate-200">
                               <button type="button" x-show="!isOpen()" x-on:click="open()"
                                 class="cursor-pointer w-6 h-6 text-slate-600 outline-none focus:outline-none">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
-                                  viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                                 </svg>
                               </button>
@@ -259,30 +250,35 @@
           },
           // Seleccionar opción dada
           select(index, event) {
+            // Verificar si el elemento no está seleccionado y si ya se han seleccionado dos elementos
+            if (!this.options[index].selected && this.selectedElms.length >= 2) {
+              // Mostrar mensaje de error
+              this.errorMessage = "Solo se permite seleccionar dos elementos";
+              return;
+            }
+
+            // Si el elemento no está seleccionado, agregarlo a la selección
             if (!this.options[index].selected) {
+              this.errorMessage = ''; // Limpiar mensaje de error si se puede seleccionar
               this.options[index].selected = true;
-              this.options[index].element = event.target;
               this.selected.push(this.options[index].value);
               this.selectedElms.push(this.options[index]);
 
             } else {
-              this.selected.splice(this.selected.lastIndexOf(index), 1);
-              this.options[index].selected = false
-              Object.keys(this.selectedElms).forEach((key) => {
-                if (this.selectedElms[key].value == this.options[index].value) {
-                  setTimeout(() => {
-                    this.selectedElms.splice(key, 1)
-                  }, 100)
-                }
-              })
+              // Si el elemento está seleccionado, eliminarlo de la selección
+              this.options[index].selected = false;
+              this.selected = this.selected.filter(value => value !== this.options[index].value);
+              this.selectedElms = this.selectedElms.filter(elm => elm.value !== this.options[index].value);
             }
           },
           // Eliminar de la opción seleccionada
           remove(index, option) {
             this.selectedElms.splice(index, 1);
+
             Object.keys(this.options).forEach((key) => {
               if (this.options[key].value == option.value) {
                 this.options[key].selected = false;
+
                 Object.keys(this.selected).forEach((skey) => {
                   if (this.selected[skey] == option.value) {
                     this.selected.splice(skey, 1);
