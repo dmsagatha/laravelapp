@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-slate-800 dark:text-slate-200 leading-tight">
-      {{ __('Select Múltiple con Alpine.js y Focus') }}
+      {{ __('Select Múltiple (Máx 2 elementos) con Alpine.js y Focus') }}
     </h2>
   </x-slot>
 
@@ -12,7 +12,7 @@
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <div class="px-4 py-5 mx-auto text-center max-w-7xl sm:px-6 lg:py-2 lg:px-8">
               <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
-                <span class="block">Alpine.js MultiSelect</span>
+                <span class="block">Alpine.js MultiSelect (Máx 2 elementos)</span>
               </h2>
               <span class="block mt-4">Este ejemplo usa
                 <a href="https://tailwindcss.com/" target="_new" class="text-indigo-600" alt="Tailwind CSS">
@@ -180,51 +180,127 @@
               </div>
             </div>
           </div>
-
-          {{-- <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <h1 class="py-5 text-center text-xl text-slate-900 dark:text-slate-50 pb-2">Listado de Usuarios</h1>
-
-            <table class="w-full text-sm text-left rtl:text-right text-slate-500 dark:text-slate-400">
-              <thead class="text-xs text-slate-700 uppercase bg-slate-50 dark:bg-slate-700 dark:text-slate-400">
-                <tr>
-                  <th>N°</th>
-                  <th scope="col" class="px-6 py-3">
-                    Nombre
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    Correo Electrónico
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    Acciones
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($users as $key => $item)
-                  <tr
-                    class="bg-slate-50 border-b dark:bg-slate-800 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-600">
-                    <td>{{ $key + 1 }}</td>
-                    <th scope="row"
-                      class="px-6 py-4 font-medium text-slate-900 slate-50space-nowrap dark:text-slate-50">
-                      {{ $item->name }}
-                    </th>
-                    <td class="px-6 py-4">{{ $item->email }}</td>
-                    <td class="flex items-center px-6 py-4">
-                      <a href="#"
-                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
-                      <a href="#"
-                        class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Eliminar</a>
-                    </td>
-                  </tr>
-                @endforeach
-              </tbody>
-            </table>
-          </div> --}}
         </div>
       </div>
     </div>
   </div>
 
   @push('scripts')
+    <script>
+      document.addEventListener("alpine:init", () => {
+        Alpine.data("alpineMuliSelect", (obj) => ({
+          elementId: obj.elementId,
+          options: [],
+          selected: obj.selected,
+          selectedElms: [],
+          show: false,
+          search: '',
+          errorMessage: '', // Mensaje de error
+          open() {
+            this.show = true
+          },
+          close() {
+            this.show = false
+          },
+          toggle() {
+            this.show = !this.show
+          },
+          isOpen() {
+            return this.show === true
+          },
+
+          // Inicializando componente
+          init() {
+            const options = document.getElementById(this.elementId).options;
+            for (let i = 0; i < options.length; i++) {
+              this.options.push({
+                value: options[i].value,
+                text: options[i].innerText,
+                search: options[i].dataset.search,
+                selected: Object.values(this.selected).includes(options[i].value)
+              });
+
+              if (this.options[i].selected) {
+                this.selectedElms.push(this.options[i])
+              }
+            }
+
+            // Buscando el valor dado
+            this.$watch("search", (e => {
+              this.options = []
+              const options = document.getElementById(this.elementId).options;
+              Object.values(options).filter((el) => {
+                var reg = new RegExp(this.search, 'gi');
+                return el.dataset.search.match(reg)
+              }).forEach((el) => {
+                let newel = {
+                  value: el.value,
+                  text: el.innerText,
+                  search: el.dataset.search,
+                  selected: Object.values(this.selected).includes(el.value)
+                }
+                this.options.push(newel);
+              })
+            }));
+          },
+          // Borrar campo de búsqueda
+          clear() {
+            this.search = ''
+          },
+          // Deseleccionar opciones seleccionadas
+          deselect() {
+            setTimeout(() => {
+              this.selected = []
+              this.selectedElms = []
+              Object.keys(this.options).forEach((key) => {
+                this.options[key].selected = false;
+              })
+            }, 100)
+          },
+          // Seleccionar opción dada
+          select(index, event) {
+            if (!this.options[index].selected) {
+              this.options[index].selected = true;
+              this.options[index].element = event.target;
+              this.selected.push(this.options[index].value);
+              this.selectedElms.push(this.options[index]);
+
+            } else {
+              this.selected.splice(this.selected.lastIndexOf(index), 1);
+              this.options[index].selected = false
+              Object.keys(this.selectedElms).forEach((key) => {
+                if (this.selectedElms[key].value == this.options[index].value) {
+                  setTimeout(() => {
+                    this.selectedElms.splice(key, 1)
+                  }, 100)
+                }
+              })
+            }
+          },
+          // Eliminar de la opción seleccionada
+          remove(index, option) {
+            this.selectedElms.splice(index, 1);
+            Object.keys(this.options).forEach((key) => {
+              if (this.options[key].value == option.value) {
+                this.options[key].selected = false;
+                Object.keys(this.selected).forEach((skey) => {
+                  if (this.selected[skey] == option.value) {
+                    this.selected.splice(skey, 1);
+                  }
+                })
+              }
+            })
+          },
+          // Filtrando elementos seleccionados
+          selectedElements() {
+            return this.options.filter(op => op.selected === true)
+          },
+          // Obteniendo valores seleccionados
+          selectedValues() {
+            return this.options.filter(op => op.selected === true).map(el => el.value)
+          }
+        }));
+      });
+    </script>
   @endpush
 </x-app-layout>

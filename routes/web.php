@@ -24,5 +24,6 @@ Route::group(['middleware' => ['auth', 'verified']], function ()
 {
   Route::prefix('usuarios')->name('users.')->controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('index');
+    Route::get('selectMultiple', 'multiSelect')->name('multiSelect');
   });
 });

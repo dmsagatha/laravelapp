@@ -7,12 +7,18 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-  
   public function index()
   {
     $users = User::all();
     
     return view('users.index', compact('users'));
+  }
+
+  public function multiSelect()
+  {
+    $users = User::orderBy('name')->get();
+    
+    return view('users.multiSelect', compact('users'));
   }
   
   public function create()
