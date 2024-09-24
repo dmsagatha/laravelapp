@@ -39,15 +39,18 @@
                       </option>
                     @endforeach
                   </select>
+  
+                  <!-- Mostrar mensaje de error -->
+                  <div x-show="errorMessage" class="text-red-500 mt-2">
+                    <p x-text="errorMessage"></p>
+                  </div>
 
                   <div class="w-full flex flex-col items-center h-64 mx-auto" @keyup.alt="toggle">
                     <!-- Selected Teams -->
                     <input name="teams[]" type="hidden" x-bind:value="selectedValues()">
 
                     <div class="inline-block relative w-full">
-
                       <div class="flex flex-col items-center relative">
-
                         <!-- Selected elements container -->
                         <div class="w-full">
                           <div class="my-2 p-1 flex border border-slate-200 bg-slate-50 rounded-md">
@@ -114,7 +117,6 @@
                             class="absolute shadow-lg top-100 bg-slate-50 z-40 w-full lef-0 rounded max-h-80"
                             x-on:click.away="close">
                             <div class="flex flex-col w-full">
-
                               <div class="px-2 py-4 border-b-2">
                                 <!-- Search input-->
                                 <div class="mt-1 relative rounded-md shadow-sm">
@@ -144,24 +146,17 @@
                                 </div>
                               </div>
                               <!-- Options container -->
-                              <ul
-                                class="z-10 mt-0 w-full bg-slate-50 shadow-lg max-h-80 rounded-md py-0 text-base ring-1 ring-black ring-opacity-5 focus:outline-none  overflow-y-auto sm:text-sm"
-                                tabindex="-1" role="listbox" @keyup.delete="deselect">
+                              <ul class="z-10 mt-0 w-full bg-slate-50 shadow-lg max-h-80 rounded-md py-0 text-base ring-1 ring-black ring-opacity-5 focus:outline-none  overflow-y-auto sm:text-sm" tabindex="-1" role="listbox" @keyup.delete="deselect">
                                 <template x-for="(option,index) in options" :key="option.text">
-                                  <li class="text-slate-900 cursor-default select-none relative py-2 pl-3 pr-3"
-                                    role="option">
-                                    <div
-                                      class="cursor-pointer w-full border-slate-100 rounded-t border-b hover:bg-slate-100"
+                                  <li class="text-slate-900 cursor-default select-none relative py-2 pl-3 pr-3" role="option">
+                                    <div class="cursor-pointer w-full border-slate-100 rounded-t border-b hover:bg-slate-100"
                                       x-bind:class="option.selected ? 'bg-indigo-100' : ''"
                                       @click="select(index,$event)">
                                       <div x-bind:class="option.selected ? 'border-indigo-600' : ''"
                                         class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative">
                                         <div class="w-full items-center flex">
                                           <div class="mx-2 leading-6" x-model="option" x-text="option.text"></div>
-                                          <span
-                                            class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
-                                            x-show="option.selected">
-
+                                          <span class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600" x-show="option.selected">
                                             <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg"
                                               viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                               <path fill-rule="evenodd"
