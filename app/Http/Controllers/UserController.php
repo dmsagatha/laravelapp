@@ -20,6 +20,13 @@ class UserController extends Controller
     
     return view('users.multiSelect', compact('users'));
   }
+
+  public function selectAlpine()
+  {
+    $users = User::orderBy('name')->get();
+    
+    return view('users.selectAlpine', compact('users'));
+  }
   
   public function create()
   {
