@@ -74,24 +74,24 @@
                                   <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium text-pink-800 bg-indigo-200 mr-2">
                                     <span x-text="selectedElms.length -2"></span>
                                   </span>
-                                  Mas seleccionados
+                                  Más seleccionados
                                 </div>
                               </div>
                               <!-- None items selected -->
                               <div x-show="selectedElms.length == 0" class="flex-1">
-                                <input placeholder="Seleccionar usuarios" class="bg-transparent p-1 px-2 appearance-none outline-none h-full w-full text-slate-800" x-bind:value="selectedElements()">
+                                <input placeholder="Seleccionar usuarios" class="w-full bg-transparent text-slate-800 dark:text-slate-50 p-1 px-2 appearance-none outline-none h-full" x-bind:value="selectedElements()">
                               </div>
                             </div>
                             <!-- Drop down toogle with icons-->
-                            <div class="text-slate-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-slate-200">
+                            <div class="w-8 text-slate-300 py-1 pl-2 pr-1 border-l flex items-center border-slate-200">
                               <button type="button" x-show="!isOpen()" x-on:click="open()"
-                                class="cursor-pointer w-6 h-6 text-slate-600 outline-none focus:outline-none">
+                                class="cursor-pointer w-6 h-6 text-slate-600 dark:text-slate-50 outline-none focus:outline-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                                 </svg>
                               </button>
                               <button type="button" x-show="isOpen()" x-on:click="close()"
-                                class="cursor-pointer w-6 h-6 text-slate-600 outline-none focus:outline-none">
+                                class="cursor-pointer w-6 h-6 text-slate-600 dark:text-slate-50 outline-none focus:outline-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
                                   viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
@@ -102,33 +102,22 @@
                         </div>
                         <!-- Dropdown container -->
                         <div class="w-full">
-                          <div x-show.transition.origin.top="isOpen()" x-trap="isOpen()"
-                            class="absolute shadow-lg top-100 bg-slate-50 z-40 w-full lef-0 rounded max-h-80"
-                            x-on:click.away="close">
+                          <div x-show.transition.origin.top="isOpen()" x-trap="isOpen()" class="absolute shadow-lg top-100 bg-slate-50 z-40 w-full lef-0 rounded max-h-80" x-on:click.away="close">
                             <div class="flex flex-col w-full">
                               <div class="px-2 py-4 border-b-2">
                                 <!-- Search input-->
                                 <div class="mt-1 relative rounded-md shadow-sm">
                                   <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-400"
-                                      fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                      <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                      <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                     </svg>
                                   </div>
-                                  <input type="text" name="search" autocomplete="off" id="search"
-                                    x-model.debounce.750ms="search"
-                                    class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border border-indigo-300 rounded-md h-10"
-                                    placeholder="" @keyup.escape="clear" @keyup.delete="deselect">
+                                  <input type="text" name="search" autocomplete="off" id="search" x-model.debounce.750ms="search" class="w-full focus:ring-indigo-500 focus:border-indigo-500 block pl-10 sm:text-sm border border-indigo-300 rounded-md h-10" placeholder="" @keyup.escape="clear" @keyup.delete="deselect">
                                   <div class="absolute inset-y-0 right-0 flex py-1.5 pr-1.5">
-                                    <kbd
-                                      class="inline-flex items-center border border-slate-200 rounded px-2 text-sm font-sans font-medium text-slate-400 mr-2"
-                                      x-on:click="clear">
+                                    <kbd class="inline-flex items-center border border-slate-200 rounded px-2 text-sm font-sans font-medium text-slate-400 mr-2" x-on:click="clear">
                                       Cancelar
                                     </kbd>
-                                    <kbd
-                                      class="inline-flex items-center border border-slate-200 rounded px-2 text-sm font-sans font-medium text-slate-400"
-                                      x-on:click="deselect">
+                                    <kbd class="inline-flex items-center border border-slate-200 rounded px-2 text-sm font-sans font-medium text-slate-400" x-on:click="deselect">
                                       Eliminar
                                     </kbd>
                                   </div>
