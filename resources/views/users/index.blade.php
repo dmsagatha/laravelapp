@@ -12,7 +12,9 @@
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <div class="px-4 py-5 mx-auto text-center max-w-7xl sm:px-6 lg:py-2 lg:px-8">
               <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
-                <span class="block">Alpine.js MultiSelect</span>
+                <span class="block">
+                  <a href="https://github.com/alexpechkarev/alpinejs-multiselect/tree/main" target="_blank">Alpine.js MultiSelect</a>
+                </span>
               </h2>
               <span class="block mt-4">Este ejemplo usa
                 <a href="https://tailwindcss.com/" target="_new" class="text-indigo-600" alt="Tailwind CSS">

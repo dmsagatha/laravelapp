@@ -40,7 +40,7 @@
                   </select>
   
                   <!-- Mostrar mensaje de error -->
-                  <div x-show="errorMessage" class="text-red-500 mt-2">
+                  <div x-show="errorMessage" class="text-red-500 dark:text-slate-100 mt-2">
                     <p x-text="errorMessage"></p>
                   </div>
 
@@ -52,11 +52,11 @@
                       <div class="flex flex-col items-center relative">
                         <!-- Selected elements container -->
                         <div class="w-full">
-                          <div class="my-2 p-1 flex border border-slate-200 bg-slate-50 dark:bg-slate-800 rounded-md">
+                          <div class="my-2 p-1 flex border border-slate-200 dark:border-slate-400 bg-slate-50 dark:bg-slate-800 rounded-md">
                             <div class="flex flex-auto flex-wrap" x-on:click="open">
                               <!-- Iterating over selected elements -->
                               <template x-for="(option,index) in selectedElms" :key="option.value">
-                                <div x-show="index < 2" class="flex justify-center items-center m-1 font-medium py-1 px-2 rounded-full text-indigo-700 bg-indigo-100 dark:text-indigo-50 dark:bg-indigo-800 border border-indigo-300 ">
+                                <div x-show="index < 2" class="flex justify-center items-center m-1 font-medium py-1 px-2 rounded-full text-indigo-700 bg-indigo-100 dark:text-indigo-50 dark:bg-indigo-800 border border-indigo-300">
                                   <div class="text-xs font-normal leading-none max-w-full flex-initial"
                                     x-model="selectedElms[option]" x-text="option.text"></div>
                                   <div class="flex flex-auto flex-row-reverse">
