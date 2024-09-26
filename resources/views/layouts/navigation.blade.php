@@ -21,6 +21,12 @@
           <x-nav-link :href="route('users.multiSelect')" :active="request()->routeIs('users.multiSelect')">
             Select Múltiple
           </x-nav-link>
+          <x-nav-link :href="route('users.selectAlpine')" :active="request()->routeIs('users.selectAlpine')">
+            Select2 con Alpine.js
+          </x-nav-link>
+          <x-nav-link :href="route('users.select2Jq')" :active="request()->routeIs('users.select2Jq')">
+            Select2 Simple y Múltiple
+          </x-nav-link>
         </div>
       </div>
 
@@ -91,6 +97,12 @@
       </x-responsive-nav-link>
       <x-responsive-nav-link :href="route('users.multiSelect')" :active="request()->routeIs('users.multiSelect')">
         Select Múltiple
+      </x-responsive-nav-link>
+      <x-responsive-nav-link :href="route('users.selectAlpine')" :active="request()->routeIs('users.selectAlpine')">
+        Select2 con Alpine.js
+      </x-responsive-nav-link>
+      <x-responsive-nav-link :href="route('users.select2Jq')" :active="request()->routeIs('users.select2Jq')">
+        Select2 Simple y Múltiple
       </x-responsive-nav-link>
     </div>
 

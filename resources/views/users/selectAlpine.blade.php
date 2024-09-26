@@ -1,7 +1,9 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-slate-800 dark:text-slate-200 leading-tight">
-      {{ __('Select Múltiple con Alpine.js y Focus') }}
+      <a href="https://codewithhugo.com/alpinejs-jquery-plugin-integration-select2/" target="_blank">
+        {{ __('Alpine.js + jQuery/JavaScript Plugin Integration: a Select2 example') }}
+      </a>
     </h2>
   </x-slot>
 
@@ -9,24 +11,11 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-slate-50 dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 text-slate-900 dark:text-slate-100">
-          <div x-data="{ selectedCity: '' }" x-init="select2Alpine">
-            <select x-ref="select" data-placeholder="Select a City" class="dark:text-slate-800 select2">
-              <option></option>
-              <option value="London">London</option>
-              <option value="New York">New York</option>
-            </select>
-            <p>Selected value (bound in Alpine.js): <code x-text="selectedCity"></code></p>
-            <p><button @click="selectedCity = ''">Reset selectedCity</button></p>
-            <p><button @click="selectedCity = 'London'">Trigger selection of London</button></p>
-            <p><button @click="selectedCity = 'New York'">Trigger selection of New York</button></p>
-          </div>
-
-
-          {{-- <div x-data="{ selectedElement: '' }" x-init="select2Alpine">
+          <div x-data="{ selectedElement: '' }" x-init="select2Alpine">
             <select 
               x-ref="select"
               data-placeholder="Seleccionar Usuario" 
-              class="block w-full sm:text-xs placeholder-transparent border-b-2 border-slate-300 text-slate-800 bg-transparent dark:text-slate-300 dark:bg-slate-800 dark:focus:bg-slate-700 dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 select2">
+              class="block w-full sm:text-xs placeholder-transparent border-b-2 border-slate-300 text-slate-800 bg-transparent dark:text-slate-300 dark:bg-slate-800 dark:focus:bg-slate-700 dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 select2-single">
               <option selected value="">Seleccionar</option>
               @foreach ($users as $user)
                 <option value="{{ $user->id }}">
@@ -41,9 +30,9 @@
                 Reiniciar selectedElement
               </x-danger-button>
             </div>
-          </div> --}}
+          </div>
 
-          {{-- <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <h1 class="py-5 text-center text-xl text-slate-900 dark:text-slate-50 pb-2">Listado de Usuarios</h1>
 
             <table class="w-full text-sm text-left rtl:text-right text-slate-500 dark:text-slate-400">
@@ -81,37 +70,29 @@
                 @endforeach
               </tbody>
             </table>
-          </div> --}}
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   @push('styles')
-    <link rel="stylesheet" href="{{ asset('plugins/select2/select2.min.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   @endpush
 
   @push('scripts')
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="{{ asset('plugins/select2/select2.min.js') }}"></script>
-    <script src="{{ asset('plugins/select2/es.min.js') }}"></script>
-
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        
     <script>
       $(document).ready(function() {
-        $('.select2').select2();
+        $('.select2-single').select2({
+          language: "es"
+        });
       });
 
       function select2Alpine() {
-        this.select2 = $(this.$refs.select).select2();
-        this.select2.on("select2:select", (event) => {
-          this.selectedCity = event.target.value;
-        });
-        this.$watch("selectedCity", (value) => {
-          this.select2.val(value).trigger("change");
-        });
-      }
-
-      /* function select2Alpine() {
         this.select2 = $(this.$refs.select).select2();
         this.select2.on("select2:select", (event) => {
           this.selectedElement = event.target.value;
@@ -119,7 +100,7 @@
         this.$watch("selectedElement", (value) => {
           this.select2.val(value).trigger("change");
         });
-      } */
+      }
     </script>
   @endpush
 </x-app-layout>
