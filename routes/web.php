@@ -26,5 +26,6 @@ Route::group(['middleware' => ['auth', 'verified']], function ()
     Route::get('/', 'index')->name('index');
     Route::get('selectMultiple', 'multiSelect')->name('multiSelect');
     Route::get('selectAlpine', 'selectAlpine')->name('selectAlpine');
+    Route::get('select2Jq', 'select2Jq')->name('select2Jq');
   });
 });

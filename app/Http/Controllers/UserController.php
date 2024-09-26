@@ -27,6 +27,13 @@ class UserController extends Controller
     
     return view('users.selectAlpine', compact('users'));
   }
+
+  public function select2Jq()
+  {
+    $users = User::orderBy('name')->get();
+    
+    return view('users.select2Jq', compact('users'));
+  }
   
   public function create()
   {
