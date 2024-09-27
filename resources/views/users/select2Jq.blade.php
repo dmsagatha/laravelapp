@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-slate-800 dark:text-slate-200 leading-tight">
-      {{ __('Select Múltiple (Máx 2 elementos) con Alpine.js y Focus') }}
+      {{ __('Select Simple y Múltiple con Select2') }}
     </h2>
   </x-slot>
 
@@ -12,7 +12,9 @@
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <div class="px-4 py-5 mx-auto max-w-7xl sm:px-6 lg:py-2 lg:px-8">
               <h2 class="text-3xl text-center font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
-                <span class="block">Select2</span>
+                <a href="https://github.com/Xibel/select2-tailwindcss/blob/master/src/css/styles.css" target="_blank">
+                  Select2 - Modo claroy oscuro
+                </a>
               </h2>
 
               <div class="grid grid-cols-6 gap-x-10 gap-y-8">
@@ -35,7 +37,7 @@
                 <div class="col-span-6 sm:col-span-4">
                   <div class="relative z-0 form-group mt-1">
                     <label for="users[]" class="block text-lg font-extrabold text-slate-800 dark:text-slate-50">
-                      Select2 Múltiple (Máx 2)
+                      Select2 Múltiple (Máx. 3)
                     </label>
                     <select name="users[]" id="users[]" multiple="multiple" class="block w-full sm:text-xs placeholder-transparent border-b-2 border-slate-300 text-slate-800 bg-transparent dark:text-slate-300 dark:bg-slate-800 dark:focus:bg-slate-700 dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 select2-multiple" data-placeholder="Seleccionar">
                       @foreach ($users as $user)
@@ -62,6 +64,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
   crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{ asset('plugins/select2/es.min.js') }}"></script>
         
     <script>
       $(document).ready(function() {

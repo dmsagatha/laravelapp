@@ -284,3 +284,29 @@ Aumente p-1 a p-2 para tener más espacio entre los resultados */
   margin-left: -3em;
   padding-left: 4em;
 }
+
+.select2-container--default .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option {
+  margin-left: -3em;
+  padding-left: 4em;
+}
+
+.select2-container--default .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option {
+  margin-left: -4em;
+  padding-left: 5em;
+}
+
+.select2-container--default .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option .select2-results__option {
+  margin-left: -5em;
+  padding-left: 6em;
+}
+
+/* Color de fondo y color de texto de las filas de opciones cuando la selección está abierta */
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  @apply bg-gray-100 dark:bg-gray-500 text-gray-700 dark:text-gray-200;
+}
+
+.select2-container--default .select2-results__group {
+/* Have no idea what this is for */
+  @apply cursor-default block;
+  padding: 6px; 
+}
