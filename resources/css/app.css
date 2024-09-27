@@ -305,7 +305,6 @@ Aumente p-1 a p-2 para tener más espacio entre los resultados */
 }
 
 .select2-container--default .select2-results__group {
-/* Have no idea what this is for */
   @apply cursor-default block;
   padding: 6px; 
 }
