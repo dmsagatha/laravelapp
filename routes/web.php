@@ -23,9 +23,7 @@ require __DIR__.'/auth.php';
 Route::group(['middleware' => ['auth', 'verified']], function ()
 {
   Route::prefix('usuarios')->name('users.')->controller(UserController::class)->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::get('selectMultiple', 'multiSelect')->name('multiSelect');
-    Route::get('selectAlpine', 'selectAlpine')->name('selectAlpine');
-    Route::get('select2Jq', 'select2Jq')->name('select2Jq');
+    Route::get('/', 'dataTablesJQ')->name('dataTablesJQ');
+    Route::get('select2JQ', 'select2JQ')->name('select2JQ');
   });
 });

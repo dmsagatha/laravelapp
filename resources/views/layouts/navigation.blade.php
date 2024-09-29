@@ -15,16 +15,10 @@
           <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
             {{ __('Dashboard') }}
           </x-nav-link>
-          <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
-            {{ __('Users') }}
+          <x-nav-link :href="route('users.dataTablesJQ')" :active="request()->routeIs('users.dataTablesJQ')">
+            DataTables JQuery
           </x-nav-link>
-          <x-nav-link :href="route('users.multiSelect')" :active="request()->routeIs('users.multiSelect')">
-            Select Múltiple
-          </x-nav-link>
-          <x-nav-link :href="route('users.selectAlpine')" :active="request()->routeIs('users.selectAlpine')">
-            Select2 con Alpine.js
-          </x-nav-link>
-          <x-nav-link :href="route('users.select2Jq')" :active="request()->routeIs('users.select2Jq')">
+          <x-nav-link :href="route('users.select2JQ')" :active="request()->routeIs('users.select2JQ')">
             Select2 Simple y Múltiple
           </x-nav-link>
         </div>
@@ -92,16 +86,10 @@
       <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
         {{ __('Dashboard') }}
       </x-responsive-nav-link>
-      <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
-        {{ __('Users') }}
+      <x-responsive-nav-link :href="route('users.dataTablesJQ')" :active="request()->routeIs('users.dataTablesJQ')">
+        DataTables JQuery
       </x-responsive-nav-link>
-      <x-responsive-nav-link :href="route('users.multiSelect')" :active="request()->routeIs('users.multiSelect')">
-        Select Múltiple
-      </x-responsive-nav-link>
-      <x-responsive-nav-link :href="route('users.selectAlpine')" :active="request()->routeIs('users.selectAlpine')">
-        Select2 con Alpine.js
-      </x-responsive-nav-link>
-      <x-responsive-nav-link :href="route('users.select2Jq')" :active="request()->routeIs('users.select2Jq')">
+      <x-responsive-nav-link :href="route('users.select2JQ')" :active="request()->routeIs('users.select2JQ')">
         Select2 Simple y Múltiple
       </x-responsive-nav-link>
     </div>

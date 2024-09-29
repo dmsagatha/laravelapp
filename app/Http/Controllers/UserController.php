@@ -7,32 +7,18 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-  public function index()
-  {
-    $users = User::all();
-    
-    return view('users.index', compact('users'));
-  }
-
-  public function multiSelect()
+  public function dataTablesJQ()
   {
     $users = User::orderBy('name')->get();
     
-    return view('users.multiSelect', compact('users'));
+    return view('users.dataTablesJQ', compact('users'));
   }
 
-  public function selectAlpine()
+  public function select2JQ()
   {
     $users = User::orderBy('name')->get();
     
-    return view('users.selectAlpine', compact('users'));
-  }
-
-  public function select2Jq()
-  {
-    $users = User::orderBy('name')->get();
-    
-    return view('users.select2Jq', compact('users'));
+    return view('users.select2JQ', compact('users'));
   }
   
   public function create()
