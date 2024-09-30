@@ -109,14 +109,25 @@
       new DataTable('#dtTheme'); */
 
       // 2da. opción
-      /* let table = new DataTable('#example', {
-        responsive: true
+      /* let table = new DataTable('#dtTheme', {
+        responsive: true,
+        responsive: true,
+        lengthMenu: [[10, 15, 25, 50, 100, -1], [10, 15, 25, 50, 100, "Todos"]],
+        pageLength: 25,
+        processing: true,
+        language: {
+          search: 'In der Tabelle finden',
+          url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-MX.json'
+        }
       }); */
 
       // 3ra. opción
       new DataTable('#dtTheme', {
         destroy: true,
         responsive: true,
+        lengthMenu: [[10, 15, 25, 50, 100, -1], [10, 15, 25, 50, 100, "Todos"]],
+        pageLength: 25,
+        processing: true,
         /* language: {
           url: "{{ asset('plugins/dataTables/Spanish.json') }}"
         }, */
