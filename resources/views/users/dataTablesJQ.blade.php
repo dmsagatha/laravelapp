@@ -32,12 +32,34 @@
                   <th>Nombre</th>
                   <th>Correo Electrónico</th>
                   <th>Acciones</th>
+                  <th>Nombre</th>
+                  <th>Correo Electrónico</th>
+                  <th>Acciones</th>
+                  <th>Nombre</th>
+                  <th>Correo Electrónico</th>
+                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 @foreach ($users as $key => $item)
                   <tr>
                     <td>{{ $key + 1 }}</td>
+                    <th>{{ $item->name }}</th>
+                    <td>{{ $item->email }}</td>
+                    <td>
+                      <a href="#"
+                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
+                      <a href="#"
+                        class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Eliminar</a>
+                    </td>
+                    <th>{{ $item->name }}</th>
+                    <td>{{ $item->email }}</td>
+                    <td>
+                      <a href="#"
+                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
+                      <a href="#"
+                        class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Eliminar</a>
+                    </td>
                     <th>{{ $item->name }}</th>
                     <td>{{ $item->email }}</td>
                     <td>
@@ -55,6 +77,12 @@
                   <th>Nombre</th>
                   <th>Correo Electrónico</th>
                   <th>Acciones</th>
+                  <th>Nombre</th>
+                  <th>Correo Electrónico</th>
+                  <th>Acciones</th>
+                  <th>Nombre</th>
+                  <th>Correo Electrónico</th>
+                  <th>Acciones</th>
                 </tr>
               </tfoot>
             </table>
@@ -67,7 +95,6 @@
   @push('styles')
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.7/css/dataTables.dataTables.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.dataTables.css">
-    <link rel="stylesheet" href="">
   @endpush
 
   @push('scripts')
@@ -81,11 +108,21 @@
       /* DataTable.defaults.responsive = true;      
       new DataTable('#dtTheme'); */
 
+      // 2da. opción
+      /* let table = new DataTable('#example', {
+        responsive: true
+      }); */
+
+      // 3ra. opción
       new DataTable('#dtTheme', {
         destroy: true,
         responsive: true,
-        language: {
+        /* language: {
           url: "{{ asset('plugins/dataTables/Spanish.json') }}"
+        }, */
+        language: {
+          search: 'In der Tabelle finden',
+          url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-MX.json'
         }
       });
     </script>
