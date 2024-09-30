@@ -8,7 +8,7 @@
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-slate-50 dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="p-6 text-slate-900 dark:text-slate-100">
+        <div class="px-6 text-slate-900 dark:text-slate-100">
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <div class="px-4 py-5 mx-auto text-center max-w-7xl sm:px-6 lg:py-2 lg:px-8">
               <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
@@ -25,7 +25,7 @@
           </div>
 
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table id="dtTheme" class="row-border" style="width:100%">
+            <table id="dtTheme" class="display nowrap row-border stripe" style="width:100%">
               <thead>
                 <tr>
                   <th>N°</th>
@@ -66,15 +66,28 @@
 
   @push('styles')
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.7/css/dataTables.dataTables.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.dataTables.css">
     <link rel="stylesheet" href="">
   @endpush
 
   @push('scripts')
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.dataTables.js"></script>
 
     <script>
-      new DataTable('#dtTheme');
+      // Inicialización predeterminada
+      /* DataTable.defaults.responsive = true;      
+      new DataTable('#dtTheme'); */
+
+      new DataTable('#dtTheme', {
+        destroy: true,
+        responsive: true,
+        language: {
+          url: '//cdn.datatables.net/plug-ins/2.1.7/i18n/es-MX.json'
+        }
+      });
     </script>
   @endpush
 </x-app-layout>
