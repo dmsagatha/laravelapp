@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-slate-800 dark:text-slate-200 leading-tight">
-      {{ __('DataTables JQuery') }}
+      {{ __('DataTables.Net') }}
     </h2>
   </x-slot>
 
@@ -13,7 +13,7 @@
             <div class="px-4 py-5 mx-auto text-center max-w-7xl sm:px-6 lg:py-2 lg:px-8">
               <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
                 <span class="block">
-                  <a href="#" target="_blank">DataTables JQuery con Tailwind CSS</a>
+                  <a href="https://datatables.net/extensions/responsive/examples/initialisation/default.html" target="_blank">DataTables.Net con Tailwind CSS</a>
                 </span>
               </h2>
               <span class="block mt-4">Este ejemplo usa
@@ -25,7 +25,7 @@
           </div>
 
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table id="dtTheme" class="display nowrap row-border stripe" style="width:100%">
+            <table id="dtTheme" class="display nowrap row-border stripe table" style="width:100%">
               <thead>
                 <tr>
                   <th>N°</th>
@@ -85,7 +85,7 @@
         destroy: true,
         responsive: true,
         language: {
-          url: '//cdn.datatables.net/plug-ins/2.1.7/i18n/es-MX.json'
+          url: "{{ asset('plugins/dataTables/Spanish.json') }}"
         }
       });
     </script>

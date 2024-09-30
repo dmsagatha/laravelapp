@@ -16,7 +16,7 @@
             {{ __('Dashboard') }}
           </x-nav-link>
           <x-nav-link :href="route('users.dataTablesJQ')" :active="request()->routeIs('users.dataTablesJQ')">
-            DataTables JQuery
+            DataTables.Net
           </x-nav-link>
           <x-nav-link :href="route('users.select2JQ')" :active="request()->routeIs('users.select2JQ')">
             Select2 Simple y Múltiple
@@ -87,7 +87,7 @@
         {{ __('Dashboard') }}
       </x-responsive-nav-link>
       <x-responsive-nav-link :href="route('users.dataTablesJQ')" :active="request()->routeIs('users.dataTablesJQ')">
-        DataTables JQuery
+        DataTables.Net
       </x-responsive-nav-link>
       <x-responsive-nav-link :href="route('users.select2JQ')" :active="request()->routeIs('users.select2JQ')">
         Select2 Simple y Múltiple
