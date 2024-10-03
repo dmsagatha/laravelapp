@@ -4,6 +4,13 @@
 
 [x-cloak] { display: none; }
 
+table.dataTable thead th,
+table.dataTable thead td,
+table.dataTable tfoot th,
+table.dataTable tfoot td {
+  text-align: center !important;
+}
+
 .table {
   @apply text-sm text-left rtl:text-right dark:text-slate-300;
 }

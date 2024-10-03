@@ -25,16 +25,14 @@
           </div>
 
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table id="dtTheme" class="display nowrap row-border stripe table" style="width:100%">
+            <table id="dtTheme" class="display compact nowrap row-border stripe table" style="width:100%">
               <thead>
                 <tr>
                   <th>N°</th>
                   <th>Nombre</th>
                   <th>Correo Electrónico</th>
-                  <th>Acciones</th>
                   <th>Nombre</th>
                   <th>Correo Electrónico</th>
-                  <th>Acciones</th>
                   <th>Nombre</th>
                   <th>Correo Electrónico</th>
                   <th>Acciones</th>
@@ -46,20 +44,8 @@
                     <td>{{ $key + 1 }}</td>
                     <th>{{ $item->name }}</th>
                     <td>{{ $item->email }}</td>
-                    <td>
-                      <a href="#"
-                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
-                      <a href="#"
-                        class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Eliminar</a>
-                    </td>
                     <th>{{ $item->name }}</th>
                     <td>{{ $item->email }}</td>
-                    <td>
-                      <a href="#"
-                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
-                      <a href="#"
-                        class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Eliminar</a>
-                    </td>
                     <th>{{ $item->name }}</th>
                     <td>{{ $item->email }}</td>
                     <td>
@@ -76,10 +62,8 @@
                   <th>N°</th>
                   <th>Nombre</th>
                   <th>Correo Electrónico</th>
-                  <th>Acciones</th>
                   <th>Nombre</th>
                   <th>Correo Electrónico</th>
-                  <th>Acciones</th>
                   <th>Nombre</th>
                   <th>Correo Electrónico</th>
                   <th>Acciones</th>
@@ -119,7 +103,6 @@
         pageLength: 25,
         processing: true,
         language: {
-          search: 'In der Tabelle finden',
           url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-MX.json'
         }
       });
@@ -132,7 +115,7 @@
         pageLength: 25,
         processing: true,
         language: {
-          search: 'In der Tabelle finden',
+          search: 'Buscar',
           url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-MX.json'
         }
       }); */
