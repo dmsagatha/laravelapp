@@ -14,6 +14,8 @@ class UserSeeder extends Seeder
     User::factory()->create([
       'name'     => 'Super Admin',
       'email'    => 'superadmin@admin.net',
+      'country'  => 'Colombia',
+      'address'  => 'Sur América',
       'password' => Hash::make('superadmin')
     ]);
 

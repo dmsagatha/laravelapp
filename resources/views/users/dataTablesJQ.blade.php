@@ -6,7 +6,7 @@
   </x-slot>
 
   <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="min-w-full mx-auto sm:px-6 lg:px-8">
       <div class="bg-slate-50 dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
         <div class="px-6 text-slate-900 dark:text-slate-100">
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -28,14 +28,16 @@
             <table id="dtTheme" class="display compact nowrap row-border stripe table" style="width:100%">
               <thead>
                 <tr>
-                  <th>N°</th>
+                  <th rowspan="2" width="1%">N°</th>
+                  <th colspan="2">Datos Personales</th>
+                  <th colspan="2">Contacto</th>
+                  <th rowspan="2">Acciones</th>
+                </tr>
+                <tr>
                   <th>Nombre</th>
                   <th>Correo Electrónico</th>
-                  <th>Nombre</th>
-                  <th>Correo Electrónico</th>
-                  <th>Nombre</th>
-                  <th>Correo Electrónico</th>
-                  <th>Acciones</th>
+                  <th>País</th>
+                  <th>Dirección</th>
                 </tr>
               </thead>
               <tbody>
@@ -44,10 +46,8 @@
                     <td>{{ $key + 1 }}</td>
                     <th>{{ $item->name }}</th>
                     <td>{{ $item->email }}</td>
-                    <th>{{ $item->name }}</th>
-                    <td>{{ $item->email }}</td>
-                    <th>{{ $item->name }}</th>
-                    <td>{{ $item->email }}</td>
+                    <th>{{ $item->country }}</th>
+                    <td>{{ $item->address }}</td>
                     <td>
                       <a href="#"
                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
@@ -62,10 +62,8 @@
                   <th>N°</th>
                   <th>Nombre</th>
                   <th>Correo Electrónico</th>
-                  <th>Nombre</th>
-                  <th>Correo Electrónico</th>
-                  <th>Nombre</th>
-                  <th>Correo Electrónico</th>
+                  <th>País</th>
+                  <th>Dirección</th>
                   <th>Acciones</th>
                 </tr>
               </tfoot>
