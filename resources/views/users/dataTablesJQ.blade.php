@@ -25,7 +25,7 @@
           </div>
 
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table id="dtTheme" class="display compact nowrap row-border stripe table" style="width:100%">
+            <table id="dtTheme" class="display compact nowrap row-border stripe" style="width:100%">
               <thead>
                 <tr>
                   <th rowspan="2" width="1%">N°</th>
@@ -43,7 +43,7 @@
               <tbody>
                 @foreach ($users as $key => $item)
                   <tr>
-                    <td>{{ $key + 1 }}</td>
+                    <td style="text-align: center;">{{ $key + 1 }}</td>
                     <th>{{ $item->name }}</th>
                     <td>{{ $item->email }}</td>
                     <th>{{ $item->country }}</th>

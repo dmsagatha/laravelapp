@@ -11,17 +11,21 @@ table.dataTable tfoot td {
   text-align: center !important;
 }
 
-.table {
+table.dataTable thead tr {
+  @apply uppercase text-lg font-bold;
+}
+
+table.dataTable tbody td {
+  @apply text-sm;
+}
+
+table.dataTable {
+  @apply text-left rtl:text-right;
+}
+
+/* .table {
   @apply text-sm text-left rtl:text-right dark:text-slate-300;
-}
-
-.table thead tr {
-  @apply uppercase text-center font-bold;
-}
-
-.table tbody {
-  @apply text-base;
-}
+} */
 
 /* El contenedor donde se encuentra el cuadro de selección */
 .select2-container {
