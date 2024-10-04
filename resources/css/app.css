@@ -4,15 +4,15 @@
 
 [x-cloak] { display: none; }
 
+table.dataTable {
+  @apply text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400;
+}
+
 table.dataTable thead th,
 table.dataTable thead td,
 table.dataTable tfoot th,
 table.dataTable tfoot td {
   text-align: center !important;
-}
-
-table.dataTable {
-  @apply text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400;
 }
 
 table.dataTable thead {
