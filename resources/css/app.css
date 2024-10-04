@@ -5,7 +5,7 @@
 [x-cloak] { display: none; }
 
 table.dataTable {
-  @apply text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400;
+  @apply text-sm text-left rtl:text-right text-slate-500 dark:text-slate-400;
 }
 
 table.dataTable thead th,
@@ -16,11 +16,11 @@ table.dataTable tfoot td {
 }
 
 table.dataTable thead {
-  @apply uppercase text-pretty font-bold text-gray-700 bg-gray-50 dark:bg-gray-800 dark:text-gray-300;
+  @apply uppercase text-pretty font-bold text-slate-700 bg-slate-50 dark:bg-slate-900 dark:text-slate-300;
 }
 
 table.dataTable tbody tr {
-  @apply bg-slate-50 border-b  dark:text-slate-400 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600;
+  @apply bg-slate-50 border-b dark:text-slate-400 dark:bg-slate-800 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-600;
 }
 
 /* El contenedor donde se encuentra el cuadro de selección */
