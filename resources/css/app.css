@@ -11,21 +11,17 @@ table.dataTable tfoot td {
   text-align: center !important;
 }
 
-table.dataTable thead tr {
-  @apply uppercase text-lg font-bold;
-}
-
-table.dataTable tbody td {
-  @apply text-sm;
-}
-
 table.dataTable {
-  @apply text-left rtl:text-right;
+  @apply text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400;
 }
 
-/* .table {
-  @apply text-sm text-left rtl:text-right dark:text-slate-300;
-} */
+table.dataTable thead {
+  @apply uppercase text-pretty font-bold text-gray-700 bg-gray-50 dark:bg-gray-800 dark:text-gray-300;
+}
+
+table.dataTable tbody tr {
+  @apply bg-slate-50 border-b  dark:text-slate-400 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600;
+}
 
 /* El contenedor donde se encuentra el cuadro de selección */
 .select2-container {
