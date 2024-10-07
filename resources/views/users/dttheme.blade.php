@@ -25,6 +25,7 @@
           </div>
 
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            {{-- <table id="dtTheme" class="display compact nowrap row-border stripe" style="width:100%"> --}}
             <table id="dtTheme" class="display compact nowrap row-border stripe" style="width:100%">
               <thead>
                 <tr>
