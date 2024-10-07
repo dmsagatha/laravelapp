@@ -5,23 +5,67 @@
 [x-cloak] { display: none; }
 
 table.dataTable {
-  @apply text-sm text-left rtl:text-right text-slate-500 dark:text-slate-400;
+  @apply text-sm text-left rtl:text-right dark:text-slate-400;
 }
 
-table.dataTable thead th,
+/* table.dataTable thead th,
 table.dataTable thead td,
 table.dataTable tfoot th,
 table.dataTable tfoot td {
   text-align: center !important;
+} */
+
+table.dataTable thead {
+  @apply uppercase text-xs font-bold dark:bg-slate-700 dark:text-slate-200;
 }
 
+table.dataTable tbody tr {
+  @apply border-b-0 dark:text-slate-400 dark:bg-slate-800 dark:border-slate-700 dark:hover:bg-slate-600;
+}
+
+table.dataTable thead tr th {
+  @apply text-center;
+}
+
+/* Lista desplegable de Mostrar */
+.dataTables_wrapper select,
+.dataTables_wrapper .dataTables_filter input {
+  @apply text-gray-700 pl-4 leading-tight border-2 border-gray-200 bg-gray-200 dark:text-gray-100  dark:bg-gray-600
+}
+
+div.dataTables_length select option {
+  @apply dark:text-slate-50 dark:bg-slate-700;
+}
+
+/* Cambiar el color del icono responsivo */
+table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before,
+table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
+  @apply dark:bg-blue-500
+}
+
+/* table.dataTable.stripe tbody tr.odd,
+table.dataTable.display tbody tr.odd {
+  @apply dark:bg-slate-700
+}
+
+table.dataTable.stripe tbody tr.odd,
+table.dataTable.hover tbody tr:hover,
+table.dataTable.display tbody tr:hover {
+  @apply bg-indigo-100;
+} */
+
+/* table.dataTable > tbody > tr > td {
+  @apply border-b-0 border-slate-200 dark:border-slate-700;
+} */
+
+/* 
 table.dataTable thead {
   @apply uppercase text-pretty font-bold text-slate-700 bg-slate-50 dark:bg-slate-900 dark:text-slate-300;
 }
 
 table.dataTable tbody tr {
   @apply bg-slate-50 border-b dark:text-slate-400 dark:bg-slate-800 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-600;
-}
+} */
 
 /* El contenedor donde se encuentra el cuadro de selección */
 .select2-container {

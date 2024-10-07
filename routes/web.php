@@ -24,6 +24,7 @@ Route::group(['middleware' => ['auth', 'verified']], function ()
 {
   Route::prefix('usuarios')->name('users.')->controller(UserController::class)->group(function () {
     Route::get('/', 'dataTablesJQ')->name('dataTablesJQ');
+    Route::get('/DataTablesTemas', 'dttheme')->name('dttheme');
     Route::get('select2JQ', 'select2JQ')->name('select2JQ');
   });
 });
