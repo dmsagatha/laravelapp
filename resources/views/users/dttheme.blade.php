@@ -75,7 +75,10 @@
   </div>
 
   @push('styles')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css"> --}}
+
+    <link rel="stylesheet" href="https://datatables.net/legacy/v1/media/css/dataTables.tailwindcss.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
     
     {{-- Estilos personalizados de las tablas --}}
@@ -83,8 +86,14 @@
   @endpush
 
   @push('scripts')
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script> --}}
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://datatables.net/legacy/v1/media/js/jquery.dataTables.js"></script>
+    <script src="https://datatables.net/legacy/v1/media/js/dataTables.tailwindcss.js"></script>
+    <script src="https://cdn.tailwindcss.com/"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 
     <script>
