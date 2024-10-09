@@ -14,8 +14,11 @@ table.dataTable thead tr th {
 }
 
 table.dataTable tbody tr {
-  @apply text-left dark:text-slate-300 dark:hover:bg-slate-700;
+  @apply text-left;
 }
+/* table.dataTable tbody tr {
+  @apply text-left dark:text-slate-300 dark:hover:bg-slate-700;
+} */
 
 /* Cambiar el color del icono responsivo */
 /* table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before,

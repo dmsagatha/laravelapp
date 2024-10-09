@@ -24,9 +24,9 @@
             </div>
           </div>
 
-          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+          <div class="relative overflow-x-auto shadow-md sm:rounded-lg dark">
             {{-- <table id="dtTheme" class="display compact nowrap row-border stripe" style="width:100%"> --}}
-            <table id="dtTailwindcss" class="display compact nowrap row-border stripe" style="width:100%">
+            <table id="dtTailwindcss" class="display" style="width:100%">
               <thead>
                 <tr>
                   <th rowspan="2" width="1%">N°</th>
@@ -75,13 +75,20 @@
   </div>
 
   @push('styles')
-    {{-- ADAPTACIÓN
-    https://datatables.net/legacy/v1/examples/styling/tailwind.html
-     --}}
-    <link rel="stylesheet" href="https://datatables.net/legacy/v1/media/css/dataTables.tailwindcss.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css">
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.tailwindcss.css"> --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.dataTables.css">
   @endpush
 
   @push('scripts')
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    {{-- <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script> --}}
+
+    {{-- <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script> --}}
+    {{-- <script src="https://cdn.datatables.net/1.13.5/js/dataTables.tailwindcss.js"></script> --}}
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.dataTables.js"></script>
 
     <script>
       let table = new DataTable('#dtTailwindcss', {
