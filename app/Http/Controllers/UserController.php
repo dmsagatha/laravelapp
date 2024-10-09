@@ -14,6 +14,13 @@ class UserController extends Controller
     return view('users.dataTablesJQ', compact('users'));
   }
 
+  public function dtTailwindcss()
+  {
+    $users = User::orderBy('name')->get();
+    
+    return view('users.dtTailwindcss', compact('users'));
+  }
+
   public function select2JQ()
   {
     $users = User::orderBy('name')->get();
