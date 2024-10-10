@@ -21,9 +21,6 @@
           <x-nav-link :href="route('users.dtTailwindcss')" :active="request()->routeIs('users.dtTailwindcss')">
             DataTables.Net y Tailwind CSS
           </x-nav-link>
-          <x-nav-link :href="route('users.dttheme')" :active="request()->routeIs('users.dttheme')">
-            DataTables Theme
-          </x-nav-link>
           <x-nav-link :href="route('users.select2JQ')" :active="request()->routeIs('users.select2JQ')">
             Select2 Simple y Múltiple
           </x-nav-link>
@@ -97,9 +94,6 @@
       </x-responsive-nav-link>
       <x-responsive-nav-link :href="route('users.dtTailwindcss')" :active="request()->routeIs('users.dtTailwindcss')">
         DataTables y Tailwind CSS
-      </x-responsive-nav-link>
-      <x-responsive-nav-link :href="route('users.dttheme')" :active="request()->routeIs('users.dttheme')">
-        DataTables Theme
       </x-responsive-nav-link>
       <x-responsive-nav-link :href="route('users.select2JQ')" :active="request()->routeIs('users.select2JQ')">
         Select2 Simple y Múltiple

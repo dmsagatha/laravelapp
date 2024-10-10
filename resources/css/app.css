@@ -15,9 +15,12 @@ table.dataTable tfoot td {
   @apply !text-center text-xs uppercase;    /* !important */
 }
 
-table.dataTable thead th,
-table.dataTable tfoot th {
+table.dataTable thead th {
   @apply border-y border-gray-400;
+}
+
+table.dataTable tfoot th {
+  @apply border-y border-gray-600;
 }
 
 html.dark table.dataTable > thead > tr > th,
