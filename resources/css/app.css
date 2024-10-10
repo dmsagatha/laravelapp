@@ -8,8 +8,25 @@ table.dataTable {
   @apply text-sm text-left rtl:text-right;
 }
 
-table.dataTable thead tr th {
-  @apply text-center text-xs uppercase border-y border-slate-600;
+table.dataTable thead th,
+table.dataTable thead td,
+table.dataTable tfoot th,
+table.dataTable tfoot td {
+  @apply !text-center text-xs uppercase;    /* !important */
+}
+
+table.dataTable thead th,
+table.dataTable tfoot th {
+  @apply border-y border-gray-400;
+}
+
+html.dark table.dataTable > thead > tr > th,
+html.dark table.dataTable > thead > tr > td {
+  @apply border-y border-gray-600;
+}
+
+html.dark table.dataTable.display > tbody > tr > * {
+  @apply dark:text-slate-300;
 }
 
 /* Selector de cantidad de registros a mostrar y Buscar */
