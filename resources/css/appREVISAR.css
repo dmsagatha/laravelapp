@@ -11,6 +11,7 @@ table.dataTable tfoot td {
   text-align: center !important;
 } */
 
+/* https://datatables.net/legacy/v1/examples/styling/tailwind.html */
 /* table.dataTable {
   @apply text-sm text-left rtl:text-right dark:text-slate-400;
 } 
@@ -20,7 +21,7 @@ table.dataTable thead {
 }
 
 table.dataTable tbody tr {
-  @apply border-b-0 dark:text-slate-400 dark:bg-slate-800 dark:border-slate-700 dark:hover:bg-slate-600;
+  @apply text-left border-b-0 dark:text-slate-400 dark:bg-slate-800 dark:border-slate-700 dark:hover:bg-slate-600;
 }
 
 table.dataTable thead tr th {

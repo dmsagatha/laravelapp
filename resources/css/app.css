@@ -4,7 +4,6 @@
 
 [x-cloak] { display: none; }
 
-/* https://datatables.net/legacy/v1/examples/styling/tailwind.html */
 table.dataTable {
   @apply text-sm text-left rtl:text-right;
 }
@@ -13,18 +12,11 @@ table.dataTable thead tr th {
   @apply text-center text-xs uppercase border-y border-slate-600;
 }
 
-table.dataTable tbody tr {
-  @apply text-left;
+/* Selector de cantidad de registros a mostrar */
+html.dark .dt-container .dt-search input,
+html.dark .dt-container .dt-length select {
+  @apply dark:bg-slate-700;
 }
-/* table.dataTable tbody tr {
-  @apply text-left dark:text-slate-300 dark:hover:bg-slate-700;
-} */
-
-/* Cambiar el color del icono responsivo */
-/* table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before,
-table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
-  @apply dark:bg-blue-600
-} */
 
 /* El contenedor donde se encuentra el cuadro de selección */
 .select2-container {
