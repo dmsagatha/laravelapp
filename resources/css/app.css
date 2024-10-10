@@ -12,10 +12,15 @@ table.dataTable thead tr th {
   @apply text-center text-xs uppercase border-y border-slate-600;
 }
 
-/* Selector de cantidad de registros a mostrar */
+/* Selector de cantidad de registros a mostrar y Buscar */
+div.dt-container .dt-search input,
+div.dt-container .dt-length select {
+  @apply hover:border-slate-500;
+}
+
 html.dark .dt-container .dt-search input,
 html.dark .dt-container .dt-length select {
-  @apply dark:bg-slate-700;
+  @apply dark:bg-slate-700 dark:hover:border-blue-500;
 }
 
 /* El contenedor donde se encuentra el cuadro de selección */

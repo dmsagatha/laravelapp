@@ -11,9 +11,9 @@
         <div class="px-6 text-slate-900 dark:text-slate-100">
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <div class="px-4 py-5 mx-auto text-center max-w-7xl sm:px-6 lg:py-2 lg:px-8">
-              <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
+              <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-3xl">
                 <span class="block">
-                  <a href="https://datatables.net/extensions/responsive/examples/initialisation/default.html" target="_blank">DataTables.Net con Tailwind CSS</a>
+                  <a href="https://datatables.net/extensions/responsive/examples/initialisation/default.html" target="_blank">DataTables.Net Responsive con Tailwind CSS</a>
                 </span>
               </h2>
               <span class="block mt-4">Este ejemplo usa
