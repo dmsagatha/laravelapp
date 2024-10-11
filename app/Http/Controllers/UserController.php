@@ -28,13 +28,6 @@ class UserController extends Controller
     return view('users.select2JQ', compact('users'));
   }
 
-  public function dtFlowbite()
-  {
-    $users = User::orderBy('name')->get();
-    
-    return view('users.dtFlowbite', compact('users'));
-  }
-
   public function dttheme()
   {
     $users = User::orderBy('name')->get();
