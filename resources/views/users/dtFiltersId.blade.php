@@ -20,13 +20,13 @@
           </div>
 
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg dark">
-            <x-selectFilter id="country-filter" label="Países" class="w-36">
+            <x-selectFilter id="country_filter" label="Países" class="w-36">
               @foreach ($countries as $country)
                 <option value="{{ $country }}">{{ $country }}</option>
               @endforeach
             </x-selectFilter>
             
-            <x-selectFilter id="jobTitle-filter" label="Profesiones" class="w-36">
+            <x-selectFilter id="jobTitle_filter" label="Profesiones" class="w-36">
               @foreach ($professions as $jobTitle)
                 <option value="{{ $jobTitle }}">{{ $jobTitle }}</option>
               @endforeach
@@ -99,7 +99,7 @@
     <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
     <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.dataTables.js"></script>
 
-    {{-- Filtros por el Elemto ID --}}
+    {{-- Filtros por el Elemto ID - https://jsfiddle.net/Ratan_Paul/5Lj6peof/1/ --}}
     <script>
       let table = new DataTable('#dtFiltersId', {
         responsive: true,
@@ -111,10 +111,10 @@
         }
       });
 
-      $('#country-filter').on('change', function () {
+      $('#country_filter').change(function () {
         table.columns(5).search(this.value).draw();
       });
-      $('#jobTitle-filter').on('change', function () {
+      $('#jobTitle_filter').change(function () {
         table.columns(4).search(this.value).draw();
       });
     </script>
