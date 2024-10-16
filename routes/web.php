@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth', 'verified']], function ()
     Route::get('/', 'dataTablesJQ')->name('dataTablesJQ');
     Route::get('dtTailwindcss', 'dtTailwindcss')->name('dtTailwindcss');
     Route::get('dtFiltros', 'dtFilters')->name('dtFilters');
+    Route::get('dtFiltrosId', 'dtFiltersId')->name('dtFiltersId');
     Route::get('select2JQ', 'select2JQ')->name('select2JQ');
 
     Route::get('DataTablesTemas', 'dttheme')->name('dttheme');

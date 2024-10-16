@@ -34,6 +34,18 @@ class UserController extends Controller
     return view('users.dtFilters', compact('users', 'full_names', 'countries', 'professions'));
   }
 
+  // DataTables y Filtros por el elemento Id
+  public function dtFiltersId()
+  {
+    $users = User::orderBy('name')->get();
+    $full_names  = $users->sortBy('name')->pluck('name')->unique();
+    $countries   = $users->sortBy('country')->pluck('country')->unique();
+    $professions = $users->sortBy('jobTitle')->pluck('jobTitle')->unique();
+    
+    return view('users.dtFiltersId', compact('users', 'full_names', 'countries', 'professions'));
+  }
+  
+
   // Selección múltiple
   public function select2JQ()
   {
