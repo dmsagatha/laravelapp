@@ -44,7 +44,6 @@ class UserController extends Controller
     
     return view('users.dtFiltersId', compact('users', 'full_names', 'countries', 'professions'));
   }
-  
 
   // Selección múltiple
   public function select2JQ()
