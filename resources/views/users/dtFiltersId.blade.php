@@ -13,18 +13,30 @@
             <div class="px-4 py-5 mx-auto text-center max-w-7xl sm:px-6 lg:py-2 lg:px-8">
               <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
                 <span class="block">
-                  <a href="https://www.youtube.com/watch?v=e-HA2YQUoi0" target="_blank">DataTables y Filtros</a>
+                  <a href="https://www.youtube.com/watch?v=e-HA2YQUoi0" target="_blank">DataTables: Filtros por el Elemento ID</a>
                 </span>
               </h2>
             </div>
           </div>
 
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg dark">
+            <x-selectFilter id="country-filter" label="Países" class="w-36">
+              @foreach ($countries as $country)
+                <option value="{{ $country }}">{{ $country }}</option>
+              @endforeach
+            </x-selectFilter>
+            
+            <x-selectFilter id="jobTitle-filter" label="Profesiones" class="w-36">
+              @foreach ($professions as $jobTitle)
+                <option value="{{ $jobTitle }}">{{ $jobTitle }}</option>
+              @endforeach
+            </x-selectFilter>
+
             <x-btn-outline type="reset" onclick="location.reload()">
               Refrescar paǵina
             </x-btn-outline>
 
-            <table id="dtFilters" class="display compact" style="width:100%">
+            <table id="dtFiltersId" class="display compact" style="width:100%">
               <thead>
                 <tr>
                   <th rowspan="2" width="1%">N°</th>
@@ -51,10 +63,8 @@
                     <th>{{ $item->country }}</th>
                     <td>{{ $item->phone_number }}</td>
                     <td>
-                      <a href="#"
-                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
-                      <a href="#"
-                        class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Eliminar</a>
+                      <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
+                      <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Eliminar</a>
                     </td>
                   </tr>
                 @endforeach
@@ -62,46 +72,11 @@
               <tfoot>
                 <tr>
                   <th>N°</th>
-                  <th>
-                    <input type="text" class="filter-input" placeholder="Buscar por Nombre" data-column="1" />
-                  </th>
-                  <th>
-                    <input type="text" class="filter-input" placeholder="Buscar por Correo" data-column="2" />
-                  </th>
+                  <th>Nombre Completo</th>
+                  <th>Correo Electrónico</th>
                   <th>Género</th>
                   <th>Profesión</th>
                   <th>País</th>
-                  <th>Teléfono</th>
-                  <th>Acciones</th>
-                </tr>
-                <tr>
-                  <th>N°</th>
-                  <th>
-                    <select data-column="1" class="filter-select">
-                      <option value="">Seleccionar Nombre</option>
-                      @foreach ($full_names as $name)
-                        <option value="{{ $name }}">{{ $name }}</option>
-                      @endforeach
-                    </select>
-                  </th>
-                  <th>Correo electrónico</th>
-                  <th>Género</th>
-                  <th>
-                    <select data-column="4" class="filter-select">
-                      <option value="">Seleccionar Profesión</option>
-                      @foreach ($professions as $jobTitle)
-                        <option value="{{ $jobTitle }}">{{ $jobTitle }}</option>
-                      @endforeach
-                    </select>
-                  </th>
-                  <th>
-                    <select data-column="5"class="filter-select">
-                      <option value="">Seleccionar País</option>
-                      @foreach ($countries as $country)
-                        <option value="{{ $country }}">{{ $country }}</option>
-                      @endforeach
-                    </select>
-                  </th>
                   <th>Teléfono</th>
                   <th>Acciones</th>
                 </tr>
@@ -124,9 +99,9 @@
     <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
     <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.dataTables.js"></script>
 
-    {{-- DataTables y Filtros por número de columna --}}
+    {{-- Filtros por el Elemto ID --}}
     <script>
-      let table = new DataTable('#dtFilters', {
+      let table = new DataTable('#dtFiltersId', {
         responsive: true,
         lengthMenu: [[5, 10, 15, 25, 50, 100, -1], [5, 10, 15, 25, 50, 100, "Todos"]],
         pageLength: 10,
@@ -136,16 +111,11 @@
         }
       });
 
-      $('.filter-input').keyup(function() {
-        table.column($(this).data('column'))
-        .search($(this).val())
-        .draw();
+      $('#country-filter').on('change', function () {
+        table.columns(5).search(this.value).draw();
       });
-
-      $('.filter-select').change(function() {
-        table.column($(this).data('column'))
-        .search($(this).val())
-        .draw();
+      $('#jobTitle-filter').on('change', function () {
+        table.columns(4).search(this.value).draw();
       });
     </script>
   @endpush
