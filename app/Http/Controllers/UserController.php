@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+  // Selección múltiple
   public function dataTablesJQ()
   {
     $users = User::orderBy('name')->get();
@@ -14,6 +15,7 @@ class UserController extends Controller
     return view('users.dataTablesJQ', compact('users'));
   }
 
+  // DataTables con Tailwind Css - Encabezados complejos
   public function dtTailwindcss()
   {
     $users = User::orderBy('name')->get();
@@ -21,6 +23,18 @@ class UserController extends Controller
     return view('users.dtTailwindcss', compact('users'));
   }
 
+  // DataTables y Filtros
+  public function dtFilters()
+  {
+    $users = User::orderBy('name')->get();
+    $full_names  = $users->sortBy('name')->pluck('name')->unique();
+    $countries   = $users->sortBy('country')->pluck('country')->unique();
+    $professions = $users->sortBy('jobTitle')->pluck('jobTitle')->unique();
+    
+    return view('users.dtFilters', compact('users', 'full_names', 'countries', 'professions'));
+  }
+
+  // Selección múltiple
   public function select2JQ()
   {
     $users = User::orderBy('name')->get();

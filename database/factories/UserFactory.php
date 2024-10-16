@@ -29,6 +29,7 @@ class UserFactory extends Factory
       'email_verified_at' => now(),
       'gender'   => $this->faker->randomElement(['m', 'f']),
       'country'  => fake()->country(),
+      'jobTitle' => fake()->randomElement(['Ingeniero de Sistemas', 'Contador', 'Diseñador', 'Médico', 'Enfermero', 'Administrador']),
       'address'  => fake()->address(),
       'password' => static::$password ??= Hash::make('password'),
       'remember_token' => Str::random(10),
