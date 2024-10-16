@@ -14,11 +14,12 @@ class UserSeeder extends Seeder
     User::factory()->create([
       'name'     => 'Super Admin',
       'email'    => 'superadmin@admin.net',
+      'gender'    => 'f',
       'country'  => 'Colombia',
       'address'  => 'Sur América',
       'password' => Hash::make('superadmin')
     ]);
 
-    User::factory(50)->create();
+    User::factory(100)->create();
   }
 }
