@@ -23,7 +23,7 @@ class UserController extends Controller
     return view('users.dtTailwindcss', compact('users'));
   }
 
-  // DataTables y Filtros
+  // DataTables y Filtros por número de columna
   public function dtFilters()
   {
     $users = User::orderBy('name')->get();

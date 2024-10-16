@@ -125,6 +125,7 @@
     <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
     <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.dataTables.js"></script>
 
+    {{-- DataTables y Filtros por número de columna --}}
     <script>
       let table = new DataTable('#dtFilters', {
         responsive: true,
