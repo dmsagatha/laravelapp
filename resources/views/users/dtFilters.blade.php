@@ -20,6 +20,11 @@
           </div>
 
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg dark">
+            <x-btn-outline type="reset" onclick="location.reload()"
+            iconFa="fa-filter">
+              Refrescar paǵina
+            </x-btn-outline>
+
             <table id="dtFilters" class="display compact" style="width:100%">
               <thead>
                 <tr>
@@ -59,10 +64,10 @@
                 <tr>
                   <th>N°</th>
                   <th>
-                    <input type="text" class="dark:bg-slate-600 dark:text-slate-100 filter-input" placeholder="Buscar por Nombre" data-column="1" />
+                    <input type="text" class="filter-input" placeholder="Buscar por Nombre" data-column="1" />
                   </th>
                   <th>
-                    <input type="text" class="dark:bg-slate-600 dark:text-slate-100 filter-input" placeholder="Buscar por Correo" data-column="2" />
+                    <input type="text" class="filter-input" placeholder="Buscar por Correo" data-column="2" />
                   </th>
                   <th>Género</th>
                   <th>Profesión</th>
@@ -73,7 +78,7 @@
                 <tr>
                   <th>N°</th>
                   <th>
-                    <select data-column="1"class="dark:bg-slate-600 dark:text-slate-100 filter-select">
+                    <select data-column="1" class="filter-select">
                       <option value="">Seleccionar Nombre</option>
                       @foreach ($full_names as $name)
                         <option value="{{ $name }}">{{ $name }}</option>
@@ -83,7 +88,7 @@
                   <th>Correo electrónico</th>
                   <th>Género</th>
                   <th>
-                    <select data-column="4"class="dark:bg-slate-600 dark:text-slate-100 filter-select">
+                    <select data-column="4" class="filter-select">
                       <option value="">Seleccionar Profesión</option>
                       @foreach ($professions as $jobTitle)
                         <option value="{{ $jobTitle }}">{{ $jobTitle }}</option>
@@ -91,7 +96,7 @@
                     </select>
                   </th>
                   <th>
-                    <select data-column="5"class="dark:bg-slate-600 dark:text-slate-100 filter-select">
+                    <select data-column="5"class="filter-select">
                       <option value="">Seleccionar País</option>
                       @foreach ($countries as $country)
                         <option value="{{ $country }}">{{ $country }}</option>
@@ -124,7 +129,7 @@
       let table = new DataTable('#dtFilters', {
         responsive: true,
         lengthMenu: [[5, 10, 15, 25, 50, 100, -1], [5, 10, 15, 25, 50, 100, "Todos"]],
-        pageLength: 5,
+        pageLength: 10,
         processing: true,
         language: {
           url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-MX.json'

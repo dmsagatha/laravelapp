@@ -43,10 +43,10 @@ html.dark .dt-container .dt-length select {
   @apply dark:bg-slate-700 dark:hover:border-blue-500;
 }
 
-/* html.dark table.dataTable > tfoot > tr > th,
-html.dark table.dataTable > tfoot > tr > td {
-  font-size: 2rem;
-} */
+html.dark table.dataTable > tfoot > tr > th input,
+html.dark table.dataTable > tfoot > tr > th select {
+  @apply !bg-slate-700 !text-slate-50; /* !important; */
+}
 
 /* El contenedor donde se encuentra el cuadro de selección */
 .select2-container {
