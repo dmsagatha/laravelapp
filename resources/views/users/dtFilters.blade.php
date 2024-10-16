@@ -20,8 +20,7 @@
           </div>
 
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg dark">
-            {{-- <table id="dtTheme" class="display compact nowrap row-border stripe" style="width:100%"> --}}
-            <table id="dtFilters" class="display" style="width:100%">
+            <table id="dtFilters" class="display compact" style="width:100%">
               <thead>
                 <tr>
                   <th rowspan="2" width="1%">N°</th>
@@ -34,7 +33,7 @@
                 <tr>
                   <th>Profesión</th>
                   <th>País</th>
-                  <th>Dirección</th>
+                  <th>Teléfono</th>
                 </tr>
               </thead>
               <tbody>
@@ -46,7 +45,7 @@
                     <td>{{ App\Models\User::GENDER_SELECT[$item->gender] ?? '' }}</td>
                     <th>{{ $item->jobTitle }}</th>
                     <th>{{ $item->country }}</th>
-                    <td>{{ $item->address }}</td>
+                    <td>{{ $item->phone_number }}</td>
                     <td>
                       <a href="#"
                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
@@ -68,7 +67,7 @@
                   <th>Género</th>
                   <th>Profesión</th>
                   <th>País</th>
-                  <th>Dirección</th>
+                  <th>Teléfono</th>
                   <th>Acciones</th>
                 </tr>
                 <tr>
@@ -99,7 +98,7 @@
                       @endforeach
                     </select>
                   </th>
-                  <th>Dirección</th>
+                  <th>Teléfono</th>
                   <th>Acciones</th>
                 </tr>
               </tfoot>
@@ -144,25 +143,5 @@
         .draw();
       });
     </script>
-
-    {{-- <script>
-      $(document).ready(function () {
-        let table = new DataTable('#dtFilters', {
-          responsive: true,
-          lengthMenu: [[5, 10, 15, 25, 50, 100, -1], [5, 10, 15, 25, 50, 100, "Todos"]],
-          pageLength: 5,
-          processing: true,
-          language: {
-            url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-MX.json'
-          }
-        });
-
-        $('.filter-input').keyup(function() {
-          table.column($(this).data('column'))
-          .search($(this).val())
-          .draw();
-        });
-      });
-    </script> --}}
   @endpush
 </x-app-layout>

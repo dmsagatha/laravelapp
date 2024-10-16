@@ -30,7 +30,7 @@ class UserFactory extends Factory
       'gender'   => $this->faker->randomElement(['m', 'f']),
       'country'  => fake()->country(),
       'jobTitle' => fake()->randomElement(['Ingeniero de Sistemas', 'Contador', 'Diseñador', 'Médico', 'Enfermero', 'Administrador']),
-      'address'  => fake()->address(),
+      'phone_number' => fake()->phoneNumber,
       'password' => static::$password ??= Hash::make('password'),
       'remember_token' => Str::random(10),
     ];

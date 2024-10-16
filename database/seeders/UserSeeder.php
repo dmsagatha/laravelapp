@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
       'gender'   => 'f',
       'country'  => 'Colombia',
       'jobTitle' => 'Ingeniero de Sistemas',
-      'address'  => 'Sur América',
+      'phone_number'  => '12345678',
       'password' => Hash::make('superadmin')
     ]);
 
