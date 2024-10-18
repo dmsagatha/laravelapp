@@ -101,7 +101,7 @@
         pageLength: 25,
         processing: true,
         language: {
-          url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-MX.json'
+          url: 'https://cdn.datatables.net/plug-ins/2.1.8/i18n/es-ES.json'
         }
       });
 
