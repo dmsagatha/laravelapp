@@ -1,0 +1,46 @@
+.dropzone {
+  position: relative;
+  max-width: 200px;
+  border: 2px dashed #3498db !important;
+  border-radius: 10px;
+  padding: 15px;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  color: #7f8c8d;
+  transition: .2s;
+  -webkit-transition: .2s;
+}
+.dropzone .dz-preview {
+  position: relative;
+  display: inline-block;
+}
+.dropzone .dz-preview .dz-progress {
+  display: block;
+  border: 1px solid #aaa;
+}
+.dropzone .dz-preview .dz-progress .dz-upload {
+  display: block;
+  width: 0;
+  background: green;
+}
+.dropzone .dz-preview .dz-error-message {
+  color: red;
+  display: none;
+}
+.dropzone .dz-preview.dz-error .dz-error-message, .dropzone .dz-preview.dz-error .dz-error-mark {
+  display: block;
+}
+.dropzone .dz-preview.dz-success .dz-success-mark {
+  display: block;
+}
+.dropzone .dz-preview .dz-error-mark, .dropzone .dz-preview .dz-success-mark {
+  position: absolute;
+  display: none;
+  left: 30px;
+  top: 30px;
+  width: 54px;
+  height: 58px;
+  left: 50%;
+  margin-left: -27px;
+}

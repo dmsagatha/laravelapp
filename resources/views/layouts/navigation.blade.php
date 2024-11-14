@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white dark:bg-slate-800 border-b border-slate-100 dark:border-slate-700">
+<nav x-data="{ open: false }" class="bg-white dark:bg-slate-800 border-b border-slate-100 dark:border-slate-700 fixed w-full z-20 top-0 start-0">
   <!-- Primary Navigation Menu -->
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between h-16">
@@ -14,6 +14,15 @@
         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
           <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
             {{ __('Dashboard') }}
+          </x-nav-link>
+          <x-nav-link :href="route('users.dataTablesJQ')" :active="request()->routeIs('users.dataTablesJQ')">
+            DataTables.Net
+          </x-nav-link>
+          <x-nav-link :href="route('users.dtTailwindcss')" :active="request()->routeIs('users.dtTailwindcss')">
+            DataTables.Net y Tailwind CSS
+          </x-nav-link>
+          <x-nav-link :href="route('users.select2JQ')" :active="request()->routeIs('users.select2JQ')">
+            Select2 Simple y Múltiple
           </x-nav-link>
         </div>
       </div>
@@ -79,6 +88,15 @@
     <div class="pt-2 pb-3 space-y-1">
       <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
         {{ __('Dashboard') }}
+      </x-responsive-nav-link>
+      <x-responsive-nav-link :href="route('users.dataTablesJQ')" :active="request()->routeIs('users.dataTablesJQ')">
+        DataTables.Net
+      </x-responsive-nav-link>
+      <x-responsive-nav-link :href="route('users.dtTailwindcss')" :active="request()->routeIs('users.dtTailwindcss')">
+        DataTables y Tailwind CSS
+      </x-responsive-nav-link>
+      <x-responsive-nav-link :href="route('users.select2JQ')" :active="request()->routeIs('users.select2JQ')">
+        Select2 Simple y Múltiple
       </x-responsive-nav-link>
     </div>
 
