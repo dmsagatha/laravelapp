@@ -10,7 +10,8 @@ class Processor extends Model
   use HasFactory;
 
   protected $fillable = [
-    'mac', 'servicetag'
+    'mac',
+    'servicetag'
   ];
 
   public function getRouteKeyName()

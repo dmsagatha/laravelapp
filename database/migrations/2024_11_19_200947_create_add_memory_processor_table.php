@@ -6,20 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-  /**
-    * Run the migrations.
-    */
   public function up(): void
   {
     Schema::create('add_memory_processor', function (Blueprint $table) {
       $table->id();
+      $table->foreignId('add_memory_id')->constrained()->onDelete('cascade');
+      $table->foreignId('processor_id')->constrained()->onDelete('cascade');
+      $table->integer('quantity_addmem');
       $table->timestamps();
     });
   }
-
-  /**
-    * Reverse the migrations.
-    */
+  
   public function down(): void
   {
     Schema::dropIfExists('add_memory_processor');

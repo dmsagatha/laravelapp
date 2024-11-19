@@ -10,7 +10,11 @@ class AddMemory extends Model
   use HasFactory;
 
   protected $fillable = [
-    'brand', 'technology', 'velocity', 'capacity', 'slug'
+    'brand',
+    'technology',
+    'velocity',
+    'capacity',
+    'slug'
   ];
 
   public function getRouteKeyName()
