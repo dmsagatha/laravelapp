@@ -10,6 +10,8 @@ return new class extends Migration
   {
     Schema::create('processors', function (Blueprint $table) {
       $table->id();
+      $table->string('servicetag')->unique();
+      $table->macAddress('mac')->unique();
       $table->timestamps();
     });
   }
