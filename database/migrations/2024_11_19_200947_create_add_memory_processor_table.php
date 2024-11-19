@@ -6,16 +6,22 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+  /**
+    * Run the migrations.
+    */
   public function up(): void
   {
-    Schema::create('{{ table }}', function (Blueprint $table) {
+    Schema::create('add_memory_processor', function (Blueprint $table) {
       $table->id();
       $table->timestamps();
     });
   }
-  
+
+  /**
+    * Reverse the migrations.
+    */
   public function down(): void
   {
-    Schema::dropIfExists('{{ table }}');
+    Schema::dropIfExists('add_memory_processor');
   }
 };
