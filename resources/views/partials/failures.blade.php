@@ -1,6 +1,6 @@
 @if (session()->has('failures'))
-  <div class="flow-root w-full mx-auto md:w-full lg:w-4/5 shadow px-4 py-4 bg-slate-50 rounded sm:px-1 sm:py-2">
-    <table class="tableShow">
+  <div class="flow-root w-full mx-auto md:w-full lg:w-4/5 shadow px-4 py-4rounded sm:px-1 sm:py-2 bg-slate-50 dark:bg-slate-700 dark:text-slate-50">
+    <table class="tableFialures">
       <tr>
         <th>Fila</th>
         <th>Atributo</th>

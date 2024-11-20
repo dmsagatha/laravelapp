@@ -376,3 +376,15 @@ Aumente p-1 a p-2 para tener más espacio entre los resultados */
 .tableShow tr td span {
   @apply font-medium;
 }
+
+.tableFialures {
+  @apply w-full text-sm;
+}
+
+.tableFialures tr {
+  @apply border-b border-slate-300 dark:border-slate-600 hover:bg-slate-200 dark:hover:bg-slate-700;
+}
+
+.tableFialures tr th {
+  @apply text-center uppercase font-bold;
+}

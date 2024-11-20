@@ -16,9 +16,30 @@ class ProcessorController extends Controller
     return view('admin.processors.index', compact('processors'));
   }
   
+  /**
+   * #2: Laravel Excel Import to Database with Errors and Validation Handling
+   * https://www.youtube.com/watch?v=Q2AUH9w9XaA
+   */
   public function import(Request $request)
   {
-    try {
+    // use Importable;   ProcessorsImport
+    $file = $request->file('import_file')->store('importProcessors');
+    $import = new ProcessorsImport;
+    $import->import($file);
+    // dd($import->errors());
+    // dd($import->failures());
+
+    // Mostrar los errores que no crearán en la base de datos
+    if ($import->failures()->isNotEmpty()) {
+      return back()->withFailures($import->failures());
+    }
+
+    return redirect()->route('processors.index')->with('success', 'Datos importados exitosamente!');
+
+    /* $file = $request->file('import_file');
+    Excel::import(new ProcessorsImport, $file);
+    return redirect()->route('processors.index')->with('success', 'Datos importados exitosamente!'); */
+    /* try {
       if (!$request->hasFile('import_file')) {
        throw new \Exception('El archivo no existe.');
       }
@@ -43,11 +64,8 @@ class ProcessorController extends Controller
 
     Session()->flash('statusCode', 'success');
     
-    return redirect()->route('processors.index')->with('success', 'Datos importados exitosamente!');
-
-    /* $file = $request->file('import_file');    
-    Excel::import(new ProcessorsImport, $file);    
     return redirect()->route('processors.index')->with('success', 'Datos importados exitosamente!'); */
+
   }
   
   public function create()
