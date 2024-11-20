@@ -13,7 +13,6 @@ return new class extends Migration
       $table->foreignId('add_memory_id')->constrained()->onDelete('cascade');
       $table->foreignId('processor_id')->constrained()->onDelete('cascade');
       $table->integer('quantity_addmem');
-      $table->timestamps();
     });
   }
   
