@@ -47,10 +47,16 @@ class ProcessorsImport implements ToModel,
 
     // Procesar los slugs y cantidades de memoria
     $addMemorySlug = explode(',', $row['slug']);
+    $quantities = explode(',', $row['quantity_mem']);
+
+    /* foreach ($addMemorySlug as $key => $slug) {
+      $addMemory = AddMemory::firstOrCreate(['slug' => $slug]);
+      $processorData->addMemories()->attach($addMemory->id, ['quantity_addmem' => $quantities[$key]]);
+    } */
     $addMemory = AddMemory::where('slug', $addMemorySlug)->first();
 
     if ($addMemory) {
-      $processorData->addMemories()->attach($addMemory->id, ['quantity_addmem' => $row['quantity_mem']]);
+      $processorData->addMemories()->attach($addMemory->id, ['quantity_addmem' => $quantities]);
     }
 
 
