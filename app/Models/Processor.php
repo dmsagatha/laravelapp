@@ -27,6 +27,6 @@ class Processor extends Model
 
   public function addMemories()
   {
-    return $this->belongsToMany(AddMemory::class, 'add_memory_processor')->withPivot('quantity_addmem')->withTimestamps();
+    return $this->belongsToMany(AddMemory::class, 'add_memory_processor')->withPivot('quantity_addmem');
   }
 }

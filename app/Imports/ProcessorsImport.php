@@ -2,7 +2,7 @@
 
 namespace App\Imports;
 
-use App\Models\{Processor, User};
+use App\Models\{Processor, User, AddMemory};
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
@@ -35,20 +35,22 @@ class ProcessorsImport implements ToModel,
   public function model(array $row)
   {
     // Crear o encontrar el producto
-    $processor = Processor::firstOrCreate([
-      'servicetag' => trim($row['service_tag']),
-      'mac'        => trim($row['mac']),
-      'user_id'    => $this->users[$row['usuario']]
-
+    $processorData = Processor::firstOrCreate(
+      ['servicetag' => $row['service_tag']],
+      [
+        'servicetag' => trim($row['service_tag']),
+        'mac'        => trim($row['mac']),
+        'user_id'    => $this->users[$row['usuario']
+      ]
     ]);
 
-    // Procesar los slugs y cantidades de memoria
-    $slugs = explode(',', $row['slugMemory']);
-    $quantities = explode(',', $row['quantity_mem']);
 
-    // Asociar el Procesador a cada Memoria en la tabla pivote con la cantidad correspondiente
-    foreach ($slugs as $index => $slug) {
-      $processor->memories()->attach($slug, ['quantity' => $quantities[$index]]);
+    // Procesar los slugs y cantidades de memoria
+    $addMemorySlug = explode(',', $row['slug']);
+    $addMemory = AddMemory::where('slug', $addMemorySlug)->first();
+
+    if ($addMemory) {
+      $processorData->addMemories()->attach($addMemory->id, ['quantity_addmem' => $row['quantity_mem']]);
     }
 
 
