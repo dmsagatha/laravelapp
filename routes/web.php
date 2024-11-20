@@ -36,8 +36,4 @@ Route::group(['middleware' => ['auth', 'verified']], function ()
     Route::get('/', 'index')->name('index');
     Route::post('importar', 'import')->name('import');
   });
-  /* Route::resource('procesadores', ProcessorController::class)
-    ->parameters(['procesadores' => 'processor'])
-    ->names('processors')
-    ->except('show'); */
 });

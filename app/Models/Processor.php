@@ -11,12 +11,18 @@ class Processor extends Model
 
   protected $fillable = [
     'mac',
-    'servicetag'
+    'servicetag',
+    'user_id'
   ];
 
   public function getRouteKeyName()
   {
     return 'servicetag';
+  }
+
+  public function user()
+  {
+    return $this->belongsTo(User::class);
   }
 
   public function addMemories()

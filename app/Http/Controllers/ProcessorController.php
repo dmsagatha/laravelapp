@@ -23,7 +23,8 @@ class ProcessorController extends Controller
     // Excel::import(new ProcessorsImport, 'procesadores.xlsx');
     Excel::import(new ProcessorsImport, $file);
     
-    return redirect('/procesadores')->with('success', 'Datos importadores exitosamente!');
+    // return redirect('/procesadores')->with('success', 'Datos importados exitosamente!');
+    return redirect()->route('processors.index')->with('success', 'Datos importados exitosamente!');
   }
   
   public function create()

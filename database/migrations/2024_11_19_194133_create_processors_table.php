@@ -10,6 +10,7 @@ return new class extends Migration
   {
     Schema::create('processors', function (Blueprint $table) {
       $table->id();
+      $table->foreignId('user_id')->nullable()->constrained();
       $table->string('servicetag')->unique();
       $table->macAddress('mac')->unique();
       $table->timestamps();

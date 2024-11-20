@@ -6,7 +6,7 @@
   </x-slot>
 
   <div class="py-12">
-    <div class="min-w-full mx-auto sm:px-6 lg:px-8">
+    <div class="flow-root mx-auto w-full md:w-full lg:w-4/5 sm:px-6 lg:px-8">
       <div class="bg-slate-50 dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
         <div class="px-6 text-slate-900 dark:text-slate-100">
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -17,9 +17,9 @@
                     target="_blank">Importar Procesadores y Memorias RAM</a>
                 </span>
               </h2>
-              <p class="mt-4 text-sm/relaxed">Hola </p>
 
               <form action="{{ route('processors.import') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 {{-- <input type="file" id="import_file" name="import_file" accept=".xls" required> --}}
                 <input type="file" id="import_file" name="import_file" required>
                 
@@ -27,19 +27,23 @@
                   Importar
                 </button>
               </form>
-              </form>
             </div>
           </div>
 
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            @if (session('success'))
-              <div>{{ session('success') }}</div>                
+            @if (isset($errors) && $errors->any())
+              <div>
+                @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                @endforeach
+              </div>                
             @endif
             
             <table id="dtTheme" class="display compact nowrap row-border stripe" style="width:100%">
               <thead>
                 <tr>
                   <th width="1%">N°</th>
+                  <th>Usuario</th>
                   <th>MAC</th>
                   <th>Service Tag</th>
                   <th>Acciones</th>
@@ -49,12 +53,14 @@
                 @foreach ($processors as $key => $item)
                   <tr>
                     <td style="text-align: center;">{{ $key + 1 }}</td>
+                    <th>{{ $item->user->name }}</th>
                     <th>{{ $item->mac }}</th>
                     <td>{{ $item->servicetag }}</td>
                     <td>
-                      <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
-                      <a href="#"
-                        class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Eliminar</a>
+                      <div class="flex items-stretch justify-center">
+                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
+                        <a href="#"  class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Eliminar</a>
+                      </div>
                     </td>
                   </tr>
                 @endforeach
