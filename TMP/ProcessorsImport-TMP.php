@@ -15,7 +15,8 @@ use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Throwable;
 
-class ProcessorsImport implements ToModel, 
+class ProcessorsImport implements
+  ToModel,
   WithHeadingRow,
   SkipsOnError,
   WithValidation,
@@ -23,7 +24,9 @@ class ProcessorsImport implements ToModel,
   WithBatchInserts,
   WithChunkReading
 {
-  use Importable, SkipsErrors, SkipsFailures;
+  use Importable;
+  use SkipsErrors;
+  use SkipsFailures;
 
   private $users;
 
@@ -34,30 +37,11 @@ class ProcessorsImport implements ToModel,
 
   public function model(array $row)
   {
-    // Crear o encontrar el producto
-    $processor = Processor::firstOrCreate([
-      'servicetag' => trim($row['service_tag']),
-      'mac'        => trim($row['mac']),
-      'user_id'    => $this->users[$row['usuario']]
-
-    ]);
-
-    // Procesar los slugs y cantidades de memoria
-    $slugs = explode(',', $row['slugMemory']);
-    $quantities = explode(',', $row['quantity_mem']);
-
-    // Asociar el Procesador a cada Memoria en la tabla pivote con la cantidad correspondiente
-    foreach ($slugs as $index => $slug) {
-      $processor->memories()->attach($slug, ['quantity' => $quantities[$index]]);
-    }
-
-
-
-    /* return new Processor([
+    return new Processor([
       'servicetag' => $row['service_tag'],
       'mac'        => $row['mac'],
       'user_id'    => $this->users[$row['usuario']]
-    ]); */
+    ]);
   }
 
   public function rules(): array
