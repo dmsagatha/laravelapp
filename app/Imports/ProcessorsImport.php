@@ -15,12 +15,13 @@ use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Throwable;
 
-// class ProcessorsImport implements ToModel, WithBatchInserts, WithChunkReading
 class ProcessorsImport implements ToModel, 
   WithHeadingRow,
   SkipsOnError,
   WithValidation,
-  SkipsOnFailure
+  SkipsOnFailure,
+  WithBatchInserts,
+  WithChunkReading
 {
   use Importable, SkipsErrors, SkipsFailures;
 
