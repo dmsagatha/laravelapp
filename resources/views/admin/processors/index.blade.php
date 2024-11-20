@@ -38,6 +38,8 @@
                 @endforeach
               </div>                
             @endif
+
+            @include('partials.failures')
             
             <table id="dtTheme" class="display compact nowrap row-border stripe" style="width:100%">
               <thead>

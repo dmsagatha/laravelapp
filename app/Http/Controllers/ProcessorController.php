@@ -18,13 +18,36 @@ class ProcessorController extends Controller
   
   public function import(Request $request)
   {
-    $file = $request->file('import_file');
+    try {
+      if (!$request->hasFile('import_file')) {
+       throw new \Exception('El archivo no existe.');
+      }
 
-    // Excel::import(new ProcessorsImport, 'procesadores.xlsx');
-    Excel::import(new ProcessorsImport, $file);
+      $file = $request->import_file;
+      Excel::import(new ProcessorsImport, $file);
+    } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+      $failures = $e->failures();
+      $errors = [];
+      
+      foreach ($failures as $failure) {
+        $failure->row(); // fila que falló
+        $failure->attribute(); // clave de encabezado (si se usa la fila de encabezado) o índice de columna
+        $failure->errors(); // Mensajes de error reales del validador de Laravel
+        $failure->values(); // Los valores de la fila que falló
+
+        // $errors[$failure->row()][$failure->column()] = $failure->errors();
+      }
+
+      return back()->with('errors', $errors);
+    };
+
+    Session()->flash('statusCode', 'success');
     
-    // return redirect('/procesadores')->with('success', 'Datos importados exitosamente!');
     return redirect()->route('processors.index')->with('success', 'Datos importados exitosamente!');
+
+    /* $file = $request->file('import_file');    
+    Excel::import(new ProcessorsImport, $file);    
+    return redirect()->route('processors.index')->with('success', 'Datos importados exitosamente!'); */
   }
   
   public function create()
