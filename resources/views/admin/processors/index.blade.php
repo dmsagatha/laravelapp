@@ -48,6 +48,7 @@
                   <th>Usuario</th>
                   <th>MAC</th>
                   <th>Service Tag</th>
+                  <th>Memorias</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -58,6 +59,11 @@
                     <th>{{ $item->user->name }}</th>
                     <th>{{ $item->mac }}</th>
                     <td>{{ $item->servicetag }}</td>
+                    <td class="text-xs">
+                      @foreach ($item->addMemories as $key => $data)
+                        <li>{{ $data->brand }} - {{ $data->technology }} - {{ $data->velocity }} - {{ $data->capacity }} - SLUG: {{ $data->slug }}</li>
+                      @endforeach
+                    </td>
                     <td>
                       <div class="flex items-stretch justify-center">
                         <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>

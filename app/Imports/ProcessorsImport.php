@@ -15,7 +15,8 @@ use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Throwable;
 
-class ProcessorsImport implements ToModel, 
+class ProcessorsImport implements
+  ToModel,
   WithHeadingRow,
   SkipsOnError,
   WithValidation,
@@ -23,7 +24,9 @@ class ProcessorsImport implements ToModel,
   WithBatchInserts,
   WithChunkReading
 {
-  use Importable, SkipsErrors, SkipsFailures;
+  use Importable;
+  use SkipsErrors;
+  use SkipsFailures;
 
   private $users;
 
@@ -34,7 +37,7 @@ class ProcessorsImport implements ToModel,
 
   public function model(array $row)
   {
-    // Crear o encontrar el producto
+    // Crear o encontrar el Procesador
     $processorData = Processor::firstOrCreate(
       ['servicetag' => $row['service_tag']],
       [
@@ -44,28 +47,14 @@ class ProcessorsImport implements ToModel,
       ]
     ]);
 
+    // Manejar AddMemory y la tabla pivote solo si están presentes `slug` y `quantity_addmem`
+    if (!is_null($row['memories_add'])) {
+      $addMemories = AddMemory::whereIn('slug', explode(',', $row['memories_add']))->get();
 
-    // Procesar los slugs y cantidades de memoria
-    $addMemorySlug = explode(',', $row['slug']);
-    $quantities = explode(',', $row['quantity_mem']);
-
-    /* foreach ($addMemorySlug as $key => $slug) {
-      $addMemory = AddMemory::firstOrCreate(['slug' => $slug]);
-      $processorData->addMemories()->attach($addMemory->id, ['quantity_addmem' => $quantities[$key]]);
-    } */
-    $addMemory = AddMemory::where('slug', $addMemorySlug)->first();
-
-    if ($addMemory) {
-      $processorData->addMemories()->attach($addMemory->id, ['quantity_addmem' => $quantities]);
+      foreach ($addMemories as $addMemory) {
+        $processorData->addMemories()->attach($addMemory->id, ['quantity_addmem' => $row['quantity_addmem']]);
+      }
     }
-
-
-
-    /* return new Processor([
-      'servicetag' => $row['service_tag'],
-      'mac'        => $row['mac'],
-      'user_id'    => $this->users[$row['usuario']]
-    ]); */
   }
 
   public function rules(): array
