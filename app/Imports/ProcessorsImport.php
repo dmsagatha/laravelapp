@@ -2,11 +2,10 @@
 
 namespace App\Imports;
 
-use Throwable;
+use App\Models\{Processor, User, AddMemory};
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
-use App\Models\{Processor, User, AddMemory};
 use Maatwebsite\Excel\Concerns\SkipsOnError;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\SkipsFailures;
@@ -25,7 +24,9 @@ class ProcessorsImport implements
   WithBatchInserts,
   WithChunkReading
 {
-  use Importable, SkipsErrors, SkipsFailures;
+  use Importable;
+  use SkipsErrors;
+  use SkipsFailures;
 
   private $users;
 
@@ -45,13 +46,14 @@ class ProcessorsImport implements
           'mac'        => trim($row['mac']),
           'user_id'    => $this->users[$row['usuario']
         ]
-      ]);
+      ]
+      );
 
       // Manejar AddMemory y la tabla pivote solo si están presentes `slug` y `quantity_addmem`
       // Archivo de ejemplo: public/importar/processors.xlsx
       if (!is_null($row['memories_add'])) {
         $addMemories = AddMemory::whereIn('slug', explode(',', $row['memories_add']))->get();
-  
+
         foreach ($addMemories as $addMemory) {
           $processorData->addMemories()->attach($addMemory->id, ['quantity_addmem' => $row['quantity_addmem']]);
         }
