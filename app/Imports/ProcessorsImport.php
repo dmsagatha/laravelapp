@@ -48,6 +48,7 @@ class ProcessorsImport implements
     ]);
 
     // Manejar AddMemory y la tabla pivote solo si están presentes `slug` y `quantity_addmem`
+    // Archivo de ejemplo: public/importar/processors.xlsx
     if (!is_null($row['memories_add'])) {
       $addMemories = AddMemory::whereIn('slug', explode(',', $row['memories_add']))->get();
 
