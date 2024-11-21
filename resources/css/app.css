@@ -353,6 +353,7 @@ Aumente p-1 a p-2 para tener más espacio entre los resultados */
   padding: 6px; 
 }
 
+/* Tabla para mostrar periféricos */
 .tableShow {
   @apply w-full;
 }
@@ -377,6 +378,7 @@ Aumente p-1 a p-2 para tener más espacio entre los resultados */
   @apply font-medium;
 }
 
+/* Tabla para mostrar los errores de las importaciones */
 .tableFialures {
   @apply w-full text-sm;
 }
