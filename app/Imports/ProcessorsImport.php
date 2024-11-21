@@ -24,9 +24,7 @@ class ProcessorsImport implements
   WithBatchInserts,
   WithChunkReading
 {
-  use Importable;
-  use SkipsErrors;
-  use SkipsFailures;
+  use Importable, SkipsErrors, SkipsFailures;
 
   private $users;
 
