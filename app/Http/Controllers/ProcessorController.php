@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\ProcessorsImport;
 use App\Models\Processor;
+use App\Imports\ProcessorsImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -29,7 +29,7 @@ class ProcessorController extends Controller
     // dd($import->errors());
     // dd($import->failures());
 
-    // Mostrar los errores que no crearán en la base de datos
+    // Mostrar los errores que los registros no se crearán en la base de datos
     if ($import->failures()->isNotEmpty()) {
       return back()->withFailures($import->failures());
     }
