@@ -27,14 +27,5 @@ class DatabaseSeeder extends Seeder
       ['brand' => 'Hynix',     'technology' => 'pc3-10600U-09-10-B0', 'velocity' => '2Rx8', 'capacity' => '8GB',   'slug' => 'hynix_pc3-10600U-09-10-B0'],
       ['brand' => 'Mac',       'technology' => 'pc3-10600U-09-10-B0', 'velocity' => '2Rx8', 'capacity' => '4GB',   'slug' => 'mac_pc3-10600U-09-10-B0']
     ]);
-
-    /* DB::table('add_memories')->insert([
-      ['brand' => 'Nanya',     'technology' => 'pc2-4200U-444-12-A1', 'velocity' => '2Rx8', 'capacity' => '8GB',   'slug' => 'pc24200U'],
-      ['brand' => 'Samsung',   'technology' => 'pc3-10600S-9-10-B2',  'velocity' => '2Rx8', 'capacity' => '4GB',   'slug' => 'pc310600S'],
-      ['brand' => 'Kingston',  'technology' => 'pc2-4200U-444-12-B1', 'velocity' => '2Rx8', 'capacity' => '1GB',   'slug' => 'pc24200E'],
-      ['brand' => 'MCT',       'technology' => 'pc2-3200U-333-10-A1', 'velocity' => '1Rx8', 'capacity' => '512MB', 'slug' => 'pc23200M'],
-      ['brand' => 'Hynix',     'technology' => 'pc3-10600U-09-10-B0', 'velocity' => '2Rx8', 'capacity' => '8GB',   'slug' => 'pc310600U'],
-      ['brand' => 'Mac',       'technology' => 'pc3-10600U-09-10-B0', 'velocity' => '2Rx8', 'capacity' => '4GB',   'slug' => 'pc310600G']
-    ]); */
   }
 }

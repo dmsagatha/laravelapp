@@ -11,12 +11,20 @@
         <div class="px-6 text-slate-900 dark:text-slate-100">
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <div class="px-4 py-5 mx-auto text-center max-w-7xl sm:px-6 lg:py-2 lg:px-8">
-              <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-3xl">
+              <h2 class="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-3xl">
                 <span class="block">
                   <a href="https://datatables.net/extensions/responsive/examples/initialisation/default.html"
-                    target="_blank">Importar Procesadores y Memorias RAM</a>
+                    target="_blank">
+                    Importar Procesadores y Memorias RAM - <br>
+                    Relación Muchos a Muchos
+                  </a>
                 </span>
               </h2>
+              <span class="block py-4">Guía: 
+                <a href="https://www.youtube.com/watch?v=Q2AUH9w9XaA" target="_new" class="font-bold text-lg text-indigo-500" alt="Tailwind CSS">
+                  Laravel Excel Import to Database with Errors and Validation Handling
+                </a>
+              </span>
 
               <form action="{{ route('processors.import') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -27,17 +35,18 @@
                   Importar
                 </button>
               </form>
+              <span class="block py-2">(Archivo de ejmplo: public/importar/processors.xlsx)</span>
             </div>
           </div>
 
           <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            @if (isset($errors) && $errors->any())
+            {{-- @if (isset($errors) && $errors->any())
               <div>
                 @foreach ($errors->all() as $error)
                   <li>{{ $error }}</li>
                 @endforeach
               </div>                
-            @endif
+            @endif --}}
 
             @include('partials.failures')
             
