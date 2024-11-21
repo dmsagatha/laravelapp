@@ -69,9 +69,12 @@
                     <th>{{ $item->mac }}</th>
                     <td>{{ $item->servicetag }}</td>
                     <td class="text-xs">
-                      @foreach ($item->addMemories as $key => $data)
-                        <li>{{ $data->brand }} - {{ $data->technology }} - {{ $data->velocity }} - {{ $data->capacity }} - SLUG: {{ $data->slug }}</li>
-                      @endforeach
+                      @if(!$item->addMemories->isEmpty())
+                        <p><span class="underline">Adicionales:</span></p>
+                        @foreach($item->addMemories as $addMemory)
+                          {{ $addMemory->brand }} - {{ $addMemory->technology }} - {{ $addMemory->velocity }} MHz - {{ $addMemory->capacity }} x {{ $addMemory->pivot->quantity_addmem }}<br>
+                        @endforeach
+                      @endif
                     </td>
                     <td>
                       <div class="flex items-stretch justify-center">
