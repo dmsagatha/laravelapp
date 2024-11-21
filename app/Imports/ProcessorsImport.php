@@ -42,9 +42,8 @@ class ProcessorsImport implements
         [
           'servicetag' => trim($row['service_tag']),
           'mac'        => trim($row['mac']),
-          'user_id'    => $this->users[$row['usuario']
+          'user_id'    => $this->users[$row['usuario']]
         ]
-      ]
       );
 
       // Manejar AddMemory y la tabla pivote solo si están presentes `slug` y `quantity_addmem`
