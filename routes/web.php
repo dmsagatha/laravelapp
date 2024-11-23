@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\{UserController, ProcessorController};
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -30,5 +30,10 @@ Route::group(['middleware' => ['auth', 'verified']], function ()
     Route::get('select2JQ', 'select2JQ')->name('select2JQ');
 
     Route::get('DataTablesTemas', 'dttheme')->name('dttheme');
+  });
+
+  Route::prefix('procesadores')->name('processors.')->controller(ProcessorController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('importar', 'import')->name('import');
   });
 });

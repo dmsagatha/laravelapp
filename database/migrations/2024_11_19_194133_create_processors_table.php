@@ -8,14 +8,17 @@ return new class extends Migration
 {
   public function up(): void
   {
-    Schema::create('{{ table }}', function (Blueprint $table) {
+    Schema::create('processors', function (Blueprint $table) {
       $table->id();
+      $table->foreignId('user_id')->nullable()->constrained();
+      $table->string('servicetag')->unique();
+      $table->macAddress('mac')->unique();
       $table->timestamps();
     });
   }
-  
+
   public function down(): void
   {
-    Schema::dropIfExists('{{ table }}');
+    Schema::dropIfExists('processors');
   }
 };

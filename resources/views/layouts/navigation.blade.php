@@ -24,6 +24,9 @@
           <x-nav-link :href="route('users.select2JQ')" :active="request()->routeIs('users.select2JQ')">
             Select2 Simple y Múltiple
           </x-nav-link>
+          <x-nav-link :href="route('processors.index')" :active="request()->routeIs('processors.index')">
+            Importar Muchos a Muchos
+          </x-nav-link>
         </div>
       </div>
 
@@ -97,6 +100,9 @@
       </x-responsive-nav-link>
       <x-responsive-nav-link :href="route('users.select2JQ')" :active="request()->routeIs('users.select2JQ')">
         Select2 Simple y Múltiple
+      </x-responsive-nav-link>
+      <x-responsive-nav-link :href="route('processors.index')" :active="request()->routeIs('processors.index')">
+        Importar Muchos a Muchos
       </x-responsive-nav-link>
     </div>
 

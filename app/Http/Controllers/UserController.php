@@ -12,7 +12,7 @@ class UserController extends Controller
   {
     $users = User::orderBy('name')->get();
     
-    return view('users.dataTablesJQ', compact('users'));
+    return view('admin.users.dataTablesJQ', compact('users'));
   }
 
   // DataTables con Tailwind Css - Encabezados complejos
@@ -20,7 +20,7 @@ class UserController extends Controller
   {
     $users = User::orderBy('name')->get();
     
-    return view('users.dtTailwindcss', compact('users'));
+    return view('admin.users.dtTailwindcss', compact('users'));
   }
 
   // DataTables y Filtros por número de columna
@@ -31,7 +31,7 @@ class UserController extends Controller
     $countries   = $users->sortBy('country')->pluck('country')->unique();
     $professions = $users->sortBy('jobTitle')->pluck('jobTitle')->unique();
     
-    return view('users.dtFilters', compact('users', 'full_names', 'countries', 'professions'));
+    return view('admin.users.dtFilters', compact('users', 'full_names', 'countries', 'professions'));
   }
 
   // DataTables y Filtros por el elemento Id
@@ -42,7 +42,7 @@ class UserController extends Controller
     $countries   = $users->sortBy('country')->pluck('country')->unique();
     $professions = $users->sortBy('jobTitle')->pluck('jobTitle')->unique();
     
-    return view('users.dtFiltersId', compact('users', 'full_names', 'countries', 'professions'));
+    return view('admin.users.dtFiltersId', compact('users', 'full_names', 'countries', 'professions'));
   }
 
   // Selección múltiple
@@ -50,14 +50,14 @@ class UserController extends Controller
   {
     $users = User::orderBy('name')->get();
     
-    return view('users.select2JQ', compact('users'));
+    return view('admin.users.select2JQ', compact('users'));
   }
 
   public function dttheme()
   {
     $users = User::orderBy('name')->get();
     
-    return view('users.dttheme', compact('users'));
+    return view('admin.users.dttheme', compact('users'));
   }
   
   public function create()
