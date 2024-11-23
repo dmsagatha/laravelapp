@@ -35,7 +35,10 @@
                   Importar
                 </button>
               </form>
-              <span class="block py-2">(Archivo de ejmplo: public/importar/processors.xlsx)</span>
+              <span class="block py-2">
+                (Archivo de ejmplo: public/importar/processors.xlsx) - <br>
+                Intentar subir varias veces el mismo archivo y verá los resultados
+              </span>
             </div>
           </div>
 
