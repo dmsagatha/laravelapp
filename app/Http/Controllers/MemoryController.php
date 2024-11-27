@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Memory;
 use Illuminate\View\View;
+use App\Http\Requests\MemoryRequest;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class MemoryController extends Controller
@@ -13,5 +16,17 @@ class MemoryController extends Controller
     $memories = Memory::orderBy('serial')->get();
 
     return view('admin.memories.index', compact('memories'));
+  }
+
+  public function create(): View
+  {
+    return view('admin.memories.createUpdate');
+  }
+
+  public function store(MemoryRequest $request): RedirectResponse
+  {   
+    Memory::create($request->validated());
+        
+    return Redirect::route('memories.index')->with('status', 'Registro creado satisfactoriamente!');
   }
 }
