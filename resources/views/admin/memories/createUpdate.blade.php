@@ -41,4 +41,24 @@
       </form>
     </div>
   </div>
+
+  @push('scripts')
+    <script>
+      document.getElementById('technology').onchange = updateList;
+
+      function updateList() {
+        velocities = {!!json_encode(App\Models\Memory::VELOCITY_SELECT) !!} [this.value] ? {!!json_encode(App\Models\Memory::VELOCITY_SELECT) !!} [this.value] : [];
+        var velocitySelect = document.getElementById('velocity');
+
+        velocitySelect.options.length = 1;
+
+        for (var i = 0; i < velocities.length; i++) {
+          var option = document.createElement('option');
+          option.value = velocities[i];
+          option.text = velocities[i];
+          velocitySelect.appendChild(option);
+        }
+      }
+    </script>
+  @endpush
 </x-app-layout>

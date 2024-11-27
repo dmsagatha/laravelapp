@@ -12,6 +12,8 @@ return new class extends Migration
       $table->id();
       $table->string('serial')->unique();
       $table->string('capacity');
+      $table->string('technology');
+      $table->string('velocity');
       $table->timestamps();
     });
   }

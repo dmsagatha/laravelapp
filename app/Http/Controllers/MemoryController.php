@@ -21,8 +21,10 @@ class MemoryController extends Controller
   public function create(): View
   {
     return view('admin.memories.createUpdate', [
-      'memory'     => new Memory(),
-      'capacities' => Memory::CAPACITY_SELECT,
+      'memory'       => new Memory(),
+      'capacities'   => Memory::CAPACITY_SELECT,
+      'technologies' => Memory::TECHNOLOGY_SELECT,
+      'velocities'   => Memory::VELOCITY_SELECT,
     ]);
   }
 
@@ -38,6 +40,8 @@ class MemoryController extends Controller
     return view('admin.memories.createUpdate', [
       'memory'       => $memory,
       'capacities'   => Memory::CAPACITY_SELECT,
+      'technologies' => Memory::TECHNOLOGY_SELECT,
+      'velocities'   => Memory::VELOCITY_SELECT[$memory->technology],
     ]);
   }
 

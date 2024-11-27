@@ -397,5 +397,5 @@ Aumente p-1 a p-2 para tener más espacio entre los resultados */
 }
   
 .select--control {
-  @apply block w-full text-xs sm:text-xs placeholder-transparent border-b-2 border-slate-300 bg-transparent text-slate-800 focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:text-slate-300 dark:bg-slate-800 dark:border-slate-600 dark:focus:bg-slate-700 dark:focus:ring-blue-500 dark:focus:border-blue-500;
+  @apply block w-full py-2.5 px-0 text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-slate-600 focus:outline-none focus:ring-0 focus:border-gray-200 sm:text-xs placeholder-transparent focus:ring-blue-500 dark:bg-slate-800 dark:focus:bg-slate-700 dark:focus:ring-blue-500 dark:focus:border-blue-500;
 }

@@ -76,10 +76,10 @@
                   {{ App\Models\Memory::CAPACITY_SELECT[$item->capacity] }}
                 </td>
                 <td class="text-center">
-                  {{-- {{ App\Models\Memory::TECHNOLOGY_SELECT[$item->technology] }} --}}
+                  {{ App\Models\Memory::TECHNOLOGY_SELECT[$item->technology] }}
                 </td>
                 <td class="text-center">
-                  {{-- {{ $item->velocity }} MHz --}}
+                  {{ $item->velocity }} MHz
                 </td>
               </tr>
             @endforeach
