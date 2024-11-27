@@ -20,7 +20,10 @@ class MemoryController extends Controller
 
   public function create(): View
   {
-    return view('admin.memories.createUpdate');
+    return view('admin.memories.createUpdate', [
+      'memory'     => new Memory(),
+      'capacities' => Memory::CAPACITY_SELECT,
+    ]);
   }
 
   public function store(MemoryRequest $request): RedirectResponse
@@ -32,7 +35,10 @@ class MemoryController extends Controller
 
   public function edit(Memory $memory): View
   {
-    return view('admin.memories.createUpdate', compact('memory'));
+    return view('admin.memories.createUpdate', [
+      'memory'       => $memory,
+      'capacities'   => Memory::CAPACITY_SELECT,
+    ]);
   }
 
   public function update(MemoryRequest $request, Memory $memory): RedirectResponse

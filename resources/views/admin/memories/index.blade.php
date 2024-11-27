@@ -73,7 +73,7 @@
                 </td>
                 <td>{{ $item->serial }}</td>
                 <td class="text-center">
-                  {{-- {{ App\Models\Memory::CAPACITY_SELECT[$item->capacity] }} --}}
+                  {{ App\Models\Memory::CAPACITY_SELECT[$item->capacity] }}
                 </td>
                 <td class="text-center">
                   {{-- {{ App\Models\Memory::TECHNOLOGY_SELECT[$item->technology] }} --}}

@@ -1,5 +1,5 @@
 <x-app-layout>
-  {{-- @section('title', 'Memorias - ' . ($memory->id ? 'Actualizar' : 'Crear')) --}}
+  @section('title', 'Memorias - ' . ($memory->id ? 'Actualizar' : 'Crear'))
 
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-slate-800 dark:text-slate-200 leading-tight">

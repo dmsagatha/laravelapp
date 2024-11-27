@@ -11,6 +11,7 @@ return new class extends Migration
     Schema::create('memories', function (Blueprint $table) {
       $table->id();
       $table->string('serial')->unique();
+      $table->string('capacity');
       $table->timestamps();
     });
   }

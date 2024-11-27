@@ -13,7 +13,7 @@
 </select>
 
 @error($key)
-  <p {{ $attributes->merge(['class' => 'text-xs text-red-600']) }}>
+  <p {{ $attributes->merge(['class' => 'text-sm text-red-600 dark:text-rose-400']) }}>
     {{ $message }}
   </p>
 @enderror

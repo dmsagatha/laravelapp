@@ -5,5 +5,5 @@
 </label>
 
 @error($for)
-  <p {{ $attributes->merge(['class' => 'text-red-600 dark:text-rose-400']) }}>{{ $message }}</p>
+  <p {{ $attributes->merge(['class' => 'text-sm text-red-600 dark:text-rose-400']) }}>{{ $message }}</p>
 @enderror
