@@ -44,11 +44,11 @@
 
   @push('scripts')
     <script>
-      document.getElementById('selectTechnology').onchange = updateList;
+      document.getElementById('technology').onchange = updateList;
 
       function updateList() {
         velocities = {!!json_encode(App\Models\Memory::VELOCITY_SELECT) !!} [this.value] ? {!!json_encode(App\Models\Memory::VELOCITY_SELECT) !!} [this.value] : [];
-        var velocitySelect = document.getElementById('selectVelocity');
+        var velocitySelect = document.getElementById('velocity');
 
         velocitySelect.options.length = 1;
 
