@@ -29,4 +29,16 @@ class MemoryController extends Controller
         
     return Redirect::route('memories.index')->with('status', 'Registro creado satisfactoriamente!');
   }
+
+  public function edit(Memory $memory): View
+  {
+    return view('admin.memories.createUpdate', compact('memory'));
+  }
+
+  public function update(MemoryRequest $request, Memory $memory): RedirectResponse
+  {   
+    $memory->update($request->validated());
+        
+    return Redirect::route('memories.index')->with('status', 'Registro actualizado satisfactoriamente!');
+  }
 }

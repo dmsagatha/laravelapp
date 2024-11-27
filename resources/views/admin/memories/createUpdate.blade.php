@@ -13,7 +13,7 @@
         <h2 class="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-3xl">
           <span class="block">
             <a href="#" target="_blank">
-              Crear Memorias - Selects dinámicos con Constantes
+              {{ isset($memory->id) ? 'Actualizar' : 'Crear' }} Memorias - Selects dinámicos con Constantes
             </a>
           </span>
         </h2>
@@ -21,8 +21,12 @@
     </div>
 
     <div class="p-10">
-      <form action="{{ route('memories.store') }}" method="POST">
+      {{-- <form action="{{ route('memories.store') }}" method="POST"> --}}
+      <form method="POST" action="{{ isset($memory->id) ? route('memories.update', $memory) : route('memories.store') }}">
         @csrf
+        @if (isset($memory->id))
+          @method('PUT')
+        @endif
 
         @include('admin.memories._fields')
 
