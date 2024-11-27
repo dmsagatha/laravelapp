@@ -16,10 +16,10 @@ class MemoryRequest extends FormRequest
   {
     return [
       // 'serial' => ['required', 'min:8', 'max:8', Rule::unique('memories')->ignore($this->route('memory'))],
-      'serial' => ['required', Rule::unique('memories')->ignore($this->memory)],
+      'serial' => ['required', 'without_spaces', 'min:5', 'max:8', Rule::unique('memories')->ignore($this->memory)],
       'capacity'   => 'required|string',
       'technology' => 'required|string',
-      'velocity' => 'required|string',
+      'velocity'   => 'required|string',
     ];
   }
 }
