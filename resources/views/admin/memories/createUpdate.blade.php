@@ -30,11 +30,11 @@
 
         @include('admin.memories._fields')
 
-        <div class="py-5 bg-slate-50 dark:bg-slate-800 text-center space-y-2">
-          <button type="submit" class="w-36 inline-flex items-center justify-center bg-green-600 border border-transparent rounded-md font-medium px-2 py-2 mr-2 mb-2 text-center text-sm text-white hover:bg-green-500 focus:outline-none focus:border-green-700 focus:ring-0 focus:ring-green-200 active:bg-green-600 disabled:opacity-25 transition">
+        <div class="py-3 bg-slate-50 dark:bg-slate-800 text-center space-x-2">
+          <button type="submit" class="w-36 inline-flex items-center justify-center bg-green-600 border border-transparent rounded-md font-medium p-2 mr-2 mb-2 text-center text-sm text-white hover:bg-green-500 focus:outline-none focus:border-green-700 focus:ring-0 focus:ring-green-200 active:bg-green-600 disabled:opacity-25 transition">
             {{ isset($memory->id) ? 'Actualizar' : 'Crear' }}
           </button>
-          <button class="w-36 inline-flex items-center justify-center bg-red-600 border border-transparent rounded-md font-medium px-2 py-2 mr-2 mb-2 text-center text-sm text-white hover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring-0 focus:ring-red-200 active:bg-red-600 disabled:opacity-25 transition">
+          <button class="w-36 inline-flex items-center justify-center bg-red-600 border border-transparent rounded-md font-medium p-2 mr-2 mb-2 text-center text-sm text-white hover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring-0 focus:ring-red-200 active:bg-red-600 disabled:opacity-25 transition">
             <a href="{{ route('memories.index') }}">Cancelar</a>
           </button>
         </div>
@@ -44,11 +44,11 @@
 
   @push('scripts')
     <script>
-      document.getElementById('technology').onchange = updateList;
+      document.getElementById('selectTechnology').onchange = updateList;
 
       function updateList() {
         velocities = {!!json_encode(App\Models\Memory::VELOCITY_SELECT) !!} [this.value] ? {!!json_encode(App\Models\Memory::VELOCITY_SELECT) !!} [this.value] : [];
-        var velocitySelect = document.getElementById('velocity');
+        var velocitySelect = document.getElementById('selectVelocity');
 
         velocitySelect.options.length = 1;
 
