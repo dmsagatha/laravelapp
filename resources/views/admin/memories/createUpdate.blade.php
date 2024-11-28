@@ -48,7 +48,7 @@
 
       function updateList() {
         velocities = {!!json_encode(App\Models\Memory::VELOCITY_SELECT) !!} [this.value] ? {!!json_encode(App\Models\Memory::VELOCITY_SELECT) !!} [this.value] : [];
-        var velocitySelect = document.getElementById('velocity');
+        var velocitySelect = document.getElementById('selectVelocity');
 
         velocitySelect.options.length = 1;
 

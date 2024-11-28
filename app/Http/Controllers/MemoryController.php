@@ -42,7 +42,6 @@ class MemoryController extends Controller
       'technologies' => Memory::TECHNOLOGY_SELECT,
       'velocities'   => Memory::VELOCITY_SELECT[$memory->technology],
     ]);
-    dd($capacities);
   }
 
   public function update(MemoryRequest $request, Memory $memory): RedirectResponse
