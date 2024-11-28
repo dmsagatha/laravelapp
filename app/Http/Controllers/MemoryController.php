@@ -23,7 +23,7 @@ class MemoryController extends Controller
       'memory'       => new Memory(),
       'capacities'   => Memory::CAPACITY_SELECT,
       'technologies' => Memory::TECHNOLOGY_SELECT,
-      'velocities'   => [],//Memory::VELOCITY_SELECT,
+      'velocities'   => [],
     ]);
   }
 
