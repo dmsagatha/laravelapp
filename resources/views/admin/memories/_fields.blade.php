@@ -11,4 +11,30 @@
       <x-input-select name="capacity" :options="$capacities" :selected="old('capacity', $memory->capacity ?? '')" label="Capacidades" placeholder=" " />
     </div>
   </div>
+
+  <div class="col-span-6 sm:col-span-3 md:col-span-2">
+    <div class="relative form-group mt-1">
+      <x-input-select name="technology" :options="$technologies" :selected="old('technology', $memory->technology ?? '')" label="Tecnología" placeholder=" " />
+    </div>
+  </div>
+
+  <div class="col-span-6 sm:col-span-3 md:col-span-2">
+    <div class="relative form-group mt-1">
+      <label for="velocity" class="select--label">Velocidad</label>
+      <select class="select--control" name="velocity" id="selectVelocity">
+        <option value="">Seleccionar</option>
+        @if ($memory->technology != null)
+          @foreach ($velocities as $key => $label)
+            <option value="{{ $key }}"
+              {{ old('velocity') == $label ? 'selected' : ($memory->velocity == $label ? 'selected' : '') }}>
+              {{ $label }}
+            </option>
+          @endforeach
+        @endif
+      </select>
+      @error('velocity')
+        <div class="text-sm text-red-600 dark:text-rose-400">{{ $message }}</div>
+      @enderror
+    </div>
+  </div>
 </div>
