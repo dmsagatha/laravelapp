@@ -17,12 +17,19 @@
             </a>
           </span>
         </h2>
+
+        <div class="absolute inset-y-0 right-0 flex items-center pr-3">
+          <div class="dot-flashing">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="p-10">
-      {{-- <form action="{{ route('memories.store') }}" method="POST"> --}}
-      <form method="POST" action="{{ isset($memory->id) ? route('memories.update', $memory) : route('memories.store') }}">
+      <form x-data="{ loading: false }" @submit="loading = true" method="POST" action="{{ isset($memory->id) ? route('memories.update', $memory) : route('memories.store') }}">
         @csrf
         @if (isset($memory->id))
           @method('PUT')
@@ -41,6 +48,37 @@
       </form>
     </div>
   </div>
+
+  @push('styles')
+    <style>
+      .dot-flashing {
+          display: flex;
+          gap: 4px;
+      }
+      .dot-flashing span {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background-color: #4A5568; /* Color gris (personalizable) */
+          animation: dotFlashing 1.2s infinite ease-in-out both;
+      }
+      .dot-flashing span:nth-child(2) {
+          animation-delay: 0.2s;
+      }
+      .dot-flashing span:nth-child(3) {
+          animation-delay: 0.4s;
+      }
+  
+      @keyframes dotFlashing {
+          0%, 80%, 100% {
+              opacity: 0;
+          }
+          40% {
+              opacity: 1;
+          }
+      }
+    </style>
+  @endpush
 
   @push('scripts')
     <script>
