@@ -44,7 +44,7 @@
 
   @push('scripts')
     <script>
-      document.getElementById('technology').onchange = updateList;
+      document.getElementById('selectTechnology').onchange = updateList;
 
       function updateList() {
         velocities = {!!json_encode(App\Models\Memory::VELOCITY_SELECT) !!} [this.value] ? {!!json_encode(App\Models\Memory::VELOCITY_SELECT) !!} [this.value] : [];
