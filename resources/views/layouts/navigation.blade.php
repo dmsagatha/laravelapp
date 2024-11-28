@@ -27,6 +27,9 @@
           <x-nav-link :href="route('processors.index')" :active="request()->routeIs('processors.index')">
             Importar Muchos a Muchos
           </x-nav-link>
+          <x-nav-link :href="route('memories.index')" :active="request()->routeIs('memories.index')">
+            Memorias RAM
+          </x-nav-link>
         </div>
       </div>
 
@@ -103,6 +106,9 @@
       </x-responsive-nav-link>
       <x-responsive-nav-link :href="route('processors.index')" :active="request()->routeIs('processors.index')">
         Importar Muchos a Muchos
+      </x-responsive-nav-link>
+      <x-responsive-nav-link :href="route('memories.index')" :active="request()->routeIs('memories.index')">
+        Memorias RAM
       </x-responsive-nav-link>
     </div>
 

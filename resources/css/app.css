@@ -390,3 +390,17 @@ Aumente p-1 a p-2 para tener más espacio entre los resultados */
 .tableFialures tr th {
   @apply text-center uppercase font-bold;
 }
+
+.group .required::after {
+  content: " *";
+  @apply text-rose-500 dark:text-slate-50;
+}
+  
+.select--control {
+  @apply block py-2.5 px-0 w-full text-xs sm:text-xs placeholder-transparent border-b-2 border-0 border-slate-300 bg-transparent text-slate-800 focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:text-slate-300 dark:bg-slate-800 dark:border-slate-600 dark:focus:bg-slate-700 dark:focus:ring-blue-500 dark:focus:border-blue-500;
+}
+/* py-2.5 px-0 border-0 appearance-none focus:ring-0 */
+
+.select--label {
+  @apply block text-xs font-medium text-slate-700 dark:text-slate-300 required;
+}

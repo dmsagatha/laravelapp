@@ -10,13 +10,22 @@ export default {
     "./resources/**/*.js",
     "./node_modules/flowbite/**/*.js"
   ],
-  
+
   darkMode: 'class',    // Laravel Breeze: [7] Cambiador de temas
 
   theme: {
     extend: {
       fontFamily: {
         sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+      },
+      animation: {
+        spin: 'spin 1s linear infinite',
+      },
+      keyframes: {
+        spin: {
+          from: { transform: 'rotate(0deg)' },
+          to: { transform: 'rotate(360deg)' },
+        },
       },
     },
   },
