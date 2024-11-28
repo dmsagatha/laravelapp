@@ -1,10 +1,14 @@
-@props(['options' => []])
+@props(['name', 'options', 'selected'])
 
-<select {{ $attributes->merge(['class' => 'select--control']) }}>
-  <option>Seleccionar</option>
-  @foreach ($options as $key => $value)
-    <option value="{{ $key }}">{{ $value }}</option>
-    {{-- <option value="India" @selected(old('country') ?? $country == 'India')>India</option>
-    <option value="Pakistan" @selected(old('country') ?? $country == 'Pakistan')>Pakistan</option> --}}
-  @endforeach
+<select name="{{ $name }}" id="{{ $name }}" 
+        {{ $attributes->merge(['class' => 'form-select border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 w-full' . ($errors->has($name) ? ' border-red-500' : '')]) }}>
+    @foreach ($options as $value => $label)
+        <option value="{{ $value }}" {{ old($name, $selected) == $value ? 'selected' : '' }}>
+            {{ $label }}
+        </option>
+    @endforeach
 </select>
+
+@error($name)
+    <span class="text-red-500 text-xs">{{ $message }}</span>
+@enderror
