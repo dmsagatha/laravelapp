@@ -8,25 +8,39 @@
 
   <div class="col-span-6 sm:col-span-3 md:col-span-2">
     <div class="relative z-0 group mt-2">
-      <x-input-select name="capacity" :options="$capacities" :selected="old('capacity', $memory->capacity ?? '')" label="Capacidades" placeholder=" " />
+      <x-input-select name="capacity" :options="$capacities" :selected="old('capacity', $memory->capacity ?? '')" label="Capacidades" />
     </div>
   </div>
 
   <div class="col-span-6 sm:col-span-3 md:col-span-2">
     <div class="relative form-group mt-1">
-      <x-input-select name="technology" :options="$technologies" :selected="old('technology', $memory->technology ?? '')" label="Tecnología" placeholder=" " />
+      <x-input-select name="technology" :options="$technologies" :selected="old('technology', $memory->technology ?? '')" label="Tecnología" />
     </div>
   </div>
 
   <div class="col-span-6 sm:col-span-3 md:col-span-2">
+    <div class="relative form-group mt-1">
+      <x-select-label name="velocity" id="selectVelocity" label="Velocidades">
+        <option value="">Seleccionar</option>
+        @if ($memory->technology != null)
+          @foreach ($velocities as $value => $label)
+            <option value="{{ $value }}" {{ old('velocity') == $label ? 'selected' : ($memory->velocity == $label ? 'selected' : '') }}>
+              {{ $label }}
+            </option>
+          @endforeach
+        @endif
+      </x-select-label>
+    </div>
+  </div>
+
+  {{-- <div class="col-span-6 sm:col-span-3 md:col-span-2">
     <div class="relative form-group mt-1">
       <label for="velocity" class="select--label">Velocidad</label>
       <select class="select--control" name="velocity" id="selectVelocity">
         <option value="">Seleccionar</option>
         @if ($memory->technology != null)
           @foreach ($velocities as $key => $label)
-            <option value="{{ $key }}"
-              {{ old('velocity') == $label ? 'selected' : ($memory->velocity == $label ? 'selected' : '') }}>
+            <option value="{{ $key }}" {{ old('velocity') == $label ? 'selected' : ($memory->velocity == $label ? 'selected' : '') }}>
               {{ $label }}
             </option>
           @endforeach
@@ -36,5 +50,5 @@
         <div class="text-sm text-red-600 dark:text-rose-400">{{ $message }}</div>
       @enderror
     </div>
-  </div>
+  </div> --}}
 </div>

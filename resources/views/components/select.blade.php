@@ -6,11 +6,6 @@
   </label>
 @endif
 
-{{-- @if($label ?? null)
-  <label for="{{ $key }}" class="block text-xs font-medium text-slate-700 dark:text-slate-300 required {{ $class ?? '' }}">
-    {{ $label }}
-  </label>
-@endif --}}
 <div class="mt-2">
     <select
         {{ $attributes->merge([

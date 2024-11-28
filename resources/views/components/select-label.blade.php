@@ -1,17 +1,17 @@
-@props(['options'])
+@props(['name', 'id', 'options', 'selected', 'label'])
 
-@if($label ?? null)
-  <label for="{{ $key }}" class="select--label required {{ $class ?? '' }}">
+@if (!empty($label))
+  <label for="{{ $id ?? $name }}" class="select--label required {{ $class ?? '' }}">
     {{ $label }}
   </label>
 @endif
-<select {{ $attributes->merge(['class' => 'select--control']) }}>
+
+<select name="{{ $name }}" id="{{ $id }}" {{ $attributes->merge(['class' => 'select--control' . ($errors->has($name) ? ' border-red-500' : '')]) }}>
   <option selected value="">Seleccionar</option>
-  @foreach ($options as $key => $value)
-    <option value="{{ $key }}" @selected(old('class_id')==$key)>{{ $value }}</option>
-  @endforeach
+  {{ $slot }}
 </select>
-@error($key)
+
+@error($name)
   <p {{ $attributes->merge(['class' => 'text-sm text-red-600 dark:text-rose-400']) }}>
     {{ $message }}
   </p>
