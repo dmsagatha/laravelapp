@@ -16,15 +16,15 @@
     <div class="relative form-group mt-1">
       <x-input-select name="technology" id="selectTechnology" :options="$technologies" :selected="old('technology', $memory->technology ?? '')" label="Tecnología" />
         <div x-show="loading" class="absolute inset-y-0 right-0 flex items-center pr-3">
-            <svg 
-                class="animate-spin h-5 w-5 text-gray-500 dark:text-gray-300" 
-                xmlns="http://www.w3.org/2000/svg" 
-                fill="none" 
-                viewBox="0 0 24 24"
-            >
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 100 8v4a8 8 0 01-8-8z"></path>
-            </svg>
+          <svg 
+            class="animate-spin h-5 w-5 text-gray-500 dark:text-gray-300" 
+            xmlns="http://www.w3.org/2000/svg" 
+            fill="none" 
+            viewBox="0 0 24 24"
+        >
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 100 8v4a8 8 0 01-8-8z"></path>
+          </svg>
         </div>
     </div>
   </div>

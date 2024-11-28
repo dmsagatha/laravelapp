@@ -71,7 +71,7 @@
                    - Eliminar
                   </div>
                 </td>
-                <td>{{ $item->serial }}</td>
+                <td class="text-center">{{ $item->serial }}</td>
                 <td class="text-center">
                   {{ App\Models\Memory::CAPACITY_SELECT[$item->capacity] }}
                 </td>
