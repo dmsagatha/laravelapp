@@ -8,7 +8,7 @@
 
   <div class="col-span-6 sm:col-span-3 md:col-span-2">
     <div class="relative z-0 group mt-2">
-      <x-input-select name="capacity" id="capacity" :options="$capacities" :selected="old('capacity', $memory->capacity ?? '')" label="Capacidades" />
+      <x-input-select name="capacity" :options="$capacities" :selected="old('capacity', $memory->capacity ?? '')" label="Capacidades" />
     </div>
   </div>
 
