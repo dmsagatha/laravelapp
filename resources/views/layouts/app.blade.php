@@ -20,6 +20,13 @@
       }
     </style>
 
+    <script>
+      if (localStorage.getItem('theme') === 'dark') {
+        const htmlElement = document.documentElement;
+        htmlElement.classList.add('dark');
+      }
+    </script>
+
     @stack('styles')
   </head>
   <body class="font-sans antialiased">

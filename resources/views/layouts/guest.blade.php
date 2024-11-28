@@ -19,6 +19,13 @@
         display: none !important;
       }
     </style>
+
+    <script>
+      if (localStorage.getItem('theme') === 'dark') {
+        const htmlElement = document.documentElement;
+        htmlElement.classList.add('dark');
+      }
+    </script>
   </head>
   <body class="font-sans antialiased">
     <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-300">
