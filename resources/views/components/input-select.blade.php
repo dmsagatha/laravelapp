@@ -1,6 +1,6 @@
-@props(['name', 'options', 'selected'])
+@props(['name', 'options', 'selected', 'label'])
 @if (!empty($label))
-    <label for="{{ $id ?? $name }}" class="block text-sm font-medium text-gray-700 mb-1">
+    <label for="{{ $id ?? $name }}" class="select--label required {{ $class ?? '' }}">
         {{ $label }}
     </label>
 @endif
