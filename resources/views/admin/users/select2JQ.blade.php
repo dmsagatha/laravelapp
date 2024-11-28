@@ -13,7 +13,7 @@
             <div class="px-4 py-5 mx-auto max-w-7xl sm:px-6 lg:py-2 lg:px-8">
               <h2 class="text-3xl text-center font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
                 <a href="https://github.com/Xibel/select2-tailwindcss/blob/master/src/css/styles.css" target="_blank">
-                  Select2 - Modo claroy oscuro
+                  Select2 - Modo claro y oscuro
                 </a>
               </h2>
 
