@@ -15,7 +15,7 @@
 </select>
 
 @error($name)
-  <p {{ $attributes->merge(['class' => 'text-sm text-red-600 dark:text-rose-300']) }}>
+  <p {{ $attributes->merge(['class' => 'text-sm text-red-600 dark:text-rose-400']) }}>
     {{ $message }}
   </p>
 @enderror
