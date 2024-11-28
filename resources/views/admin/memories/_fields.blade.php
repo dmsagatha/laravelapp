@@ -18,11 +18,11 @@
     </div>
   </div>
 
-  {{-- <div class="col-span-6 sm:col-span-3 md:col-span-2">
+  <div class="col-span-6 sm:col-span-3 md:col-span-2">
     <div class="relative z-0 group mt-2">
       <x-input-label for="capacity" :value="__('Capacidades')" />
-      <x-select-label name="capacity" id="selectCapacity" :options="$capacities" />
+      <x-select-label name="capacity" id="selectCapacity" :options="$capacities" label="Capacidad" />
       <x-input-error :messages="$errors->get('capacity')" />
     </div>
-  </div> --}}
+  </div>
 </div>
