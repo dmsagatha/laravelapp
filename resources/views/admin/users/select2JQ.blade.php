@@ -5,48 +5,46 @@
     </h2>
   </x-slot>
 
-  <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="bg-slate-50 dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="p-6 text-slate-900 dark:text-slate-100">
-          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <div class="px-4 py-5 mx-auto max-w-7xl sm:px-6 lg:py-2 lg:px-8">
-              <h2 class="text-3xl text-center font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
-                <a href="https://github.com/Xibel/select2-tailwindcss/blob/master/src/css/styles.css" target="_blank">
-                  Select2 - Modo claroy oscuro
-                </a>
-              </h2>
+  <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 my-12">
+    <div class="bg-slate-50 dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
+      <div class="p-6 text-slate-900 dark:text-slate-100">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+          <div class="px-4 py-5 mx-auto max-w-7xl sm:px-6 lg:py-2 lg:px-8">
+            <h2 class="text-3xl text-center font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
+              <a href="https://github.com/Xibel/select2-tailwindcss/blob/master/src/css/styles.css" target="_blank">
+                Select2 - Modo claro y oscuro
+              </a>
+            </h2>
 
-              <div class="grid grid-cols-6 gap-x-10 gap-y-8">
-                <div class="col-span-4 sm:col-span-2">
-                  <div class="relative z-0 form-group">
-                    <label for="users[]" class="block text-lg font-extrabold text-slate-800 dark:text-slate-50">
-                      Select2 Simple
-                    </label>
-                    <select name="users" class="block w-full sm:text-xs placeholder-transparent border-b-2 border-slate-300 text-slate-800 bg-transparent dark:text-slate-300 dark:bg-slate-800 dark:focus:bg-slate-700 dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 select2-single">
-                      <option selected value="">Seleccionar</option>
-                      @foreach ($users as $user)
-                        <option value="{{ $user->id }}">
-                          {{ $user->name }}
-                        </option>
-                      @endforeach
-                    </select>
-                  </div>
+            <div class="grid grid-cols-6 gap-x-10 gap-y-8">
+              <div class="col-span-4 sm:col-span-2">
+                <div class="relative z-0 form-group">
+                  <label for="users[]" class="block text-lg font-extrabold text-slate-800 dark:text-slate-50">
+                    Select2 Simple
+                  </label>
+                  <select name="users" class="block w-full sm:text-xs placeholder-transparent border-b-2 border-slate-300 text-slate-800 bg-transparent dark:text-slate-300 dark:bg-slate-800 dark:focus:bg-slate-700 dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 select2-single">
+                    <option selected value="">Seleccionar</option>
+                    @foreach ($users as $user)
+                      <option value="{{ $user->id }}">
+                        {{ $user->name }}
+                      </option>
+                    @endforeach
+                  </select>
                 </div>
-              
-                <div class="col-span-6 sm:col-span-4">
-                  <div class="relative z-0 form-group mt-1">
-                    <label for="users[]" class="block text-lg font-extrabold text-slate-800 dark:text-slate-50">
-                      Select2 Múltiple (Máx. 3)
-                    </label>
-                    <select name="users[]" id="users[]" multiple="multiple" class="block w-full sm:text-xs placeholder-transparent border-b-2 border-slate-300 text-slate-800 bg-transparent dark:text-slate-300 dark:bg-slate-800 dark:focus:bg-slate-700 dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 select2-multiple" data-placeholder="Seleccionar">
-                      @foreach ($users as $user)
-                        <option value="{{ $user->id }}">
-                          {{ $user->name }}
-                        </option>
-                      @endforeach
-                    </select>
-                  </div>
+              </div>
+            
+              <div class="col-span-6 sm:col-span-4">
+                <div class="relative z-0 form-group mt-1">
+                  <label for="users[]" class="block text-lg font-extrabold text-slate-800 dark:text-slate-50">
+                    Select2 Múltiple (Máx. 3)
+                  </label>
+                  <select name="users[]" id="users[]" multiple="multiple" class="block w-full sm:text-xs placeholder-transparent border-b-2 border-slate-300 text-slate-800 bg-transparent dark:text-slate-300 dark:bg-slate-800 dark:focus:bg-slate-700 dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 select2-multiple" data-placeholder="Seleccionar">
+                    @foreach ($users as $user)
+                      <option value="{{ $user->id }}">
+                        {{ $user->name }}
+                      </option>
+                    @endforeach
+                  </select>
                 </div>
               </div>
             </div>
