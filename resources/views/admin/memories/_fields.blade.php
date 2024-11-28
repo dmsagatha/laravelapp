@@ -1,19 +1,19 @@
 <div class="grid grid-cols-6 gap-x-10 gap-y-8">
   <div class="col-span-6 sm:col-span-3 md:col-span-2">
-    <div class="relative z-0 group mt-4">
+    <div class="relative z-0 group mt-3">
       <x-input name="serial" id="inputSerial" value="{{ old('serial', $memory->serial) }}" autocomplete="serial" autofocus />
       <x-label for="serial" class="required" value="Serial" />
     </div>
   </div>
 
   <div class="col-span-6 sm:col-span-3 md:col-span-2">
-    <div class="relative z-0 group mt-2">
+    <div class="relative z-0 group">
       <x-input-select name="capacity" :options="$capacities" :selected="old('capacity', $memory->capacity ?? '')" label="Capacidades" />
     </div>
   </div>
 
   <div class="col-span-6 sm:col-span-3 md:col-span-2">
-    <div class="relative form-group mt-1">
+    <div class="relative form-group">
       <x-input-select name="technology" id="selectTechnology" :options="$technologies" :selected="old('technology', $memory->technology ?? '')" label="Tecnología" />
         <div x-show="loading" class="absolute inset-y-0 right-0 flex items-center pr-3">
           <svg 
@@ -30,7 +30,7 @@
   </div>
 
   <div class="col-span-6 sm:col-span-3 md:col-span-2">
-    <div class="relative form-group mt-1">
+    <div class="relative form-group">
       <x-select-label name="velocity" id="selectVelocity" label="Velocidades">
         @if ($memory->technology != null)
           @foreach ($velocities as $value => $label)
