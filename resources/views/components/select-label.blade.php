@@ -6,7 +6,8 @@
   </label>
 @endif
 
-<select name="{{ $name }}" id="{{ $id ?? $name }}" {{ $attributes->merge(['class' => 'select--control' . ($errors->has($name) ? ' border-red-500' : '')]) }}>
+<select name="{{ $name }}" id="{{ $id ?? $name }}" {{ $attributes->merge(['class' => 'select--control' .
+  ($errors->has($name) ? ' border-red-500' : '')]) }}>
   <option selected value="">Seleccionar</option>
   {{ $slot }}
 </select>
