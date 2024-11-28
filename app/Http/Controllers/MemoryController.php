@@ -23,7 +23,7 @@ class MemoryController extends Controller
       'memory'       => new Memory(),
       'capacities'   => Memory::CAPACITY_SELECT,
       'technologies' => Memory::TECHNOLOGY_SELECT,
-      'velocities'   => Memory::VELOCITY_SELECT,
+      'velocities'   => [],//Memory::VELOCITY_SELECT,
     ]);
   }
 
@@ -40,7 +40,7 @@ class MemoryController extends Controller
       'memory'       => $memory,
       'capacities'   => Memory::CAPACITY_SELECT,
       'technologies' => Memory::TECHNOLOGY_SELECT,
-      'velocities'   => Memory::VELOCITY_SELECT[$memory->technology],
+      'velocities'   => Memory::VELOCITY_SELECT[$memory->technology] ?? [],
     ]);
   }
 

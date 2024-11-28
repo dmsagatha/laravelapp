@@ -29,12 +29,38 @@
     </div>
   </div>
 
+  {{-- Todas las opciones funcionan --}}
   <div class="col-span-6 sm:col-span-3 md:col-span-2">
     <div class="relative form-group">
-      <x-select-label name="velocity" id="selectVelocity" label="Velocidades">
+      {{-- <x-select-label name="velocity" id="selectVelocity" label="Velocidades">
         @if ($memory->technology != null)
           @foreach ($velocities as $value => $label)
             <option value="{{ $value }}" {{ old('velocity') == $label ? 'selected' : ($memory->velocity == $label ? 'selected' : '') }}>
+              {{ $label }}
+            </option>
+          @endforeach
+        @endif
+      </x-select-label> --}}
+
+      {{-- <x-select-label name="velocity" id="selectVelocity" label="Velocidades">
+        @if (!empty($velocities))
+          @foreach ($velocities as $value)
+            <option value="{{ $value }}" @selected(old('velocity', $memory->velocity) == $value)>
+              {{ $value }}
+            </option>
+          @endforeach
+        @endif
+      </x-select-label> --}}
+
+      <x-select-label name="velocity" id="selectVelocity" label="Velocidades">
+        @if (!empty($velocities) && is_array($velocities))
+          {{-- @foreach ($velocities as $value)
+            <option value="{{ $value }}" @selected(old('velocity', $memory->velocity ?? '') == $value)>
+              {{ $value }}
+            </option>
+          @endforeach --}}
+          @foreach ($velocities as $key => $label)
+            <option value="{{ $key }}" {{ old('velocity') == $label ? 'selected' : ($memory->velocity == $label ? 'selected' : '') }}>
               {{ $label }}
             </option>
           @endforeach

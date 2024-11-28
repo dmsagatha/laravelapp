@@ -81,7 +81,7 @@
   @endpush
 
   @push('scripts')
-    <script>
+    {{-- <script>
       document.getElementById('selectTechnology').onchange = updateList;
 
       function updateList() {
@@ -97,6 +97,38 @@
           velocitySelect.appendChild(option);
         }
       }
+    </script> --}}
+    <script>
+      document.getElementById('selectTechnology').addEventListener('change', updateList);
+  
+      function updateList() {
+          const velocities = {!! json_encode(App\Models\Memory::VELOCITY_SELECT) !!};
+          const selectedTechnology = this.value;
+          const velocityOptions = velocities[selectedTechnology] || [];
+          const velocitySelect = document.getElementById('selectVelocity');
+  
+          // Limpiar las opciones actuales
+          velocitySelect.innerHTML = '<option value="">Seleccione una velocidad</option>';
+  
+          // Agregar las nuevas opciones
+          velocityOptions.forEach(velocity => {
+              const option = document.createElement('option');
+              option.value = velocity;
+              option.text = velocity;
+              velocitySelect.appendChild(option);
+          });
+  
+          // Mantener el valor seleccionado si aplica
+          const oldVelocity = {!! json_encode(old('velocity', $memory->velocity)) !!};
+          if (oldVelocity && velocityOptions.includes(oldVelocity)) {
+              velocitySelect.value = oldVelocity;
+          }
+      }
+  
+      // Ejecutar al cargar la página para manejar valores previos
+      document.addEventListener('DOMContentLoaded', () => {
+          document.getElementById('selectTechnology').dispatchEvent(new Event('change'));
+      });
     </script>
   @endpush
 </x-app-layout>
