@@ -1,4 +1,4 @@
-<button id="theme-toggle" class="text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 focus:outline-none focus:ring-slate-200 dark:focus:ring-slate-700 rounded-lg text-sm p-2.5">
+<button id="theme-toggle" class="text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 focus:outline-none focus:ring-slate-200 dark:focus:ring-slate-700 rounded-lg text-sm p-2.5 mr-5">
 
   <!-- Ícono del sol (mostrar cuando esté en tema oscuro para cambiar a tema claro) -->
   <svg id="icon-sun" class="h-5 w-5 hidden dark:block text-yellow-200 hover:text-yellow-300 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
