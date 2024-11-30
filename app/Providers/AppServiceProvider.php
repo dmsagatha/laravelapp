@@ -24,10 +24,14 @@ class AppServiceProvider extends ServiceProvider
     Route::resourceVerbs([
         'create' => 'crear',
         'edit' => 'editar'
-    ]); 
+    ]);
+    
+    Validator::extend('without_spaces', function ($attribute, $value) {
+      return preg_match('/^\S*$/u', $value); // Rechaza valores con espacios
+    });
 
-    Validator::extend('without_spaces', function($attribute, $value){
-      return preg_match('/^\S*$/u', $value);
+    Validator::replacer('without_spaces', function ($message, $attribute) {
+      return __('El campo :attribute no debe contener espacios en blanco.');
     });
   }
 }

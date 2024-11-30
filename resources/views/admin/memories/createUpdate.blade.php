@@ -91,7 +91,7 @@
         const velocitySelect = document.getElementById('selectVelocity');
 
         // Limpiar las opciones actuales
-        velocitySelect.innerHTML = '<option value="">Seleccione una velocidad</option>';
+        velocitySelect.innerHTML = '<option value="">Seleccionar</option>';
 
         // Agregar las nuevas opciones
         velocityOptions.forEach(velocity => {
