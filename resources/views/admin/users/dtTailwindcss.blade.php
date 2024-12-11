@@ -31,12 +31,13 @@
                 <th rowspan="2" width="1%">N°</th>
                 <th rowspan="2">Nombre</th>
                 <th rowspan="2">Correo Electrónico</th>
-                <th colspan="2">Datos Personales</th>
+                <th colspan="3">Contacto</th>
                 <th rowspan="2">Acciones</th>
               </tr>
               <tr>
                 <th>País</th>
-                <th>Dirección</th>
+                <th>Profesión</th>
+                <th>Teléfono</th>
               </tr>
             </thead>
             <tbody>
@@ -46,7 +47,8 @@
                   <th>{{ $item->name }}</th>
                   <td>{{ $item->email }}</td>
                   <th>{{ $item->country }}</th>
-                  <td>{{ $item->address }}</td>
+                  <td>{{ $item->jobTitle }}</td>
+                  <td>{{ $item->phone_number }}</td>
                   <td>
                     <a href="#"
                       class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>

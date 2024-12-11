@@ -3,16 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-  // Selección múltiple
-  public function dataTablesJQ()
+  public function index(Request $request): View
   {
-    $users = User::orderBy('name')->get();
-    
-    return view('admin.users.dataTablesJQ', compact('users'));
+    $users = User::query()
+      ->when(request()->routeIs('users.trashed'), function ($q) {
+        $q->onlyTrashed();
+      })
+      ->orderBy('name')
+      ->get();
+
+    return view('admin.users.index', [
+      'view'  => $request->routeIs('admin.users.trashed') ? 'trashed' : 'index',
+      'users' => $users,
+    ]);
   }
 
   // DataTables con Tailwind Css - Encabezados complejos
@@ -21,6 +29,14 @@ class UserController extends Controller
     $users = User::orderBy('name')->get();
     
     return view('admin.users.dtTailwindcss', compact('users'));
+  }
+
+  // Selección múltiple
+  public function dataTablesJQ()
+  {
+    $users = User::orderBy('name')->get();
+    
+    return view('admin.users.dataTablesJQ', compact('users'));
   }
 
   // DataTables y Filtros por número de columna
