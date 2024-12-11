@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-slate-800 dark:text-slate-200 leading-tight">
-      {{ __('DataTables.Net') }}
+      {{ __('Usuarios') }}
     </h2>
   </x-slot>
 
@@ -12,15 +12,9 @@
           <div class="px-4 py-5 mx-auto text-center max-w-7xl sm:px-6 lg:py-2 lg:px-8">
             <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-3xl">
               <span class="block">
-                <a href="https://datatables.net/extensions/responsive/examples/initialisation/default.html"
-                  target="_blank">DataTables.Net Responsive con Tailwind CSS</a>
+                <a href="#" target="_blank">Usuarios: Eliminacion y restauracion masiva</a>
               </span>
             </h2>
-            <span class="block mt-4">Este ejemplo usa
-              <a href="https://tailwindcss.com/" target="_new" class="text-indigo-600" alt="Tailwind CSS">
-                Tailwind CSS
-              </a>
-            </span>
           </div>
         </div>
 
@@ -63,12 +57,35 @@
         let table = new DataTable('#dtTheme', {
           responsive: true,
           lengthMenu: [[10, 15, 25, 50, 100, -1], [10, 15, 25, 50, 100, "Todos"]],
-          pageLength: 25,
+          pageLength: 15,
           processing: true,
           language: {
             url: 'https://cdn.datatables.net/plug-ins/2.1.8/i18n/es-ES.json'
           }
         });
+    </script>
+
+    <script>
+      // Evento para seleccionar todos los checkbox con Javascript
+      const chckboxAll = document.querySelector("#selectAll");
+      const chckboxOptions = document.querySelectorAll('#selectIds');
+
+      // <input type="checkbox" id="selectAll" onchange="selectAllChkboxes()" />
+      /* function selectAllChkboxes() {
+        const isChecked = chckboxAll.checked;
+
+        for (let i = 0; i < chckboxOptions.length; i++) {
+          chckboxOptions[i].checked = isChecked;
+        }
+      } */
+
+      // Evento de cambio de la casilla de verificación
+      // Convertir la lista de nodos a una matriz con el método Array.from
+      chckboxAll.addEventListener('change', () => {
+        Array.from(chckboxOptions).map((chkbx) => {
+          chkbx.checked = chckboxAll.checked;
+        });
+      });
     </script>
   @endpush
 </x-app-layout>
