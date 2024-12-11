@@ -68,21 +68,21 @@
     <script>
       // Evento para seleccionar todos los checkbox con Javascript
       const chckboxAll = document.querySelector("#selectAll");
-      const chckboxOptions = document.querySelectorAll('#selectIds');
+      const selectIdChkbox = document.querySelectorAll('#selectIds');
 
       // <input type="checkbox" id="selectAll" onchange="selectAllChkboxes()" />
       /* function selectAllChkboxes() {
         const isChecked = chckboxAll.checked;
 
-        for (let i = 0; i < chckboxOptions.length; i++) {
-          chckboxOptions[i].checked = isChecked;
+        for (let i = 0; i < selectIdChkbox.length; i++) {
+          selectIdChkbox[i].checked = isChecked;
         }
       } */
 
       // Evento de cambio de la casilla de verificación
       // Convertir la lista de nodos a una matriz con el método Array.from
       chckboxAll.addEventListener('change', () => {
-        Array.from(chckboxOptions).map((chkbx) => {
+        Array.from(selectIdChkbox).map((chkbx) => {
           chkbx.checked = chckboxAll.checked;
         });
       });
