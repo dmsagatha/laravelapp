@@ -52,21 +52,21 @@
     <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.colVis.min.js"></script>
 
+    {{-- DataTables --}}
     <script>
-      // Inicialización predeterminada
-        let table = new DataTable('#dtTheme', {
-          responsive: true,
-          lengthMenu: [[10, 15, 25, 50, 100, -1], [10, 15, 25, 50, 100, "Todos"]],
-          pageLength: 15,
-          processing: true,
-          language: {
-            url: 'https://cdn.datatables.net/plug-ins/2.1.8/i18n/es-ES.json'
-          }
-        });
+      let table = new DataTable('#dtTheme', {
+        responsive: true,
+        lengthMenu: [[10, 15, 25, 50, 100, -1], [10, 15, 25, 50, 100, "Todos"]],
+        pageLength: 15,
+        processing: true,
+        language: {
+          url: 'https://cdn.datatables.net/plug-ins/2.1.8/i18n/es-ES.json'
+        }
+      });
     </script>
 
+    {{-- Evento para seleccionar todos los checkbox con Javascript --}}
     <script>
-      // Evento para seleccionar todos los checkbox con Javascript
       const chckboxAll = document.querySelector("#selectAll");
       const selectIdChkbox = document.querySelectorAll('#selectIds');
 

@@ -20,20 +20,20 @@
   </thead>
   <tbody>
     @foreach ($users as $key => $item)
-    <tr>
-      <td style="text-align: center;">{{ $key + 1 }}</td>
-      <td class="text-center">
-        <input type="checkbox" name="ids" id="selectIds" value="{{ $item->id }}" />
-      </td>
-      <td>
-        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
-        <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Eliminar</a>
-      </td>
-      <th>{{ $item->name }}</th>
-      <td>{{ $item->email }}</td>
-      <td>{{ $item->jobTitle }}</td>
-      <td>{{ $item->phone_number }}</td>
-    </tr>
+      <tr>
+        <td style="text-align: center;">{{ $key + 1 }}</td>
+        <td class="text-center">
+          <input type="checkbox" name="ids" id="selectIds" value="{{ $item->id }}" />
+        </td>
+        <td>
+          <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
+          <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Eliminar</a>
+        </td>
+        <th>{{ $item->name }}</th>
+        <td>{{ $item->email }}</td>
+        <td>{{ $item->jobTitle }}</td>
+        <td>{{ $item->phone_number }}</td>
+      </tr>
     @endforeach
   </tbody>
   <tfoot>
