@@ -23,6 +23,15 @@ class UserController extends Controller
     ]);
   }
 
+  public function massDestroy(Request $request)
+  {
+    $ids = $request->ids;
+
+    User::whereIn('id', $ids)->delete();
+
+    return redirect()->back();
+  }
+
   // DataTables con Tailwind Css - Encabezados complejos
   public function dtTailwindcss()
   {
