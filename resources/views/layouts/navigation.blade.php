@@ -17,8 +17,7 @@
     </div>
     <!-- Centered navigation links -->
     <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-      <ul
-        class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+      <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
           {{ __('Dashboard') }}
         </x-nav-link>
@@ -34,24 +33,16 @@
         <div id="dropdownNavbar"
           class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
           <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
-            <li>
-              <a href="#"
-                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-            </li>
-            <li>
-              <a href="#"
-                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-            </li>
-            <li>
-              <a href="#"
-                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-            </li>
+            <x-dropdown--link :href="route('users.dataTablesJQ')">
+              DataTables.Net
+            </x-dropdown--link>
+            <x-dropdown--link :href="route('users.dtTailwindcss')">
+              DataTables.Net y Tailwind CSS
+            </x-dropdown--link>
+            <x-dropdown--link :href="route('users.select2JQ')">
+              Select2 Simple y Múltiple
+            </x-dropdown--link>
           </ul>
-          <div class="py-1">
-            <a href="#"
-              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
-              out</a>
-          </div>
         </div>
         <x-nav-link :href="route('processors.index')" :active="request()->routeIs('processors.index')">
           Importar - ToMany
