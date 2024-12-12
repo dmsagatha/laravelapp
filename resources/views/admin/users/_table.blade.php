@@ -5,7 +5,7 @@
       <th rowspan="2">
         <p class="text-xs">Eliminar Todos</p>
         {{-- <input type="checkbox" id="selectAll" onchange="selectAllChkboxes()" /> --}}
-        <input type="checkbox" id="selectAll" />
+        <input type="checkbox" id="selectedAll" />
       </th>
       <th rowspan="2">Acciones</th>
       <th colspan="2">Datos Personales</th>
