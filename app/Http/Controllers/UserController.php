@@ -3,10 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
-{
+{  public function index(Request $request): View
+  {
+    $users = User::query()
+      ->when(request()->routeIs('users.trashed'), function ($q) {
+        $q->onlyTrashed();
+      })
+      ->orderBy('name')
+      ->get();
+
+    return view('admin.users.index', [
+      'view'  => $request->routeIs('admin.users.trashed') ? 'trashed' : 'index',
+      'users' => $users,
+    ]);
+  }
+
   // Selección múltiple
   public function dataTablesJQ()
   {
