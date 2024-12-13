@@ -1,3 +1,4 @@
+// Manejar la selección de checkboxes
 function toggleAllCheckboxes(source) {
   const checkboxes = document.querySelectorAll('.recordCheckbox');
 
@@ -6,6 +7,6 @@ function toggleAllCheckboxes(source) {
 
 document.getElementById('bulkDeleteForm').addEventListener('submit', function(e) {
   if (!confirm('¿Esta seguro de eliminar los registros seleccionados?')) {
-      e.preventDefault();
+    e.preventDefault();
   }
 });
