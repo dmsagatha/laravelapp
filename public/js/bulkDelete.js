@@ -1,48 +1,47 @@
-// Manejar la selección de checkboxes
-function toggleAllCheckboxes(source) {
-  const checkboxes = document.querySelectorAll('.recordCheckbox:not(:disabled)');
+document.addEventListener('DOMContentLoaded', function () {
+  const selectAllCheckbox = document.getElementById('selectAll');   // <thead> - Todos
+  const checkboxes = document.querySelectorAll('.recordCheckbox');  // <tbody> - Individuales
+  const selectCount = document.getElementById('select_count');
+  const bulkDeleteButton = document.getElementById('bulkDeleteButton');
+  const bulkDeleteIdsInput = document.getElementById('bulkDeleteIds');  // form - input
 
-  checkboxes.forEach(checkbox => checkbox.checked = source.checked);
-}
+  // Actualizar el contador y el botón de eliminar
+  function updateUI() {
+    const selectedCheckboxes = [...checkboxes].filter(cb => cb.checked);
+    const selectedCount = selectedCheckboxes.length;
 
-// Confirmación antes de Eliminar
-document.getElementById('bulkDeleteForm').addEventListener('submit', function(e) {
-  if (!confirm('¿Esta seguro de eliminar los registros seleccionados?')) {
-    e.preventDefault();
+    selectCount.textContent = selectedCount;  // Actualiza el contador
+
+    // Actualiza los IDs seleccionados
+    const selectedIds = selectedCheckboxes.map(cb => cb.value).join(',');
+    bulkDeleteIdsInput.value = selectedIds;
+
+    // Muestra/oculta el botón de eliminación masiva
+    if (selectedCount > 0) {
+      bulkDeleteButton.classList.remove('hidden'); // Muestra el botón
+    } else {
+      bulkDeleteButton.classList.add('hidden'); // Oculta el botón
+    }
   }
-});
 
-// El checkbox maestro cambie su estado dinámicamente según los checkboxes seleccionados
-document.addEventListener('DOMContentLoaded', function() {
-  const selectAllCheckbox = document.getElementById('selectAll');   // <thead>
-  const checkboxes = document.querySelectorAll('.recordCheckbox:not(:disabled)');  // <tbody>
+  // Evento para el checkbox "Seleccionar todo"
+  if (selectAllCheckbox) {
+    selectAllCheckbox.addEventListener('change', function () {
+      const isChecked = this.checked;
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = isChecked;
+      });
+      updateUI();
+    });
+  }
 
+  // Evento para cada checkbox individual
   checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', function() {
-      const allChecked = Array.from(checkboxes).every(cb => cb.checked);
-      const noneChecked = Array.from(checkboxes).every(cb => !cb.checked);
-
-      if (allChecked) {
-        selectAllCheckbox.checked = true;
-        selectAllCheckbox.indeterminate = false;
-      } else if (noneChecked) {
-        selectAllCheckbox.checked = false;
-        selectAllCheckbox.indeterminate = false;
-      } else {
-        selectAllCheckbox.indeterminate = true;
-      }
+    checkbox.addEventListener('change', function () {
+      updateUI();
     });
   });
+
+  // Actualiza la interfaz al cargar la página
+  updateUI();
 });
-
-// Deshabilitar el Botón si No Hay Selección
-const deleteButton = document.querySelector('.bulkDeleteButton');
-const checkboxes = document.querySelectorAll('.recordCheckbox');
-
-function updateButtonState() {
-  deleteButton.disabled = !Array.from(checkboxes).some(cb => cb.checked);
-}
-
-checkboxes.forEach(checkbox => checkbox.addEventListener('change', updateButtonState));
-document.getElementById('selectAll').addEventListener('change', updateButtonState);
-updateButtonState(); // Inicialmente desactiva el botón

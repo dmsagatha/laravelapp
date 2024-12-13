@@ -30,23 +30,25 @@ class UserController extends Controller
 
     return back()->withStatus('Usuarios eliminados exitosamente.'); */
 
-    /* $ids = $request->input('ids', []);
+    $ids = $request->input('ids', []);
+
     if (!empty($ids)) {
-      User::whereIn('id', $ids)->delete();
+      // User::whereIn('id', $ids)->delete();
+      User::whereIn('id', explode(",", $ids))->delete();
 
       return back()->with('status', 'Usuarios eliminados exitosamente.');
     }
 
-    return back()->withInput()->withErrors(['ids' => 'No se seleccionó ningún usuario.']); */
+    return back()->withInput()->withErrors(['ids' => 'No se seleccionó ningún usuario.']);
 
-    $validated = $request->validate([
+    /* $validated = $request->validate([
       'selected_records' => 'required|array',
       'selected_records.*' => 'integer|exists:users,id',
     ]);
 
     User::whereIn('id', $validated['selected_records'])->delete();
 
-    return redirect()->route('users.index')->with('success', 'Registros eliminados exitosamente.');
+    return redirect()->route('users.index')->with('success', 'Registros eliminados exitosamente.'); */
   }
 
   // Selección múltiple

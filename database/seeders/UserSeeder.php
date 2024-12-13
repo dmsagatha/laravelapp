@@ -13,6 +13,7 @@ class UserSeeder extends Seeder
   {
     User::factory()->create([
       'name'     => 'Super Admin',
+      'username' => 'superadmin',
       'email'    => 'superadmin@admin.net',
       'gender'   => 'f',
       'country'  => 'Colombia',
@@ -23,6 +24,7 @@ class UserSeeder extends Seeder
 
     User::factory()->create([
       'name'     => 'Usuario 1',
+      'username' => 'usuario1',
       'email'    => 'usuario1@tmp.com',
       'gender'   => 'f',
       'country'  => 'Brasil',
@@ -33,6 +35,7 @@ class UserSeeder extends Seeder
 
     User::factory()->create([
       'name'     => 'Usuario 2',
+      'username' => 'usuario2',
       'email'    => 'usuario2@tmp.com',
       'gender'   => 'f',
       'country'  => 'Ecuador',
