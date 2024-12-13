@@ -15,13 +15,19 @@
     {{-- Eliminación masiva --}}
     <div class="flex float-left px-1 py-3 space-x-1 text-slate-800 dark:text-slate-50 flex-wrap">
       @if ($view == 'index')
+        <a href="javascript:void(0)" 
+          id="bulkDeleteButton"
+          class="relative inline-flex items-center justify-center p-2 mr-2 mb-2 text-red-600 border border-blue-500 hover:bg-red-500 hover:text-slate-50 active:bg-red-600 font-medium rounded-lg outline-none focus:outline-none ease-linear transition-all duration-150">
+          🗑️ Eliminar seleccionados (<span id="select_count">0</span>)
+        </a>
+        
         <form id="bulkDeleteForm" action="{{ route('users.massDestroy') }}" method="POST">
           @csrf
           @method('DELETE')
 
-          <button type="submit" class="bulkDeleteButton items-center justify-center bg-red-600 border border-transparent rounded-md font-medium px-2 py-2 mr-2 mb-2 text-center text-xs text-slate-50 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring-0 focus:ring-red-200 active:bg-red-600 disabled:opacity-25 transition">
+          {{-- <button type="submit" class="bulkDeleteButton items-center justify-center bg-red-600 border border-transparent rounded-md font-medium px-2 py-2 mr-2 mb-2 text-center text-xs text-slate-50 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring-0 focus:ring-red-200 active:bg-red-600 disabled:opacity-25 transition">
             Eliminar Seleccionados
-          </button>
+          </button> --}}
 
           <div>
             <input type="checkbox" id="selectAll" onclick="toggleAllCheckboxes(this)">
@@ -73,6 +79,7 @@
       });
     </script>
 
-    <script src="{{ asset('js/bulkDelete.js') }}"></script>
+    {{-- <script src="{{ asset('js/bulkDelete.js') }}"></script> --}}
+    <script src="{{ asset('js/eliminacionMasiva.js') }}"></script>
   @endpush
 </x-app-layout>
