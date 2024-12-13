@@ -404,3 +404,8 @@ Aumente p-1 a p-2 para tener más espacio entre los resultados */
 .select--label {
   @apply block text-xs font-medium text-slate-700 dark:text-slate-300 required;
 }
+
+input[type="checkbox"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

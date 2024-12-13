@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth', 'verified']], function ()
     Route::get('DataTablesTemas', 'dttheme')->name('dttheme');
 
     Route::get('papelera', 'index')->name('trashed');
+    Route::delete('eliminar-en-masa', 'massDestroy')->name('massDestroy');
   });
 
   Route::resource('/usuarios', UserController::class)

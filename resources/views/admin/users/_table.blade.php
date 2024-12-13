@@ -2,6 +2,9 @@
   <thead>
     <tr>
       <th rowspan="2" width="1%">N°</th>
+      <th rowspan="2">
+        Seleccionar Todos
+      </th>
       <th rowspan="2">Nombre</th>
       <th rowspan="2">Correo Electrónico</th>
       <th colspan="2">Datos Personales</th>
@@ -16,6 +19,10 @@
     @foreach ($users as $key => $item)
       <tr>
         <td style="text-align: center;">{{ $key + 1 }}</td>
+        <td>
+          <input type="checkbox" name="selected_records[]" value="{{ $item->id }}" class="recordCheckbox">
+      </td>
+        </td>
         <th>{{ $item->name }}</th>
         <td>{{ $item->email }}</td>
         <th>{{ $item->country }}</th>

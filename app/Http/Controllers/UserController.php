@@ -7,7 +7,8 @@ use Illuminate\View\View;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
-{  public function index(Request $request): View
+{
+  public function index(Request $request): View
   {
     $users = User::query()
       ->when(request()->routeIs('users.trashed'), function ($q) {
@@ -20,6 +21,32 @@ class UserController extends Controller
       'view'  => $request->routeIs('admin.users.trashed') ? 'trashed' : 'index',
       'users' => $users,
     ]);
+  }
+
+  public function massDestroy(Request $request)
+  {
+    /* $ids = $request->ids;
+    User::whereIn('id', explode(',', $ids))->delete();
+
+    return back()->withStatus('Usuarios eliminados exitosamente.'); */
+
+    /* $ids = $request->input('ids', []);
+    if (!empty($ids)) {
+      User::whereIn('id', $ids)->delete();
+
+      return back()->with('status', 'Usuarios eliminados exitosamente.');
+    }
+
+    return back()->withInput()->withErrors(['ids' => 'No se seleccionó ningún usuario.']); */
+
+    $validated = $request->validate([
+      'selected_records' => 'required|array',
+      'selected_records.*' => 'integer|exists:users,id',
+    ]);
+
+    User::whereIn('id', $validated['selected_records'])->delete();
+
+    return redirect()->route('users.index')->with('success', 'Registros eliminados exitosamente.');
   }
 
   // Selección múltiple
