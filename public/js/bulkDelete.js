@@ -5,6 +5,7 @@ function toggleAllCheckboxes(source) {
   checkboxes.forEach(checkbox => checkbox.checked = source.checked);
 }
 
+// Confirmación antes de Eliminar
 document.getElementById('bulkDeleteForm').addEventListener('submit', function(e) {
   if (!confirm('¿Esta seguro de eliminar los registros seleccionados?')) {
     e.preventDefault();
@@ -33,3 +34,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+// Deshabilitar el Botón si No Hay Selección
+const deleteButton = document.querySelector('.bulkDeleteButton');
+const checkboxes = document.querySelectorAll('.recordCheckbox');
+
+function updateButtonState() {
+  deleteButton.disabled = !Array.from(checkboxes).some(cb => cb.checked);
+}
+
+checkboxes.forEach(checkbox => checkbox.addEventListener('change', updateButtonState));
+document.getElementById('selectAll').addEventListener('change', updateButtonState);
+updateButtonState(); // Inicialmente desactiva el botón
