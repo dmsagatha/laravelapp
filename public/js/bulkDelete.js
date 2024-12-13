@@ -1,6 +1,6 @@
 // Manejar la selección de checkboxes
 function toggleAllCheckboxes(source) {
-  const checkboxes = document.querySelectorAll('.recordCheckbox');
+  const checkboxes = document.querySelectorAll('.recordCheckbox:not(:disabled)');
 
   checkboxes.forEach(checkbox => checkbox.checked = source.checked);
 }
@@ -15,7 +15,7 @@ document.getElementById('bulkDeleteForm').addEventListener('submit', function(e)
 // El checkbox maestro cambie su estado dinámicamente según los checkboxes seleccionados
 document.addEventListener('DOMContentLoaded', function() {
   const selectAllCheckbox = document.getElementById('selectAll');   // <thead>
-  const checkboxes = document.querySelectorAll('.recordCheckbox');  // <tbody>
+  const checkboxes = document.querySelectorAll('.recordCheckbox:not(:disabled)');  // <tbody>
 
   checkboxes.forEach(checkbox => {
     checkbox.addEventListener('change', function() {
