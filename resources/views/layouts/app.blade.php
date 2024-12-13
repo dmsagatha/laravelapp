@@ -29,7 +29,7 @@
 
     @stack('styles')
   </head>
-  <body class="bg-slate-50 dark:bg-slate-900 antialiased font-sans">
+  <body class="bg-slate-100 dark:bg-slate-900 antialiased font-sans">
     <div class="min-h-screen text-slate-700 dark:text-slate-300">
       @include('layouts.navigation')
 
