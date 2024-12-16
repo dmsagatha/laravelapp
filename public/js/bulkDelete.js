@@ -1,3 +1,4 @@
+// Script para eliminación masiva de Periféricos
 document.addEventListener('DOMContentLoaded', () => {
   const selectAllCheckbox = document.getElementById('selectAll');   // <thead> - Todos
   const checkboxes = document.querySelectorAll('.recordCheckbox');  // <tbody> - Individuales
