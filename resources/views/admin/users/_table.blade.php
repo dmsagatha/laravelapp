@@ -19,18 +19,18 @@
   <tbody>
     @foreach ($users as $key => $item)
       <tr>
-        <td style="text-align: center;">{{ $key + 1 }}</td>
-        <td class="text-center"><input type="checkbox" class="recordCheckbox" value="{{ $item->id }}"></td>
+        <td class="text-center">{{ $key + 1 }}</td>
+        <td class="text-center">
+          <input type="checkbox" class="recordCheckbox" value="{{ $item->id }}">
+        </td>
         </td>
         <th>{{ $item->name }}</th>
         <td>{{ $item->email }}</td>
         <th>{{ $item->country }}</th>
         <td>{{ $item->jobTitle }}</td>
         <td>
-          <a href="#"
-            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
-          <a href="#"
-            class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Eliminar</a>
+          <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
+          <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Eliminar</a>
         </td>
       </tr>
     @endforeach
@@ -38,10 +38,11 @@
   <tfoot>
     <tr>
       <th>N°</th>
+      <th></th>
       <th>Nombre</th>
       <th>Correo Electrónico</th>
       <th>País</th>
-      <th>Dirección</th>
+      <th>Profesión</th>
       <th>Acciones</th>
     </tr>
   </tfoot>
