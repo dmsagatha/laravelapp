@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // const selectedCheckboxes = [...checkboxes].filter(cb => cb.checked);
     const selectedCheckboxes = [...checkboxes].filter(checkbox => checkbox.checked);
     const selectedCount = selectedCheckboxes.length;
-
     selectCount.textContent = selectedCount;  // Actualiza el contador
 
     // Actualiza los IDs seleccionados
@@ -35,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (selectAllCheckbox) {
     selectAllCheckbox.addEventListener('change', function () {
       const isChecked = this.checked;
+      
       checkboxes.forEach(checkbox => {
         checkbox.checked = isChecked;
       });
@@ -66,7 +66,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Cerrar el modal al cancelar
   cancelButton.addEventListener('click', () => {
-    deleteModal.classList.add('hidden');
+    deleteModal.classList.add('hidden');  // Cierra el modal
+
+    // Deseleccionar todos los checkboxes
+    checkboxes.forEach(checkbox => {
+      checkbox.checked = false;
+    });
+
+    selectAllCheckbox.forEach(checkbox => {
+      checkbox.checked = false;
+    });
+
+    // Resetear el contador y el campo oculto
+    updateUI();
   });
 
   // Confirmar eliminación y enviar el formulario
