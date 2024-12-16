@@ -9,29 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const confirmDeleteButton = document.getElementById('confirmDeleteButton');
   const bulkDeleteForm = document.getElementById('bulkDeleteForm'); // form de eliminación
 
-  // Abrir el modal
-  bulkDeleteButton.addEventListener('click', () => {
-    const selectedCount = parseInt(document.getElementById('select_count').textContent, 10);
-    if (selectedCount > 0) {
-      deleteModal.classList.remove('hidden');
-    } else {
-      alert('Por favor, selecciona al menos un periférico para eliminar.');
-    }
-  });
-
-  // Cerrar el modal al cancelar
-  cancelButton.addEventListener('click', () => {
-    deleteModal.classList.add('hidden');
-  });
-
-  // Confirmar eliminación
-  confirmDeleteButton.addEventListener('click', () => {
-    // Enviar el formulario
-    if (bulkDeleteForm) {
-      bulkDeleteForm.submit();
-    }
-  });
-
   // Actualizar el contador y el botón de eliminar
   function updateUI() {
     // const selectedCheckboxes = [...checkboxes].filter(cb => cb.checked);
@@ -74,4 +51,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Actualiza la interfaz al cargar la página
   updateUI();
+
+  // Abrir el modal
+  bulkDeleteButton.addEventListener('click', (e) => {
+    e.preventDefault(); // Previene cualquier acción por defecto
+    const selectedCount = parseInt(document.getElementById('select_count').textContent, 10);
+
+    if (selectedCount > 0) {
+      deleteModal.classList.remove('hidden');
+    } else {
+      alert('Por favor, selecciona al menos un periférico para eliminar.');
+    }
+  });
+
+  // Cerrar el modal al cancelar
+  cancelButton.addEventListener('click', () => {
+    deleteModal.classList.add('hidden');
+  });
+
+  // Confirmar eliminación y enviar el formulario
+  confirmDeleteButton.addEventListener('click', () => {
+    if (bulkDeleteForm) {
+      bulkDeleteForm.submit();
+    }
+  });
 });

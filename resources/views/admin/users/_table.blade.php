@@ -21,7 +21,7 @@
       <tr>
         <td class="text-center">{{ $key + 1 }}</td>
         <td class="text-center">
-          <input type="checkbox" class="recordCheckbox" value="{{ $item->id }}">
+          <input type="checkbox" class="recordCheckbox h-4 w-4 text-indigo-600" value="{{ $item->id }}">
         </td>
         </td>
         <th>{{ $item->name }}</th>
