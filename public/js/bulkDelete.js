@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const bulkDeleteButton = document.getElementById('bulkDeleteButton');
   const bulkDeleteIdsInput = document.getElementById('bulkDeleteIds');  // form - input
   const deleteModal = document.getElementById('deleteModal');
-  const cancelButton = document.getElementById('cancelButton');
   const confirmDeleteButton = document.getElementById('confirmDeleteButton');
+  const cancelButton = document.getElementById('cancelButton');
   const bulkDeleteForm = document.getElementById('bulkDeleteForm'); // form de eliminación
 
   // Actualizar el contador y el botón de eliminar
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Evento para el checkbox "Seleccionar todo"
+  // Evento para el checkbox "Seleccionar todos"
   if (selectAllCheckbox) {
     selectAllCheckbox.addEventListener('change', function () {
       const isChecked = this.checked;
@@ -70,10 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Deseleccionar todos los checkboxes
     checkboxes.forEach(checkbox => {
-      checkbox.checked = false;
-    });
-
-    selectAllCheckbox.forEach(checkbox => {
       checkbox.checked = false;
     });
 

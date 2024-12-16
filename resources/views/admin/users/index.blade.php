@@ -18,7 +18,7 @@
         <form id="bulkDeleteForm" action="{{ route('users.massDestroy') }}" method="POST">
           @csrf
           @method('DELETE')
-          
+                    
           <input type="hidden" name="ids" id="bulkDeleteIds">
 
           <button
