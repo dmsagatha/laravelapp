@@ -22,7 +22,7 @@
           <input type="hidden" name="ids" id="bulkDeleteIds">
 
           <button
-            type="submit"
+            type="button"
             id="bulkDeleteButton"
             class="hidden items-center justify-center bg-red-600 border border-transparent rounded-md font-medium px-2 py-2 mr-2 mb-2 text-center text-xs text-slate-50 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring-0 focus:ring-red-200 active:bg-red-600 disabled:opacity-25 transition">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 inline-flex">
@@ -47,6 +47,29 @@
           No hay registros creados
         </div>
       @endif
+    </div>
+  </div>
+
+  <!-- Modal para confirmar o cancelar la eliminación masiva -->
+  <div id="deleteModal" class="hidden fixed inset-0 z-20 justify-center items-center h-full w-full bg-slate-500 bg-opacity-50" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
+    <!-- Modal content -->
+    <div class="bg-slate-50 dark:bg-slate-700 rounded-lg shadow-lg p-4 w-1/2 fade-in">
+      <!-- Modal header -->
+      <div class="py-4">
+        <svg class="mx-auto mb-4 text-slate-400 w-12 h-12 dark:text-slate-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+        </svg>
+        <h4 class="text-xl font-bold text-center">¿Confirma eliminar los registros seleccionados?</h4>
+      </div>
+      <!-- Modal body -->
+      <div class="flex justify-end space-x-2 my-4">
+        <button id="confirmDeleteButton" type="submit" class="bg-red-600 border border-transparent rounded-md font-medium px-2 py-2 mr-2 text-center text-slate-50 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring-0 focus:ring-red-200 active:bg-red-600 disabled:opacity-25 transition">
+          Si, eliminar!
+        </button>
+        <button id="cancelButton" type="button" class="bg-blue-600 border border-transparent rounded-md font-medium px-2 py-2 mr-2 text-center text-slate-50 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:ring-0 focus:ring-blue-200 active:bg-blue-600 disabled:opacity-25 transition">
+          No, cancelar!
+        </button>
+      </div>
     </div>
   </div>
 
