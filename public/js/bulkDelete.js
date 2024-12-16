@@ -34,20 +34,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Actualizar el contador y el botón de eliminar
   function updateUI() {
-    const selectedCheckboxes = [...checkboxes].filter(cb => cb.checked);
+    // const selectedCheckboxes = [...checkboxes].filter(cb => cb.checked);
+    const selectedCheckboxes = [...checkboxes].filter(checkbox => checkbox.checked);
     const selectedCount = selectedCheckboxes.length;
 
     selectCount.textContent = selectedCount;  // Actualiza el contador
 
     // Actualiza los IDs seleccionados
-    const selectedIds = selectedCheckboxes.map(cb => cb.value).join(',');
-    bulkDeleteIdsInput.value = selectedIds;
+    /* const selectedIds = selectedCheckboxes.map(cb => cb.value).join(',');
+    bulkDeleteIdsInput.value = selectedIds; */
 
     // Muestra/oculta el botón de eliminación masiva
     if (selectedCount > 0) {
       bulkDeleteButton.classList.remove('hidden'); // Muestra el botón
+      bulkDeleteIdsInput.value = selectedCheckboxes.map(checkbox => checkbox.value).join(',');
     } else {
       bulkDeleteButton.classList.add('hidden'); // Oculta el botón
+      bulkDeleteIdsInput.value = '';
     }
   }
 
