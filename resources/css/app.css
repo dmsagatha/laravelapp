@@ -48,6 +48,12 @@ html.dark table.dataTable > tfoot > tr > th select {
   @apply !bg-slate-700 !text-slate-50; /* !important; */
 }
 
+/* Selector de cantidad de registros a mostrar y Buscar */
+html.dark .dataTables_wrapper .dataTables_filter input,
+html.dark .dataTables_wrapper .dataTables_length select {
+  @apply dark:border dark:border-blue-600 dark:text-slate-100 dark:bg-slate-800 dark:hover:border-blue-500;
+}
+
 /* El contenedor donde se encuentra el cuadro de selección */
 .select2-container {
 	@apply relative box-border align-middle inline-block m-0 mb-2;
