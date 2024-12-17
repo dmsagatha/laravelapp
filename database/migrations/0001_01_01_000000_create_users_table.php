@@ -20,6 +20,9 @@ return new class extends Migration
       $table->string('country');
       $table->string('jobTitle');
       $table->string('phone_number');
+
+      $table->softDeletes();
+      
       $table->timestamp('email_verified_at')->nullable();
       $table->string('password');
       $table->rememberToken();

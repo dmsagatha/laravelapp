@@ -16,10 +16,10 @@ class UserController extends Controller
       })
       ->orderBy('name')
       ->get();
-
+    
     return view('admin.users.index', [
-      'view'  => $request->routeIs('admin.users.trashed') ? 'trashed' : 'index',
-      'users' => $users,
+      'view'  => $request->routeIs('users.trashed') ? 'trashed' : 'index',
+      'users' => $users
     ]);
   }
 
