@@ -12,6 +12,10 @@
       Eliminación masiva de Usuarios
     </h1>
 
+    {{-- <div id="notification" class="hidden fixed top-16 right-5 z-50 bg-green-500 text-white text-sm rounded-md px-4 py-2 shadow-lg transition-opacity duration-300"></div> --}}
+    <div id="notification" class="hidden fixed top-32 right-5 z-50 bg-green-500 text-slate-50 dark:text-slate-800 text-sm rounded-md px-4 py-2 shadow-lg transition-opacity duration-1000"></div>
+
+
     {{-- Eliminación masiva --}}
     <div class="flex float-left px-1 py-3 space-x-1 text-slate-800 dark:text-slate-50 flex-wrap">
       @if ($view == 'index')
@@ -49,7 +53,7 @@
       @endif
     </div>
   </div>
-  
+
   <!-- Modal para confirmar o cancelar la eliminación masiva -->
   <div id="deleteModal" class="hidden fixed inset-0 z-10 justify-center items-center h-full w-full bg-black/50 transition-opacity duration-300 ease-in-out" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
     <!-- Modal content -->

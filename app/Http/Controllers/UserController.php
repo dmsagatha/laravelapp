@@ -33,7 +33,6 @@ class UserController extends Controller
     $ids = $request->input('ids', []);
 
     if (!empty($ids)) {
-      // User::whereIn('id', $ids)->delete();
       User::whereIn('id', explode(",", $ids))->delete();
 
       return back()->with('status', 'Usuarios eliminados exitosamente.');

@@ -76,12 +76,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Enviar el formulario
     document.getElementById('bulkDeleteForm').submit();
+    hideModal();
+    showNotification('¡Registros eliminados correctamente!', 'success', 4000); // Muestra por 4 segundos
   });
 
   // Cancelar la eliminación
   cancelButton.addEventListener('click', () => {
     // deleteModal.classList.add('hidden');
     hideModal(); // Cerrar el modal con animación
+    showNotification('Eliminación cancelada.', 'error', 4000);
 
     // Reiniciar checkboxes y contador
     selectedIds = [];
@@ -101,11 +104,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Ocultar el modal con animación
   function hideModal() {
-    const deleteModal = document.getElementById('deleteModal');
+    // const deleteModal = document.getElementById('deleteModal');
     /* deleteModal.classList.add('hidden');
     deleteModal.classList.remove('flex'); */
     deleteModal.classList.add('modal-leave'); // Aplicar la clase de salida
-    
+
     // Esperar que termine la animación antes de ocultar completamente el modal
     setTimeout(() => {
       deleteModal.classList.remove('modal-leave', 'modal-enter-active'); // Limpiar las clases de animación
@@ -115,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Mostrar el modal con animación
   function showModal() {
-    const deleteModal = document.getElementById('deleteModal');
+    // const deleteModal = document.getElementById('deleteModal');
     deleteModal.classList.remove('hidden');
     deleteModal.classList.add('flex');
     deleteModal.classList.add('modal-enter', 'modal-enter-active'); // Clases para la animación
@@ -124,5 +127,29 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       deleteModal.classList.remove('modal-enter'); // Remover las clases después de la animación
     }, 300); // El tiempo de duración de la animación debe coincidir con el tiempo definido en CSS
+  }
+
+  function showNotification(message, type = 'success', displayDuration = 3000) {
+    const notification = document.getElementById('notification');
+
+    // Ajustar colores según el tipo
+    const colors = {
+      success: 'bg-green-500',
+      error: 'bg-red-500',
+    };
+
+    // Configurar el mensaje y el color
+    notification.textContent = message;
+    notification.className = `fixed top-32 right-5 z-50 bg-green-500 text-slate-50 dark:text-slate-800 text-sm rounded-md px-4 py-2 shadow-lg transition-opacity duration-1000 ${colors[type]}`;
+
+    // Mostrar el mensaje
+    notification.classList.remove('hidden', 'opacity-0');
+    notification.classList.add('opacity-100');
+
+    // Ocultar después de 3 segundos
+    setTimeout(() => {
+      notification.classList.add('opacity-0');
+      setTimeout(() => notification.classList.add('hidden'), 300); // Esconde tras el desvanecimiento
+    }, displayDuration);
   }
 });
