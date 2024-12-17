@@ -4,7 +4,7 @@
       <img src="{{ asset('images/logoLaravel.min.svg') }}" class="h-8" alt="Flowbite Logo" />
       <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Laravel 11</span>
     </a>
-    <!-- Left navigation links -->
+    <!-- Right navigation links -->
     <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
       <x-theme-switcher class="pl-7" />
 
@@ -51,23 +51,37 @@
         </x-nav-link>
         <!-- Dropdown menu -->
         <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" class="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-          Manejo de DataTables
+          Varios temas
           <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
           </svg>
         </button>
-        <div id="dropdownNavbar"
-          class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+        <div id="dropdownNavbar" class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
           <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
-            <x-dropdown--link :href="route('users.dataTablesJQ')">
-              DataTables.Net
+            <x-dropdown--link :href="route('users.index')">
+              Eliminación masiva
             </x-dropdown--link>
-            <x-dropdown--link :href="route('users.dtTailwindcss')">
-              DataTables.Net y Tailwind CSS
-            </x-dropdown--link>
-            <x-dropdown--link :href="route('users.select2JQ')">
-              Select2 Simple y Múltiple
-            </x-dropdown--link>
+            <li aria-labelledby="dropdownNavbarLink">
+              <button id="doubleDropdownButton" data-dropdown-toggle="doubleDropdown" data-dropdown-placement="right-start" type="button" class="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                DataTables
+                <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                </svg>
+              </button>
+              <div id="doubleDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton">
+                  <x-dropdown--link :href="route('users.dataTablesJQ')">
+                    DataTables.Net
+                  </x-dropdown--link>
+                  <x-dropdown--link :href="route('users.dtTailwindcss')">
+                    DataTables.Net y Tailwind CSS
+                  </x-dropdown--link>
+                  <x-dropdown--link :href="route('users.select2JQ')">
+                    Select2 Simple y Múltiple
+                  </x-dropdown--link>
+                </ul>
+              </div>
+            </li>
           </ul>
         </div>
         <x-nav-link :href="route('processors.index')" :active="request()->routeIs('processors.index')">

@@ -15,7 +15,13 @@ class User extends Authenticatable
     'name',
     'email',
     'password',
+    'username'
   ];
+
+  public function getRouteKeyName()
+  {
+    return 'username';
+  }
 
   const GENDER_SELECT = [
     'm' => 'Masculino',

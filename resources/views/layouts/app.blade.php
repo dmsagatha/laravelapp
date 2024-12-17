@@ -29,7 +29,7 @@
 
     @stack('styles')
   </head>
-  <body class="bg-slate-50 dark:bg-slate-900 antialiased font-sans">
+  <body class="bg-slate-100 dark:bg-slate-900 font-sans antialiased">
     <div class="min-h-screen text-slate-700 dark:text-slate-300">
       @include('layouts.navigation')
 
@@ -43,13 +43,17 @@
       @endisset
 
       <!-- Page Content -->
-      <main>
+      <main class="flex-grow py-3 px-5">
         {{ $slot }}
       </main>
 
       <footer class="bg-slate-50 rounded-lg shadow m-4 dark:bg-gray-800">
         <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-          <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="#" class="hover:underline">Laravel App</a>. All Rights Reserved.
+          <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 
+            <script>
+              document.write(new Date().getFullYear())
+            </script>
+            <a href="#" class="hover:underline">Laravel App</a>. All Rights Reserved.
           </span>
           <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
             <li>

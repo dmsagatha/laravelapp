@@ -23,14 +23,23 @@ require __DIR__.'/auth.php';
 Route::group(['middleware' => ['auth', 'verified']], function ()
 {
   Route::prefix('usuarios')->name('users.')->controller(UserController::class)->group(function () {
-    Route::get('/', 'dataTablesJQ')->name('dataTablesJQ');
+    Route::get('dataTablesJQ', 'dataTablesJQ')->name('dataTablesJQ');
     Route::get('dtTailwindcss', 'dtTailwindcss')->name('dtTailwindcss');
     Route::get('dtFiltros', 'dtFilters')->name('dtFilters');
     Route::get('dtFiltrosId', 'dtFiltersId')->name('dtFiltersId');
     Route::get('select2JQ', 'select2JQ')->name('select2JQ');
 
     Route::get('DataTablesTemas', 'dttheme')->name('dttheme');
+
+    Route::get('papelera', 'index')->name('trashed');
+    Route::delete('eliminar-en-masa', 'massDestroy')->name('massDestroy');
+
   });
+
+  Route::resource('/usuarios', UserController::class)
+    ->only(['index', 'destroy'])
+    ->parameters(['usuarios' => 'user'])
+    ->names('users');
 
   Route::prefix('procesadores')->name('processors.')->controller(ProcessorController::class)->group(function () {
     Route::get('/', 'index')->name('index');

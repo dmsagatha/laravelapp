@@ -48,6 +48,12 @@ html.dark table.dataTable > tfoot > tr > th select {
   @apply !bg-slate-700 !text-slate-50; /* !important; */
 }
 
+/* Selector de cantidad de registros a mostrar y Buscar */
+html.dark .dataTables_wrapper .dataTables_filter input,
+html.dark .dataTables_wrapper .dataTables_length select {
+  @apply dark:border dark:border-blue-600 dark:text-slate-100 dark:bg-slate-800 dark:hover:border-blue-500;
+}
+
 /* El contenedor donde se encuentra el cuadro de selección */
 .select2-container {
 	@apply relative box-border align-middle inline-block m-0 mb-2;
@@ -403,4 +409,31 @@ Aumente p-1 a p-2 para tener más espacio entre los resultados */
 
 .select--label {
   @apply block text-xs font-medium text-slate-700 dark:text-slate-300 required;
+}
+
+/* Estilizar los Checkboxes Deshabilitados */
+input[type="checkbox"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Efectos de transición al mostrar y ocultar el modal */
+.modal-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.modal-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.modal-leave {
+  opacity: 1;
+}
+
+.modal-leave-active {
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
