@@ -51,9 +51,9 @@
   </div>
 
   <!-- Modal para confirmar o cancelar la eliminación masiva -->
-  <div id="deleteModal" class="hidden fixed inset-0 z-20 justify-center items-center h-full w-full bg-slate-500 bg-opacity-50" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
+  <div id="deleteModal" class="hidden fixed inset-0 z-10 justify-center items-center h-full w-full bg-black/50" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
     <!-- Modal content -->
-    <div class="bg-slate-50 dark:bg-slate-700 rounded-lg shadow-lg p-4 w-1/2 fade-in">
+    <div class="bg-slate-50 dark:bg-slate-700 rounded-lg shadow-lg p-4 max-w-lg w-full">
       <!-- Modal header -->
       <div class="py-4">
         <svg class="mx-auto mb-4 text-slate-400 w-12 h-12 dark:text-slate-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
