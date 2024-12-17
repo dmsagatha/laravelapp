@@ -2,86 +2,93 @@
 document.addEventListener('DOMContentLoaded', () => {
   const selectAllCheckbox = document.getElementById('selectAll');   // <thead> - Todos
   const checkboxes = document.querySelectorAll('.recordCheckbox');  // <tbody> - Individuales
-  const selectCount = document.getElementById('select_count');
   const bulkDeleteButton = document.getElementById('bulkDeleteButton');
-  const bulkDeleteIdsInput = document.getElementById('bulkDeleteIds');  // form - input
+  const selectCount = document.getElementById('select_count');
   const deleteModal = document.getElementById('deleteModal');
   const confirmDeleteButton = document.getElementById('confirmDeleteButton');
   const cancelButton = document.getElementById('cancelButton');
-  const bulkDeleteForm = document.getElementById('bulkDeleteForm'); // form de eliminación
+  const bulkDeleteIdsInput = document.getElementById('bulkDeleteIds');  // form - input
+
+  let selectedIds = []; // IDs seleccionados
 
   // Actualizar el contador y el botón de eliminar
-  function updateUI() {
-    // const selectedCheckboxes = [...checkboxes].filter(cb => cb.checked);
-    const selectedCheckboxes = [...checkboxes].filter(checkbox => checkbox.checked);
-    const selectedCount = selectedCheckboxes.length;
-    selectCount.textContent = selectedCount;  // Actualiza el contador
+  const updateUI = () => {
+    const count = selectedIds.length;
+    selectCount.textContent = count;
 
-    // Actualiza los IDs seleccionados
-    /* const selectedIds = selectedCheckboxes.map(cb => cb.value).join(',');
-    bulkDeleteIdsInput.value = selectedIds; */
-
-    // Muestra/oculta el botón de eliminación masiva
-    if (selectedCount > 0) {
-      bulkDeleteButton.classList.remove('hidden'); // Muestra el botón
-      bulkDeleteIdsInput.value = selectedCheckboxes.map(checkbox => checkbox.value).join(',');
+    // Mostrar u ocultar el botón
+    if (count > 0) {
+      bulkDeleteButton.classList.remove('hidden');
     } else {
-      bulkDeleteButton.classList.add('hidden'); // Oculta el botón
-      bulkDeleteIdsInput.value = '';
+      bulkDeleteButton.classList.add('hidden');
     }
-  }
+  };
 
-  // Evento para el checkbox "Seleccionar todos"
-  if (selectAllCheckbox) {
-    selectAllCheckbox.addEventListener('change', function () {
-      const isChecked = this.checked;
-      
-      checkboxes.forEach(checkbox => {
-        checkbox.checked = isChecked;
-      });
-      updateUI();
-    });
-  }
+  // Manejo del checkbox "Seleccionar todos"
+  selectAllCheckbox.addEventListener('change', () => {
+    const isChecked = selectAllCheckbox.checked;
 
-  // Evento para cada checkbox individual
-  checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', function () {
-      updateUI();
-    });
-  });
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = isChecked;
+      const id = checkbox.value;
 
-  // Actualiza la interfaz al cargar la página
-  updateUI();
-
-  // Abrir el modal
-  bulkDeleteButton.addEventListener('click', (e) => {
-    e.preventDefault(); // Previene cualquier acción por defecto
-    const selectedCount = parseInt(document.getElementById('select_count').textContent, 10);
-
-    if (selectedCount > 0) {
-      deleteModal.classList.remove('hidden');
-    } else {
-      alert('Por favor, selecciona al menos un periférico para eliminar.');
-    }
-  });
-
-  // Cerrar el modal al cancelar
-  cancelButton.addEventListener('click', () => {
-    deleteModal.classList.add('hidden');  // Cierra el modal
-
-    // Deseleccionar todos los checkboxes
-    checkboxes.forEach(checkbox => {
-      checkbox.checked = false;
+      if (isChecked && !selectedIds.includes(id)) {
+        selectedIds.push(id);
+      } else if (!isChecked) {
+        selectedIds = [];
+      }
     });
 
-    // Resetear el contador y el campo oculto
     updateUI();
   });
 
-  // Confirmar eliminación y enviar el formulario
+  // Manejo de los checkboxes individuales
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', () => {
+      const id = checkbox.value;
+
+      if (checkbox.checked) {
+        if (!selectedIds.includes(id)) {
+          selectedIds.push(id);
+        }
+      } else {
+        selectedIds = selectedIds.filter((selectedId) => selectedId !== id);
+      }
+
+      // Sincronizar "Seleccionar todos" con los checkboxes individuales
+      selectAllCheckbox.checked =
+        selectedIds.length === checkboxes.length;
+
+      updateUI();
+    });
+  });
+
+  // Mostrar ventana modal al hacer clic en el botón de eliminación
+  bulkDeleteButton.addEventListener('click', () => {
+    deleteModal.classList.remove('hidden');
+  });
+
+  // Confirmar la eliminación
   confirmDeleteButton.addEventListener('click', () => {
-    if (bulkDeleteForm) {
-      bulkDeleteForm.submit();
-    }
+    // Asignar los IDs seleccionados al campo oculto del formulario
+    bulkDeleteIdsInput.value = selectedIds.join(',');
+
+    // Enviar el formulario
+    document.getElementById('bulkDeleteForm').submit();
+  });
+
+  // Cancelar la eliminación
+  cancelButton.addEventListener('click', () => {
+    deleteModal.classList.add('hidden');
+
+    // Reiniciar checkboxes y contador
+    selectedIds = [];
+    selectAllCheckbox.checked = false;
+
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = false;
+    });
+
+    updateUI();
   });
 });
