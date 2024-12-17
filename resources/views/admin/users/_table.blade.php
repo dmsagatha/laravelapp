@@ -4,7 +4,7 @@
       <th rowspan="2" width="1%">N°</th>
       <th rowspan="2">
         <p>Eliminar Todos</p>
-        <input type="checkbox" id="selectAll" class="selectAllCheckbox w-4 h-4 rounded border-gray-400">
+        <input type="checkbox" id="selectAll" class="selectAllCheckbox w-4 h-4 rounded border-slate-400">
       </th>
       <th rowspan="2">Nombre</th>
       <th rowspan="2">Correo Electrónico</th>
