@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Cancelar la eliminación
-  cancelButton.addEventListener('click', () => {
+  /* cancelButton.addEventListener('click', () => {
     deleteModal.classList.add('hidden');
 
     // Reiniciar checkboxes y contador
@@ -90,5 +90,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     updateUI();
+  }); */
+  cancelButton.addEventListener('click', cancelDeletion);
+
+  // Ocultar ventana modal al presionar la tecla Esc
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') hideModal();
   });
+
+  // Cerrar el modal
+  function hideModal() {
+    const deleteModal = document.getElementById('deleteModal');
+    deleteModal.classList.add('hidden');
+    deleteModal.classList.remove('flex');
+  }
+
+  function cancelDeletion() {
+    hideModal();  // Cierra el modal
+  
+    // Reinicia los checkboxes y el contador
+    selectedIds = [];
+    selectAllCheckbox.checked = false;
+  
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = false;
+    });
+  
+    // Actualiza el contador y la UI
+    updateUI();
+  }
 });
