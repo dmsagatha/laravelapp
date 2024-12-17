@@ -56,8 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // Sincronizar "Seleccionar todos" con los checkboxes individuales
-      selectAllCheckbox.checked =
-        selectedIds.length === checkboxes.length;
+      selectAllCheckbox.checked = selectedIds.length === checkboxes.length;
 
       updateUI();
     });
@@ -66,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Mostrar ventana modal al hacer clic en el botón de eliminación
   bulkDeleteButton.addEventListener('click', () => {
     deleteModal.classList.remove('hidden');
+    deleteModal.classList.add('flex');
   });
 
   // Confirmar la eliminación
