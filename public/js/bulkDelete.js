@@ -63,10 +63,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Mostrar ventana modal al hacer clic en el botón de eliminación
-  bulkDeleteButton.addEventListener('click', () => {
+  /* bulkDeleteButton.addEventListener('click', () => {
     deleteModal.classList.remove('hidden');
     deleteModal.classList.add('flex');
-  });
+  }); */
+  bulkDeleteButton.addEventListener('click', showModal);
 
   // Confirmar la eliminación
   confirmDeleteButton.addEventListener('click', () => {
@@ -78,8 +79,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Cancelar la eliminación
-  /* cancelButton.addEventListener('click', () => {
-    deleteModal.classList.add('hidden');
+  cancelButton.addEventListener('click', () => {
+    // deleteModal.classList.add('hidden');
+    hideModal(); // Cerrar el modal con animación
 
     // Reiniciar checkboxes y contador
     selectedIds = [];
@@ -90,33 +92,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     updateUI();
-  }); */
-  cancelButton.addEventListener('click', cancelDeletion);
+  });
 
   // Ocultar ventana modal al presionar la tecla Esc
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') hideModal();
   });
 
-  // Cerrar el modal
+  // Ocultar el modal con animación
   function hideModal() {
     const deleteModal = document.getElementById('deleteModal');
-    deleteModal.classList.add('hidden');
-    deleteModal.classList.remove('flex');
+    /* deleteModal.classList.add('hidden');
+    deleteModal.classList.remove('flex'); */
+    deleteModal.classList.add('modal-leave'); // Aplicar la clase de salida
+    
+    // Esperar que termine la animación antes de ocultar completamente el modal
+    setTimeout(() => {
+      deleteModal.classList.remove('modal-leave', 'modal-enter-active'); // Limpiar las clases de animación
+      deleteModal.classList.add('hidden'); // Ocultar el modal
+    }, 200); // El tiempo de duración de la animación debe coincidir con el tiempo de
   }
 
-  function cancelDeletion() {
-    hideModal();  // Cierra el modal
-  
-    // Reinicia los checkboxes y el contador
-    selectedIds = [];
-    selectAllCheckbox.checked = false;
-  
-    checkboxes.forEach((checkbox) => {
-      checkbox.checked = false;
-    });
-  
-    // Actualiza el contador y la UI
-    updateUI();
+  // Mostrar el modal con animación
+  function showModal() {
+    const deleteModal = document.getElementById('deleteModal');
+    deleteModal.classList.remove('hidden');
+    deleteModal.classList.add('flex');
+    deleteModal.classList.add('modal-enter', 'modal-enter-active'); // Clases para la animación
+
+    // Esperar a que termine la animación antes de eliminar las clases
+    setTimeout(() => {
+      deleteModal.classList.remove('modal-enter'); // Remover las clases después de la animación
+    }, 300); // El tiempo de duración de la animación debe coincidir con el tiempo definido en CSS
   }
 });

@@ -49,11 +49,11 @@
       @endif
     </div>
   </div>
-
+  
   <!-- Modal para confirmar o cancelar la eliminación masiva -->
-  <div id="deleteModal" class="hidden fixed inset-0 z-10 justify-center items-center h-full w-full bg-black/50" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
+  <div id="deleteModal" class="hidden fixed inset-0 z-10 justify-center items-center h-full w-full bg-black/50 transition-opacity duration-300 ease-in-out" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
     <!-- Modal content -->
-    <div class="bg-slate-50 dark:bg-slate-700 rounded-lg shadow-lg p-4 max-w-lg w-full">
+    <div class="bg-slate-50 dark:bg-slate-700 rounded-lg shadow-lg p-4 max-w-lg w-full transform scale-95 transition-all duration-300 ease-in-out">
       <!-- Modal header -->
       <div class="py-4">
         <svg class="mx-auto mb-4 text-slate-400 w-12 h-12 dark:text-slate-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -63,10 +63,10 @@
       </div>
       <!-- Modal body -->
       <div class="flex justify-end space-x-2 my-4">
-        <button id="confirmDeleteButton" type="button" class="bg-red-600 border border-transparent rounded-md font-medium px-2 py-2 mr-2 text-center text-slate-50 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring-0 focus:ring-red-200 active:bg-red-600 disabled:opacity-25 transition-transform transform active:scale-95">
+        <button id="confirmDeleteButton" type="button" class="bg-red-600 border border-transparent rounded-md font-medium px-2 py-2 mr-2 text-center text-slate-50 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring-0 focus:ring-red-200 active:bg-red-600 disabled:opacity-25 transition">
           Si, eliminar!
         </button>
-        <button id="cancelButton" type="button" class="bg-blue-600 border border-transparent rounded-md font-medium px-2 py-2 mr-2 text-center text-slate-50 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:ring-0 focus:ring-blue-200 active:bg-blue-600 disabled:opacity-25 transition-transform transform active:scale-95">
+        <button id="cancelButton" type="button" class="bg-blue-600 border border-transparent rounded-md font-medium px-2 py-2 mr-2 text-center text-slate-50 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:ring-0 focus:ring-blue-200 active:bg-blue-600 disabled:opacity-25 transition">
           No, cancelar!
         </button>
       </div>
