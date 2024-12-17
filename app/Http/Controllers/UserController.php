@@ -25,11 +25,6 @@ class UserController extends Controller
 
   public function massDestroy(Request $request)
   {
-    /* $ids = $request->ids;
-    User::whereIn('id', explode(',', $ids))->delete();
-
-    return back()->withStatus('Usuarios eliminados exitosamente.'); */
-
     $ids = $request->input('ids', []);
 
     if (!empty($ids)) {
@@ -39,15 +34,25 @@ class UserController extends Controller
     }
 
     return back()->withInput()->withErrors(['ids' => 'No se seleccionó ningún usuario.']);
+  }
 
-    /* $validated = $request->validate([
-      'selected_records' => 'required|array',
-      'selected_records.*' => 'integer|exists:users,id',
-    ]);
+  public function restoreAll(Request $request)
+  {
+    $ids = $request->input('ids'); // Recibe los IDs a restaurar
 
-    User::whereIn('id', $validated['selected_records'])->delete();
+    if (!$ids) {
+      return response()->json(['message' => 'No se seleccionaron elementos para restaurar.'], 400);
+    }
 
-    return redirect()->route('users.index')->with('success', 'Registros eliminados exitosamente.'); */
+    User::withTrashed()->whereIn('id', $ids)->restore();
+
+    return response()->json(['message' => 'Elementos restaurados con éxito.']);
+
+    /* User::onlyTrashed()->restore();
+
+    Session()->flash('statusCode', 'info');
+
+    return to_route('admin.users.index')->withStatus('Todos los registro fueron restaurados exitosamente!.'); */
   }
 
   // Selección múltiple
