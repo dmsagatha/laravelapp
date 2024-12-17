@@ -4,7 +4,7 @@
       <th rowspan="2" width="1%">N°</th>
       <th rowspan="2">
         <p>Eliminar Todos</p>
-        <input type="checkbox" id="selectAll" class="selectAllCheckbox w-4 h-4 rounded border-gray-300">
+        <input type="checkbox" id="selectAll" class="selectAllCheckbox w-4 h-4 rounded border-gray-400">
       </th>
       <th rowspan="2">Nombre</th>
       <th rowspan="2">Correo Electrónico</th>
@@ -21,7 +21,7 @@
       <tr>
         <td class="text-center">{{ $key + 1 }}</td>
         <td class="text-center">
-          <input type="checkbox" class="recordCheckbox w-4 h-4 rounded border-gray-300" value="{{ $item->id }}">
+          <input type="checkbox" class="recordCheckbox w-4 h-4 text-blue-600 bg-slate-50 border-slate-400 rounded cursor-pointer focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-slate-800 focus:ring-2 dark:bg-slate-100 dark:border-blue-800 focus:outline-none" value="{{ $item->id }}">
         </td>
         </td>
         <th>{{ $item->name }}</th>
