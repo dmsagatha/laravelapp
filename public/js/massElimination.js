@@ -4,6 +4,40 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalTitle = document.getElementById('modalTitle');
   const modalMessage = document.getElementById('modalMessage');
 
+  const actionButtons = document.getElementById('actionButtons');
+  const selectAllCheckbox = document.getElementById('selectAll'); // Checkbox para seleccionar todos
+  const checkboxes = document.querySelectorAll('.itemCheckbox'); // Checkboxes individuales
+
+  // Actualizar la visibilidad de los botones
+  function updateActionButtonsVisibility() {
+      const anyChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+      if (anyChecked) {
+          actionButtons.classList.remove('hidden');
+          actionButtons.classList.add('flex');
+      } else {
+          actionButtons.classList.remove('flex');
+          actionButtons.classList.add('hidden');
+      }
+  }
+
+  // Evento: Actualizar al cambiar el estado de un checkbox
+  checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', updateActionButtonsVisibility);
+  });
+
+  // Evento: Seleccionar/deseleccionar todos los checkboxes
+  if (selectAllCheckbox) {
+      selectAllCheckbox.addEventListener('change', () => {
+          checkboxes.forEach(checkbox => {
+              checkbox.checked = selectAllCheckbox.checked;
+          });
+          updateActionButtonsVisibility();
+      });
+  }
+
+  // Inicializar estado de los botones al cargar la página
+  updateActionButtonsVisibility();
+
   // Vincular eventos a los botones con data-action
   document.querySelectorAll('[data-action]').forEach(button => {
     button.addEventListener('click', () => {

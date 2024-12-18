@@ -21,14 +21,15 @@
     <div class="flex float-right px-0 py-3 space-x-0 text-slate-800">
       @if ($view == 'index')
         <!-- Botones de acción -->
-        <div id="actionButtons" class="">
+        <div id="actionButtons" class="hidden space-x-2 mt-4">
           <button 
             type="button"
+            id="deleteButton"
             data-action="/usuarios/eliminar-en-masa"
             data-method="DELETE"
             data-title="Confirmar Eliminación"
             data-message="¿Está seguro de que desea eliminar los registros seleccionados?"
-            class="deleteButton bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
+            class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-500">
             Eliminar
           </button>
           {{-- <button 
@@ -64,7 +65,7 @@
           Regresar al listado
         </a>
         <!-- Botones de acción -->
-        <div id="actionButtons" class="">
+        <div id="actionButtons" class="hidden space-x-2 mt-4">
           <button 
             type="button" 
             data-action="/usuarios/restaurar-todos"
