@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const selectAllCheckbox = document.getElementById('selectAll'); // Checkbox para seleccionar todos
   const checkboxes = document.querySelectorAll('.itemCheckbox'); // Checkboxes individuales
 
+  const deleteButton = document.getElementById('deleteButton');
+
   // Actualizar la visibilidad de los botones
   function updateActionButtonsVisibility() {
       const anyChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
@@ -37,6 +39,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Inicializar estado de los botones al cargar la página
   updateActionButtonsVisibility();
+
+  // Conectaar el botón "Eliminar" con el modal
+    deleteButton.addEventListener('click', () => {
+      const actionUrl = deleteButton.dataset.action;
+      const method = deleteButton.dataset.method || 'POST';
+      const title = deleteButton.dataset.title || 'Confirmación';
+      const message = deleteButton.dataset.message || '¿Estás segura de realizar esta acción?';
+
+      // Mostrar el modal
+      modalTitle.textContent = title;
+      modalMessage.textContent = message;
+      modalForm.action = actionUrl;
+      modalForm.querySelector('[name="_method"]').value = method;
+
+      actionModal.classList.remove('hidden');
+      actionModal.classList.add('flex');
+  });
+
+
+
+
 
   // Vincular eventos a los botones con data-action
   document.querySelectorAll('[data-action]').forEach(button => {
