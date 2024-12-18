@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth', 'verified']], function ()
   });
 
   Route::resource('/usuarios', UserController::class)
-    ->only(['index', 'destroy'])
+    ->only(['index'])
     ->parameters(['usuarios' => 'user'])
     ->names('users');
 
