@@ -21,7 +21,7 @@
     <div class="flex float-right px-0 py-3 space-x-0 text-slate-800">
       @if ($view == 'index')
         <!-- Botones de acción -->
-        <div id="actionButtons" class="hidden space-x-2 mt-4">
+        <div id="actionButtons" class="hidden space-x-2 mt-2">
           <button 
             type="button"
             id="deleteButton"
