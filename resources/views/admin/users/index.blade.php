@@ -71,8 +71,8 @@
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
         </svg>
         {{-- <h4 class="text-xl font-bold text-center">¿Confirma eliminar los registros seleccionados?</h4> --}}
-        <h4 id="modalTitle" class="text-xl font-bold text-center"></h4>
-        <p id="modalMessage" class="text-gray-600 dark:text-gray-300 mb-6"></p>
+        <h2 id="modalTitle" class="text-xl font-semibold text-slate-800 dark:text-slate-50 text-center"></h2>
+        <p id="modalMessage" class="text-slate-600 dark:text-slate-300 mb-6"></p>
       </div>
       <!-- Modal body -->
       <div class="flex justify-end space-x-2 my-4">
