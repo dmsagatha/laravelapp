@@ -34,7 +34,7 @@ Route::group(['middleware' => ['auth', 'verified']], function ()
     Route::get('papelera', 'index')->name('trashed');
     Route::delete('eliminar-en-masa', 'massDestroy')->name('massDestroy');
     Route::post('restaurar-todos', 'restoreAll')->name('restoreAll');
-    Route::delete('forzar-eliminar', 'massForceDelete')->name('massForceDelete');
+    Route::delete('forzar-eliminar', 'massForceDestroy')->name('massForceDestroy');
   });
 
   Route::resource('/usuarios', UserController::class)

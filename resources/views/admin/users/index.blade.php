@@ -15,18 +15,41 @@
     
     <div id="notification" class="hidden fixed top-32 right-5 z-50 bg-green-500 text-slate-50 dark:text-slate-800 text-sm rounded-md px-4 py-2 shadow-lg transition-opacity duration-1000"></div>
 
-    {{-- Eliminación masiva --}}
-    <div class="flex float-left px-1 py-3 space-x-1 text-slate-800 dark:text-slate-50 flex-wrap">
-      @if ($view == 'index')
-        <button onclick="showModal('massDestroy', getSelectedIds())" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">
-          Eliminar
-        </button>
-      @endif
-    </div>
+    <div class="flex float-left px-1 py-3 space-x-1 text-slate-800 dark:text-slate-50 flex-wrap"></div>
 
-    {{-- Papelera --}}
+    {{-- Eliminación masiva, Papelera --}}
     <div class="flex float-right px-0 py-3 space-x-0 text-slate-800">
       @if ($view == 'index')
+        <!-- Botones de acción -->
+        <div id="actionButtons" class="">
+          <button 
+            type="button"
+            data-action="/usuarios/eliminar-en-masa"
+            data-method="DELETE"
+            data-title="Confirmar Eliminación"
+            data-message="¿Está seguro de que desea eliminar los registros seleccionados?"
+            class="deleteButton bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
+            Eliminar
+          </button>
+          {{-- <button 
+            type="button" 
+            data-action="/usuarios/restaurar-todos"
+            data-method="POST"
+            data-title="Confirmar Restauración"
+            data-message="¿Está seguro de que desea restaurar los registros seleccionados?"
+            class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
+            Restaurar
+          </button> --}}
+          {{-- <button
+            data-action="forceDelete"
+            data-url="/usuarios/forzar-eliminar"
+            data-method="DELETE"
+            data-title="Eliminar Definitivamente"
+            data-message="¿Está seguro de que desea eliminar definitivamente los registros seleccionados?"
+            class="action-button bg-gray-800 text-white">
+            Eliminar definitivamente
+          </button> --}}
+        </div>
         <a href="{{ route('users.trashed') }}" class="relative inline-flex items-center justify-center text-blue-800 hover:text-slate-50 border border-blue-500 hover:bg-blue-700 focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg p-2 mr-2 mb-2 text-center text-sm dark:border-slate-500 dark:text-slate-400 dark:hover:text-slate-50 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
@@ -38,14 +61,28 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M8.242 5.992h12m-12 6.003H20.24m-12 5.999h12M4.117 7.495v-3.75H2.99m1.125 3.75H2.99m1.125 0H5.24m-1.92 2.577a1.125 1.125 0 1 1 1.591 1.59l-1.83 1.83h2.16M2.99 15.745h1.125a1.125 1.125 0 0 1 0 2.25H3.74m0-.002h.375a1.125 1.125 0 0 1 0 2.25H2.99" />
           </svg>          
-          Regresar al listado de usuarios
+          Regresar al listado
         </a>
-        <button onclick="showModal('restoreAll', getSelectedIds())" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-          Restaurar
-        </button>
-        {{-- <a id="restoreButton" href="{{ route('users.restoreAll') }}" class="inline-flex items-center justify-center px-2 py-2 mr-2 mb-2 bg-green-600 border border-transparent rounded-md font-semibold text-sm text-slate-50 hover:bg-green-500 focus:outline-none focus:border-green-700 focus:ring-0 focus:ring-green-200 active:bg-green-600 disabled:opacity-25 transition">
-          Restaurar todos - restoreButton
-        </a> --}}
+        <!-- Botones de acción -->
+        <div id="actionButtons" class="">
+          <button 
+            type="button" 
+            data-action="/usuarios/restaurar-todos"
+            data-method="POST"
+            data-title="Confirmar Restauración"
+            data-message="¿Está seguro de que desea restaurar los registros seleccionados?"
+            class="restoreButton bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
+            Restaurar
+          </button>
+          <button
+            data-action="/usuarios/forzar-eliminar"
+            data-method="DELETE"
+            data-title="Eliminar Definitivamente"
+            data-message="¿Está seguro de que desea eliminar definitivamente los registros seleccionados?"
+            class="forceDeleteButton bg-gray-800 text-white">
+            Eliminar definitivamente
+          </button>
+        </div>
       @endif
     </div>
 
@@ -70,18 +107,22 @@
         <svg class="mx-auto mb-4 text-slate-400 w-12 h-12 dark:text-slate-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
         </svg>
-        {{-- <h4 class="text-xl font-bold text-center">¿Confirma eliminar los registros seleccionados?</h4> --}}
         <h2 id="modalTitle" class="text-xl font-semibold text-slate-800 dark:text-slate-50 text-center"></h2>
         <p id="modalMessage" class="text-slate-600 dark:text-slate-300 mb-6"></p>
       </div>
       <!-- Modal body -->
       <div class="flex justify-end space-x-2 my-4">
-        <button id="confirmButton" type="button" class="bg-red-600 border border-transparent rounded-md font-medium px-2 py-2 mr-2 text-center text-slate-50 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring-0 focus:ring-red-200 active:bg-red-600 disabled:opacity-25 transition">
-          Confirmar
-        </button>
-        <button id="cancelButton" type="button" class="bg-blue-600 border border-transparent rounded-md font-medium px-2 py-2 mr-2 text-center text-slate-50 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:ring-0 focus:ring-blue-200 active:bg-blue-600 disabled:opacity-25 transition">
-          Cancelar
-        </button>
+        <form id="modalForm" method="POST">
+          @csrf
+          @method('POST')
+
+          <button id="confirmButton" type="submit" class="bg-red-600 border border-transparent rounded-md font-medium px-2 py-2 mr-2 text-center text-slate-50 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring-0 focus:ring-red-200 active:bg-red-600 disabled:opacity-25 transition">
+            Confirmar
+          </button>
+          <button id="modalCancelButton" type="button" class="bg-blue-600 border border-transparent rounded-md font-medium px-2 py-2 mr-2 text-center text-slate-50 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:ring-0 focus:ring-blue-200 active:bg-blue-600 disabled:opacity-25 transition">
+            Cancelar
+          </button>
+        </form>
       </div>
     </div>
   </div>
@@ -118,31 +159,5 @@
 
     {{-- <script src="{{ asset('js/bulkDelete.js') }}"></script> --}}
     <script src="{{ asset('js/massElimination.js') }}"></script>
-    
-    {{-- <script>
-      // Variables
-      const restoreButton = document.getElementById('restoreButton');
-      const selectedRestoreIds = [];
-
-      // Restaurar seleccionados
-      restoreButton.addEventListener('click', () => {
-          if (selectedRestoreIds.length === 0) {
-              alert('No has seleccionado elementos para restaurar.');
-              return;
-          }
-
-          fetch('/usuarios/restaurar-todos', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken },
-              body: JSON.stringify({ ids: selectedRestoreIds }),
-          })
-              .then((response) => response.json())
-              .then((data) => {
-                  alert(data.message);
-                  // Actualizar tabla o recargar página
-              })
-              .catch((error) => console.error(error));
-      });
-    </script> --}}
   @endpush
 </x-app-layout>

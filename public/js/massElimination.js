@@ -1,87 +1,88 @@
-const actionModal = document.getElementById('actionModal');
-const modalTitle = document.getElementById('modalTitle');
-const modalMessage = document.getElementById('modalMessage');
-const cancelButton = document.getElementById('cancelButton');
-const confirmButton = document.getElementById('confirmButton');
+document.addEventListener('DOMContentLoaded', () => {
+  const actionModal = document.getElementById('actionModal');
+  const modalForm = document.getElementById('modalForm');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalMessage = document.getElementById('modalMessage');
 
-// IDs seleccionados para las acciones masivas
-let selectedIds = [];
-let currentAction = ''; // Puede ser 'delete', 'restore', 'forceDelete'
+  // Vincular eventos a los botones con data-action
+  document.querySelectorAll('[data-action]').forEach(button => {
+    button.addEventListener('click', () => {
+      console.log('Botón clickeado:', button);
 
-// Función para mostrar el modal
-function showModal(action, ids) {
-  currentAction = action;
-  selectedIds = ids;
+      const actionUrl = button.dataset.action;
+      const method = button.dataset.method || 'POST';
+      const title = button.dataset.title || 'Confirmación';
+      const message = button.dataset.message || '¿Estás segura de realizar esta acción?';
 
-  // Configurar el contenido del modal según la acción
-  switch (action) {
-    case 'massDestroy':
-      modalTitle.textContent = 'Eliminar registros';
-      modalMessage.textContent = '¿Estás seguro de que deseas eliminar los registros seleccionados?';
-      confirmButton.classList.replace('bg-red-500', 'bg-yellow-500');
-      confirmButton.textContent = 'Eliminar';
-      break;
-    case 'restoreAll':
-      modalTitle.textContent = 'Restaurar registros';
-      modalMessage.textContent = '¿Deseas restaurar los registros seleccionados?';
-      confirmButton.classList.replace('bg-yellow-500', 'bg-green-500');
-      confirmButton.textContent = 'Restaurar';
-      break;
-    /* case 'forceDelete':
-        modalTitle.textContent = 'Eliminar permanentemente';
-        modalMessage.textContent = '¿Estás seguro de que deseas eliminar permanentemente estos registros? Esta acción no se puede deshacer.';
-        confirmButton.classList.replace('bg-green-500', 'bg-red-500');
-        confirmButton.textContent = 'Eliminar permanentemente';
-        break; */
-    default:
-      return;
+      // Mostrar el modal con la información configurada
+      showModal({ title, message, actionUrl, method });
+    });
+  });
+
+  // Función para mostrar el modal
+  function showModal({ title, message, actionUrl, method }) {
+    console.log('Mostrando modal con:', { title, message, actionUrl, method });
+
+    // Actualizar contenido del modal
+    modalTitle.textContent = title;
+    modalMessage.textContent = message;
+    modalForm.action = actionUrl;
+    modalForm.querySelector('[name="_method"]').value = method;
+
+    actionModal.classList.remove('hidden');
+    actionModal.classList.add('flex');
   }
 
-  actionModal.classList.remove('hidden');
-  actionModal.classList.add('flex');
-}
+  // Cerrar el modal al cancelar
+  document.getElementById('modalCancelButton').addEventListener('click', () => {
+    actionModal.classList.remove('flex');
+    actionModal.classList.add('hidden');
+  });
 
-// Función para ocultar el modal
-function hideModal() {
-  actionModal.classList.add('hidden');
-  actionModal.classList.remove('flex');
-  currentAction = '';
-  selectedIds = [];
-}
 
-// Configurar botones del modal
-cancelButton.addEventListener('click', hideModal);
-confirmButton.addEventListener('click', () => {
-  executeAction(currentAction, selectedIds);
-  hideModal();
+
+  // Buscar todos los botones con data-action
+  /* const buttons = document.querySelectorAll('[data-action]');
+  console.log('Botones encontrados:', buttons);
+
+  buttons.forEach(button => {
+    // Log para verificar cada botón
+    console.log('Configurando evento para botón:', button);
+
+    // Agregar evento click
+    button.addEventListener('click', () => {
+      console.log('¡Se hizo clic en el botón!', button);
+
+      // Extraer atributos del botón
+      const actionUrl = button.dataset.action;
+      const method = button.dataset.method || 'POST';
+      const title = button.dataset.title || '¿Estás segura?';
+      const message = button.dataset.message || 'Esta acción no se puede deshacer.';
+
+      // Mostrar datos en la consola
+      console.log('Datos del botón:', { actionUrl, method, title, message });
+
+      // Aquí se llamaría la función que abre el modal
+      showModal({ title, message, actionUrl, method });
+    });
+  });
+
+  function showModal({ title, message, actionUrl, method }) {
+    console.log('Mostrando modal con:', { title, message, actionUrl, method });
+
+    const actionModal = document.getElementById('actionModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalMessage = document.getElementById('modalMessage');
+    const modalForm = document.getElementById('modalForm');
+
+    // Actualizar contenido del modal
+    modalTitle.textContent = title;
+    modalMessage.textContent = message;
+    modalForm.action = actionUrl;
+    modalForm.method = method;
+
+    // Mostrar modal
+    actionModal.classList.remove('hidden');
+    actionModal.classList.add('flex');
+  } */
 });
-
-// Función para ejecutar la acción seleccionada
-function executeAction(action, ids) {
-  console.log(`Acción: ${action}, IDs: ${ids}`);
-  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-  // URL base para las acciones de eliminación, restauración y eliminación permanente
-  const urlMap = {
-    massDestroy: '/usuarios/eliminar-en-masa',
-    restoreAll: '/usuarios/restaurar-todos',
-    // forceDelete: '/',
-  };
-
-  fetch(urlMap[action], {
-    method: action === 'restoreAll' ? 'POST' : 'DELETE',
-    headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken },
-    body: JSON.stringify({ ids }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      alert(data.message);
-      // Recargar o actualizar tabla
-    })
-    .catch((error) => console.error(error));
-}
-
-function getSelectedIds() {
-  const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-  return Array.from(checkboxes).map((checkbox) => checkbox.value);
-}
