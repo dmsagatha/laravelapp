@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Actualizar la visibilidad de los botones
   const updateDeleteButtonVisibility = () => {
     const anyChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+    console.log('¿Hay algún checkbox marcado?', anyChecked);
 
     if (anyChecked) {
       actionButtons.classList.remove('hidden');
