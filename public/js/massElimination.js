@@ -10,10 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const checkboxes = document.querySelectorAll('.itemCheckbox'); // Checkboxes individuales
 
   const deleteButton = document.getElementById('deleteButton');
+  const deleteButtonText = document.getElementById('deleteButtonText'); // Contenedor del texto dinámico
 
   // Actualizar la visibilidad de los botones
   const updateDeleteButtonVisibility = () => {
-    const anyChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+    const anyChecked = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
+    deleteButtonText.textContent = `seleccionados (${anyChecked})`;
     console.log('¿Hay algún checkbox marcado?', anyChecked);
 
     if (anyChecked) {
