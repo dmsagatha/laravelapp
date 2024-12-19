@@ -13,7 +13,9 @@
       Eliminación masiva de Usuarios
     </h1>
     
-    <div id="notification" class="hidden fixed top-32 right-5 z-50 bg-green-500 text-slate-50 dark:text-slate-800 text-sm rounded-md px-4 py-2 shadow-lg transition-opacity duration-1000"></div>
+    {{-- <div id="notification" class="hidden fixed top-32 right-5 z-50 bg-green-500 text-slate-50 dark:text-slate-800 text-sm rounded-md px-4 py-2 shadow-lg transition-opacity duration-1000"></div> --}}
+    <!-- Contenedor de notificaciones -->
+    <div id="notificationContainer" class="fixed top-4 right-4 space-y-4 z-50"></div>
 
     <div class="flex float-left px-1 py-3 space-x-1 text-slate-800 dark:text-slate-50 flex-wrap"></div>
 

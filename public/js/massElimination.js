@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
       checkboxes.forEach(checkbox => {
         checkbox.checked = selectAllCheckbox.checked;
       });
-      
+
       updateDeleteButtonVisibility();
     });
   }
@@ -136,4 +136,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateDeleteButtonVisibility();
   });
+
+  // Función para mostrar notificaciones
+  function showNotification(message, type = 'success', duration = 3000) {
+    const notificationContainer = document.getElementById('notificationContainer');
+
+    // Crear el elemento de notificación
+    const notification = document.createElement('div');
+    notification.className = `px-4 py-2 rounded shadow-lg transition-all duration-500 ${type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+      }`;
+
+    notification.textContent = message;
+
+    // Agregar la notificación al contenedor
+    notificationContainer.appendChild(notification);
+
+    // Eliminar la notificación después del tiempo configurado
+    setTimeout(() => {
+      notification.style.opacity = '0';
+      setTimeout(() => notification.remove(), 500); // Esperar el final de la transición
+    }, 5000); // Usa el mismo tiempo para todas las notificaciones
+  };
+
+
+  // Notificación al confirmar
+  modalForm.addEventListener('submit', (event) => {
+    showNotification('La eliminación fue confirmada.', 'success', 6000); // Duración: 3 segundos
+  });
+
+  // Notificación al cancelar
+  modalCancelButton.addEventListener('click', () => {
+    showNotification('La eliminación fue cancelada.', 'error', 3000); // Duración: 3 segundos
+  });
+
+  /* function showNotification({ type, message }) {
+    const notification = document.createElement('div');
+    notification.classList.add('notification', `is-${type}`);
+    notification.textContent = message;
+
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+      notification.remove();
+    }, 5000);
+  } */
 });
