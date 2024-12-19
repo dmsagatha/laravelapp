@@ -25,32 +25,16 @@ class UserController extends Controller
 
   public function massDestroy(Request $request)
   {
-    /* $ids = $request->input('ids', []);
-
-    if (!empty($ids)) {
-      User::whereIn('id', explode(",", $ids))->delete();
-
-      return redirect()->back()->with('status', 'Usuarios eliminados exitosamente.');
-    }
-
-    return back()->withInput()->withErrors(['ids' => 'No se seleccionó ningún usuario.']); */
-
     $ids = json_decode($request->input('ids'), true);
 
     // Validar que se reciban IDs
     if (!is_array($ids) || empty($ids)) {
-        return redirect()->back()->withErrors(['message' => 'No se seleccionaron elementos para eliminar.']);
+      return redirect()->back()->withErrors(['message' => 'No se seleccionaron elementos para eliminar.']);
     }
-
-    // Eliminar los usuarios seleccionados
+    
     User::whereIn('id', $ids)->delete();
 
     return redirect()->back()->with('status', 'Usuarios eliminados exitosamente.');
-
-    /* $ids = $request->input('ids');
-    User::whereIn('id', $ids)->delete();
-
-    return redirect()->back()->with('status', 'Usuarios eliminados exitosamente.'); */
   }
 
   public function restoreAll(Request $request)
