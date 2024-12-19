@@ -36,7 +36,7 @@
                 <th>Nombre</th>
                 <th>Correo Electrónico</th>
                 <th>País</th>
-                <th>Dirección</th>
+                <th>Profesión</th>
               </tr>
             </thead>
             <tbody>
@@ -46,7 +46,7 @@
                   <th>{{ $item->name }}</th>
                   <td>{{ $item->email }}</td>
                   <th>{{ $item->country }}</th>
-                  <td>{{ $item->address }}</td>
+                  <td>{{ $item->jobTitle }}</td>
                   <td>
                     <a href="#"
                       class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
@@ -62,7 +62,7 @@
                 <th>Nombre</th>
                 <th>Correo Electrónico</th>
                 <th>País</th>
-                <th>Dirección</th>
+                <th>Profesión</th>
                 <th>Acciones</th>
               </tr>
             </tfoot>
