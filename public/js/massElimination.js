@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
       checkboxes.forEach(checkbox => {
         checkbox.checked = selectAllCheckbox.checked;
       });
+      
       updateDeleteButtonVisibility();
     });
   }
