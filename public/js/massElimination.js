@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Crear el elemento de notificación
     const notification = document.createElement('div');
-    notification.className = `px-4 py-2 rounded shadow-lg transition-all duration-500 ${type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+    notification.className = `px-4 py-2 rounded shadow-lg transition-all duration-500 ${type === 'success' ? 'bg-green-500 text-slate-50' : 'bg-red-500 text-slate-50'
       }`;
 
     notification.textContent = message;
