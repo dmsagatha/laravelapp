@@ -12,6 +12,16 @@
     <h1 class="flex justify-center font-sans font-bold break-normal py-3 text-xl md:text-2xl text-slate-600 dark:text-slate-300">
       Eliminación masiva de Usuarios
     </h1>
+      
+    {{-- Mensaje de éxito --}}
+    {{-- @if (session()->has('status'))
+      <div class="flex items-center bg-green-500 text-white text-sm font-bold px-4 py-3 mb-3 rounded" role="alert">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+        <p>{{ session('status') }}</p>
+      </div>
+    @endif --}}
     
     {{-- <div id="notification" class="hidden fixed top-32 right-5 z-50 bg-green-500 text-slate-50 dark:text-slate-800 text-sm rounded-md px-4 py-2 shadow-lg transition-opacity duration-1000"></div> --}}
     <!-- Contenedor de notificaciones -->

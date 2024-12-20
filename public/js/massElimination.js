@@ -158,10 +158,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 5000); // Usa el mismo tiempo para todas las notificaciones
   };
 
-
   // Notificación al confirmar
   modalForm.addEventListener('submit', (event) => {
-    showNotification('La eliminación fue confirmada.', 'success', 6000); // Duración: 3 segundos
+    showNotification('La eliminación fue confirmada.', 'success', 10000); // Duración: 3 segundos
   });
 
   // Notificación al cancelar
