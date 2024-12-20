@@ -21,7 +21,11 @@
       <tr>
         <td class="text-center">{{ $key + 1 }}</td>
         <td class="text-center">
-          <input type="checkbox" class="recordCheckbox w-4 h-4 text-blue-600 bg-slate-50 border-slate-400 rounded cursor-pointer focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-slate-800 focus:ring-2 dark:bg-slate-100 dark:border-blue-800 focus:outline-none" value="{{ $item->id }}">
+          @if ($view == 'index')
+            <input type="checkbox" class="itemCheckbox w-4 h-4 text-blue-600 bg-slate-50 border-slate-400 rounded cursor-pointer focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-slate-800 focus:ring-2 dark:bg-slate-100 dark:border-blue-800 focus:outline-none" value="{{ $item->id }}">
+          @else
+            <input type="checkbox" id="selectAllRestore" class="w-4 h-4">Restaurar
+          @endif
         </td>
         </td>
         <th>{{ $item->name }}</th>

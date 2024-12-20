@@ -16,38 +16,53 @@ class UserController extends Controller
       })
       ->orderBy('name')
       ->get();
-
+    
     return view('admin.users.index', [
-      'view'  => $request->routeIs('admin.users.trashed') ? 'trashed' : 'index',
-      'users' => $users,
+      'view'  => $request->routeIs('users.trashed') ? 'trashed' : 'index',
+      'users' => $users
     ]);
   }
 
   public function massDestroy(Request $request)
   {
-    /* $ids = $request->ids;
-    User::whereIn('id', explode(',', $ids))->delete();
+    $ids = json_decode($request->input('ids'), true);
 
-    return back()->withStatus('Usuarios eliminados exitosamente.'); */
+    // Validar que se reciban IDs
+    if (!is_array($ids) || empty($ids)) {
+      return redirect()->back()->withErrors(['message' => 'No se seleccionaron elementos para eliminar.']);
+    }
+    
+    User::whereIn('id', $ids)->delete();
 
-    $ids = $request->input('ids', []);
+    return redirect()->back()->with('status', 'Usuarios eliminados exitosamente.');
+  }
 
-    if (!empty($ids)) {
-      User::whereIn('id', explode(",", $ids))->delete();
+  public function restoreAll(Request $request)
+  {
+    $ids = $request->input('ids'); // Recibe los IDs a restaurar
 
-      return back()->with('status', 'Usuarios eliminados exitosamente.');
+    if (!$ids) {
+      return response()->json(['message' => 'No se seleccionaron elementos para restaurar.'], 400);
     }
 
-    return back()->withInput()->withErrors(['ids' => 'No se seleccionó ningún usuario.']);
+    // User::withTrashed()->whereIn('id', $ids)->restore();
+    User::onlyTrashed()->whereIn('id', $ids)->restore();
 
-    /* $validated = $request->validate([
-      'selected_records' => 'required|array',
-      'selected_records.*' => 'integer|exists:users,id',
-    ]);
+    return response()->json(['message' => 'Elementos restaurados con éxito.']);
 
-    User::whereIn('id', $validated['selected_records'])->delete();
+    /* User::onlyTrashed()->restore();
 
-    return redirect()->route('users.index')->with('success', 'Registros eliminados exitosamente.'); */
+    Session()->flash('statusCode', 'info');
+
+    return to_route('admin.users.index')->withStatus('Todos los registro fueron restaurados exitosamente!.'); */
+  }
+
+  public function massForceDestroy(Request $request)
+  {
+    $ids = $request->input('ids');
+    User::onlyTrashed()->whereIn('id', $ids)->forceDelete();
+    
+    return redirect()->back()->with('success', 'Registros eliminados definitivamente.');
   }
 
   // Selección múltiple
@@ -101,29 +116,5 @@ class UserController extends Controller
     $users = User::orderBy('name')->get();
     
     return view('admin.users.dttheme', compact('users'));
-  }
-  
-  public function create()
-  {
-  }
-  
-  public function store(Request $request)
-  {
-  }
-  
-  public function show(User $user)
-  {
-  }
-  
-  public function edit(User $user)
-  {
-  }
-  
-  public function update(Request $request, User $user)
-  {
-  }
-  
-  public function destroy(User $user)
-  {
   }
 }
