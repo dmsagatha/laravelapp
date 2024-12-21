@@ -34,7 +34,11 @@ class UserController extends Controller
     
     User::whereIn('id', $ids)->delete();
 
-    return redirect()->back()->with('status', 'Usuarios eliminados exitosamente.');
+    // return redirect()->back()->with('status', 'Usuarios eliminados exitosamente.');
+    return redirect()->back()->with([
+      'type'    => 'success',
+      'message' => 'Registros seleccionados eliminados exitosamente.'
+    ]);
   }
 
   public function restoreAll(Request $request)
