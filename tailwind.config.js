@@ -1,6 +1,7 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
 import { info } from 'autoprefixer';
+const colors = require('tailwindcss/colors')
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -13,10 +14,10 @@ export default {
   ],
 
   darkMode: 'class',    // Laravel Breeze: [7] Cambiador de temas
-
+  
   theme: {
     extend: {
-      colors: { 
+      colors: {
         success: {
           100: '#d1e7dd',
           200: '#a3cfbb',
@@ -63,16 +64,9 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-      },
-      animation: {
-        spin: 'spin 1s linear infinite',
-      },
-      keyframes: {
-        spin: {
-          from: { transform: 'rotate(0deg)' },
-          to: { transform: 'rotate(360deg)' },
-        },
+        sans: ['Poppins', 'sans-serif', ...defaultTheme.fontFamily.sans],
+        display: ['Poppins', 'sans-serif'],
+        body: ['Poppins', 'sans-serif']
       },
     },
   },

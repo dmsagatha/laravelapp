@@ -34,9 +34,9 @@
     <x-alert :type="$type" :message="$message" /> --}}
 
     @if(session('message'))
-      <x-alert :type="session('type')" :message="session('message')" />
+      {{-- <x-alert :type="session('type')" :message="session('message')" /> --}}
+      <x-alert :type="session('type')" :message="session('message')" position="top-right" />
     @endif
-
 
     {{-- <x-alert type="success" :message="$errorMessage" class="mb-4 border-2 border-green-700" /> --}}
     
