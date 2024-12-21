@@ -33,13 +33,55 @@
     <x-alert :type="session('type')" :message="session('message')" /> --}}
     <x-alert :type="session('type')" :message="session('message')" position="top-right" />
     @endif
-    
 
-    <div class="relative text-sm font-medium leading-6">
+    {{-- <div class="relative text-sm font-medium leading-6">
       <div class="absolute -top-14 right-0 bg-purple-500 shadow-lg rounded-lg p-2 text-white dark:bg-sky-500">
         Absolute child
       </div>
+    </div> --}}
+
+    <div class="relative text-sm font-medium leading-6">
+      <div class="absolute -top-14 right-0 w-full max-w-sm bg-white shadow-[0.8rem_1rem_0.5rem_rgba(0,0,0,0.1)] rounded-lg">
+        <div class="flex items-center justify-between p-2">
+          <div class="text-green-500 text-2xl">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10s10-4.5 10-10S17.5 2 12 2m-2 15l-5-5l1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9Z" />
+            </svg>
+          </div>
+          <h2 class="text-sm text-green-500 font-semibold">
+            Your object was successfully created
+          </h2>
+          <div class="close">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-7 rounded cursor-pointer feather feather-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </div>
+        </div>
+      </div>
     </div>
+
+    {{-- <div id="root" class="flex flex-col items-center gap-10 w-full px-3 sm:px-0">
+      <div class="w-full max-w-md bg-white shadow-[0.8rem_1rem_0.5rem_rgba(0,0,0,0.1)]">
+        <div class="flex items-center justify-between px-4 py-4 gap-2">
+          <div class="text-green-500 text-2xl"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+              viewBox="0 0 24 24">
+              <path fill="currentColor"
+                d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10s10-4.5 10-10S17.5 2 12 2m-2 15l-5-5l1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9Z" />
+            </svg></div>
+          <h2 class="text-sm text-green-500 font-semibold">Your object was successfully created</h2>
+          <div class="close">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-8 rounded cursor-pointer" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="feather feather-x">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div> --}}
+
 
     {{-- <div class="flex float-left px-1 py-3 space-x-1 text-slate-800 dark:text-slate-50 flex-wrap"></div> --}}
 
