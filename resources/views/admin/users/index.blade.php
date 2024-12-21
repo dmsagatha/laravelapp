@@ -26,19 +26,10 @@
     <!-- Contenedor de notificaciones -->
     <div id="notificationContainer" class="fixed top-32 right-4 space-y-4 z-50"></div>
 
-    {{-- <x-alert type="success" message="¡Este es un mensaje de éxito!" class="mb-4 border-2 border-green-700" />
-    <x-alert type="error" message="¡Este es un mensaje de error!" class="mb-4 border-2 border-red-700" />
-    <x-alert type="info" message="¡Este es un mensaje informativo!" class="mb-4 border-2 border-blue-700" /> --}}
-    {{-- <x-alert type="warning" message="¡Este es un mensaje de advertencia!" /> --}}
-    {{-- <x-alert type="success" message="¡Este es un mensaje de éxito!" class="mb-4 border-2 border-green-700" />
-    <x-alert :type="$type" :message="$message" /> --}}
-
     @if(session('message'))
       {{-- <x-alert :type="session('type')" :message="session('message')" /> --}}
       <x-alert :type="session('type')" :message="session('message')" position="top-right" />
     @endif
-
-    {{-- <x-alert type="success" :message="$errorMessage" class="mb-4 border-2 border-green-700" /> --}}
     
     {{-- <div class="flex float-left px-1 py-3 space-x-1 text-slate-800 dark:text-slate-50 flex-wrap"></div> --}}
 
@@ -132,4 +123,7 @@
   </div>
 
   @include('partials.dataTables')
+
+  @push('scripts')
+  @endpush
 </x-app-layout>
