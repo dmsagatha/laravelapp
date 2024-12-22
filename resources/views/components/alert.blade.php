@@ -4,11 +4,11 @@
   $dismissible = filter_var($dismissible, FILTER_VALIDATE_BOOLEAN);
   $typeClasses =
       [
-        'success' => 'text-blue-800 bg-blue-100 dark:bg-gray-800 dark:text-blue-400 border border-blue-300',
-        'danger' => 'text-red-800 bg-red-100 dark:bg-gray-800 dark:text-red-400 border border-red-300',
-        'info' => 'text-sky-800 bg-sky-100 dark:bg-gray-800 dark:text-sky-400 border border-sky-300',
-        'warning' => 'text-yellow-800 bg-yellow-100 dark:bg-gray-800 dark:text-yellow-400 border border-yellow-300',
-      ][$type] ?? 'text-sky-800 bg-sky-100 dark:bg-gray-800 dark:text-sky-400 border border-sky-300';
+        'success' => 'text-success-800 bg-success-100 dark:bg-gray-800 dark:text-success-400 border border-success-300',
+        'info' => 'text-info-800 bg-info-100 dark:bg-gray-800 dark:text-info-400 border border-info-300',
+        'warning' => 'text-warning-800 bg-warning-100 dark:bg-gray-800 dark:text-warning-400 border border-warning-300',
+        'danger' => 'text-danger-800 bg-danger-100 dark:bg-gray-800 dark:text-danger-400 border border-danger-300',
+      ][$type] ?? 'text-info-800 bg-info-100 dark:bg-gray-800 dark:text-info-400 border border-info-300';
 @endphp
 
 {{-- <div x-data="{ open: true }" x-show="open" x-transition.duration.300ms
