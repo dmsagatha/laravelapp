@@ -4,10 +4,10 @@
   $dismissible = filter_var($dismissible, FILTER_VALIDATE_BOOLEAN);
   $typeClasses =
       [
-          'success' => 'text-blue-800 bg-blue-100 dark:bg-gray-800 dark:text-blue-400 border border-blue-300',
-          'danger' => 'text-red-800 bg-red-100 dark:bg-gray-800 dark:text-red-400 border border-red-300',
-          'info' => 'text-sky-800 bg-sky-100 dark:bg-gray-800 dark:text-sky-400 border border-sky-300',
-          'warning' => 'text-yellow-800 bg-yellow-100 dark:bg-gray-800 dark:text-yellow-400 border border-yellow-300',
+        'success' => 'text-blue-800 bg-blue-100 dark:bg-gray-800 dark:text-blue-400 border border-blue-300',
+        'danger' => 'text-red-800 bg-red-100 dark:bg-gray-800 dark:text-red-400 border border-red-300',
+        'info' => 'text-sky-800 bg-sky-100 dark:bg-gray-800 dark:text-sky-400 border border-sky-300',
+        'warning' => 'text-yellow-800 bg-yellow-100 dark:bg-gray-800 dark:text-yellow-400 border border-yellow-300',
       ][$type] ?? 'text-sky-800 bg-sky-100 dark:bg-gray-800 dark:text-sky-400 border border-sky-300';
 @endphp
 
@@ -62,3 +62,33 @@
     </button>
   @endif
 </div>
+
+
+<!-- Contenedor de alertas -->
+{{-- <div class="relative text-sm font-medium leading-6">
+    <div
+    class="absolute -top-14 right-0 w-full max-w-sm shadow-[0.8rem_1rem_0.5rem_rgba(0,0,0,0.1)] bg-white rounded-lg">
+    <!-- Icono de marca de verificación -->
+    <div class="flex items-center justify-between p-2">
+        <div class="text-green-500 text-2xl">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+            <path fill="currentColor"
+            d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10s10-4.5 10-10S17.5 2 12 2m-2 15l-5-5l1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9Z" />
+        </svg>
+        </div>
+        <!-- Mensaje de alerta -->
+        <h2 class="text-sm text-green-500 font-semibold">
+        Your object was successfully created
+        </h2>
+        <!-- Icono de cerrar -->
+        <div class="close">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-7 rounded cursor-pointer feather feather-x"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+        </div>
+    </div>
+    </div>
+</div> --}}
