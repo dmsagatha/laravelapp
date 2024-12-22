@@ -26,7 +26,7 @@
     @endif --}}
 
     <!-- Contenedor de notificaciones -->
-    <div id="notificationContainer" class="fixed top-32 right-4 space-y-4 z-50"></div>
+    {{-- <div id="notificationContainer" class="fixed top-32 right-4 space-y-4 z-50"></div> --}}
 
     @if(session('message'))
     {{--
