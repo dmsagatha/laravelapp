@@ -37,8 +37,8 @@ class UserController extends Controller
 
     // return redirect()->back()->with('status', 'Usuarios eliminados exitosamente.');
     return redirect()->back()->with([
-      'type'    => 'danger',
-      'message' => 'Registros seleccionados eliminados exitosamente.'
+      'type'    => 'success',
+      'message' => 'Registros eliminados exitosamente.'
     ]);
   }
 
