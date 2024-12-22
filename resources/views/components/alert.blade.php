@@ -3,11 +3,9 @@
 @php
   $typeClasses =
     [
-        'success' =>
-            'text-success-800 bg-success-100 dark:bg-gray-800 dark:text-success-400 border border-success-300',
+        'success' => 'text-success-800 bg-success-100 dark:bg-gray-800 dark:text-success-400 border border-success-300',
         'info' => 'text-info-800 bg-info-100 dark:bg-gray-800 dark:text-info-400 border border-info-300',
-        'warning' =>
-            'text-warning-800 bg-warning-100 dark:bg-gray-800 dark:text-warning-400 border border-warning-300',
+        'warning' => 'text-warning-800 bg-warning-100 dark:bg-gray-800 dark:text-warning-400 border border-warning-300',
         'danger' => 'text-danger-800 bg-danger-100 dark:bg-gray-800 dark:text-danger-400 border border-danger-300',
     ][$type] ?? 'text-info-800 bg-info-100 dark:bg-gray-800 dark:text-info-400 border border-info-300';
 @endphp
