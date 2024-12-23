@@ -14,6 +14,7 @@ class UserController extends Controller
       ->when(request()->routeIs('users.trashed'), function ($q) {
         $q->onlyTrashed();
       })
+      ->where('email', '!=', 'superadmin@admin.net')
       ->orderBy('name')
       ->get();
     
@@ -34,7 +35,11 @@ class UserController extends Controller
     
     User::whereIn('id', $ids)->delete();
 
-    return redirect()->back()->with('status', 'Usuarios eliminados exitosamente.');
+    // return redirect()->back()->with('status', 'Usuarios eliminados exitosamente.');
+    return redirect()->back()->with([
+      'type'    => 'success',
+      'message' => 'Registros eliminados exitosamente.'
+    ]);
   }
 
   public function restoreAll(Request $request)
