@@ -34,14 +34,32 @@
   
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Seleccionar y deseleccionar todos los checkboxes
+        // Seleccionar todos los checkboxes
         const selectAllCheckbox = document.getElementById('select-all');
+        const recordCheckboxes = document.querySelectorAll('.record-checkbox');
+        const actionsDiv = document.getElementById('actions');
+        const selectedCount = document.getElementById('selected-count');
+        const cancelButton = document.getElementById('cancel-button');
+
         if (selectAllCheckbox) {
             selectAllCheckbox.addEventListener('click', function(event) {
-                const checkboxes = document.querySelectorAll('.record-checkbox');
-                checkboxes.forEach(checkbox => checkbox.checked = event.target.checked);
+                recordCheckboxes.forEach(checkbox => checkbox.checked = event.target.checked);
+                updateActions();
             });
         }
+
+        // Actualizar el contador y la visibilidad de los botones
+        function updateActions() {
+            const checkedCheckboxes = document.querySelectorAll('.record-checkbox:checked');
+            const count = checkedCheckboxes.length;
+            selectedCount.innerText = `${count} elementos seleccionados`;
+            actionsDiv.classList.toggle('hidden', count === 0);
+        }
+
+        // Asignar eventos a los checkboxes individuales
+        recordCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('click', updateActions);
+        });
 
         // Mostrar modal
         function showModal(action, url) {
@@ -96,10 +114,12 @@
         }
 
         // Cancelar modal
-        const cancelButton = document.getElementById('cancel-button');
         if (cancelButton) {
             cancelButton.addEventListener('click', () => {
                 document.getElementById('modal').classList.add('hidden');
+                recordCheckboxes.forEach(checkbox => checkbox.checked = false);
+                selectAllCheckbox.checked = false;
+                updateActions();
             });
         }
     });

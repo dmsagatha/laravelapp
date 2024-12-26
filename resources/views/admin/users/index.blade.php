@@ -32,6 +32,7 @@
     @endif
 
     <div class="flex float-left px-1 py-3 space-x-1 text-slate-800 dark:text-slate-50 flex-wrap">
+      {{-- Eliminación masiva --}}
       @if ($view == 'index')
         <!-- Botones de acción -->
         <div id="actionButtons" class="hidden space-x-2 mt-2">
@@ -45,7 +46,12 @@
       
 
         <!-- Botones para las acciones -->
-        <button id="delete-button" data-action="{{ route('users.delete.records') }}" class="bg-red-500 text-white px-4 py-2">Eliminar</button>
+        <div id="actions" class="hidden mt-4">
+          <button id="delete-button" data-action="{{ route('users.delete.records') }}" class="bg-red-500 text-white px-4 py-2">
+            Eliminar
+            <span id="selected-count" class="mr-4">0 elementos seleccionados</span>
+          </button>
+        </div>
       @else
         <a href="{{ route('users.index') }}"
           class="relative inline-flex items-center justify-center text-blue-800 hover:text-slate-50 border border-blue-500 hover:bg-blue-700 focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg p-2 mr-2 mb-2 text-center text-sm dark:border-slate-500 dark:text-slate-400 dark:hover:text-slate-50 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
@@ -56,8 +62,11 @@
         </a>
 
         <!-- Botones de acción -->
-        <button id="restore-button" data-action="{{ route('users.restore.records') }}" class="bg-green-500 text-white px-4 py-2">Restaurar</button>
-        <button id="reset-button" data-action="{{ route('users.reset.records') }}" class="bg-blue-500 text-white px-4 py-2">Eliminar definitivamente</button>
+        <div id="actions" class="hidden mt-4">
+          <span id="selected-count" class="mr-4">0 elementos seleccionados</span>
+          <button id="restore-button" data-action="{{ route('users.restore.records') }}" class="bg-green-500 text-white px-4 py-2">Restaurar</button>
+          <button id="reset-button" data-action="{{ route('users.reset.records') }}" class="bg-blue-500 text-white px-4 py-2">Eliminar definitivamente</button>
+        </div>
 
         {{-- <div id="actionButtons" class="hidden space-x-2 mt-4">
           <button type="button" data-action="/usuarios/restaurar-todos" data-method="POST" data-title="Confirmar Restauración" data-message="¿Está seguro de que desea restaurar los registros seleccionados?" class="restoreButton bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
@@ -70,7 +79,7 @@
       @endif
     </div>
 
-    {{-- Eliminación masiva, Papelera --}}
+    {{-- Papelera --}}
     <div class="flex float-right px-0 py-3 space-x-0 text-slate-800">
       @if ($view == 'index')
         <a href="{{ route('users.trashed') }}"
