@@ -29,5 +29,79 @@
   </script>
 
   {{-- <script src="{{ asset('js/bulkDelete.js') }}"></script> --}}
-  <script src="{{ asset('js/massElimination.js') }}"></script>
+  {{-- <script src="{{ asset('js/massElimination.js') }}"></script> --}}
+
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Seleccionar y deseleccionar todos los checkboxes
+        const selectAllCheckbox = document.getElementById('select-all');
+        if (selectAllCheckbox) {
+            selectAllCheckbox.addEventListener('click', function(event) {
+                const checkboxes = document.querySelectorAll('.record-checkbox');
+                checkboxes.forEach(checkbox => checkbox.checked = event.target.checked);
+            });
+        }
+
+        // Mostrar modal
+        function showModal(action, url) {
+            document.getElementById('modal-title').innerText = action.charAt(0).toUpperCase() + action.slice(1);
+            document.getElementById('modal').classList.remove('hidden');
+            document.getElementById('confirm-button').onclick = function() { handleAction(action, url); };
+        }
+
+        // Manejar el envío de la acción
+        function handleAction(action, url) {
+            const selectedIds = Array.from(document.querySelectorAll('.record-checkbox:checked')).map(cb => cb.value);
+            if (!selectedIds.length) {
+                alert('Por favor, selecciona al menos un registro.');
+                return;
+            }
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({ ids: selectedIds })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                location.reload();
+            });
+        }
+
+        // Asignar eventos a los botones
+        const deleteButton = document.getElementById('delete-button');
+        if (deleteButton) {
+            deleteButton.addEventListener('click', function() {
+                showModal('delete', this.dataset.action);
+            });
+        }
+
+        const restoreButton = document.getElementById('restore-button');
+        if (restoreButton) {
+            restoreButton.addEventListener('click', function() {
+                showModal('restore', this.dataset.action);
+            });
+        }
+
+        const resetButton = document.getElementById('reset-button');
+        if (resetButton) {
+            resetButton.addEventListener('click', function() {
+                showModal('reset', this.dataset.action);
+            });
+        }
+
+        // Cancelar modal
+        const cancelButton = document.getElementById('cancel-button');
+        if (cancelButton) {
+            cancelButton.addEventListener('click', () => {
+                document.getElementById('modal').classList.add('hidden');
+            });
+        }
+    });
+</script>
 @endpush

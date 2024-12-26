@@ -42,6 +42,10 @@
             <span id="deleteButtonText"></span>
           </button>
         </div>
+      
+
+        <!-- Botones para las acciones -->
+        <button id="delete-button" data-action="{{ route('users.delete.records') }}" class="bg-red-500 text-white px-4 py-2">Eliminar</button>
       @else
         <a href="{{ route('users.index') }}"
           class="relative inline-flex items-center justify-center text-blue-800 hover:text-slate-50 border border-blue-500 hover:bg-blue-700 focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg p-2 mr-2 mb-2 text-center text-sm dark:border-slate-500 dark:text-slate-400 dark:hover:text-slate-50 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
@@ -50,15 +54,19 @@
           </svg>
           Regresar al listado
         </a>
+
         <!-- Botones de acción -->
-        <div id="actionButtons" class="hidden space-x-2 mt-4">
+        <button id="restore-button" data-action="{{ route('users.restore.records') }}" class="bg-green-500 text-white px-4 py-2">Restaurar</button>
+        <button id="reset-button" data-action="{{ route('users.reset.records') }}" class="bg-blue-500 text-white px-4 py-2">Eliminar definitivamente</button>
+
+        {{-- <div id="actionButtons" class="hidden space-x-2 mt-4">
           <button type="button" data-action="/usuarios/restaurar-todos" data-method="POST" data-title="Confirmar Restauración" data-message="¿Está seguro de que desea restaurar los registros seleccionados?" class="restoreButton bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
             Restaurar
           </button>
           <button data-action="/usuarios/forzar-eliminar" data-method="DELETE" data-title="Eliminar Definitivamente" data-message="¿Está seguro de que desea eliminar definitivamente los registros seleccionados?" class="forceDeleteButton bg-gray-800 text-white">
             Eliminar definitivamente
           </button>
-        </div>
+        </div> --}}
       @endif
     </div>
 
@@ -89,8 +97,20 @@
     </div>
   </div>
 
+  <!-- Modal -->
+    <div id="modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 justify-center items-center hidden">
+      <div class="bg-white p-4 rounded">
+          <h2 id="modal-title" class="text-lg font-bold mb-4"></h2>
+          <p>¿Estás seguro de que deseas realizar esta acción?</p>
+          <div class="flex justify-end mt-4">
+              <button id="confirm-button" class="bg-blue-500 text-white px-4 py-2 mr-2">Confirmar</button>
+              <button id="cancel-button" class="bg-gray-500 text-white px-4 py-2">Cancelar</button>
+          </div>
+      </div>
+  </div>
+
   <!-- Modal para confirmar o cancelar la eliminación masiva -->
-  <div id="actionModal"
+  {{-- <div id="actionModal"
     class="hidden fixed inset-0 z-10 justify-center items-center h-full w-full bg-black/50 transition-opacity duration-300 ease-in-out"
     role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
     <!-- Modal content -->
@@ -123,10 +143,7 @@
         </form>
       </div>
     </div>
-  </div>
+  </div> --}}
 
   @include('partials.dataTables')
-
-  @push('scripts')
-  @endpush
 </x-app-layout>

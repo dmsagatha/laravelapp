@@ -35,6 +35,10 @@ Route::group(['middleware' => ['auth', 'verified']], function ()
     Route::delete('eliminar-en-masa', 'massDestroy')->name('massDestroy');
     Route::post('restaurar-todos', 'restoreAll')->name('restoreAll');
     Route::delete('forzar-eliminar', 'massForceDestroy')->name('massForceDestroy');
+
+    Route::post('/delete-records', 'delete')->name('delete.records');
+    Route::post('/restore-records', 'restore')->name('restore.records');
+    Route::post('/reset-records', 'reset')->name('reset.records');
   });
 
   Route::resource('/usuarios', UserController::class)

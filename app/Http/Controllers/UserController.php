@@ -17,11 +17,31 @@ class UserController extends Controller
       ->where('email', '!=', 'superadmin@admin.net')
       ->orderBy('name')
       ->get();
-    
+
     return view('admin.users.index', [
       'view'  => $request->routeIs('users.trashed') ? 'trashed' : 'index',
       'users' => $users
     ]);
+  }
+  // Función para eliminar registros
+  public function delete(Request $request)
+  {
+    User::destroy($request->ids);
+    return response()->json(['message' => 'Registros eliminados exitosamente.']);
+  }
+
+  // Función para restaurar registros
+  public function restore(Request $request)
+  {
+    User::onlyTrashed()->whereIn('id', $request->ids)->restore();
+    return response()->json(['message' => 'Registros restaurados exitosamente.']);
+  }
+
+  // Función para restablecer registros
+  public function reset(Request $request)
+  {
+    User::whereIn('id', $request->ids)->forceDelete();
+    return response()->json(['message' => 'Registros restablecidos exitosamente.']);
   }
 
   public function massDestroy(Request $request)
@@ -32,7 +52,7 @@ class UserController extends Controller
     if (!is_array($ids) || empty($ids)) {
       return redirect()->back()->withErrors(['message' => 'No se seleccionaron elementos para eliminar.']);
     }
-    
+
     User::whereIn('id', $ids)->delete();
 
     // return redirect()->back()->with('status', 'Usuarios eliminados exitosamente.');
@@ -66,7 +86,7 @@ class UserController extends Controller
   {
     $ids = $request->input('ids');
     User::onlyTrashed()->whereIn('id', $ids)->forceDelete();
-    
+
     return redirect()->back()->with('success', 'Registros eliminados definitivamente.');
   }
 
@@ -74,7 +94,7 @@ class UserController extends Controller
   public function dataTablesJQ()
   {
     $users = User::orderBy('name')->get();
-    
+
     return view('admin.users.dataTablesJQ', compact('users'));
   }
 
@@ -82,29 +102,29 @@ class UserController extends Controller
   public function dtTailwindcss()
   {
     $users = User::orderBy('name')->get();
-    
+
     return view('admin.users.dtTailwindcss', compact('users'));
   }
 
   // DataTables y Filtros por número de columna
   public function dtFilters()
   {
-    $users = User::orderBy('name')->get();
+    $users       = User::orderBy('name')->get();
     $full_names  = $users->sortBy('name')->pluck('name')->unique();
     $countries   = $users->sortBy('country')->pluck('country')->unique();
     $professions = $users->sortBy('jobTitle')->pluck('jobTitle')->unique();
-    
+
     return view('admin.users.dtFilters', compact('users', 'full_names', 'countries', 'professions'));
   }
 
   // DataTables y Filtros por el elemento Id
   public function dtFiltersId()
   {
-    $users = User::orderBy('name')->get();
+    $users       = User::orderBy('name')->get();
     $full_names  = $users->sortBy('name')->pluck('name')->unique();
     $countries   = $users->sortBy('country')->pluck('country')->unique();
     $professions = $users->sortBy('jobTitle')->pluck('jobTitle')->unique();
-    
+
     return view('admin.users.dtFiltersId', compact('users', 'full_names', 'countries', 'professions'));
   }
 
@@ -112,14 +132,14 @@ class UserController extends Controller
   public function select2JQ()
   {
     $users = User::orderBy('name')->get();
-    
+
     return view('admin.users.select2JQ', compact('users'));
   }
 
   public function dttheme()
   {
     $users = User::orderBy('name')->get();
-    
+
     return view('admin.users.dttheme', compact('users'));
   }
 }
