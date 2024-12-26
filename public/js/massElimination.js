@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .map(checkbox => checkbox.value);
 
     if (selectedIds.length === 0) {
-      alert('Por favor, selecciona al menos un elemento para eliminar.');
+      alert('Por favor, seleccionar al menos un elemento para eliminar.');
       return;
     }
 
@@ -115,10 +115,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Cerrar el modal al cancelar
-  document.getElementById('modalCancelButton').addEventListener('click', () => {
+  /* document.getElementById('modalCancelButton').addEventListener('click', () => {
     actionModal.classList.remove('flex');
     actionModal.classList.add('hidden');
-  });
+  }); */
 
   // Cerrar el modal al cancelar
   modalCancelButton.addEventListener('click', () => {
