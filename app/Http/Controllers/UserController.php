@@ -27,7 +27,15 @@ class UserController extends Controller
   public function delete(Request $request)
   {
     User::destroy($request->ids);
-    return response()->json(['message' => 'Registros eliminados exitosamente.']);
+    // return response()->json(['message' => 'Registros eliminados exitosamente.']);
+    /* return response()->json([
+      'type'    => 'success',
+      'message' => 'Registros eliminados exitosamente.'
+    ]); */
+    return redirect()->back()->with([
+      'type'    => 'success',
+      'message' => 'Registros eliminados exitosamente.'
+    ]);
   }
 
   // Función para restaurar registros

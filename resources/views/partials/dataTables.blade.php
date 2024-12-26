@@ -84,10 +84,24 @@
                 },
                 body: JSON.stringify({ ids: selectedIds })
             })
-            .then(response => response.json())
+            .then(response => {
+                // Verificar si la respuesta es JSON
+                const contentType = response.headers.get('content-type');
+                if (contentType && contentType.indexOf('application/json') !== -1) {
+                    return response.json();
+                } else {
+                    throw new Error('Respuesta no es JSON');
+                }
+            })
             .then(data => {
+              // Aquí manejas los datos JSON de la respuesta
                 alert(data.message);
                 location.reload();
+            })
+            .catch(error => {
+                // Aquí manejas los errores
+                console.error('Error:', error);
+                alert('Ocurrió un error al procesar tu solicitud.');
             });
         }
 
@@ -124,4 +138,16 @@
         }
     });
 </script>
+
+
+{{-- <script>
+  document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+          const alert = document.getElementById('alert-message');
+          if (alert) {
+              alert.style.display = 'none';
+          }
+      }, 5000); // Ocultar después de 5 segundos
+  });
+</script> --}}
 @endpush

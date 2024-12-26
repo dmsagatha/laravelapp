@@ -28,7 +28,7 @@
     {{-- <div id="notificationContainer" class="fixed top-32 right-4 space-y-4 z-50"></div> --}}
 
     @if(session('message'))
-      <x-alert :type="session('type')" :message="session('message')" position="top-right" />
+      <x-alert :type="session('type')" :message="session('message')" />
     @endif
 
     <div class="flex float-left px-1 py-3 space-x-1 text-slate-800 dark:text-slate-50 flex-wrap">
