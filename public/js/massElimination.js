@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inicializar estado de los botones al cargar la página
   updateDeleteButtonVisibility();
 
-  // Conectaar el botón "Eliminar" con el modal
+  // Conectar el botón "Eliminar" con el modal
   deleteButton.addEventListener('click', () => {
     const actionUrl = deleteButton.dataset.action;
     const method = deleteButton.dataset.method || 'POST';
