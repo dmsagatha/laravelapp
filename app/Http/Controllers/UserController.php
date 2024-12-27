@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 
@@ -44,22 +45,18 @@ class UserController extends Controller
 
   public function massRestore(Request $request)
   {
-    $ids = $request->input('ids'); // Recibe los IDs a restaurar
+    $ids = json_decode($request->input('ids'), true);
 
-    if (!$ids) {
-      return response()->json(['message' => 'No se seleccionaron elementos para restaurar.'], 400);
+    if (!is_array($ids) || empty($ids)) {
+      return redirect()->back()->withErrors(['message' => 'No se seleccionaron elementos para restaurar.']);
     }
 
-    // User::withTrashed()->whereIn('id', $ids)->restore();
-    User::onlyTrashed()->whereIn('id', $ids)->restore();
+    DB::table('users')->whereIn('id', $ids)->update(['deleted_at' => null]);
 
-    return response()->json(['message' => 'Elementos restaurados con éxito.']);
-
-    /* User::onlyTrashed()->restore();
-
-    Session()->flash('statusCode', 'info');
-
-    return to_route('admin.users.index')->withStatus('Todos los registro fueron restaurados exitosamente!.'); */
+    return redirect()->back()->with([
+      'type'    => 'info',
+      'message' => 'Registros restaurados exitosamente.'
+    ]);
   }
 
   public function massForceDestroy(Request $request)
@@ -72,7 +69,10 @@ class UserController extends Controller
 
     User::whereIn('id', $ids)->forceDelete();
 
-    return redirect()->back()->with('success', 'Registros eliminados definitivamente.');
+    return redirect()->back()->with([
+      'type'    => 'danger',
+      'message' => 'Registros eliminados definitivamente.'
+    ]);
   }
 
   // Selección múltiple
