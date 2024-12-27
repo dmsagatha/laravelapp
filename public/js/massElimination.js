@@ -1,35 +1,45 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const actionModal = document.getElementById('actionModal');
-  const modalForm = document.getElementById('modalForm');
-  const modalTitle = document.getElementById('modalTitle');
-  const modalMessage = document.getElementById('modalMessage');
-  const modalCancelButton = document.getElementById('modalCancelButton');
-
-  const actionButtons = document.getElementById('actionButtons');
-  const selectAllCheckbox = document.getElementById('selectAll'); // Checkbox para seleccionar todos
+  // Referencias a los botones
+  const selectAllCheckbox = document.getElementById('selectAll');
   const checkboxes = document.querySelectorAll('.itemCheckbox'); // Checkboxes individuales
-
   const deleteButton = document.getElementById('deleteButton');
-  const deleteButtonText = document.getElementById('deleteButtonText'); // Contenedor del texto dinámico
+  const restoreButton = document.getElementById('restoreButton');
+  const forceDeleteButton = document.getElementById('forceDeleteButton');
 
-  // Actualizar la visibilidad de los botones
-  const updateDeleteButtonVisibility = () => {
-    const anyChecked = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
-    deleteButtonText.textContent = `seleccionados (${anyChecked})`;
-    console.log('¿Hay algún checkbox marcado?', anyChecked);
+  // Actualizar la visibilidad y texto de los botones dinámicamente
+  const updateButtonVisibility = () => {
+    const selectedCount = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
+    console.log('¿Hay algún checkbox marcado?', selectedCount);
 
-    if (anyChecked) {
-      actionButtons.classList.remove('hidden');
-      actionButtons.classList.add('flex');
-    } else {
-      actionButtons.classList.remove('flex');
-      actionButtons.classList.add('hidden');
+    // Actualizar texto y visibilidad de los botones
+    if (deleteButton) {
+      const deleteButtonText = document.getElementById('deleteButtonText');
+      if (deleteButtonText) {
+        deleteButtonText.textContent = `Eliminar seleccionados (${selectedCount})`;
+      }
+      deleteButton.classList.toggle('hidden', selectedCount === 0);
+    }
+
+    if (restoreButton) {
+      const restoreButtonText = document.getElementById('restoreButtonText');
+      if (restoreButtonText) {
+        restoreButtonText.textContent = `Restaurar seleccionados (${selectedCount})`;
+      }
+      restoreButton.classList.toggle('hidden', selectedCount === 0);
+    }
+
+    if (forceDeleteButton) {
+      const forceDeleteButtonText = document.getElementById('forceDeleteButtonText');
+      if (forceDeleteButtonText) {
+        forceDeleteButtonText.textContent = `Eliminar definitivamente (${selectedCount})`;
+      }
+      forceDeleteButton.classList.toggle('hidden', selectedCount === 0);
     }
   };
 
   // Evento: Actualizar al cambiar el estado de un checkbox
   checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', updateDeleteButtonVisibility);
+    checkbox.addEventListener('change', updateButtonVisibility);
   });
 
   // Evento: Seleccionar/deseleccionar todos los checkboxes
@@ -39,86 +49,75 @@ document.addEventListener('DOMContentLoaded', () => {
         checkbox.checked = selectAllCheckbox.checked;
       });
 
-      updateDeleteButtonVisibility();
+      updateButtonVisibility();
     });
   }
 
-  // Inicializar estado de los botones al cargar la página
-  updateDeleteButtonVisibility();
+  // Función para mostrar el modal
+  function showModal(actionType, actionUrl) {
+    const actionModal = document.getElementById('actionModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalMessage = document.getElementById('modalMessage');
+    const modalForm = document.getElementById('modalForm');
+    const selectedIdsInput = document.getElementById('selectedIds');
 
-  // Conectaar el botón "Eliminar" con el modal
-  deleteButton.addEventListener('click', () => {
-    const actionUrl = deleteButton.dataset.action;
-    const method = deleteButton.dataset.method || 'POST';
-    const title = deleteButton.dataset.title || 'Confirmación';
-    const message = deleteButton.dataset.message || '¿Estás segura de realizar esta acción?';
-
-    // Obtener los IDs seleccionados
     const selectedIds = Array.from(checkboxes)
       .filter(checkbox => checkbox.checked)
       .map(checkbox => checkbox.value);
 
     if (selectedIds.length === 0) {
-      alert('Por favor, seleccionar al menos un elemento para eliminar.');
+      alert('Por favor, selecciona al menos un registro para continuar.');
       return;
     }
 
-    // Actualizar el formulario del modal
-    modalTitle.textContent = title;
-    modalMessage.textContent = message;
-    modalForm.action = actionUrl;
-    modalForm.querySelector('[name="_method"]').value = method;
+    selectedIdsInput.value = JSON.stringify(selectedIds);
 
-    // Crear un input oculto para los IDs
-    let idsInput = modalForm.querySelector('input[name="ids"]');
+    const selectedCount = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
 
-    if (!idsInput) {
-      idsInput = document.createElement('input');
-      idsInput.type = 'hidden';
-      idsInput.name = 'ids';
-      modalForm.appendChild(idsInput);
+    if (!modalTitle || !modalMessage || !modalForm || !actionModal) {
+      console.error('Los elementos del modal no están en el DOM.');
+      return;
     }
-    idsInput.value = JSON.stringify(selectedIds);
 
-    // Mostrar el modal
-    actionModal.classList.remove('hidden');
-    actionModal.classList.add('flex');
-  });
+    const titles = {
+      delete: 'Confirmar eliminación',
+      restore: 'Confirmar restauración',
+      forceDelete: 'Eliminar permanentemente',
+    };
 
-  // Vincular eventos a los botones con data-action
-  document.querySelectorAll('[data-action]').forEach(button => {
-    button.addEventListener('click', () => {
-      console.log('Botón clickeado:', button);
+    const messages = {
+      delete: `¿Está seguro de que desea eliminar ${selectedCount} registros?`,
+      restore: `¿Está seguro de que desea restaurar ${selectedCount} registros?`,
+      forceDelete: `¿Está seguro de que desea eliminar permanentemente ${selectedCount} registros?`,
+    };
 
-      const actionUrl = button.dataset.action;
-      const method = button.dataset.method || 'POST';
-      const title = button.dataset.title || 'Confirmación';
-      const message = button.dataset.message || '¿Estás segura de realizar esta acción?';
-
-      // Mostrar el modal con la información configurada
-      showModal({ title, message, actionUrl, method });
-    });
-  });
-
-  // Función para mostrar el modal
-  function showModal({ title, message, actionUrl, method }) {
-    console.log('Mostrando modal con:', { title, message, actionUrl, method });
-
-    // Actualizar contenido del modal
-    modalTitle.textContent = title;
-    modalMessage.textContent = message;
+    modalTitle.textContent = titles[actionType];
+    modalMessage.textContent = messages[actionType];
     modalForm.action = actionUrl;
-    modalForm.querySelector('[name="_method"]').value = method;
+    modalForm.querySelector('[name="_method"]').value = actionType === 'restore' ? 'POST' : 'DELETE';
 
     actionModal.classList.remove('hidden');
     actionModal.classList.add('flex');
   }
 
-  // Cerrar el modal al cancelar
-  /* document.getElementById('modalCancelButton').addEventListener('click', () => {
-    actionModal.classList.remove('flex');
-    actionModal.classList.add('hidden');
-  }); */
+  // Asignar eventos a los botones que están presentes en el DOM
+  if (deleteButton) {
+    deleteButton.addEventListener('click', function () {
+      showModal('delete', this.dataset.action);
+    });
+  }
+
+  if (restoreButton) {
+    restoreButton.addEventListener('click', function () {
+      showModal('restore', this.dataset.action);
+    });
+  }
+
+  if (forceDeleteButton) {
+    forceDeleteButton.addEventListener('click', function () {
+      showModal('forceDelete', this.dataset.action);
+    });
+  }
 
   // Cerrar el modal al cancelar
   modalCancelButton.addEventListener('click', () => {
@@ -134,49 +133,9 @@ document.addEventListener('DOMContentLoaded', () => {
       selectAllCheckbox.checked = false;
     }
 
-    updateDeleteButtonVisibility();
+    updateButtonVisibility();
   });
 
-  // Función para mostrar notificaciones
-  /* function showNotification(message, type = 'success', duration = 3000) {
-    const notificationContainer = document.getElementById('notificationContainer');
-
-    // Crear el elemento de notificación
-    const notification = document.createElement('div');
-    notification.className = `px-4 py-2 rounded shadow-lg transition-all duration-500 ${type === 'success' ? 'bg-green-500 text-slate-50' : 'bg-red-500 text-slate-50'
-      }`;
-
-    notification.textContent = message;
-
-    // Agregar la notificación al contenedor
-    notificationContainer.appendChild(notification);
-
-    // Eliminar la notificación después del tiempo configurado
-    setTimeout(() => {
-      notification.style.opacity = '0';
-      setTimeout(() => notification.remove(), 500); // Esperar el final de la transición
-    }, 5000); // Usa el mismo tiempo para todas las notificaciones
-  }; */
-
-  // Notificación al confirmar
-  /* modalForm.addEventListener('submit', (event) => {
-    showNotification('La eliminación fue confirmada.', 'success', 10000); // Duración: 3 segundos
-  }); */
-
-  // Notificación al cancelar
-  /* modalCancelButton.addEventListener('click', () => {
-    showNotification('La eliminación fue cancelada.', 'error', 3000); // Duración: 3 segundos
-  }); */
-
-  /* function showNotification({ type, message }) {
-    const notification = document.createElement('div');
-    notification.classList.add('notification', `is-${type}`);
-    notification.textContent = message;
-
-    document.body.appendChild(notification);
-
-    setTimeout(() => {
-      notification.remove();
-    }, 5000);
-  } */
+  // Inicializar estado de los botones al cargar la página
+  updateButtonVisibility();
 });
