@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     actionModal.classList.add('hidden');
 
     // Desmarcar todos los checkboxes
-    checkboxes.forEach(checkbox => {
+    checkboxes.forEach(checkbox => { 
       checkbox.checked = false;
     });
 
