@@ -17,7 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (deleteButtonText) {
         deleteButtonText.textContent = `Eliminar seleccionados (${selectedCount})`;
       }
+      // deleteButton.classList.toggle('hidden', selectedCount === 0);
       deleteButton.classList.toggle('hidden', selectedCount === 0);
+      deleteButton.classList.toggle('flex', selectedCount > 0);
     }
 
     if (restoreButton) {
@@ -26,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         restoreButtonText.textContent = `Restaurar seleccionados (${selectedCount})`;
       }
       restoreButton.classList.toggle('hidden', selectedCount === 0);
+      restoreButton.classList.toggle('flex', selectedCount > 0);
     }
 
     if (forceDeleteButton) {
@@ -34,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         forceDeleteButtonText.textContent = `Eliminar definitivamente (${selectedCount})`;
       }
       forceDeleteButton.classList.toggle('hidden', selectedCount === 0);
+      forceDeleteButton.classList.toggle('flex', selectedCount > 0);
     }
   };
 
@@ -125,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     actionModal.classList.add('hidden');
 
     // Desmarcar todos los checkboxes
-    checkboxes.forEach(checkbox => {
+    checkboxes.forEach(checkbox => { 
       checkbox.checked = false;
     });
 
