@@ -81,6 +81,7 @@
   @endpush
 
   @push('scripts')
+    <!-- Actualizar la lista de velocidades según la tecnología seleccionada -->
     <script>
       document.getElementById('selectTechnology').addEventListener('change', updateList);
   
