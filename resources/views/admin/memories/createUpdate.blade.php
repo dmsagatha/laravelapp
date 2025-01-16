@@ -7,7 +7,7 @@
     </h2>
   </x-slot>
 
-  <div class="max-w-4xl mx-auto bg-slate-50 dark:bg-slate-800 rounded shadow-md shadow-blue-600 my-12">
+  <div class="max-w-4xl mx-auto bg-slate-50 dark:bg-slate-800 rounded shadow-sm shadow-blue-600 my-12">
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div class="px-4 py-5 mx-auto text-center max-w-7xl sm:px-6 lg:py-2 lg:px-8">
         <h2 class="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-3xl">
@@ -50,6 +50,9 @@
   </div>
 
   @push('styles')
+    {{-- Tema oscuro para Pikaday --}}
+    {{-- <link rel="stylesheet" href="{{ asset('css/pikaday-theme.css') }}"> --}}
+    
     <style>
       .dot-flashing {
           display: flex;
@@ -125,6 +128,7 @@
           new Pikaday({
             field: field,  // Aplica Pikaday a cada input
             format: 'YYYY-MM-DD',
+            theme: 'dark-theme',
             firstDay: 1,
             i18n: {
               previousMonth: 'Mes anterior',

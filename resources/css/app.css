@@ -2,11 +2,10 @@
 
 @import "tailwindcss/components";
 @import "styleApp.css";
-@import "pikaday/css/pikaday.css";
+@import "pikaday/css/pikaday.css";  /* node_modules */
+@import "pikaday-dark.css";
 
 @import "tailwindcss/utilities";
-
-/* Importing external CSS */
 
 [x-cloak] {
   display: none;
