@@ -18,7 +18,6 @@ export default {
   theme: {
     extend: {
       colors: {
-        // orange: '#ff8000',
         success: {
           100: '#d1e7dd',
           200: '#a3cfbb',

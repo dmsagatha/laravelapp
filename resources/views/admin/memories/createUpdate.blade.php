@@ -165,6 +165,7 @@
         new Pikaday({
           field: birthdateInput,
           format: 'YYYY-MM-DD',
+          theme: 'dark-theme',
           firstDay: 1,
           i18n: {
             previousMonth: 'Mes anterior',
