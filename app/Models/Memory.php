@@ -10,7 +10,7 @@ class Memory extends Model
   use HasFactory;
 
   protected $fillable = [
-    'serial', 'capacity', 'technology', 'velocity'
+    'serial', 'capacity', 'technology', 'velocity', 'purchase_date', 'sale_date', 'birthdate'
   ];
 
   public function getRouteKeyName()

@@ -14,6 +14,9 @@ return new class extends Migration
       $table->string('capacity');
       $table->string('technology');
       $table->string('velocity');
+      $table->date('purchase_date')->nullable();
+      $table->date('sale_date')->nullable();
+      $table->date('birthdate')->nullable();
       $table->timestamps();
     });
   }

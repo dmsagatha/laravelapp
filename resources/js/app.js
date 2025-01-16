@@ -1,8 +1,12 @@
 import Alpine from 'alpinejs'
 import focus from '@alpinejs/focus'
 import 'flowbite'
+import moment from 'moment'
+import Pikaday from 'pikaday'
 
 window.Alpine = Alpine
+window.moment = moment
+window.Pikaday = Pikaday
 
 Alpine.plugin(focus)
 Alpine.start()
