@@ -32,6 +32,8 @@ class MemoryRequest extends FormRequest
           }
         },
       ],
+      'purchase_date' => 'required|date',
+      'sale_date'     => 'required|date|after_or_equal:purchase_date',
     ];
   }
 }

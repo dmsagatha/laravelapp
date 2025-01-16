@@ -55,6 +55,8 @@
               <th>Capacidad</th>
               <th>Tecnología</th>
               <th>Velocidad</th>
+              <th>Fecha de<br> Compra</th>
+              <th>Fecha de<br> Venta</th>
             </tr>
           </thead>
           <tbody>
@@ -80,6 +82,12 @@
                 </td>
                 <td class="text-center">
                   {{ $item->velocity }} MHz
+                </td>
+                <td class="text-center">
+                  {{ date('Y/m/d', strtotime($item->purchase_date)) }}
+                </td>
+                <td class="text-center">
+                  {{ date('Y/m/d', strtotime($item->sale_date)) }}
                 </td>
               </tr>
             @endforeach
