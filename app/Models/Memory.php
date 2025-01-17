@@ -46,18 +46,10 @@ class Memory extends Model
       static::saving(function ($model) {
         $model->days_warranty = $model->calculateWarrantyDays();
       });
-  
-      /* static::creating(function ($model) {
-          $model->days_warranty = $model->calculateWarrantyDays();
-      });
-  
-      static::updating(function ($model) {
-          $model->days_warranty = $model->calculateWarrantyDays();
-      }); */
   }
   
   /**
-   * Calcula los días restantes de garantía.
+   * Calcula los días restantes de garantía.🥳
    *
    * @return int
    */
@@ -68,21 +60,10 @@ class Memory extends Model
 
     // Si la fecha de finalización es menor a la fecha actual, retorna 0.
     if ($final_warranty->lt($now)) {
-        return 0;
+      return 0;
     }
 
     // Retorna la diferencia de días de manera positiva.
     return $now->diffInDays($final_warranty);
-
-    /* $now = Carbon::now()->startOfDay(); // Aseguramos que la fecha actual no incluya la hora.
-    $final_warranty = Carbon::parse($this->final_warranty)->startOfDay();
-
-    // Si la fecha actual está después de la finalización de la garantía
-    if ($final_warranty->lt($now)) {
-        return 0;
-    }
-
-    // Calcula la diferencia exacta en días
-    return $final_warranty->diffInDays($now); */
   }
 }

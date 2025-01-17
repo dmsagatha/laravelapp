@@ -149,7 +149,7 @@
           return `${year}-${month}-${day}`;
         },
         parse(dateString, format) {
-          // Asegúrate de que Pikaday maneja la entrada sin desplazamiento
+          // Asegurarse de que Pikaday maneje la entrada sin desplazamiento
           const parts = dateString.split('-');
           const year = parseInt(parts[0], 10);
           const month = parseInt(parts[1], 10) - 1; // Meses en JavaScript son 0-indexados
