@@ -7,7 +7,7 @@
     </h2>
   </x-slot>
 
-  <div class="max-w-4xl mx-auto bg-slate-50 dark:bg-slate-800 rounded shadow-md shadow-blue-600 my-12">
+  <div class="max-w-4xl mx-auto bg-slate-50 dark:bg-slate-800 rounded shadow-sm shadow-blue-600 my-12">
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div class="px-4 py-5 mx-auto text-center max-w-7xl sm:px-6 lg:py-2 lg:px-8">
         <h2 class="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-3xl">
@@ -50,6 +50,9 @@
   </div>
 
   @push('styles')
+    {{-- Tema oscuro para Pikaday --}}
+    {{-- <link rel="stylesheet" href="{{ asset('css/pikaday-theme.css') }}"> --}}
+    
     <style>
       .dot-flashing {
           display: flex;
@@ -81,6 +84,7 @@
   @endpush
 
   @push('scripts')
+    <!-- Actualizar la lista de velocidades según la tecnología seleccionada -->
     <script>
       document.getElementById('selectTechnology').addEventListener('change', updateList);
   
@@ -112,6 +116,88 @@
       // Ejecutar al cargar la página para manejar valores previos
       document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('selectTechnology').dispatchEvent(new Event('change'));
+      });
+    </script>
+
+{{-- Pikaday - Fechas para las compras y ventas --}}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const fields = document.querySelectorAll('.warranties');
+
+    fields.forEach(field => {
+      new Pikaday({
+        field: field,  // Aplica Pikaday a cada input
+        format: 'YYYY-MM-DD',
+        theme: 'dark-theme',
+        firstDay: 1,
+        i18n: {
+          previousMonth: 'Mes anterior',
+          nextMonth: 'Mes siguiente',
+          months: [
+            'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+          ],
+          weekdays: [
+            'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'
+          ],
+          weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
+        },
+        toString(date, format) {
+          // Formato personalizado para la salida (mantiene la fecha en local)
+          const day = date.getDate().toString().padStart(2, '0');
+          const month = (date.getMonth() + 1).toString().padStart(2, '0');
+          const year = date.getFullYear();
+          return `${year}-${month}-${day}`;
+        },
+        parse(dateString, format) {
+          // Asegurarse de que Pikaday maneje la entrada sin desplazamiento
+          const parts = dateString.split('-');
+          const year = parseInt(parts[0], 10);
+          const month = parseInt(parts[1], 10) - 1; // Meses en JavaScript son 0-indexados
+          const day = parseInt(parts[2], 10);
+          return new Date(year, month, day);
+        },
+        onSelect: function() {
+          console.log(moment(this.getDate()).format('YYYY-MM-DD'));
+          console.log(this.getDate());
+        }
+      });
+    });
+  });
+</script>
+
+    <!-- Pikaday - Fecha de nacimiento -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const birthdateInput = document.getElementById('birthdate');
+
+        new Pikaday({
+          field: birthdateInput,
+          format: 'YYYY-MM-DD',
+          theme: 'dark-theme',
+          firstDay: 1,
+          i18n: {
+            previousMonth: 'Mes anterior',
+            nextMonth: 'Mes siguiente',
+            months: [
+              'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+            ],
+            weekdays: [
+              'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'
+            ],
+            weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
+          },
+          toString(date, format) {
+            // Formato personalizado para la salida
+            const day = date.getDate().toString().padStart(2, '0');
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const year = date.getFullYear();
+            return `${year}-${month}-${day}`;
+          },
+          onSelect: function() {
+            console.log(moment(this.getDate()).format('YYYY-MM-DD'));
+            console.log(this.getDate());
+          }
+        });
       });
     </script>
   @endpush

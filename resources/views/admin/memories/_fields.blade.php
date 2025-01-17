@@ -69,22 +69,24 @@
     </div>
   </div>
 
-  {{-- <div class="col-span-6 sm:col-span-3 md:col-span-2">
-    <div class="relative form-group mt-1">
-      <label for="velocity" class="select--label">Velocidad</label>
-      <select class="select--control" name="velocity" id="selectVelocity">
-        <option value="">Seleccionar</option>
-        @if ($memory->technology != null)
-          @foreach ($velocities as $key => $label)
-            <option value="{{ $key }}" {{ old('velocity') == $label ? 'selected' : ($memory->velocity == $label ? 'selected' : '') }}>
-              {{ $label }}
-            </option>
-          @endforeach
-        @endif
-      </select>
-      @error('velocity')
-        <div class="text-sm text-red-600 dark:text-rose-400">{{ $message }}</div>
-      @enderror
+  <div class="col-span-6 sm:col-span-3 md:col-span-2">
+    <div class="relative z-0 group mt-3">
+      <x-input type="text" name="initial_warranty" id="initial_warranty" class="warranties" value="{{ old('initial_warranty', $memory->initial_warranty) }}" />
+      <x-label for="initial_warranty" class="required" value="Fecha de compra" />
     </div>
-  </div> --}}
+  </div>
+  <div class="col-span-6 sm:col-span-3 md:col-span-2">
+    <div class="relative z-0 group mt-3">
+      <x-input type="text" name="final_warranty" id="final_warranty" class="warranties" value="{{ old('final_warranty', $memory->final_warranty) }}" />
+      <x-label for="final_warranty" class="required" value="Fecha de venta" />
+    </div>
+  </div>
+
+  <div class="col-span-6 sm:col-span-3 md:col-span-2">
+    <div class="relative z-0 group mt-3">
+      <x-input type="text" id="birthdate" name="birthdate" value="{{ old('birthdate', $memory->birthdate) }}" />
+      <x-label for="birthdate" class="required" value="Fecha de nacimiento" />
+      <p id="ageError" class="text-red-500 text-sm mt-2 hidden">Debes tener al menos 18 años.</p>
+    </div>
+  </div>
 </div>

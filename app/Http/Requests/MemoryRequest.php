@@ -16,9 +16,7 @@ class MemoryRequest extends FormRequest
   public function rules(): array
   {
     return [
-      // 'serial' => ['required', 'min:8', 'max:8', Rule::unique('memories')->ignore($this->route('memory'))],
       'serial'     => ['required', 'without_spaces', 'min:5', Rule::unique('memories')->ignore($this->memory)],
-      // 'serial'     => 'required|without_spaces|min:5|max:8|unique:memories,serial,' . $this->memory->id,
       'capacity'   => 'required|in:' . implode(',', array_keys(Memory::CAPACITY_SELECT)),
       'technology' => 'required|in:' . implode(',', array_keys(Memory::TECHNOLOGY_SELECT)),
       'velocity'   => [
@@ -32,6 +30,8 @@ class MemoryRequest extends FormRequest
           }
         },
       ],
+      'initial_warranty' => 'required|date|before_or_equal:final_warranty',
+      'final_warranty'   => 'required|date|after_or_equal:initial_warranty',
     ];
   }
 }
