@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,7 +11,7 @@ class Memory extends Model
   use HasFactory;
 
   protected $fillable = [
-    'serial', 'capacity', 'technology', 'velocity', 'initial_warranty', 'final_warranty', 'birthdate'
+    'serial', 'capacity', 'technology', 'velocity', 'initial_warranty', 'final_warranty', 'days_warranty', 'birthdate'
   ];
 
   public function getRouteKeyName()
@@ -37,4 +38,51 @@ class Memory extends Model
     'DDR4' => ['1600', '1866', '2133', '2400', '2666', '2933', '3200'],
     'DDR5' => ['3200', '3600', '4000', '4400', '4800', '5000', '5120', '5200', '5300', '5600', '6000', '6400'],
   ];
+
+  public static function boot()
+  {
+      parent::boot();
+
+      static::saving(function ($model) {
+        $model->days_warranty = $model->calculateWarrantyDays();
+      });
+  
+      /* static::creating(function ($model) {
+          $model->days_warranty = $model->calculateWarrantyDays();
+      });
+  
+      static::updating(function ($model) {
+          $model->days_warranty = $model->calculateWarrantyDays();
+      }); */
+  }
+  
+  /**
+   * Calcula los días restantes de garantía.
+   *
+   * @return int
+   */
+  public function calculateWarrantyDays(): int
+  {
+    $now = Carbon::now()->startOfDay(); // Fecha actual (sin horas).
+    $final_warranty = Carbon::parse($this->final_warranty)->startOfDay();
+
+    // Si la fecha de finalización es menor a la fecha actual, retorna 0.
+    if ($final_warranty->lt($now)) {
+        return 0;
+    }
+
+    // Retorna la diferencia de días de manera positiva.
+    return $now->diffInDays($final_warranty);
+
+    /* $now = Carbon::now()->startOfDay(); // Aseguramos que la fecha actual no incluya la hora.
+    $final_warranty = Carbon::parse($this->final_warranty)->startOfDay();
+
+    // Si la fecha actual está después de la finalización de la garantía
+    if ($final_warranty->lt($now)) {
+        return 0;
+    }
+
+    // Calcula la diferencia exacta en días
+    return $final_warranty->diffInDays($now); */
+  }
 }

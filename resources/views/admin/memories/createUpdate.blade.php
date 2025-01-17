@@ -119,43 +119,51 @@
       });
     </script>
 
-    {{-- Pikaday - Fechas para las compras y ventas --}}
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const fields = document.querySelectorAll('.warranties');
+{{-- Pikaday - Fechas para las compras y ventas --}}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const fields = document.querySelectorAll('.warranties');
 
-        fields.forEach(field => {
-          new Pikaday({
-            field: field,  // Aplica Pikaday a cada input
-            format: 'YYYY-MM-DD',
-            theme: 'dark-theme',
-            firstDay: 1,
-            i18n: {
-              previousMonth: 'Mes anterior',
-              nextMonth: 'Mes siguiente',
-              months: [
-                'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-              ],
-              weekdays: [
-                'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'
-              ],
-              weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
-            },
-            toString(date, format) {
-              // Formato personalizado para la salida
-              const day = date.getDate().toString().padStart(2, '0');
-              const month = (date.getMonth() + 1).toString().padStart(2, '0');
-              const year = date.getFullYear();
-              return `${year}-${month}-${day}`;
-            },
-            onSelect: function() {
-              console.log(moment(this.getDate()).format('YYYY-MM-DD'));
-              console.log(this.getDate());
-            }
-          });
-        });
+    fields.forEach(field => {
+      new Pikaday({
+        field: field,  // Aplica Pikaday a cada input
+        format: 'YYYY-MM-DD',
+        theme: 'dark-theme',
+        firstDay: 1,
+        i18n: {
+          previousMonth: 'Mes anterior',
+          nextMonth: 'Mes siguiente',
+          months: [
+            'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+          ],
+          weekdays: [
+            'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'
+          ],
+          weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
+        },
+        toString(date, format) {
+          // Formato personalizado para la salida (mantiene la fecha en local)
+          const day = date.getDate().toString().padStart(2, '0');
+          const month = (date.getMonth() + 1).toString().padStart(2, '0');
+          const year = date.getFullYear();
+          return `${year}-${month}-${day}`;
+        },
+        parse(dateString, format) {
+          // Asegúrate de que Pikaday maneja la entrada sin desplazamiento
+          const parts = dateString.split('-');
+          const year = parseInt(parts[0], 10);
+          const month = parseInt(parts[1], 10) - 1; // Meses en JavaScript son 0-indexados
+          const day = parseInt(parts[2], 10);
+          return new Date(year, month, day);
+        },
+        onSelect: function() {
+          console.log(moment(this.getDate()).format('YYYY-MM-DD'));
+          console.log(this.getDate());
+        }
       });
-    </script>
+    });
+  });
+</script>
 
     <!-- Pikaday - Fecha de nacimiento -->
     <script>
