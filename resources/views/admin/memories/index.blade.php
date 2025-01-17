@@ -49,14 +49,18 @@
         <table id="dtTheme" class="display compact nowrap row-border stripe" style="width:100%">
           <thead>
             <tr>
-              <th width="1%">N°</th>
-              <th>Acciones</th>
-              <th>Serial</th>
-              <th>Capacidad</th>
-              <th>Tecnología</th>
-              <th>Velocidad</th>
-              <th>Fecha de<br> Compra</th>
-              <th>Fecha de<br> Venta</th>
+              <th rowspan="2" width="1%">N°</th>
+              <th rowspan="2">Acciones</th>
+              <th rowspan="2">Serial</th>
+              <th rowspan="2">Capacidad</th>
+              <th rowspan="2">Tecnología</th>
+              <th rowspan="2">Velocidad</th>
+              <th colspan="3">Garantía</th>
+            </tr>
+            <tr>
+              <th>Inicia</th>
+              <th>Finaliza</th>
+              <th>Días</th>
             </tr>
           </thead>
           <tbody>
@@ -74,21 +78,12 @@
                   </div>
                 </td>
                 <td class="text-center">{{ $item->serial }}</td>
-                <td class="text-center">
-                  {{ App\Models\Memory::CAPACITY_SELECT[$item->capacity] }}
-                </td>
-                <td class="text-center">
-                  {{ App\Models\Memory::TECHNOLOGY_SELECT[$item->technology] }}
-                </td>
-                <td class="text-center">
-                  {{ $item->velocity }} MHz
-                </td>
-                <td class="text-center">
-                  {{ date('Y/m/d', strtotime($item->initial_warranty)) }}
-                </td>
-                <td class="text-center">
-                  {{ date('Y/m/d', strtotime($item->final_warranty)) }}
-                </td>
+                <td class="text-center">{{ App\Models\Memory::CAPACITY_SELECT[$item->capacity] }}</td>
+                <td class="text-center">{{ App\Models\Memory::TECHNOLOGY_SELECT[$item->technology] }}</td>
+                <td class="text-center">{{ $item->velocity }} MHz</td>
+                <td class="text-center">{{ date('Y/m/d', strtotime($item->initial_warranty)) }}</td>
+                <td class="text-center">{{ date('Y/m/d', strtotime($item->final_warranty)) }}</td>
+                <td class="text-center">{{ $item->days_warranty }}</td>
               </tr>
             @endforeach
           </tbody>
