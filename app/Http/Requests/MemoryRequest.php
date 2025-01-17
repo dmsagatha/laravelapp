@@ -32,8 +32,8 @@ class MemoryRequest extends FormRequest
           }
         },
       ],
-      'purchase_date' => 'required|date',
-      'sale_date'     => 'required|date|after_or_equal:purchase_date',
+      'initial_warranty' => 'required|date',
+      'final_warranty'     => 'required|date|after_or_equal:initial_warranty',
     ];
   }
 }

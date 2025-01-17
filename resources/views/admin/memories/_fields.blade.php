@@ -71,14 +71,14 @@
 
   <div class="col-span-6 sm:col-span-3 md:col-span-2">
     <div class="relative z-0 group mt-3">
-      <x-input type="text" name="purchase_date" id="purchase_date" class="warranties" value="{{ old('purchase_date', $memory->purchase_date) }}" />
-      <x-label for="purchase_date" class="required" value="Fecha de compra" />
+      <x-input type="text" name="initial_warranty" id="initial_warranty" class="warranties" value="{{ old('initial_warranty', $memory->initial_warranty) }}" />
+      <x-label for="initial_warranty" class="required" value="Fecha de compra" />
     </div>
   </div>
   <div class="col-span-6 sm:col-span-3 md:col-span-2">
     <div class="relative z-0 group mt-3">
-      <x-input type="text" name="sale_date" id="sale_date" class="warranties" value="{{ old('sale_date', $memory->sale_date) }}" />
-      <x-label for="sale_date" class="required" value="Fecha de venta" />
+      <x-input type="text" name="final_warranty" id="final_warranty" class="warranties" value="{{ old('final_warranty', $memory->final_warranty) }}" />
+      <x-label for="final_warranty" class="required" value="Fecha de venta" />
     </div>
   </div>
 

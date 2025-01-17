@@ -84,10 +84,10 @@
                   {{ $item->velocity }} MHz
                 </td>
                 <td class="text-center">
-                  {{ date('Y/m/d', strtotime($item->purchase_date)) }}
+                  {{ date('Y/m/d', strtotime($item->initial_warranty)) }}
                 </td>
                 <td class="text-center">
-                  {{ date('Y/m/d', strtotime($item->sale_date)) }}
+                  {{ date('Y/m/d', strtotime($item->final_warranty)) }}
                 </td>
               </tr>
             @endforeach
@@ -100,66 +100,6 @@
       @endif
     </div>
   </div>
-
-  {{-- <div class="py-12">
-    <div class="flow-root mx-auto w-full md:w-full lg:w-4/5 sm:px-6 lg:px-8">
-      <div class="bg-slate-50 dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="px-6 text-slate-900 dark:text-slate-100">
-          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <div class="px-4 py-5 mx-auto text-center max-w-7xl sm:px-6 lg:py-2 lg:px-8">
-              <h2 class="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-3xl">
-                <span class="block">
-                  <a href="#" target="_blank">
-                    Memorias - Selects dinámicos con Constantes
-                  </a>
-                </span>
-              </h2>
-            </div>
-          </div>
-
-          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            @include('partials.failures')
-            
-            @if ($memories->count())
-              <table id="dtTheme" class="display compact nowrap row-border stripe" style="width:100%">
-                <thead>
-                  <tr>
-                    <th width="1%">N°</th>
-                    <th>Serial</th>
-                    <th>Capacidad</th>
-                    <th>Tipo</th>
-                    <th>Velocidad</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($memories as $key => $item)
-                    <tr>
-                      <td style="text-align: center;">{{ $key + 1 }}</td>
-                      <td>{{ $item->serial }}</td>
-                      <td class="text-center">
-                        {{ App\Models\Memory::CAPACITY_SELECT[$item->capacity] }}
-                      </td>
-                      <td class="text-center">
-                        {{ App\Models\Memory::TYPE_SELECT[$item->type] }}
-                      </td>
-                      <td class="text-center">
-                        {{ $item->velocity }} MHz
-                      </td>
-                    </tr>
-                  @endforeach
-                </tbody>
-              </table>
-            @else
-              <div class="flex justify-center px-4 mt-4 mb-2 space-x-4 text-slate-800 dark:text-slate-300">
-                No hay registros creados
-              </div>
-            @endif
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> --}}
 
   @push('styles')
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.7/css/dataTables.dataTables.css">
