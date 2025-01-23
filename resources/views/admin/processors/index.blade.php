@@ -60,6 +60,7 @@
                 <th>MAC</th>
                 <th>Service Tag</th>
                 <th>Memorias</th>
+                <th>Prototipos</th>
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -78,6 +79,7 @@
                       @endforeach
                     @endif
                   </td>
+                  <td>{{ $item->prototype->reference }}</td>
                   <td>
                     <div class="flex items-stretch justify-center">
                       <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>

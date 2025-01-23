@@ -2,7 +2,7 @@
 
 namespace App\Imports;
 
-use App\Models\{Processor, User, AddMemory};
+use App\Models\{Processor, User, AddMemory, Prototype};
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\{Importable, SkipsErrors, SkipsOnError, SkipsFailures, SkipsOnFailure, WithHeadingRow, WithValidation, WithBatchInserts, WithChunkReading};
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -17,11 +17,12 @@ class ProcessorsImport implements ToCollection,
 {
   use Importable, SkipsErrors, SkipsFailures;
 
-  private $users;
+  private $users, $prototypes;
 
   public function __construct()
   {
     $this->users = User::pluck('id', 'email');
+    $this->prototypes = Prototype::pluck('id', 'reference');
   }
 
   public function collection(Collection $rows)
@@ -31,9 +32,10 @@ class ProcessorsImport implements ToCollection,
       $processorData = Processor::firstOrCreate(
         ['servicetag' => $row['service_tag']],
         [
-          'servicetag' => trim($row['service_tag']),
-          'mac'        => trim($row['mac']),
-          'user_id'    => $this->users[$row['usuario']]
+          'servicetag'   => trim($row['service_tag']),
+          'mac'          => trim($row['mac']),
+          'user_id'      => $this->users[$row['usuario']],
+          'prototype_id' => $this->prototypes[$row['prototype_reference']]
         ]
       );
 
