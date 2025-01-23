@@ -41,55 +41,50 @@
           </div>
         </div>
 
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-          {{-- @if (isset($errors) && $errors->any())
-            <div>
-              @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-              @endforeach
-            </div>                
-          @endif --}}
-
-          @include('partials.failures')
-          
-          <table id="dtTheme" class="display compact nowrap row-border stripe" style="width:100%">
-            <thead>
-              <tr>
-                <th width="1%">N°</th>
-                <th>Usuario</th>
-                <th>MAC</th>
-                <th>Service Tag</th>
-                <th>Memorias</th>
-                <th>Prototipos</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach ($processors as $key => $item)
-                <tr>
-                  <td style="text-align: center;">{{ $key + 1 }}</td>
-                  <th>{{ $item->user->name }}</th>
-                  <th>{{ $item->mac }}</th>
-                  <td>{{ $item->servicetag }}</td>
-                  <td class="text-xs">
-                    @if(!$item->addMemories->isEmpty())
-                      <p><span class="underline">Adicionales:</span></p>
-                      @foreach($item->addMemories as $addMemory)
-                        {{ $addMemory->brand }} - {{ $addMemory->technology }} - {{ $addMemory->velocity }} MHz - {{ $addMemory->capacity }} x {{ $addMemory->pivot->quantity_addmem }}<br>
-                      @endforeach
-                    @endif
-                  </td>
-                  <td>{{ $item->prototype->reference }}</td>
-                  <td>
-                    <div class="flex items-stretch justify-center">
-                      <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
-                      <a href="#"  class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Eliminar</a>
-                    </div>
-                  </td>
-                </tr>
-              @endforeach
-            </tbody>
-          </table>
+        <div class="text-white h-full bg-gray-800">
+          <h1 class="text-2xl md:text-4xl lg:text-5xl font-extrabold pt-8 px-2 text-center w-full">Tailwind CSS Premier League Table #1</h1>
+          <div class="py-8">
+            <div class="max-w-screen-xl px-2 mx-auto">
+              <table id="dtTheme" class="w-full text-base">
+                <thead>
+                  <tr>
+                    <th width="1%">N°</th>
+                    <th>Usuario</th>
+                    <th>MAC</th>
+                    <th>Service Tag</th>
+                    <th>Memorias</th>
+                    <th>Prototipos</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach ($processors as $key => $item)
+                    <tr>
+                      <td style="text-align: center;">{{ $key + 1 }}</td>
+                      <th>{{ $item->user->name }}</th>
+                      <th>{{ $item->mac }}</th>
+                      <td>{{ $item->servicetag }}</td>
+                      <td class="text-xs">
+                        @if(!$item->addMemories->isEmpty())
+                          <p><span class="underline">Adicionales:</span></p>
+                          @foreach($item->addMemories as $addMemory)
+                            {{ $addMemory->brand }} - {{ $addMemory->technology }} - {{ $addMemory->velocity }} MHz - {{ $addMemory->capacity }} x {{ $addMemory->pivot->quantity_addmem }}<br>
+                          @endforeach
+                        @endif
+                      </td>
+                      <td>{{ $item->prototype->reference }}</td>
+                      <td>
+                        <div class="flex items-stretch justify-center">
+                          <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
+                          <a href="#"  class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Eliminar</a>
+                        </div>
+                      </td>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
