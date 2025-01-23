@@ -119,56 +119,65 @@
       });
     </script>
 
-{{-- Pikaday - Fechas para las compras y ventas --}}
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const fields = document.querySelectorAll('.warranties');
+    {{-- Pikaday - Fechas para las garantías --}}
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const fields = document.querySelectorAll('.warranties');
 
-    fields.forEach(field => {
-      new Pikaday({
-        field: field,  // Aplica Pikaday a cada input
-        format: 'YYYY-MM-DD',
-        theme: 'dark-theme',
-        firstDay: 1,
-        i18n: {
-          previousMonth: 'Mes anterior',
-          nextMonth: 'Mes siguiente',
-          months: [
-            'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-          ],
-          weekdays: [
-            'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'
-          ],
-          weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
-        },
-        toString(date, format) {
-          // Formato personalizado para la salida (mantiene la fecha en local)
-          const day = date.getDate().toString().padStart(2, '0');
-          const month = (date.getMonth() + 1).toString().padStart(2, '0');
-          const year = date.getFullYear();
-          return `${year}-${month}-${day}`;
-        },
-        parse(dateString, format) {
-          // Asegurarse de que Pikaday maneje la entrada sin desplazamiento
-          const parts = dateString.split('-');
-          const year = parseInt(parts[0], 10);
-          const month = parseInt(parts[1], 10) - 1; // Meses en JavaScript son 0-indexados
-          const day = parseInt(parts[2], 10);
-          return new Date(year, month, day);
-        },
-        onSelect: function() {
-          console.log(moment(this.getDate()).format('YYYY-MM-DD'));
-          console.log(this.getDate());
-        }
+        fields.forEach(field => {
+          new Pikaday({
+            field: field,  // Aplica Pikaday a cada input
+            format: 'YYYY-MM-DD',
+            theme: 'dark-theme',
+            firstDay: 1,
+            i18n: {
+              previousMonth: 'Mes anterior',
+              nextMonth: 'Mes siguiente',
+              months: [
+                'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+              ],
+              weekdays: [
+                'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'
+              ],
+              weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
+            },
+            toString(date, format) {
+              // Formato personalizado para la salida (mantiene la fecha en local)
+              const day = date.getDate().toString().padStart(2, '0');
+              const month = (date.getMonth() + 1).toString().padStart(2, '0');
+              const year = date.getFullYear();
+              return `${year}-${month}-${day}`;
+            },
+            parse(dateString, format) {
+              // Asegurarse de que Pikaday maneje la entrada sin desplazamiento
+              const parts = dateString.split('-');
+              const year = parseInt(parts[0], 10);
+              const month = parseInt(parts[1], 10) - 1; // Meses en JavaScript son 0-indexados
+              const day = parseInt(parts[2], 10);
+              return new Date(year, month, day);
+            },
+            onSelect: function() {
+              console.log(moment(this.getDate()).format('YYYY-MM-DD'));
+              console.log(this.getDate());
+            }
+          });
+        });
       });
-    });
-  });
-</script>
+    </script>
 
     <!-- Pikaday - Fecha de nacimiento -->
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const birthdateInput = document.getElementById('birthdate');
+        const ageError = document.getElementById('ageError');
+
+        // Obtener la fecha máxima permitida (18 años atrás)
+        const today = new Date();
+        const maxDate = new Date(
+          today.getFullYear() - 18,
+          today.getMonth(),
+          today.getDate()
+        );
 
         new Pikaday({
           field: birthdateInput,
@@ -186,6 +195,8 @@
             ],
             weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
           },
+          yearRange: [1960, maxDate.getFullYear()],
+          maxDate: maxDate, // Limitar la fecha seleccionable a hace 18 años
           toString(date, format) {
             // Formato personalizado para la salida
             const day = date.getDate().toString().padStart(2, '0');
@@ -193,11 +204,36 @@
             const year = date.getFullYear();
             return `${year}-${month}-${day}`;
           },
-          onSelect: function() {
+          parse(dateString, format) {
+            // Asegurarse de que Pikaday maneje la entrada sin desplazamiento
+            const parts = dateString.split('-');
+            const year = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10) - 1; // Meses en JavaScript son 0-indexados
+            const day = parseInt(parts[2], 10);
+            return new Date(year, month, day);
+          },
+          onSelect: function(date) {
             console.log(moment(this.getDate()).format('YYYY-MM-DD'));
             console.log(this.getDate());
+            validateAge(date);
           }
         });
+
+        // Validar la edad al seleccionar una fecha
+        function validateAge(selectedDate) {
+          const age = today.getFullYear() - selectedDate.getFullYear();
+          const monthDiff = today.getMonth() - selectedDate.getMonth();
+          const dayDiff = today.getDate() - selectedDate.getDate();
+
+          // Mostrar mensaje de error si la edad no es válida
+          if (age < 18 || (age === 18 && (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)))) {
+            ageError.classList.remove('hidden');
+            birthdateInput.classList.add('border-red-500');
+          } else {
+            ageError.classList.add('hidden');
+            birthdateInput.classList.remove('border-red-500');
+          }
+        }
       });
     </script>
   @endpush
