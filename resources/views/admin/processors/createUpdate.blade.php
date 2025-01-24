@@ -37,45 +37,6 @@
   </div>
 
   @push('scripts')
-  {{-- Seleccionar el Tipo del Modelo del Prototipo --}}
-    {{-- <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        const modelTypeSelect = document.getElementById('model_type');
-        const referenceSelect = document.getElementById('reference');
-    
-        modelTypeSelect.addEventListener('change', function () {
-          const modelType = modelTypeSelect.value;
-
-          // Limpia las opciones actuales del select de referencias
-          referenceSelect.innerHTML = '<option value="">Seleccionar Referencia</option>';
-          referenceSelect.disabled = true;
-
-          if (modelType) {
-            fetch(`/procesadores/prototipos?model_type=${encodeURIComponent(modelType)}`)
-              .then(response => {
-                if (!response.ok) {
-                  throw new Error('La respuesta de la red no fue correcta');
-                }
-                return response.json();
-              })
-              .then(data => {
-                // Agrega las nuevas opciones al select de referencias
-                Object.entries(data).forEach(([id, reference]) => {
-                  const option = document.createElement('option');
-                  option.value = id;
-                  option.textContent = reference;
-                  referenceSelect.appendChild(option);
-                });
-
-                referenceSelect.disabled = false;
-              })
-              .catch(error => {
-                console.error('Error al obtener referencias:', error);
-              });
-          }
-        });
-      });
-    </script> --}}
     <script>
       document.addEventListener('DOMContentLoaded', () => {
           const addMemoryBtn = document.getElementById('add-memory-btn');
@@ -137,7 +98,6 @@
               memoryList.appendChild(row);
           });
       });
-  </script>
-  
+    </script>
   @endpush
 </x-app-layout>
