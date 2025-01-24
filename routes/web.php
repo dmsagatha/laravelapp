@@ -45,6 +45,7 @@ Route::group(['middleware' => ['auth', 'verified']], function ()
   Route::prefix('procesadores')->name('processors.')->controller(ProcessorController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::post('importar', 'import')->name('import');
+    Route::get('prototipos', 'getReferences')->name('references');
   });
 
   Route::resource('memorias', MemoryController::class)

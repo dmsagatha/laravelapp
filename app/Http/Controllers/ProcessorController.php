@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Processor;
+use App\Models\{Processor, Prototype};
 use App\Imports\ProcessorsImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -14,6 +14,19 @@ class ProcessorController extends Controller
     $processors = Processor::orderBy('mac')->get();
     
     return view('admin.processors.index', compact('processors'));
+  }
+
+  public function getReferences(Request $request)
+  {
+    $modelType = $request->input('model_type');
+
+    if (!$modelType) {
+    return response()->json([], 400);
+    }
+
+    $references = Prototype::where('model_type', $modelType)->pluck('reference', 'id'); // Devuelve id y referencia
+
+    return response()->json($references);
   }
   
   /**
