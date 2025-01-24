@@ -33,9 +33,14 @@ class ProcessorController extends Controller
     dd($request->all());
     $processor = Processor::create($request->only('mac', 'servicetag', 'user_id', 'prototype_id'));
 
-    foreach ($request->input('memories') as $memory) {
+    /* foreach ($request->input('memories') as $memory) {
       $processor->memories()->attach($memory['id'], ['quantity' => $memory['quantity']]);
-    }
+    } */
+    $memories = collect($request->input('memories'))->mapWithKeys(function ($memory) {
+        return [$memory['id'] => ['quantity' => $memory['quantity']]];
+    });
+
+    $processor->memories()->sync($memories);
 
     return redirect()->route('processors.index')->with('success', 'Registro creado satisfactoriamente!');
   }

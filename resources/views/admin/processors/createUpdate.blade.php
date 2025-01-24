@@ -66,7 +66,7 @@
               memories.forEach(memory => {
                   const option = document.createElement('option');
                   option.value = memory.id;
-                  option.textContent = `${memory.serial} - ${memory.capacity}GB (${memory.technology})`;
+                  option.textContent = `${memory.serial} - ${memory.capacity} (${memory.technology})`;
                   memorySelect.appendChild(option);
               });
   
@@ -96,6 +96,7 @@
   
               // Agregar la fila a la tabla
               memoryList.appendChild(row);
+              console.log(memoryList);
           });
       });
     </script>
