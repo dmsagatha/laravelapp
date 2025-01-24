@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\{Processor, Prototype, Memory};
+use App\Http\Requests\ProcessorRequest;
 use App\Imports\ProcessorsImport;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
@@ -20,12 +21,47 @@ class ProcessorController extends Controller
   public function create()
   {
     $memories = Memory::all();
-    
+
     return view('processors.create', compact('memories'));
   }
   
-  public function store(Request $request)
+  public function store(ProcessorRequest $request)
   {
+    $processor = Processor::create($request->only('mac', 'servicetag', 'user_id', 'prototype_id'));
+
+    foreach ($request->input('memories') as $memory) {
+      $processor->memories()->attach($memory['id'], ['quantity' => $memory['quantity']]);
+    }
+
+    return redirect()->route('processors.index')->with('success', 'Registro creado satisfactoriamente!');
+  }
+
+  public function edit(Processor $processor)
+  {
+    $memories = Memory::all();
+
+    return view('processors.edit', compact('processor', 'memories'));
+  }
+
+  public function update(ProcessorRequest $request, Processor $processor)
+  {
+    $processor->update($request->only('mac', 'servicetag', 'user_id', 'prototype_id'));
+
+    $syncData = [];
+    foreach ($request->input('memories') as $memory) {
+      $syncData[$memory['id']] = ['quantity' => $memory['quantity']];
+    }
+
+    $processor->memories()->sync($syncData);
+
+    return redirect()->route('processors.index')->with('success', 'Registro actualizado correctamente.');
+  }
+  
+  public function destroy(Processor $processor)
+  {
+    $processor->delete();
+
+    return redirect()->route('processors.index')->with('success', 'Registro eliminado satisfactoriamente!');
   }
 
   public function getReferences(Request $request)
@@ -76,26 +112,5 @@ class ProcessorController extends Controller
     }
 
     return redirect()->route('processors.index')->with('success', 'Datos importados exitosamente!');
-  }
-
-  /**
-    * Show the form for editing the specified resource.
-    */
-  public function edit(Processor $processor)
-  {
-  }
-
-  /**
-    * Update the specified resource in storage.
-    */
-  public function update(Request $request, Processor $processor)
-  {
-  }
-
-  /**
-    * Remove the specified resource from storage.
-    */
-  public function destroy(Processor $processor)
-  {
   }
 }
