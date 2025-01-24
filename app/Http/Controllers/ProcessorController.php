@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Processor, Prototype, Memory};
+use App\Models\{Processor, Prototype, Memory, User};
 use App\Http\Requests\ProcessorRequest;
 use App\Imports\ProcessorsImport;
 use Illuminate\Support\Facades\Cache;
@@ -20,13 +20,17 @@ class ProcessorController extends Controller
   
   public function create()
   {
-    $memories = Memory::all();
+    $processor = new Processor();
+    $users = User::orderBy('name')->get();
+    $prototypes = Prototype::orderBy('reference')->get();
+    $memories = Memory::orderBy('serial')->get();
 
-    return view('processors.create', compact('memories'));
+    return view('admin.processors.createUpdate', compact('processor', 'users', 'prototypes', 'memories'));
   }
   
   public function store(ProcessorRequest $request)
   {
+    dd($request->all());
     $processor = Processor::create($request->only('mac', 'servicetag', 'user_id', 'prototype_id'));
 
     foreach ($request->input('memories') as $memory) {
@@ -40,7 +44,7 @@ class ProcessorController extends Controller
   {
     $memories = Memory::all();
 
-    return view('processors.edit', compact('processor', 'memories'));
+    return view('admin.processors.edit', compact('processor', 'memories'));
   }
 
   public function update(ProcessorRequest $request, Processor $processor)
