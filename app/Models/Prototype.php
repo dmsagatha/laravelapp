@@ -40,7 +40,6 @@ class Prototype extends Model
     'Escritorio' => 'Escritorio',
     'Portatil'   => 'Portatil',
     'Todo en 1'  => 'Todo en 1',
-    'Tableta'    => 'Tableta',
   ];
 
   public const BRAND_SELECT = [

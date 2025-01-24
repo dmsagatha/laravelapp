@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\{Processor, Prototype};
 use App\Imports\ProcessorsImport;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -21,12 +22,28 @@ class ProcessorController extends Controller
     $modelType = $request->input('model_type');
 
     if (!$modelType) {
-    return response()->json([], 400);
+      return response()->json([], 400);
     }
 
-    $references = Prototype::where('model_type', $modelType)->pluck('reference', 'id'); // Devuelve id y referencia
+    // Crear una clave única para el caché basada en el tipo de modelo
+    $cacheKey = "references_{$modelType}";
+
+    // Recuperar datos de caché o consulta y almacena
+    $references = Cache::remember($cacheKey, now()->addMinutes(10), function () use ($modelType) {
+      return Prototype::where('model_type', $modelType)->pluck('reference', 'id'); // Devuelve id y referencia
+    });
 
     return response()->json($references);
+  }
+
+  public function updateReference(Request $request, Prototype $prototype)
+  {
+    $prototype->update($request->all());
+
+    // Borra el caché para este modelo
+    Cache::forget("references_{$prototype->model_type}");
+
+    return redirect()->back()->with('success', 'Referencias actualizadas satisfactoriamente!');
   }
   
   /**
