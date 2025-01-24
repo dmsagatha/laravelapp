@@ -33,4 +33,11 @@ class Processor extends Model
   {
     return $this->belongsTo(Prototype::class)->withDefault();
   }
+
+  public function memories()
+  {
+    return $this->belongsToMany(Memory::class, 'memory_processor')
+                ->withPivot('quantity')
+                ->withTimestamps();
+  }
 }

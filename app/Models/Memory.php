@@ -39,6 +39,13 @@ class Memory extends Model
     'DDR5' => ['3200', '3600', '4000', '4400', '4800', '5000', '5120', '5200', '5300', '5600', '6000', '6400'],
   ];
 
+  public function processors()
+  {
+    return $this->belongsToMany(Processor::class, 'memory_processor')
+                ->withPivot('quantity')
+                ->withTimestamps();
+  }
+
   public static function boot()
   {
       parent::boot();

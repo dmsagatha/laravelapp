@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Processor, Prototype};
+use App\Models\{Processor, Prototype, Memory};
 use App\Imports\ProcessorsImport;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
@@ -12,9 +12,20 @@ class ProcessorController extends Controller
 {
   public function index()
   {
-    $processors = Processor::orderBy('mac')->get();
+    $processors = Processor::with('memories')->orderBy('mac')->get();
     
     return view('admin.processors.index', compact('processors'));
+  }
+  
+  public function create()
+  {
+    $memories = Memory::all();
+    
+    return view('processors.create', compact('memories'));
+  }
+  
+  public function store(Request $request)
+  {
   }
 
   public function getReferences(Request $request)
@@ -65,14 +76,6 @@ class ProcessorController extends Controller
     }
 
     return redirect()->route('processors.index')->with('success', 'Datos importados exitosamente!');
-  }
-  
-  public function create()
-  {
-  }
-  
-  public function store(Request $request)
-  {
   }
 
   /**
