@@ -13,24 +13,25 @@ class ProcessorController extends Controller
 {
   public function index()
   {
-    $processors = Processor::orderBy('mac')->get();
-    
+    $processors = Processor::with('memories')->orderBy('mac')->get();
+
     return view('admin.processors.index', compact('processors'));
   }
-  
+
   public function create()
   {
-    $processor = new Processor();
-    $users = User::orderBy('name')->get();
+    $processor  = new Processor();
+    $users      = User::orderBy('name')->get();
     $prototypes = Prototype::orderBy('reference')->get();
+    $memories   = Memory::orderBy('serial')->get();
 
-    return view('admin.processors.createUpdate', compact('processor', 'users', 'prototypes'));
+    return view('admin.processors.createUpdate', compact('processor', 'users', 'prototypes', 'memories'));
   }
-  
+
   public function store(ProcessorRequest $request)
   {
-    dd($request->all());
-    $processor = Processor::create($request->only('mac', 'servicetag', 'user_id', 'prototype_id'));
+    // dd($request->all());
+    // $processor = Processor::create($request->only('mac', 'servicetag', 'user_id', 'prototype_id'));
 
     /* foreach ($request->input('memories') as $memory) {
       $processor->memories()->attach($memory['id'], ['quantity' => $memory['quantity']]);
@@ -40,6 +41,17 @@ class ProcessorController extends Controller
     }); */
 
     // $processor->memories()->sync($memories);
+
+    $processor = Processor::create($request->validated());
+
+    if ($request->filled('memories')) {
+      $memories = [];
+      foreach ($request->memories as $memory) {
+        $memories[$memory['id']] = ['quantity' => $memory['quantity']];
+      }
+
+      $processor->memories()->attach($memories);
+    }
 
     return redirect()->route('processors.index')->with('success', 'Registro creado satisfactoriamente!');
   }
@@ -53,18 +65,31 @@ class ProcessorController extends Controller
 
   public function update(ProcessorRequest $request, Processor $processor)
   {
-    $processor->update($request->only('mac', 'servicetag', 'user_id', 'prototype_id'));
+    /* $processor->update($request->only('mac', 'servicetag', 'user_id', 'prototype_id'));
 
     $syncData = [];
     foreach ($request->input('memories') as $memory) {
       $syncData[$memory['id']] = ['quantity' => $memory['quantity']];
     }
 
-    $processor->memories()->sync($syncData);
+    $processor->memories()->sync($syncData); */
+
+
+    $processor->update($request->validated());
+
+    if ($request->filled('memories')) {
+      $memories = [];
+      foreach ($request->memories as $memory) {
+        $memories[$memory['id']] = ['quantity' => $memory['quantity']];
+      }
+      $processor->memories()->sync($memories);
+    } else {
+      $processor->memories()->detach();
+    }
 
     return redirect()->route('processors.index')->with('success', 'Registro actualizado correctamente.');
   }
-  
+
   public function destroy(Processor $processor)
   {
     $processor->delete();
@@ -100,7 +125,7 @@ class ProcessorController extends Controller
 
     return redirect()->back()->with('success', 'Referencias actualizadas satisfactoriamente!');
   }
-  
+
   /**
    * #2: Laravel Excel Import to Database with Errors and Validation Handling
    * https://www.youtube.com/watch?v=Q2AUH9w9XaA
@@ -108,8 +133,8 @@ class ProcessorController extends Controller
   public function import(Request $request)
   {
     // use Importable;   ProcessorsImport
-    $file = $request->file('import_file')->store('importProcessors');
-    $import = new ProcessorsImport;
+    $file   = $request->file('import_file')->store('importProcessors');
+    $import = new ProcessorsImport();
     $import->import($file);
     // dd($import->errors());
     // dd($import->failures());

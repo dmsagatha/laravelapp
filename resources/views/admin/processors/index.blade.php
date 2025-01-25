@@ -94,6 +94,7 @@
               <th>Usuario</th>
               <th>MAC</th>
               <th>Service Tag</th>
+              <th>Memorias Adicionales</th>
               <th>Memorias</th>
               <th>Prototipos</th>
               <th>Acciones</th>
@@ -111,6 +112,13 @@
                     <p><span class="underline">Adicionales:</span></p>
                     @foreach($item->addMemories as $addMemory)
                       {{ $addMemory->brand }} - {{ $addMemory->technology }} - {{ $addMemory->velocity }} MHz - {{ $addMemory->capacity }} x {{ $addMemory->pivot->quantity_addmem }}<br>
+                    @endforeach
+                  @endif
+                </td>
+                <td>
+                  @if(!$item->memories->isEmpty())
+                    @foreach($item->memories as $memory)
+                      {{ $memory->serial }} - {{ $memory->capacity }} - {{ $memory->technology }} x {{ $memory->pivot->quantity }}<br>
                     @endforeach
                   @endif
                 </td>

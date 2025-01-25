@@ -19,8 +19,11 @@
     </div>
 
     <div class="p-10">
-      <form action="{{ route('processors.store') }}" method="POST">
+      <form method="POST" action="{{ isset($processor->id) ? route('processors.update', $processor) : route('processors.store') }}">
         @csrf
+        @if (isset($processor->id))
+          @method('PUT')
+        @endif
 
         @include('admin.processors._fields')
 
@@ -37,6 +40,29 @@
   </div>
 
   @push('scripts')
+
+    <script>
+      document.getElementById('add-memory-btn').addEventListener('click', function () {
+        const container = document.getElementById('memory-fields');
+        const index = container.children.length;
+
+        // Crear nuevos campos dinámicamente
+        const memoryField = document.createElement('div');
+        memoryField.innerHTML = `
+            <div>
+                <label for="memories[${index}][id]">Memory:</label>
+                <select name="memories[${index}][id]" required>
+                    @foreach($memories as $memory)
+                        <option value="{{ $memory->id }}">{{ $memory->serial }} - {{ $memory->capacity }}GB</option>
+                    @endforeach
+                </select>
+                <label for="memories[${index}][quantity]">Quantity:</label>
+                <input type="number" name="memories[${index}][quantity]" min="1" required>
+            </div>
+        `;
+        container.appendChild(memoryField);
+      });
+    </script>
     {{-- <script>
       document.addEventListener('DOMContentLoaded', () => {
           const addMemoryBtn = document.getElementById('add-memory-btn');

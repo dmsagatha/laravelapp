@@ -33,3 +33,13 @@
     </div>
   </div> 
 </div>
+
+
+    <!-- Sección para agregar memorias dinámicamente -->
+    <div id="memory-section">
+      <label>Memories:</label>
+      <button type="button" id="add-memory-btn">Add Memory</button>
+      <div id="memory-fields">
+          <!-- Campos dinámicos serán añadidos aquí -->
+      </div>
+  </div>
