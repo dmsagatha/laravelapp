@@ -58,9 +58,11 @@ class ProcessorController extends Controller
 
   public function edit(Processor $processor)
   {
-    $memories = Memory::all();
+    $users      = User::orderBy('name')->get();
+    $prototypes = Prototype::orderBy('reference')->get();
+    $memories   = Memory::orderBy('serial')->get();
 
-    return view('admin.processors.edit', compact('processor', 'memories'));
+    return view('admin.processors.createUpdate', compact('processor', 'users', 'prototypes', 'memories'));
   }
 
   public function update(ProcessorRequest $request, Processor $processor)
