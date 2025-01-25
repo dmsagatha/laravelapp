@@ -37,7 +37,7 @@
   </div>
 
   @push('scripts')
-    <script>
+    {{-- <script>
       document.addEventListener('DOMContentLoaded', () => {
           const addMemoryBtn = document.getElementById('add-memory-btn');
           const memoryList = document.getElementById('memory-list');
@@ -99,6 +99,6 @@
               console.log(memoryList);
           });
       });
-    </script>
+    </script> --}}
   @endpush
 </x-app-layout>

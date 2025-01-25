@@ -33,20 +33,3 @@
     </div>
   </div> 
 </div>
-
-<!-- Sección de Memorias -->
-<div id="memory-section">
-  <h3>Agregar Memorias</h3>
-  <button type="button" id="add-memory-btn">Agregar Memoria</button>
-
-  <table>
-      <thead>
-          <tr>
-              <th>Memoria</th>
-              <th>Cantidad</th>
-              <th>Acción</th>
-          </tr>
-      </thead>
-      <tbody id="memory-list"></tbody>
-  </table>
-</div>

@@ -13,7 +13,7 @@ class ProcessorController extends Controller
 {
   public function index()
   {
-    $processors = Processor::with('memories')->orderBy('mac')->get();
+    $processors = Processor::orderBy('mac')->get();
     
     return view('admin.processors.index', compact('processors'));
   }
@@ -23,9 +23,8 @@ class ProcessorController extends Controller
     $processor = new Processor();
     $users = User::orderBy('name')->get();
     $prototypes = Prototype::orderBy('reference')->get();
-    $memories = Memory::orderBy('serial')->get();
 
-    return view('admin.processors.createUpdate', compact('processor', 'users', 'prototypes', 'memories'));
+    return view('admin.processors.createUpdate', compact('processor', 'users', 'prototypes'));
   }
   
   public function store(ProcessorRequest $request)
@@ -36,11 +35,11 @@ class ProcessorController extends Controller
     /* foreach ($request->input('memories') as $memory) {
       $processor->memories()->attach($memory['id'], ['quantity' => $memory['quantity']]);
     } */
-    $memories = collect($request->input('memories'))->mapWithKeys(function ($memory) {
+    /* $memories = collect($request->input('memories'))->mapWithKeys(function ($memory) {
         return [$memory['id'] => ['quantity' => $memory['quantity']]];
-    });
+    }); */
 
-    $processor->memories()->sync($memories);
+    // $processor->memories()->sync($memories);
 
     return redirect()->route('processors.index')->with('success', 'Registro creado satisfactoriamente!');
   }

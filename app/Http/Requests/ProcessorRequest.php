@@ -19,9 +19,9 @@ class ProcessorRequest extends FormRequest
       'servicetag' => 'required|string|max:255',
       'user_id' => 'required|exists:users,id',
       'prototype_id' => 'required|exists:prototypes,id',
-      'memories' => 'required|array',
+      /* 'memories' => 'required|array',
       'memories.*.id' => 'required|exists:memories,id',
-      'memories.*.quantity' => 'required|integer|min:1',
+      'memories.*.quantity' => 'required|integer|min:1', */
     ];
 
     // Reglas adicionales para editar (omitir validación de unicidad en el ID actual)
