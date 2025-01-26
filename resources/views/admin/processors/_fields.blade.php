@@ -34,12 +34,31 @@
   </div> 
 </div>
 
-
-    <!-- Sección para agregar memorias dinámicamente -->
-    <div id="memory-section">
-      <label>Memories:</label>
-      <button type="button" id="add-memory-btn">Add Memory</button>
-      <div id="memory-fields">
-          <!-- Campos dinámicos serán añadidos aquí -->
+<div id="memory-section">
+  <label>Memorias:</label>
+  <button type="button" id="add-memory-btn" class="bg-blue-500 text-white px-4 py-2 rounded">
+    Adicionar Memoria
+  </button>
+  <div id="memory-fields" class="space-y-4">
+      @foreach($selectedMemories as $index => $memory)
+      <div class="flex items-center space-x-4">
+          <div>
+              <label for="memories[{{ $index }}][id]">Memory:</label>
+              <select name="memories[{{ $index }}][id]" class="border border-gray-300 rounded p-2" required>
+                  @foreach($memories as $availableMemory)
+                      <option value="{{ $availableMemory->id }}" {{ $memory['id'] == $availableMemory->id ? 'selected' : '' }}>
+                          {{ $availableMemory->serial }} - {{ $availableMemory->capacity }}GB
+                      </option>
+                  @endforeach
+              </select>
+          </div>
+          <div>
+              <label for="memories[{{ $index }}][quantity]">Quantity:</label>
+              <input type="number" name="memories[{{ $index }}][quantity]]" class="border border-gray-300 rounded p-2"
+                  min="1" value="{{ $memory['quantity'] }}" required>
+          </div>
+          <button type="button" class="remove-memory-btn bg-red-500 text-white px-2 py-1 rounded">Remove</button>
       </div>
+      @endforeach
   </div>
+</div>

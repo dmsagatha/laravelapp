@@ -20,12 +20,19 @@ class ProcessorController extends Controller
 
   public function create()
   {
-    $processor  = new Processor();
+    /* $processor  = new Processor();
     $users      = User::orderBy('name')->get();
     $prototypes = Prototype::orderBy('reference')->get();
     $memories   = Memory::orderBy('serial')->get();
 
-    return view('admin.processors.createUpdate', compact('processor', 'users', 'prototypes', 'memories'));
+    return view('admin.processors.createUpdate', compact('processor', 'users', 'prototypes', 'memories')); */
+    return view('admin.processors.createUpdate', [
+        'processor'        => new Processor(),
+        'users'            => User::orderBy('name')->get(),
+        'prototypes'       => Prototype::orderBy('reference')->get(),
+        'memories'         => Memory::orderBy('serial')->get(),
+        'selectedMemories' => [], // Vacío en creación
+    ]);
   }
 
   public function store(ProcessorRequest $request)
@@ -42,27 +49,40 @@ class ProcessorController extends Controller
 
     // $processor->memories()->sync($memories);
 
-    $processor = Processor::create($request->validated());
 
-    if ($request->filled('memories')) {
-      $memories = [];
-      foreach ($request->memories as $memory) {
-        $memories[$memory['id']] = ['quantity' => $memory['quantity']];
+    try {
+      $processor = Processor::create($request->validated());
+
+      if ($request->filled('memories')) {
+        $memories = [];
+        foreach ($request->memories as $memory) {
+          $memories[$memory['id']] = ['quantity' => $memory['quantity']];
+        }
+        $processor->memories()->attach($memories);
       }
 
-      $processor->memories()->attach($memories);
+      return redirect()->route('processors.index')->with('success', 'Registro creado satisfactoriamente!');
+    } catch (\Exception $e) {
+      return back()->withErrors(['error' => 'No se pudo guardar el procesador: ' . $e->getMessage()])->withInput();
     }
-
-    return redirect()->route('processors.index')->with('success', 'Registro creado satisfactoriamente!');
   }
 
   public function edit(Processor $processor)
   {
-    $users      = User::orderBy('name')->get();
-    $prototypes = Prototype::orderBy('reference')->get();
-    $memories   = Memory::orderBy('serial')->get();
+    $selectedMemories = $processor->memories->map(function ($memory) {
+      return [
+          'id'       => $memory->id,
+          'quantity' => $memory->pivot->quantity,
+      ];
+    });
 
-    return view('admin.processors.createUpdate', compact('processor', 'users', 'prototypes', 'memories'));
+    return view('admin.processors.createUpdate', [
+        'processor'        => $processor,
+        'users'            => User::orderBy('name')->get(),
+        'prototypes'       => Prototype::orderBy('reference')->get(),
+        'memories'         => Memory::orderBy('serial')->get(),
+        'selectedMemories' => $selectedMemories
+    ]);
   }
 
   public function update(ProcessorRequest $request, Processor $processor)

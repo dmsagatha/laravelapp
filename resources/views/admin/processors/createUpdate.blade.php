@@ -16,6 +16,15 @@
           </span>
         </h2>
       </div>
+      @if($errors->any())
+<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
     </div>
 
     <div class="p-10">
@@ -40,8 +49,38 @@
   </div>
 
   @push('scripts')
+  <script>
+    document.getElementById('add-memory-btn').addEventListener('click', function () {
+        const container = document.getElementById('memory-fields');
+        const index = container.children.length;
+    
+        const memoryField = document.createElement('div');
+        memoryField.classList.add('flex', 'items-center', 'space-x-4');
+        memoryField.innerHTML = `
+            <div>
+                <label for="memories[${index}][id]">Memory:</label>
+                <select name="memories[${index}][id]" class="border border-gray-300 rounded p-2" required>
+                    @foreach($memories as $memory)
+                        <option value="{{ $memory->id }}">{{ $memory->serial }} - {{ $memory->capacity }}GB</option>
+                    @endforeach
+                </select>
+            </div>
+            <div>
+                <label for="memories[${index}][quantity]">Quantity:</label>
+                <input type="number" name="memories[${index}][quantity]" class="border border-gray-300 rounded p-2" min="1" required>
+            </div>
+            <button type="button" class="remove-memory-btn bg-red-500 text-white px-2 py-1 rounded">Remove</button>
+        `;
+        container.appendChild(memoryField);
+    
+        // Agregar evento para eliminar memoria
+        memoryField.querySelector('.remove-memory-btn').addEventListener('click', function () {
+            memoryField.remove();
+        });
+    });
+    </script>
 
-    <script>
+    {{-- <script>
       document.getElementById('add-memory-btn').addEventListener('click', function () {
         const container = document.getElementById('memory-fields');
         const index = container.children.length;
@@ -62,7 +101,7 @@
         `;
         container.appendChild(memoryField);
       });
-    </script>
+    </script> --}}
     {{-- <script>
       document.addEventListener('DOMContentLoaded', () => {
           const addMemoryBtn = document.getElementById('add-memory-btn');

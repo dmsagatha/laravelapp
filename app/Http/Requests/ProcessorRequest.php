@@ -20,7 +20,7 @@ class ProcessorRequest extends FormRequest
       'user_id'             => ['required', 'exists:users,id'],
       'prototype_id'        => ['required', 'exists:prototypes,id'],
       'memories'            => ['nullable', 'array'],
-      'memories.*.id'       => ['required', 'exists:memories,id'],
+      'memories.*.id'       => ['required', 'exists:memories,id', 'distinct'],
       'memories.*.quantity' => ['required', 'integer', 'min:1'],
     ];
 
