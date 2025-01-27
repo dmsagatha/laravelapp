@@ -19,55 +19,24 @@
     </div>
   </div>
 
-  <div class="col-span-6 sm:col-span-3">
+  <div class="col-span-6 sm:col-span-3 md:col-span-2">
     <div class="relative form-group">
-      <label for="prototype_id" class="select--label required">
-        Referencia de Modelo
-      </label>
       <select name="prototype_id" id="prototype_id" class="select--control">
-        {{-- <option selected value="">Seleccionar</option>
-        @foreach ($prototypes as $value => $label)
-          <option value="{{ $value }}" {{ old('prototype_id', old('prototype_id', $processor->prototype->id ?? '')) == $value ? 'selected' : '' }}>
-            {{ $label->reference }}
+        <option selected value="">Seleccionar</option>
+        @foreach ($prototypes as $id => $label)
+          <option value="{{ $id }}" @selected(old('prototype_id', $processor->prototype->id ?? '') == $id)>
+          {{-- <option value="{{ $id }}" @selected(old('prototype_id', $processor->prototype->id ?? $processor->prototype_id) == $id)> --}}
+            {{ $label }}
           </option>
-          <option value="{{ $value }}"
-            {{ (old('prototype_id') ? old('prototype_id') : $processor->prototype->id ?? '') == $value ? 'selected' : '' }}>
-            {{ $label->reference }}
-          </option>
-          @endforeach --}}
-          {{-- <option value disabled {{ old('prototype_id', null) === null ? 'selected' : '' }}>
-            Seleccionar
-          </option> --}}
-          <option selected value="">Seleccionar</option>
-          {{-- @foreach ($prototypes as $value => $label)
-            <option value="{{ $value }}" @selected(old('prototype_id', $processor->prototype->id) == $value)>
-              {{ $label->reference }}
-            </option>
-          @endforeach --}}
-          @foreach ($prototypes as $prototype)
-            <option value="{{ $prototype->id }}" @selected(old('prototype_id', $processor->prototype_id) == $prototype->id) />
-              {{ $prototype->reference }}
-            </option>
-          @endforeach
-      </select>
-
-      @error('prototype_id')
-        <p class="text-sm text-red-600 dlabelark:text-rose-400">
-          {{ $message }}
-        </p>
-      @enderror
-    </div>
-  </div> 
-
-  {{-- <div class="col-span-6 sm:col-span-3">
-    <div class="relative form-group">
-      <x-select-label name="prototype_id" id="prototype_id" label="Referencia de Modelo">
-        @foreach ($prototypes as $prototype)
-          <option value="{{ $prototype->id }}">{{ $prototype->reference }}</option>
         @endforeach
-      </x-select-label>
+    </select>
+    @error('prototype_id')
+      <p class="text-sm text-red-600 dark:text-rose-400">
+        {{ $message }}
+      </p>
+    @enderror    
     </div>
-  </div> --}}
+  </div>
 </div>
 
 <div id="memory-section">

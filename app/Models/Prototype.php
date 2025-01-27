@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -50,4 +51,19 @@ class Prototype extends Model
     'Samsung' => 'Samsung',
     'Ibm'     => 'Ibm',
   ];
+
+  // Accessor
+  public function getFormattedReferenceAttribute()
+  {
+    return "{$this->id} - {$this->reference}";
+  }
+
+  
+	public function scopeFullPrototypes($query)
+	{
+    return $query->select('id', 'reference') // Selecciona solo lo necesario
+      ->orderBy('reference')
+      ->get()
+      ->pluck('formatted_reference', 'id'); // Usa el accessor
+  }
 }

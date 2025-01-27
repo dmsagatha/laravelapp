@@ -20,17 +20,11 @@ class ProcessorController extends Controller
 
   public function create()
   {
-    /* $processor  = new Processor();
-    $users      = User::orderBy('name')->get();
-    $prototypes = Prototype::orderBy('reference')->get();
-    $memories   = Memory::orderBy('serial')->get();
-
-    return view('admin.processors.createUpdate', compact('processor', 'users', 'prototypes', 'memories')); */
     return view('admin.processors.createUpdate', [
         'processor'        => new Processor(),
         // 'users'            => User::orderBy('name')->get()->pluck('name'),
         'users'            => User::fullUsers(),
-        'prototypes'       => Prototype::orderBy('reference')->get(),
+        'prototypes'       => Prototype::fullPrototypes(),
         'memories'         => Memory::orderBy('serial')->get(),
         'selectedMemories' => [], // Vacío en creación
     ]);
@@ -39,17 +33,6 @@ class ProcessorController extends Controller
   public function store(ProcessorRequest $request)
   {
     // dd($request->all());
-    // $processor = Processor::create($request->only('mac', 'servicetag', 'user_id', 'prototype_id'));
-
-    /* foreach ($request->input('memories') as $memory) {
-      $processor->memories()->attach($memory['id'], ['quantity' => $memory['quantity']]);
-    } */
-    /* $memories = collect($request->input('memories'))->mapWithKeys(function ($memory) {
-        return [$memory['id'] => ['quantity' => $memory['quantity']]];
-    }); */
-
-    // $processor->memories()->sync($memories);
-
 
     try {
       $processor = Processor::create($request->validated());
@@ -79,9 +62,8 @@ class ProcessorController extends Controller
 
     return view('admin.processors.createUpdate', [
         'processor'        => $processor,
-        // 'users'            => User::orderBy('name')->get()->pluck('name'),
         'users'            => User::fullUsers(),
-        'prototypes'       => Prototype::orderBy('reference')->get(),
+        'prototypes'       => Prototype::fullPrototypes(),
         'memories'         => Memory::orderBy('serial')->get(),
         'selectedMemories' => $selectedMemories
     ]);
@@ -89,16 +71,6 @@ class ProcessorController extends Controller
 
   public function update(ProcessorRequest $request, Processor $processor)
   {
-    /* $processor->update($request->only('mac', 'servicetag', 'user_id', 'prototype_id'));
-
-    $syncData = [];
-    foreach ($request->input('memories') as $memory) {
-      $syncData[$memory['id']] = ['quantity' => $memory['quantity']];
-    }
-
-    $processor->memories()->sync($syncData); */
-
-
     $processor->update($request->validated());
 
     if ($request->filled('memories')) {
