@@ -40,7 +40,7 @@
         </div>
 
         <div>
-          <h1 class="text-xl underline mt-5">Selects Dependientes</h1>
+          <h1 class="text-xl underline mt-3">Selects Dependientes (JavaScript)</h1>
 
           <div class="flex justify-center items-center">
             <form>
@@ -91,6 +91,7 @@
           <thead>
             <tr>
               <th width="1%">N°</th>
+              <th>ID</th>
               <th>Acciones</th>
               <th>Usuario</th>
               <th>MAC</th>
@@ -104,6 +105,7 @@
             @foreach ($processors as $key => $item)
               <tr>
                 <td style="text-align: center;">{{ $key + 1 }}</td>
+                <td >{{ $item->id }}</td>
                 <td>
                   <div class="flex items-stretch justify-center">
                     <a href="{{ route('processors.edit', $item) }}">

@@ -33,16 +33,6 @@ class ProcessorRequest extends FormRequest
     }
 
     return $rules;
-
-    /* return [
-      'mac'     => ['required', 'without_spaces', Rule::unique('processors')->ignore($this->processor)],
-      'servicetag' => ['required', 'without_spaces', Rule::unique('processors')->ignore($this->processor)],
-      'user_id' => 'required|exists:users,id',
-      'prototype_id' => 'required|exists:prototypes,id',
-      'memories' => 'required|array',
-      'memories.*.id' => 'required|exists:memories,id',
-      'memories.*.quantity' => 'required|integer|min:1',
-    ]; */
   }
 
   public function messages()

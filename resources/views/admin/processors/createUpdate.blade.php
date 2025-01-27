@@ -12,7 +12,11 @@
       <div class="px-4 py-5 mx-auto text-center max-w-7xl sm:px-6 lg:py-2 lg:px-8">
         <h2 class="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-3xl">
           <span class="block">
-            Procesadores - Selects dependencies
+            @if (isset($processor->id))
+              Actualizar - Procesadores - Selects dependientes
+            @else
+              Crear - Procesadores - Selects dependientes
+            @endif
           </span>
         </h2>
       </div>

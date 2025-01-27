@@ -28,7 +28,8 @@ class ProcessorController extends Controller
     return view('admin.processors.createUpdate', compact('processor', 'users', 'prototypes', 'memories')); */
     return view('admin.processors.createUpdate', [
         'processor'        => new Processor(),
-        'users'            => User::orderBy('name')->get(),
+        // 'users'            => User::orderBy('name')->get()->pluck('name'),
+        'users'            => User::fullUsers(),
         'prototypes'       => Prototype::orderBy('reference')->get(),
         'memories'         => Memory::orderBy('serial')->get(),
         'selectedMemories' => [], // Vacío en creación
@@ -78,7 +79,8 @@ class ProcessorController extends Controller
 
     return view('admin.processors.createUpdate', [
         'processor'        => $processor,
-        'users'            => User::orderBy('name')->get(),
+        // 'users'            => User::orderBy('name')->get()->pluck('name'),
+        'users'            => User::fullUsers(),
         'prototypes'       => Prototype::orderBy('reference')->get(),
         'memories'         => Memory::orderBy('serial')->get(),
         'selectedMemories' => $selectedMemories

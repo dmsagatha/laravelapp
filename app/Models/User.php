@@ -47,4 +47,16 @@ class User extends Authenticatable
   {
     return $this->hasMany(Processor::class);
   }
+  
+	public function scopefullUsers($query)
+	{
+    return $query->where('id', '!=', '1')
+      ->select(
+        'users.id',
+        DB::raw("CONCAT(users.name, ' - ', users.id) AS fullUsers")
+      )
+      ->orderBy('fullUsers')
+      ->get()
+      ->pluck('fullUsers', 'id');
+  }
 }
