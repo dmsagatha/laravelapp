@@ -18,10 +18,18 @@ return new class extends Migration
       $table->string('slug')->unique();
       $table->timestamps();
     });
+
+    Schema::create('add_memory_processor', function (Blueprint $table) {
+      $table->id();
+      $table->foreignId('add_memory_id')->constrained()->cascadeOnDelete();
+      $table->foreignId('processor_id')->constrained()->cascadeOnDelete();
+      $table->integer('quantity_addmem');
+    });
   }
   
   public function down(): void
   {
     Schema::dropIfExists('add_memories');
+    Schema::dropIfExists('add_memory_processor');
   }
 };
