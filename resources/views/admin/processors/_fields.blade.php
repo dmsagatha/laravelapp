@@ -39,7 +39,7 @@
   </div>
 </div>
 
-<div id="memory-section">
+<div id="memory-section" class="w-full mt-5">
   <label>Memorias:</label>
   <button type="button" id="add-memory-btn" class="bg-blue-500 text-white px-4 py-2 rounded">
     Adicionar Memoria

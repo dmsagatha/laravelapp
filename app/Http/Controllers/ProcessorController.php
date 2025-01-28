@@ -13,7 +13,7 @@ class ProcessorController extends Controller
 {
   public function index()
   {
-    $processors = Processor::with('memories')->orderBy('mac')->get();
+    $processors = Processor::with('user', 'prototype', 'memories', 'addMemories')->orderBy('mac')->get();
 
     return view('admin.processors.index', compact('processors'));
   }
@@ -22,7 +22,6 @@ class ProcessorController extends Controller
   {
     return view('admin.processors.createUpdate', [
         'processor'        => new Processor(),
-        // 'users'            => User::orderBy('name')->get()->pluck('name'),
         'users'            => User::fullUsers(),
         'prototypes'       => Prototype::fullPrototypes(),
         'memories'         => Memory::orderBy('serial')->get(),

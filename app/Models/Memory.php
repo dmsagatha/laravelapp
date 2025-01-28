@@ -24,7 +24,6 @@ class Memory extends Model
     '32 GB' => '32 GB',
     '16 GB' => '16 GB',
     '8 GB'  => '8 GB',
-    '4 GB'  => '4 GB',
   ];
 
   public const TECHNOLOGY_SELECT = [

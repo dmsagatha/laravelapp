@@ -29,16 +29,16 @@ class DatabaseSeeder extends Seeder
       ['brand' => 'Hynix',     'technology' => 'pc3-10600U-09-10-B0', 'velocity' => '2Rx8', 'capacity' => '8GB',   'slug' => 'hynix_pc3-10600U-09-10-B0'],
       ['brand' => 'Mac',       'technology' => 'pc3-10600U-09-10-B0', 'velocity' => '2Rx8', 'capacity' => '4GB',   'slug' => 'mac_pc3-10600U-09-10-B0']
     ]);
-    
+
     DB::table('memories')->insert([
-      ['serial' => 'SN001', 'capacity' => '8GB', 'technology' => '2Rx8', 'velocity' => '1Rx8', 'initial_warranty' => '2022-01-01', 'final_warranty' => '2023-12-31', 'days_warranty' => 365, 'birthdate' => '1990-01-01'],
-      ['serial' => 'SN002', 'capacity' => '4GB', 'technology' => '2Rx8', 'velocity' => '1Rx8', 'initial_warranty' => '2022-01-01', 'final_warranty' => '2023-12-31', 'days_warranty' => 365, 'birthdate' => '1990-01-01'],
-      ['serial' => 'SN003', 'capacity' => '1GB', 'technology' => '2Rx8', 'velocity' => '1Rx8', 'initial_warranty' => '2022-01-01', 'final_warranty' => '2023-12-31', 'days_warranty' => 365, 'birthdate' => '1990-01-01'],
-      ['serial' => 'SN004', 'capacity' => '512MB', 'technology' => '1Rx8', 'velocity' => '1Rx8', 'initial_warranty' => '2022-01-01', 'final_warranty' => '2023-12-31', 'days_warranty' => 365, 'birthdate' => '1990-01-01'],
-      ['serial' => 'SN005', 'capacity' => '8GB', 'technology' => '2Rx8', 'velocity' => '1Rx8', 'initial_warranty' => '2022-01-01', 'final_warranty' => '2023-12-31', 'days_warranty' => 365, 'birthdate' => '1990-01-01'],
-      ['serial' => 'SN006', 'capacity' => '4GB', 'technology' => '2Rx8', 'velocity' => '1Rx8', 'initial_warranty' => '2022-01-01', 'final_warranty' => '2023-12-31', 'days_warranty' => 365, 'birthdate' => '1990-01-01']
+      ['serial' => 'SN001', 'capacity' => '8 GB', 'technology' => 'DDR3', 'velocity' => '1Rx8', 'initial_warranty' => '2022-01-01', 'final_warranty' => '2023-12-31', 'days_warranty' => 365, 'birthdate' => '1990-01-01'],
+      ['serial' => 'SN002', 'capacity' => '32 GB', 'technology' => 'DDR4', 'velocity' => '1Rx8', 'initial_warranty' => '2022-01-01', 'final_warranty' => '2023-12-31', 'days_warranty' => 365, 'birthdate' => '1990-01-01'],
+      ['serial' => 'SN003', 'capacity' => '16 GB', 'technology' => 'DDR3', 'velocity' => '1Rx8', 'initial_warranty' => '2022-01-01', 'final_warranty' => '2023-12-31', 'days_warranty' => 365, 'birthdate' => '1990-01-01'],
+      ['serial' => 'SN004', 'capacity' => '32 GB', 'technology' => 'DDR5', 'velocity' => '1Rx8', 'initial_warranty' => '2022-01-01', 'final_warranty' => '2023-12-31', 'days_warranty' => 365, 'birthdate' => '1990-01-01'],
+      ['serial' => 'SN005', 'capacity' => '64 GB', 'technology' => 'DDR4', 'velocity' => '1Rx8', 'initial_warranty' => '2022-01-01', 'final_warranty' => '2023-12-31', 'days_warranty' => 365, 'birthdate' => '1990-01-01'],
+      ['serial' => 'SN006', 'capacity' => '16 GB', 'technology' => 'DDR3', 'velocity' => '1Rx8', 'initial_warranty' => '2022-01-01', 'final_warranty' => '2023-12-31', 'days_warranty' => 365, 'birthdate' => '1990-01-01']
     ]);
-    
+
     DB::table('prototypes')->insert([
       ['reference' => 'Referencia-01 - Escritorio', 'model_type' => 'Escritorio', 'brand' => 'Lenovo'],
       ['reference' => 'Referencia-02 - Escritorio', 'model_type' => 'Escritorio', 'brand' => 'Dell'],
