@@ -10,64 +10,72 @@
       <div class="relative overflow-x-auto w-full mx-auto text-center p-4 m-4 sm:px-6 lg:py-2 lg:px-8">
         <h2 class="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-3xl">
           <span class="block">
-            <a href="https://datatables.net/extensions/responsive/examples/initialisation/default.html"
-              target="_blank">
-              Importar Procesadores y Memorias RAM - <br>
+            <a href="https://datatables.net/extensions/responsive/examples/initialisation/default.html" target="_blank">
+              CRUD e Importar Procesadores y Memorias RAM - <br>
               Relación Muchos a Muchos
             </a>
           </span>
         </h2>
-        <span class="block py-4">Guía: 
-          <a href="https://www.youtube.com/watch?v=Q2AUH9w9XaA" target="_new" class="font-bold text-lg text-indigo-500" alt="Tailwind CSS">
-            Laravel Excel Import to Database with Errors and Validation Handling
-          </a>
-        </span>
+      </div>
 
-        <div>
-          <form action="{{ route('processors.import') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            
-            <input type="file" id="import_file" name="import_file" required>
-            
-            <button type="submit" class="ml-3 bg-indigo-600 dark:bg-indigo-500 text-white font-medium hover:bg-indigo-500 dark:hover:bg-indigo-600 px-4 py-2 rounded-md">
-              Importar
-            </button>
-          </form>
-          <span class="block py-2">
-            (Archivo de ejmplo: public/importar/processors.xlsx) - <br>
-            Intentar subir varias veces el mismo archivo y verá los resultados
+      <div class="flex justify-between content-center m-20 space-x-5">
+        <div class="w-full bg-slate-500 p-5 flex flex-col">
+          <span class="block py-4">Guía: 
+            <a href="https://www.youtube.com/watch?v=Q2AUH9w9XaA" target="_new" class="font-bold text-lg text-indigo-500" alt="Tailwind CSS">
+              Laravel Excel Import to Database with Errors and Validation Handling
+            </a>
           </span>
+
+          <div>
+            <form action="{{ route('processors.import') }}" method="POST" enctype="multipart/form-data">
+              @csrf
+              
+              <input type="file" id="import_file" name="import_file" required>
+              
+              <button type="submit" class="ml-3 bg-indigo-600 dark:bg-indigo-500 text-white font-medium hover:bg-indigo-500 dark:hover:bg-indigo-600 px-4 py-2 rounded-md">
+                Importar
+              </button>
+            </form>
+            <span class="block py-2">
+              (Archivo de ejmplo: public/importar/processors.xlsx) - <br>
+              Intentar subir varias veces el mismo archivo y verá los resultados
+            </span>
+          </div>
         </div>
 
-        <div>
-          <h1 class="text-xl underline mt-3">Selects Dependientes (JavaScript)</h1>
+        <div class="flex flex-col justify-center items-center w-full bg-slate-200 dark:bg-slate-700 p-5">
+          <div class="flex-1">
+            <h1 class="text-xl text-center underline my-3">
+              Selects Dependientes (JavaScript)
+            </h1>
+            <div>
+              <form>
+                <div class="grid grid-cols-6 gap-x-10 gap-y-8">
+                  <div class="col-span-6 sm:col-span-3">
+                    <div class="relative form-group">
+                      <x-select-label name="model_type" id="model_type" label="Tipo de Modelo">
+                        @foreach (\App\Models\Prototype::MODEL_TYPE_SELECT as $value => $label)
+                          <option value="{{ $value }}">{{ $label }}</option>
+                        @endforeach
+                      </x-select-label>
+                    </div>
+                  </div>
 
-          <div class="flex justify-center items-center">
-            <form>
-              <div class="grid grid-cols-6 gap-x-10 gap-y-8">
-                <div class="col-span-6 sm:col-span-3">
-                  <div class="relative form-group">
-                    <x-select-label name="model_type" id="model_type" label="Tipo de Modelo">
-                      @foreach (\App\Models\Prototype::MODEL_TYPE_SELECT as $value => $label)
-                        <option value="{{ $value }}">{{ $label }}</option>
-                      @endforeach
-                    </x-select-label>
+                  <div class="col-span-6 sm:col-span-3">
+                    <div class="relative form-group">
+                      <x-select-label name="reference" id="reference" label="Referencia de Modelo" disabled>
+                        <option value="">Seleccionar Referencia</option>
+                      </x-select-label>
+                    </div>
                   </div>
                 </div>
-
-                <div class="col-span-6 sm:col-span-3">
-                  <div class="relative form-group">
-                    <x-select-label name="reference" id="reference" label="Referencia de Modelo" disabled>
-                      <option value="">Seleccionar Referencia</option>
-                    </x-select-label>
-                  </div>
-                </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    
+      
+      {{-- Filtros, Crear --}}
       <div class="flex justify-between flex-wrap flex-grow">
         {{-- Filtros --}}
         <div class="flex items-center px-2 py-3 space-x-2 text-slate-800 dark:text-slate-50"></div>
@@ -84,6 +92,7 @@
         </div>
       </div>
       
+      {{-- Listado --}}
       <div class="relative overflow-x-auto max-w-6xl mx-auto p-4 m-4 shadow-sm shadow-slate-300 sm:rounded-lg">
         @include('partials.failures')
 
@@ -155,6 +164,7 @@
     <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
     <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.dataTables.js"></script>
 
+    {{-- DataTables --}}
     <script>
       let table = new DataTable('#dtTheme', {
         responsive: true,
