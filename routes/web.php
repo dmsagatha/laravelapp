@@ -42,7 +42,6 @@ Route::group(['middleware' => ['auth', 'verified']], function ()
     ->parameters(['usuarios' => 'user'])
     ->names('users');
   
-  // Route::resource('processors', ProcessorController::class);
   Route::resource('procesadores', ProcessorController::class)
     ->parameters(['procesadores' => 'processor'])
     ->names('processors');
@@ -50,7 +49,7 @@ Route::group(['middleware' => ['auth', 'verified']], function ()
   Route::prefix('procesadores')->name('processors.')->controller(ProcessorController::class)->group(function () {
     // Route::get('/', 'index')->name('index');
     Route::post('importar', 'import')->name('import');
-    Route::get('prototipos', 'getReferences')->name('references');
+    Route::get('prototipos/tipo', 'getReferences')->name('references');
   });
 
   Route::resource('memorias', MemoryController::class)

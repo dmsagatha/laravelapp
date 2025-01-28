@@ -194,7 +194,7 @@
           referenceSelect.disabled = true;
   
           if (modelType) {
-            fetch(`/procesadores/prototipos?model_type=${encodeURIComponent(modelType)}`)
+            fetch(`/procesadores/prototipos/tipo?model_type=${encodeURIComponent(modelType)}`)
               .then(response => {
                 if (!response.ok) {
                   throw new Error('La respuesta de la red no fue correcta');
