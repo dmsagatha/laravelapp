@@ -18,9 +18,9 @@
         </h2>
       </div>
 
-      <div class="flex justify-between content-center m-20 space-x-5">
-        <div class="w-full bg-slate-500 p-5 flex flex-col">
-          <span class="block py-4">Guía: 
+      <div class="relative overflow-x-auto flex justify-between content-center p-2 space-x-5">
+        <div class="flex flex-col w-full justify-center items-center border dark:border-slate-600 border-slate-300 rounded-sm shadow-sm shadow-slate-300 dark:shadow-slate-400">
+          <span class="block text-center py-4">Guía: 
             <a href="https://www.youtube.com/watch?v=Q2AUH9w9XaA" target="_new" class="font-bold text-lg text-indigo-500" alt="Tailwind CSS">
               Laravel Excel Import to Database with Errors and Validation Handling
             </a>
@@ -36,14 +36,14 @@
                 Importar
               </button>
             </form>
-            <span class="block py-2">
-              (Archivo de ejmplo: public/importar/processors.xlsx) - <br>
+            <span class="block text-center text-sm py-2">
+              (Archivo de ejemplo: public/importar/processors.xlsx) - <br>
               Intentar subir varias veces el mismo archivo y verá los resultados
             </span>
           </div>
         </div>
 
-        <div class="flex flex-col justify-center items-center w-full bg-slate-200 dark:bg-slate-700 p-5">
+        <div class="flex flex-col w-full justify-center items-center border dark:border-slate-600 border-slate-300 rounded-sm shadow-sm shadow-slate-300 dark:shadow-slate-400">
           <div class="flex-1">
             <h1 class="text-xl text-center underline my-3">
               Selects Dependientes (JavaScript)
