@@ -42,10 +42,10 @@
         @include('admin.processors._fields')
 
         <div class="py-3 bg-slate-50 dark:bg-slate-800 text-center space-x-2">
-          <button type="submit" class="w-36 inline-flex items-center justify-center bg-green-600 border border-transparent rounded-md font-medium p-2 mr-2 mb-2 text-center text-sm text-white hover:bg-green-500 focus:outline-none focus:border-green-700 focus:ring-0 focus:ring-green-200 active:bg-green-600 disabled:opacity-25 transition">
+          <button type="submit" class="w-36 inline-flex items-center justify-center bg-green-600 border border-transparent rounded-md font-medium p-2 mr-2 mb-2 text-center text-sm text-slate-50 hover:bg-green-500 focus:outline-none focus:border-green-700 focus:ring-0 focus:ring-green-200 active:bg-green-600 disabled:opacity-25 transition">
             {{ isset($processor->id) ? 'Actualizar' : 'Crear' }}
           </button>
-          <button class="w-36 inline-flex items-center justify-center bg-red-600 border border-transparent rounded-md font-medium p-2 mr-2 mb-2 text-center text-sm text-white hover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring-0 focus:ring-red-200 active:bg-red-600 disabled:opacity-25 transition">
+          <button class="w-36 inline-flex items-center justify-center bg-red-600 border border-transparent rounded-md font-medium p-2 mr-2 mb-2 text-center text-sm text-slate-50 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring-0 focus:ring-red-200 active:bg-red-600 disabled:opacity-25 transition">
             <a href="{{ route('processors.index') }}">Cancelar</a>
           </button>
         </div>
@@ -62,25 +62,26 @@
         const memoryField = document.createElement('div');
         memoryField.classList.add('flex', 'items-center', 'space-x-4');
         memoryField.innerHTML = `
-            <div>
-                <label for="memories[${index}][id]">Memory:</label>
-                <select name="memories[${index}][id]" class="border border-gray-300 rounded p-2" required>
-                    @foreach($memories as $memory)
-                        <option value="{{ $memory->id }}">{{ $memory->serial }} - {{ $memory->capacity }}GB</option>
-                    @endforeach
-                </select>
-            </div>
-            <div>
-                <label for="memories[${index}][quantity]">Quantity:</label>
-                <input type="number" name="memories[${index}][quantity]" class="border border-gray-300 rounded p-2" min="1" required>
-            </div>
-            <button type="button" class="remove-memory-btn bg-red-500 text-white px-2 py-1 rounded">Remove</button>
+            <td>
+              <select name="memories[${index}][id]" class="select--control sm:w-80 md:w-60 p-2" required>
+                <option value="">Seleccionar</option>
+                @foreach($memories as $memory)
+                  <option value="{{ $memory->id }}">
+                    {{ $memory->serial }} - {{ $memory->technology }} - {{ $memory->capacity }}
+                  </option>
+                @endforeach
+              </select>
+            </td>
+            <td>
+              <input type="number" name="memories[${index}][quantity]" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer text-center" min="1" required>
+            </td>
+            <button type="button" class="remove-memory-btn bg-red-500 text-slate-50 px-2 py-1 rounded">Eliminar</button>
         `;
         container.appendChild(memoryField);
     
         // Agregar evento para eliminar memoria
         memoryField.querySelector('.remove-memory-btn').addEventListener('click', function () {
-            memoryField.remove();
+          memoryField.remove();
         });
     });
     </script>
