@@ -22,7 +22,7 @@
       <div class="-mx-4 flex flex-wrap p-8">
         <!-- card 1 -->
         <div class="w-full px-4 md:w-1/2">
-          <div class="mb-9 rounded-xl py-8 px-7 border-slate-300 shadow-sm transition-all hover:shadow-md shadow-slate-400 dark:shadow-slate-400 sm:p-9 lg:px-6 xl:px-9">
+          <div class="mb-9 h-full rounded-xl py-8 px-7 border-slate-300 shadow-sm transition-all hover:shadow-md shadow-slate-400 dark:shadow-slate-400 sm:p-9 lg:px-6 xl:px-9">
             <span class="block text-center py-4">Guía:
               <a href="https://www.youtube.com/watch?v=Q2AUH9w9XaA" target="_new"
                 class="font-bold text-lg text-indigo-500" alt="Tailwind CSS">
@@ -50,7 +50,7 @@
         
         <!-- card 2 -->
         <div class="w-full px-4 md:w-1/2">
-          <div class="mb-9 rounded-xl py-8 px-7 border-slate-300 shadow-sm transition-all hover:shadow-md shadow-slate-400 dark:shadow-slate-400 sm:p-9 lg:px-6 xl:px-9">
+          <div class="mb-9 h-full rounded-xl py-8 px-7 border-slate-300 shadow-sm transition-all hover:shadow-md shadow-slate-400 dark:shadow-slate-400 sm:p-9 lg:px-6 xl:px-9">
             <div class="flex items-center mb-3">
               <h2 class="text-slate-50 dark:text-slate-50 text-lg font-medium">
                 Selects Dependientes (JavaScript)
