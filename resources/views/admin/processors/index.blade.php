@@ -7,6 +7,84 @@
   
   <div class="flow-root mx-auto w-full max-w-7xl">
     <div class="text-slate-900 bg-slate-50 dark:text-slate-100 dark:bg-slate-800 p-4 m-2 sm:p-4 shadow rounded">
+      <div class="flex justify-center flex-wrap gap-4">
+        <div class="card grow">1</div>
+        <div class="card grow">2</div>
+      </div>
+    </div>
+  </class>
+  
+  <div class="flow-root mx-auto w-full max-w-7xl">
+    <div class="text-slate-900 bg-slate-50 dark:text-slate-100 dark:bg-slate-800 p-4 m-2 sm:p-4 shadow rounded">
+      <div class="relative overflow-x-auto w-full mx-auto text-center p-4 m-4 sm:px-6 lg:py-2 lg:px-8">
+        <h2 class="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-3xl">
+          <span class="block">
+            <a href="https://datatables.net/extensions/responsive/examples/initialisation/default.html" target="_blank">
+              CRUD e Importar Procesadores y Memorias RAM - <br>
+              Relación Muchos a Muchos
+            </a>
+          </span>
+        </h2>
+      </div>
+
+      <div class="flex justify-center flex-wrap gap-2">
+        <div class="grow text-center">
+          <span class="block py-4">Guía: 
+            <a href="https://www.youtube.com/watch?v=Q2AUH9w9XaA" target="_new" class="font-bold text-lg text-indigo-500" alt="Tailwind CSS">
+              Laravel Excel Import to Database with <br>Errors and Validation Handling
+            </a>
+          </span>
+
+          <div>
+            <form action="{{ route('processors.import') }}" method="POST" enctype="multipart/form-data">
+              @csrf
+              
+              <input type="file" id="import_file" name="import_file" required>
+              
+              <button type="submit" class="ml-3 bg-indigo-600 dark:bg-indigo-500 text-white font-medium hover:bg-indigo-500 dark:hover:bg-indigo-600 px-4 py-2 rounded-md">
+                Importar
+              </button>
+            </form>
+            <span class="block text-center text-sm py-2">
+              (Archivo de ejemplo: public/importar/processors.xlsx) - <br>
+              Intentar subir varias veces el mismo archivo y verá los resultados
+            </span>
+          </div>
+        </div>
+        <div class="grow">
+          <h1 class="text-xl text-center underline my-3">
+            Selects Dependientes (JavaScript)
+          </h1>
+          <div>
+            <form>
+              <div class="grid grid-cols-6 gap-x-10 gap-y-8">
+                <div class="col-span-6 sm:col-span-3">
+                  <div class="relative form-group">
+                    <x-select-label name="model_type" id="model_type" label="Tipo de Modelo">
+                      @foreach (\App\Models\Prototype::MODEL_TYPE_SELECT as $value => $label)
+                        <option value="{{ $value }}">{{ $label }}</option>
+                      @endforeach
+                    </x-select-label>
+                  </div>
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                  <div class="relative form-group">
+                    <x-select-label name="reference" id="reference" label="Referencia de Modelo" disabled>
+                      <option value="">Seleccionar Referencia</option>
+                    </x-select-label>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </class>
+  
+  <div class="flow-root mx-auto w-full max-w-7xl">
+    <div class="text-slate-900 bg-slate-50 dark:text-slate-100 dark:bg-slate-800 p-4 m-2 sm:p-4 shadow rounded">
       <div class="relative overflow-x-auto w-full mx-auto text-center p-4 m-4 sm:px-6 lg:py-2 lg:px-8">
         <h2 class="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-3xl">
           <span class="block">
