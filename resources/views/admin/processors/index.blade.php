@@ -23,12 +23,28 @@
         <!-- card 1 -->
         <div class="w-full px-4 md:w-1/2 flex-grow">
           <div class="mb-9 rounded-xl py-8 px-7 border-slate-300 shadow-sm transition-all hover:shadow-md shadow-slate-400 dark:shadow-slate-400 sm:p-9 lg:px-6 xl:px-9">
-              <div>
-                  <h3 class="mb-4 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">Free to Get Started
-                  </h3>
-                  <p class="text-base font-medium text-body-color">FormBold is free to use, we are offering a decent free
-                      plan for experiments, personal projects and projects.</p>
-              </div>
+            <span class="block text-center py-4">Guía:
+              <a href="https://www.youtube.com/watch?v=Q2AUH9w9XaA" target="_new"
+                class="font-bold text-lg text-indigo-500" alt="Tailwind CSS">
+                Laravel Excel Import to Database with Errors and Validation Handling
+              </a>
+            </span>
+            <div>
+              <form action="{{ route('processors.import') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+
+                <input type="file" id="import_file" name="import_file" required>
+  
+                <button type="submit"
+                  class="ml-3 bg-indigo-600 dark:bg-indigo-500 text-white font-medium hover:bg-indigo-500 dark:hover:bg-indigo-600 px-4 py-2 rounded-md">
+                  Importar
+                </button>
+              </form>
+              <span class="block text-center text-sm py-2">
+                (Archivo de ejemplo: public/importar/processors.xlsx) - <br>
+                Intentar subir varias veces el mismo archivo y verá los resultados
+              </span>
+            </div>
           </div>
         </div>
         
