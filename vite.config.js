@@ -13,7 +13,7 @@ export default defineConfig({
     ],
     server: {
         host: true,
-        port: 5174, // Asegúrate de que coincide con VITE_PORT
+        port: 5140, // Asegúrate de que coincide con VITE_PORT
         strictPort: true,
         hmr: {
             host: 'localhost',

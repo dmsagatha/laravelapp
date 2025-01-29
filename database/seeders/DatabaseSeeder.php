@@ -40,21 +40,21 @@ class DatabaseSeeder extends Seeder
     ]);
 
     DB::table('prototypes')->insert([
-      ['reference' => 'Referencia-01 - Escritorio', 'model_type' => 'Escritorio', 'brand' => 'Lenovo'],
-      ['reference' => 'Referencia-02 - Escritorio', 'model_type' => 'Escritorio', 'brand' => 'Dell'],
-      ['reference' => 'Referencia-03 - Todo en 1', 'model_type' => 'Todo en 1', 'brand' => 'Apple'],
-      ['reference' => 'Referencia-04 - Portatil', 'model_type' => 'Portatil', 'brand' => 'Dell'],
-      ['reference' => 'Referencia-05 - Escritorio', 'model_type' => 'Escritorio', 'brand' => 'HP'],
-      ['reference' => 'Referencia-06 - Escritorio', 'model_type' => 'Escritorio', 'brand' => 'Apple'],
-      ['reference' => 'Referencia-07 - Portatil', 'model_type' => 'Portatil', 'brand' => 'Samsung'],
-      ['reference' => 'Referencia-08 - Escritorio', 'model_type' => 'Escritorio', 'brand' => 'Acer'],
-      ['reference' => 'Referencia-09 - Todo en 1', 'model_type' => 'Todo en 1', 'brand' => 'Apple'],
-      ['reference' => 'Referencia-10 - Portatil', 'model_type' => 'Portatil', 'brand' => 'Dell'],
-      ['reference' => 'Referencia-11 - Escritorio', 'model_type' => 'Escritorio', 'brand' => 'HP'],
-      ['reference' => 'Referencia-12 - Todo en 1', 'model_type' => 'Todo en 1', 'brand' => 'Apple'],
-      ['reference' => 'Referencia-13 - Portatil', 'model_type' => 'Portatil', 'brand' => 'Samsung'],
-      ['reference' => 'Referencia-14 - Escritorio', 'model_type' => 'Escritorio', 'brand' => 'Samsung'],
-      ['reference' => 'Referencia-15 - Todo en 1', 'model_type' => 'Todo en 1', 'brand' => 'Apple'],
+      ['reference' => 'Referencia-01', 'model_type' => 'Escritorio', 'brand' => 'Lenovo'],
+      ['reference' => 'Referencia-02', 'model_type' => 'Escritorio', 'brand' => 'Dell'],
+      ['reference' => 'Referencia-03', 'model_type' => 'Todo en 1', 'brand' => 'Apple'],
+      ['reference' => 'Referencia-04', 'model_type' => 'Portatil', 'brand' => 'Dell'],
+      ['reference' => 'Referencia-05', 'model_type' => 'Escritorio', 'brand' => 'HP'],
+      ['reference' => 'Referencia-06', 'model_type' => 'Escritorio', 'brand' => 'Apple'],
+      ['reference' => 'Referencia-07', 'model_type' => 'Portatil', 'brand' => 'Samsung'],
+      ['reference' => 'Referencia-08', 'model_type' => 'Escritorio', 'brand' => 'Acer'],
+      ['reference' => 'Referencia-09', 'model_type' => 'Todo en 1', 'brand' => 'Apple'],
+      ['reference' => 'Referencia-10', 'model_type' => 'Portatil', 'brand' => 'Dell'],
+      ['reference' => 'Referencia-11', 'model_type' => 'Escritorio', 'brand' => 'HP'],
+      ['reference' => 'Referencia-12', 'model_type' => 'Todo en 1', 'brand' => 'Apple'],
+      ['reference' => 'Referencia-13', 'model_type' => 'Portatil', 'brand' => 'Samsung'],
+      ['reference' => 'Referencia-14', 'model_type' => 'Escritorio', 'brand' => 'Samsung'],
+      ['reference' => 'Referencia-15', 'model_type' => 'Todo en 1', 'brand' => 'Apple'],
     ]);
   }
 }

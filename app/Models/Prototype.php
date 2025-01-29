@@ -54,13 +54,13 @@ class Prototype extends Model
   // Accessor
   public function getFormattedReferenceAttribute()
   {
-    return "{$this->id} - {$this->reference}";
+    return "{$this->id} - {$this->reference} - {$this->model_type}";
   }
 
   
 	public function scopeFullPrototypes($query)
 	{
-    return $query->select('id', 'reference') // Selecciona solo lo necesario
+    return $query->select('id', 'reference', 'model_type') // Selecciona solo lo necesario
       ->orderBy('reference')
       ->get()
       ->pluck('formatted_reference', 'id'); // Usa el accessor

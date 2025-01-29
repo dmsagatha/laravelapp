@@ -31,8 +31,6 @@ class ProcessorController extends Controller
 
   public function store(ProcessorRequest $request)
   {
-    // dd($request->all());
-
     try {
       $processor = Processor::create($request->validated());
 
