@@ -21,7 +21,7 @@
       {{-- Importar y Selects Dependientes (JavaScript) --}}
       <div class="-mx-4 flex flex-wrap p-8">
         <!-- card 1 -->
-        <div class="w-full px-4 md:w-1/2 flex-grow">
+        <div class="w-full px-4 md:w-1/2">
           <div class="mb-9 rounded-xl py-8 px-7 border-slate-300 shadow-sm transition-all hover:shadow-md shadow-slate-400 dark:shadow-slate-400 sm:p-9 lg:px-6 xl:px-9">
             <span class="block text-center py-4">Guía:
               <a href="https://www.youtube.com/watch?v=Q2AUH9w9XaA" target="_new"
@@ -36,7 +36,7 @@
                 <input type="file" id="import_file" name="import_file" required>
   
                 <button type="submit"
-                  class="ml-3 bg-indigo-600 dark:bg-indigo-500 text-white font-medium hover:bg-indigo-500 dark:hover:bg-indigo-600 px-4 py-2 rounded-md">
+                  class="ml-3 bg-indigo-600 dark:bg-indigo-500 text-slate-50 font-medium hover:bg-indigo-500 dark:hover:bg-indigo-600 px-4 py-2 rounded-md">
                   Importar
                 </button>
               </form>
@@ -49,15 +49,37 @@
         </div>
         
         <!-- card 2 -->
-        <div class="w-full px-4 md:w-1/2 flex-grow">
-            <div class="mb-9 rounded-xl py-8 px-7 border-slate-300 shadow-sm transition-all hover:shadow-md shadow-slate-400 dark:shadow-slate-400 sm:p-9 lg:px-6 xl:px-9">
-                <div>
-                    <h3 class="mb-4 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl">Link Multiple Emails
-                    </h3>
-                    <p class="text-base font-medium text-body-color">Link multiple email address under your parent account,
-                        use any of them for your forms to recieve submissions.</p>
-                </div>
+        <div class="w-full px-4 md:w-1/2">
+          <div class="mb-9 rounded-xl py-8 px-7 border-slate-300 shadow-sm transition-all hover:shadow-md shadow-slate-400 dark:shadow-slate-400 sm:p-9 lg:px-6 xl:px-9">
+            <div class="flex items-center mb-3">
+              <h2 class="text-slate-50 dark:text-slate-50 text-lg font-medium">
+                Selects Dependientes (JavaScript)
+              </h2>
             </div>
+            <div>
+              <form>
+                <div class="grid grid-cols-6 gap-x-10 gap-y-8">
+                  <div class="col-span-6 sm:col-span-3">
+                    <div class="relative form-group">
+                      <x-select-label name="model_type" id="model_type" label="Tipo de Modelo">
+                        @foreach (\App\Models\Prototype::MODEL_TYPE_SELECT as $value => $label)
+                        <option value="{{ $value }}">{{ $label }}</option>
+                        @endforeach
+                      </x-select-label>
+                    </div>
+                  </div>
+  
+                  <div class="col-span-6 sm:col-span-3">
+                    <div class="relative form-group">
+                      <x-select-label name="reference" id="reference" label="Referencia de Modelo" disabled>
+                        <option value="">Seleccionar Referencia</option>
+                      </x-select-label>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
 
