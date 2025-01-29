@@ -55,6 +55,62 @@
 
   @push('scripts')
     <script>
+      document.addEventListener("DOMContentLoaded", function () {
+    const container = document.getElementById('memory-fields');
+    const addMemoryBtn = document.getElementById('add-memory-btn');
+
+    // ✅ Evento delegado para eliminar memorias (funciona en nuevas y existentes)
+    container.addEventListener("click", function (event) {
+        if (event.target.classList.contains("remove-memory-btn")) {
+            const memoryField = event.target.closest(".memory-item");
+            
+            if (memoryField) {
+                // ✅ Si la memoria tiene un input hidden con un ID, marcamos para eliminar
+                const hiddenInput = memoryField.querySelector('input[name^="memories"][name$="[id]"]');
+                
+                if (hiddenInput && hiddenInput.value) {
+                    // Marcar el ID como eliminado para procesarlo en el backend
+                    memoryField.style.display = "none"; // Ocultar visualmente
+                    const deleteInput = document.createElement("input");
+                    deleteInput.type = "hidden";
+                    deleteInput.name = `memories_to_delete[]`;
+                    deleteInput.value = hiddenInput.value;
+                    container.appendChild(deleteInput);
+                } else {
+                    // Si es una memoria nueva, simplemente la eliminamos
+                    memoryField.remove();
+                }
+            }
+        }
+    });
+
+    // ✅ Agregar una nueva memoria
+    addMemoryBtn.addEventListener("click", function () {
+        const index = container.children.length;
+
+        const memoryField = document.createElement("div");
+        memoryField.classList.add("memory-item", "flex", "items-center", "space-x-4");
+        memoryField.innerHTML = `
+            <div>
+                <label for="memories[${index}][id]">Memory:</label>
+                <select name="memories[${index}][id]" class="border border-gray-300 rounded p-2" required>
+                    @foreach($memories as $memory)
+                        <option value="{{ $memory->id }}">{{ $memory->serial }} - {{ $memory->capacity }}GB</option>
+                    @endforeach
+                </select>
+            </div>
+            <div>
+                <label for="memories[${index}][quantity]">Quantity:</label>
+                <input type="number" name="memories[${index}][quantity]" class="border border-gray-300 rounded p-2" min="1" required>
+            </div>
+            <button type="button" class="remove-memory-btn bg-red-500 text-white px-2 py-1 rounded">Remove</button>
+        `;
+        container.appendChild(memoryField);
+    });
+});
+
+    </script>
+    {{-- <script>
       document.getElementById('add-memory-btn').addEventListener('click', function () {
         const container = document.getElementById('memory-fields');
         const index = container.children.length;
@@ -84,7 +140,7 @@
           memoryField.remove();
         });
       });
-    </script>
+    </script> --}}
 
     {{-- <script>
       document.getElementById('add-memory-btn').addEventListener('click', function () {
