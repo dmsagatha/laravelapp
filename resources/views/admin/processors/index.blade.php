@@ -20,9 +20,9 @@
       
       {{-- Importar y Selects Dependientes (JavaScript) --}}
       <div class="mx-2 flex flex-wrap">
-        <!-- card 1 -->
+        <!-- Card 1 -->
         <div class="w-full px-2 md:w-3/5">
-          <div class="h-full rounded-xl py-2 px-2 border-slate-300 shadow-sm transition-all hover:shadow-md shadow-slate-400 sm:p-9 lg:px-6 xl:px-9">
+          <div class="h-full rounded-xl p-2 border-slate-300 shadow-sm transition-all hover:shadow-md shadow-slate-400 dark:shadow-slate-400 sm:p-7 lg:px-6 xl:px-9">
             <span class="block text-center py-4">Guía:
               <a href="https://www.youtube.com/watch?v=Q2AUH9w9XaA" target="_new"
                 class="font-bold text-lg text-indigo-500" alt="Tailwind CSS">
@@ -47,17 +47,17 @@
           </div>
         </div>
         
-        <!-- card 2 -->
+        <!-- Card 2 -->
         <div class="w-full px-2 md:w-2/5">
-          <div class="h-full rounded-xl py-2 px-2 border-slate-300 shadow-sm transition-all hover:shadow-md shadow-slate-400 sm:p-9 lg:px-6 xl:px-9">
+          <div class="h-full rounded-xl p-2 border-slate-300 shadow-sm transition-all hover:shadow-md shadow-slate-400 dark:shadow-slate-400 sm:p-7 lg:px-6 xl:px-9">
             <div class="flex items-center mb-3">
-              <h2 class="text-slate-50 dark:text-slate-50 text-lg font-medium">
+              <h2 class="text-center text-slate-50 dark:text-slate-50 text-lg font-semibold">
                 Selects Dependientes (JavaScript)
               </h2>
             </div>
-            <div>
+            <div class="py-4">
               <form>
-                <div class="grid grid-cols-6 gap-x-10 gap-y-8">
+                <div class="grid grid-cols-6 gap-x-3 gap-y-8">
                   <div class="col-span-6 sm:col-span-3">
                     <div class="relative form-group">
                       <x-select-label name="model_type" id="model_type" label="Tipo de Modelo">
@@ -85,13 +85,12 @@
       {{-- Filtros, Crear --}}
       <div class="flex justify-between flex-wrap flex-grow">
         {{-- Filtros --}}
-        <div class="flex items-center px-2 py-3 space-x-2 text-slate-800 dark:text-slate-50"></div>
+        <div class="flex items-center p-2 space-x-2 text-slate-800 dark:text-slate-50"></div>
 
         {{-- Crear --}}
-        <div class="flex items-center px-2 py-3 space-x-2 text-slate-800 dark:text-slate-50">
+        <div class="flex items-center mt-2 p-2 space-x-2 text-slate-800 dark:text-slate-50">
           <div class="row">
-            <a href="{{ route('processors.create') }}"
-              class="relative inline-flex items-center justify-center p-2 mr-2 mb-2 text-blue-600 border border-blue-500 hover:bg-blue-500 hover:text-slate-50 active:bg-blue-600 font-medium rounded-lg outline-none focus:outline-none ease-linear transition-all duration-150">
+            <a href="{{ route('processors.create') }}" class="relative inline-flex items-center justify-center p-2 mr-2 mb-2 text-blue-600 border border-blue-500 hover:bg-blue-500 hover:text-slate-50 active:bg-blue-600 font-medium rounded-lg outline-none focus:outline-none ease-linear transition-all duration-150">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -207,41 +206,41 @@
     {{-- Seleccionar el Tipo del Modelo del Prototipo --}}
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-          const modelTypeSelect = document.getElementById('model_type');
-          const referenceSelect = document.getElementById('reference');
+        const modelTypeSelect = document.getElementById('model_type');
+        const referenceSelect = document.getElementById('reference');
 
-          modelTypeSelect.addEventListener('change', function () {
-            const modelType = modelTypeSelect.value;
-    
-            // Limpia las opciones actuales del select de referencias
-            referenceSelect.innerHTML = '<option value="">Seleccionar Referencia</option>';
-            referenceSelect.disabled = true;
+        modelTypeSelect.addEventListener('change', function () {
+          const modelType = modelTypeSelect.value;
+  
+          // Limpia las opciones actuales del select de referencias
+          referenceSelect.innerHTML = '<option value="">Seleccionar Referencia</option>';
+          referenceSelect.disabled = true;
 
-            if (modelType) {
-              fetch(`/procesadores/prototipos/tipo?model_type=${encodeURIComponent(modelType)}`)
-                .then(response => {
-                  if (!response.ok) {
-                    throw new Error('La respuesta de la red no fue correcta');
-                  }
-                  return response.json();
-                })
-                .then(data => {
-                  // Agrega las nuevas opciones al select de referencias
-                  Object.entries(data).forEach(([id, reference]) => {
-                    const option = document.createElement('option');
-                    option.value = id;
-                    option.textContent = reference;
-                    referenceSelect.appendChild(option);
-                  });
-
-                  referenceSelect.disabled = false;
-                })
-                .catch(error => {
-                  console.error('Error al obtener referencias:', error);
+          if (modelType) {
+            fetch(`/procesadores/prototipos/tipo?model_type=${encodeURIComponent(modelType)}`)
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error('La respuesta de la red no fue correcta');
+                }
+                return response.json();
+              })
+              .then(data => {
+                // Agrega las nuevas opciones al select de referencias
+                Object.entries(data).forEach(([id, reference]) => {
+                  const option = document.createElement('option');
+                  option.value = id;
+                  option.textContent = reference;
+                  referenceSelect.appendChild(option);
                 });
-            }
-          });
+
+                referenceSelect.disabled = false;
+              })
+              .catch(error => {
+                console.error('Error al obtener referencias:', error);
+              });
+          }
         });
+      });
     </script>
   @endpush
 </x-app-layout>
