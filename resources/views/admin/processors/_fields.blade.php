@@ -21,6 +21,7 @@
 
   <div class="col-span-6 sm:col-span-3 md:col-span-2">
     <div class="relative form-group">
+      <label for="prototype_id" class="select--label required">Prototipos</label>
       <select name="prototype_id" id="prototype_id" class="select--control">
         <option selected value="">Seleccionar</option>
         @foreach ($prototypes as $id => $label)
@@ -29,12 +30,12 @@
             {{ $label }}
           </option>
         @endforeach
-    </select>
-    @error('prototype_id')
-      <p class="text-sm text-red-600 dark:text-rose-400">
-        {{ $message }}
-      </p>
-    @enderror    
+      </select>
+      @error('prototype_id')
+        <p class="text-sm text-red-600 dark:text-rose-400">
+          {{ $message }}
+        </p>
+      @enderror
     </div>
   </div>
 </div>
@@ -67,6 +68,11 @@
             @endforeach
           </select>
         </td>
+        @error('memories[{{ $index }}][id]')
+          <p class="text-sm text-red-600 dark:text-rose-400">
+            {{ $message }}
+          </p>
+        @enderror
         <td>
           <input type="number" name="memories[{{ $index }}][quantity]]" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer text-center" min="1" value="{{ $memory['quantity'] }}" required>
         </td>
