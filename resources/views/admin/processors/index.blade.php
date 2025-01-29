@@ -19,24 +19,23 @@
       </div>
       
       {{-- Importar y Selects Dependientes (JavaScript) --}}
-      <div class="-mx-4 flex flex-wrap p-8">
+      <div class="mx-2 flex flex-wrap">
         <!-- card 1 -->
-        <div class="w-full px-4 md:w-1/2">
-          <div class="mb-9 h-full rounded-xl py-8 px-7 border-slate-300 shadow-sm transition-all hover:shadow-md shadow-slate-400 dark:shadow-slate-400 sm:p-9 lg:px-6 xl:px-9">
+        <div class="w-full px-2 md:w-3/5">
+          <div class="h-full rounded-xl py-2 px-2 border-slate-300 shadow-sm transition-all hover:shadow-md shadow-slate-400 sm:p-9 lg:px-6 xl:px-9">
             <span class="block text-center py-4">Guía:
               <a href="https://www.youtube.com/watch?v=Q2AUH9w9XaA" target="_new"
                 class="font-bold text-lg text-indigo-500" alt="Tailwind CSS">
                 Laravel Excel Import to Database with Errors and Validation Handling
               </a>
             </span>
-            <div>
+            <div class="text-center">
               <form action="{{ route('processors.import') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <input type="file" id="import_file" name="import_file" required>
   
-                <button type="submit"
-                  class="ml-3 bg-indigo-600 dark:bg-indigo-500 text-slate-50 font-medium hover:bg-indigo-500 dark:hover:bg-indigo-600 px-4 py-2 rounded-md">
+                <button type="submit" class="bg-indigo-600 dark:bg-indigo-500 text-slate-50 font-medium hover:bg-indigo-500 dark:hover:bg-indigo-600 my-2 px-4 py-2 rounded-md">
                   Importar
                 </button>
               </form>
@@ -49,8 +48,8 @@
         </div>
         
         <!-- card 2 -->
-        <div class="w-full px-4 md:w-1/2">
-          <div class="mb-9 h-full rounded-xl py-8 px-7 border-slate-300 shadow-sm transition-all hover:shadow-md shadow-slate-400 dark:shadow-slate-400 sm:p-9 lg:px-6 xl:px-9">
+        <div class="w-full px-2 md:w-2/5">
+          <div class="h-full rounded-xl py-2 px-2 border-slate-300 shadow-sm transition-all hover:shadow-md shadow-slate-400 sm:p-9 lg:px-6 xl:px-9">
             <div class="flex items-center mb-3">
               <h2 class="text-slate-50 dark:text-slate-50 text-lg font-medium">
                 Selects Dependientes (JavaScript)
