@@ -46,8 +46,7 @@
     Agregar
   </button>
 
-  <table class="table-auto w-full">
-    <caption class="font-bold py-2">Memorias RAM</caption>
+  <table id="memory-table" class="table-auto w-full">
     <thead>
       <tr>
         <th class="text-center text-xs">Memorias</th>
@@ -55,9 +54,9 @@
         <th class="text-center text-sm">Acciones</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="memory-list">
       @foreach($selectedMemories as $index => $memory)
-        <tr>
+        <tr class="memory-item">
           <td>
             <select name="memories[{{ $index }}][id]" class="select--control sm:w-80 md:w-60 p-2">
               <option value="">Seleccionar</option>

@@ -60,18 +60,53 @@
       document.addEventListener("DOMContentLoaded", function () {
         const container = document.getElementById("memory-fields");
         const addMemoryBtn = document.getElementById("add-memory-btn");
+        const memoryTable = document.getElementById("memory-table");
+        const memoryList = document.getElementById("memory-list");
+
+        // Ocultar la tabla si no hay memorias cargadas
+        if (memoryList.children.length === 0) {
+          memoryTable.classList.add("hidden");
+        }
+
+        addMemoryBtn.addEventListener("click", function () {
+          console.log("🟡 Botón de agregar memoria clickeado");
+        
+          // Mostrar la tabla
+          memoryTable.classList.remove("hidden");
+
+          const index = memoryList.children.length;
+          const memoryField = document.createElement("tr");
+          memoryField.classList.add("memory-item");
+
+          memoryField.innerHTML = `
+            <td>
+              <select name="memories[${index}][id]" class="select--control sm:w-80 md:w-60 p-2" required>
+                <option value="">Seleccionar</option>
+                @foreach($memories as $memory)
+                  <option value="{{ $memory->id }}">{{ $memory->serial }} - {{ $memory->capacity }}GB</option>
+                @endforeach
+                </select>
+            </td>
+            <td>
+              <input type="number" name="memories[${index}][quantity]" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer text-center" min="1" required>
+            </td>
+            <button type="button" class="remove-memory-btn bg-red-500 text-white px-2 py-1 rounded">Eliminar</button>
+          `;
+          memoryList.appendChild(memoryField);
+        });
 
         container.addEventListener("click", function (event) {
           if (event.target.classList.contains("remove-memory-btn")) {
             console.log("🔴 Botón de eliminar clickeado");
 
             // Buscar la memoria en una fila `<tr>` si es una memoria guardada
-            let memoryField = event.target.closest("tr") || event.target.closest(".memory-item") || event.target.closest(".flex");
+            const memoryField = event.target.closest("tr");
 
             if (memoryField) {
               console.log("✅ Elemento encontrado para eliminar:", memoryField);
 
-              const hiddenInput = memoryField.querySelector('input[name^="memories"][name$="[id]"]');
+              const hiddenInput = memoryField.querySelector('select[name^="memories"][name$="[id]"]');
+              
               if (hiddenInput && hiddenInput.value) {
                 console.log("🔵 Memoria existente detectada con ID:", hiddenInput.value);
 
@@ -95,31 +130,12 @@
               console.log("⚠️ No se encontró el contenedor de la memoria. Probando con `event.target.parentElement`...");
               console.log("📌 Parent Element:", event.target.parentElement);
             }
+
+            // Ocultar la tabla si ya no quedan memorias
+            if (memoryList.children.length === 0) {
+              memoryTable.classList.add("hidden");
+            }
           }
-        });
-
-        addMemoryBtn.addEventListener("click", function () {
-          console.log("🟡 Botón de agregar memoria clickeado");
-
-          const index = container.children.length;
-
-          const memoryField = document.createElement("div");
-          memoryField.classList.add("memory-item", "flex", "items-center", "space-x-4");
-          memoryField.innerHTML = `
-            <div>
-              <select name="memories[${index}][id]" class="select--control sm:w-80 md:w-60 p-2" required>
-                <option value="">Seleccionar</option>
-                @foreach($memories as $memory)
-                  <option value="{{ $memory->id }}">{{ $memory->serial }} - {{ $memory->capacity }}GB</option>
-                @endforeach
-                </select>
-            </div>
-            <div>
-              <input type="number" name="memories[${index}][quantity]" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer text-center" min="1" required>
-            </div>
-            <button type="button" class="remove-memory-btn bg-red-500 text-white px-2 py-1 rounded">Remove</button>
-          `;
-          container.appendChild(memoryField);
         });
       });
     </script>
