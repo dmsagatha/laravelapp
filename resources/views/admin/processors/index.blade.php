@@ -17,6 +17,24 @@
           </span>
         </h2>
       </div>
+
+      {{-- Filtros, Crear --}}
+      <div class="flex justify-between flex-wrap flex-grow">
+        {{-- Filtros --}}
+        <div class="flex items-center p-2 space-x-2 text-slate-800 dark:text-slate-50"></div>
+
+        {{-- Crear --}}
+        <div class="flex items-center p-2 space-x-2 text-slate-800 dark:text-slate-50">
+          <div class="row">
+            <a href="{{ route('processors.create') }}" class="relative inline-flex items-center justify-center p-2 mr-2 mb-2 text-blue-600 border border-blue-500 hover:bg-blue-500 hover:text-slate-50 active:bg-blue-600 font-medium rounded-lg outline-none focus:outline-none ease-linear transition-all duration-150">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
       
       {{-- Importar y Selects Dependientes (JavaScript) --}}
       <div class="mx-2 flex flex-wrap">
