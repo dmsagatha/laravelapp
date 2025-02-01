@@ -58,7 +58,7 @@
       @foreach($selectedMemories as $index => $memory)
         <tr class="memory-item">
           <td>
-            <select name="memories[{{ $index }}][id]" class="select--control sm:w-80 md:w-60 p-2">
+            <select name="memories[{{ $index }}][id]" class="memory-select select--control sm:w-80 md:w-60 p-2">
               <option value="">Seleccionar</option>
               @foreach($memories as $availableMemory)
                 <option value="{{ $availableMemory->id }}" {{ $memory['id'] == $availableMemory->id ? 'selected' : '' }}>

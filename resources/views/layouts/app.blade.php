@@ -73,6 +73,15 @@
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 
+    {{-- <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function () {
+        Swal.fire(
+          'Buen trabajo, estoy funcionando!',
+          'Haga clic en el botón!',
+          'success')
+        });
+    </script> --}}
+
     @stack('scripts')
   </body>
 </html>
