@@ -54,117 +54,117 @@
   </div>
 
   @push('scripts')
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const container = document.getElementById("memory-fields");
-      const addMemoryBtn = document.getElementById("add-memory-btn");
-      const memoryTable = document.getElementById("memory-table");
-      const memoryList = document.getElementById("memory-list");
-  
-      // Ocultar la tabla si no hay memorias cargadas
-      function checkTableVisibility() {
-        if (memoryList.children.length === 0) {
-          memoryTable.classList.add("hidden");
-        } else {
-          memoryTable.classList.remove("hidden");
-        }
-      }
-      checkTableVisibility();
-  
-      addMemoryBtn.addEventListener("click", function () {
-        console.log("🟡 Botón de agregar memoria clickeado");
-  
-        const index = memoryList.children.length;
-        const memoryField = document.createElement("tr");
-        memoryField.classList.add("memory-item");
-  
-        memoryField.innerHTML = `
-          <td>
-            <select name="memories[${index}][id]" class="memory-select select--control sm:w-80 md:w-60 p-2" required>
-              <option value="">Seleccionar</option>
-              @foreach($memories as $memory)
-                <option value="{{ $memory->id }}">
-                  {{ $memory->serial }} - {{ $memory->technology }} - {{ $memory->capacity }}
-                </option>
-              @endforeach
-            </select>
-          </td>
-          <td>
-            <input type="number" name="memories[${index}][quantity]" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer text-center" min="1" required>
-          </td>
-          <td>
-            <button type="button" class="remove-memory-btn bg-red-500 text-white px-2 py-1 rounded">
-              <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
-              </svg>
-            </button>
-          </td>
-        `;
-        memoryList.appendChild(memoryField);
-        checkTableVisibility();
-      });
-  
-      // Validación de referencias duplicadas
-      container.addEventListener("change", function (event) {
-        if (event.target.classList.contains("memory-select")) {
-          const selectedValues = Array.from(document.querySelectorAll(".memory-select"))
-            .map(select => select.value)
-            .filter(value => value !== "");
-  
-          const uniqueValues = new Set(selectedValues);
-  
-          if (selectedValues.length !== uniqueValues.size) {
-            Swal.fire({
-              icon: "warning",
-              title: "Referencia duplicada",
-              text: "Esta referencia ya ha sido seleccionada. Por favor, elegir otra.",
-              confirmButtonColor: "#d33",
-            });
-  
-            // Restablecer la selección
-            event.target.value = "";
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const container = document.getElementById("memory-fields");
+        const addMemoryBtn = document.getElementById("add-memory-btn");
+        const memoryTable = document.getElementById("memory-table");
+        const memoryList = document.getElementById("memory-list");
+    
+        // Ocultar la tabla si no hay memorias cargadas
+        function checkTableVisibility() {
+          if (memoryList.children.length === 0) {
+            memoryTable.classList.add("hidden");
+          } else {
+            memoryTable.classList.remove("hidden");
           }
         }
-      });
-  
-      // Eliminación de memorias
-      container.addEventListener("click", function (event) {
-        if (event.target.closest(".remove-memory-btn")) {
-          console.log("🔴 Botón de eliminar clickeado");
-  
-          let memoryField = event.target.closest("tr");
-  
-          if (memoryField) {
-            console.log("✅ Elemento encontrado para eliminar:", memoryField);
-  
-            const selectInput = memoryField.querySelector('select[name^="memories"][name$="[id]"]');
-  
-            if (selectInput && selectInput.value) {
-              console.log("🔵 Memoria existente detectada con ID:", selectInput.value);
-  
-              memoryField.style.display = "none"; // Ocultar visualmente en edición
-  
-              let deleteInput = document.querySelector(`input[name="memories_to_delete[]"][value="${selectInput.value}"]`);
-  
-              if (!deleteInput) {
-                deleteInput = document.createElement("input");
-                deleteInput.type = "hidden";
-                deleteInput.name = "memories_to_delete[]";
-                deleteInput.value = selectInput.value;
-                container.appendChild(deleteInput);
-                console.log("🟢 Input hidden creado para marcar la memoria como eliminada:", deleteInput);
-              }
-            } else {
-              console.log("🟠 Memoria nueva eliminada completamente del DOM");
-              memoryField.remove();
+        checkTableVisibility();
+    
+        addMemoryBtn.addEventListener("click", function () {
+          console.log("🟡 Botón de agregar memoria clickeado");
+    
+          const index = memoryList.children.length;
+          const memoryField = document.createElement("tr");
+          memoryField.classList.add("memory-item");
+    
+          memoryField.innerHTML = `
+            <td>
+              <select name="memories[${index}][id]" class="memory-select select--control sm:w-80 md:w-60 p-2" required>
+                <option value="">Seleccionar</option>
+                @foreach($memories as $memory)
+                  <option value="{{ $memory->id }}">
+                    {{ $memory->serial }} - {{ $memory->technology }} - {{ $memory->capacity }}
+                  </option>
+                @endforeach
+              </select>
+            </td>
+            <td>
+              <input type="number" name="memories[${index}][quantity]" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer text-center" min="1" required>
+            </td>
+            <td class="flex justify-center items-center">
+              <button type="button" class="remove-memory-btn bg-red-500 text-white px-2 py-1 rounded">
+                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                </svg>
+              </button>
+            </td>
+          `;
+          memoryList.appendChild(memoryField);
+          checkTableVisibility();
+        });
+    
+        // Validación de referencias duplicadas
+        container.addEventListener("change", function (event) {
+          if (event.target.classList.contains("memory-select")) {
+            const selectedValues = Array.from(document.querySelectorAll(".memory-select"))
+              .map(select => select.value)
+              .filter(value => value !== "");
+    
+            const uniqueValues = new Set(selectedValues);
+    
+            if (selectedValues.length !== uniqueValues.size) {
+              Swal.fire({
+                icon: "warning",
+                title: "Referencia duplicada",
+                text: "Esta referencia ya ha sido seleccionada. Por favor, elegir otra.",
+                confirmButtonColor: "#d33",
+              });
+    
+              // Restablecer la selección
+              event.target.value = "";
             }
           }
-  
-          // Revisar si la tabla debe ocultarse
-          setTimeout(checkTableVisibility, 200);
-        }
+        });
+    
+        // Eliminación de memorias
+        container.addEventListener("click", function (event) {
+          if (event.target.closest(".remove-memory-btn")) {
+            console.log("🔴 Botón de eliminar clickeado");
+    
+            let memoryField = event.target.closest("tr");
+    
+            if (memoryField) {
+              console.log("✅ Elemento encontrado para eliminar:", memoryField);
+    
+              const selectInput = memoryField.querySelector('select[name^="memories"][name$="[id]"]');
+    
+              if (selectInput && selectInput.value) {
+                console.log("🔵 Memoria existente detectada con ID:", selectInput.value);
+    
+                memoryField.style.display = "none"; // Ocultar visualmente en edición
+    
+                let deleteInput = document.querySelector(`input[name="memories_to_delete[]"][value="${selectInput.value}"]`);
+    
+                if (!deleteInput) {
+                  deleteInput = document.createElement("input");
+                  deleteInput.type = "hidden";
+                  deleteInput.name = "memories_to_delete[]";
+                  deleteInput.value = selectInput.value;
+                  container.appendChild(deleteInput);
+                  console.log("🟢 Input hidden creado para marcar la memoria como eliminada:", deleteInput);
+                }
+              } else {
+                console.log("🟠 Memoria nueva eliminada completamente del DOM");
+                memoryField.remove();
+              }
+            }
+    
+            // Revisar si la tabla debe ocultarse
+            setTimeout(checkTableVisibility, 200);
+          }
+        });
       });
-    });
-  </script>
+    </script>
   @endpush
 </x-app-layout>
