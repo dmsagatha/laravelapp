@@ -54,8 +54,6 @@
   </div>
 
   @push('scripts')
-    {{-- <script src="{{ asset('js/dynamicSelection.js') }}"></script> --}}
-
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const container = document.getElementById("memory-fields");

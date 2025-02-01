@@ -66,38 +66,17 @@ class ProcessorController extends Controller
     ]);
   }
 
-  public function update(Request $request, Processor $processor)
+  public function update(ProcessorRequest $request, Processor $processor)
   {
-    // $processor->update($request->validated());
-
-    /* if ($request->filled('memories')) {
-      $memories = [];
-      foreach ($request->memories as $memory) {
-        $memories[$memory['id']] = ['quantity' => $memory['quantity']];
-      }
-      $processor->memories()->sync($memories);
-    } else {
-      $processor->memories()->detach();
-    } */
-    $data = $request->validate([
-      'mac' => 'required|string',
-      'servicetag' => 'required|string',
-      'memories' => 'nullable|array',
-      'memories.*.id' => 'exists:memories,id',
-      'memories.*.quantity' => 'integer|min:1',
-      'memories_to_delete' => 'nullable|array',
-      'memories_to_delete.*' => 'exists:memory_processor,memory_id',
-    ]);
-
     // Sincronizar las memorias nuevas
-    $memories = collect($data['memories'] ?? [])
-        ->mapWithKeys(fn($memory) => [$memory['id'] => ['quantity' => $memory['quantity']]]);
+    $memories = collect($request->validated(['memories']) ?? [])
+        ->mapWithKeys(fn ($memory) => [$memory['id'] => ['quantity' => $memory['quantity']]]);
 
     $processor->memories()->sync($memories);
 
     // Eliminar memorias que se marcaron para borrar
-    if (!empty($data['memories_to_delete'])) {
-        $processor->memories()->detach($data['memories_to_delete']);
+    if (!empty($request->validated(['memories_to_delete']))) {
+      $processor->memories()->detach($request->validated(['memories_to_delete']));
     }
 
     return redirect()->route('processors.index')->with('success', 'Registro actualizado correctamente.');

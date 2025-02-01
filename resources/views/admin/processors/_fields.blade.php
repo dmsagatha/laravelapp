@@ -79,7 +79,7 @@
             <button type="button" class="remove-memory-btn bg-red-500 text-slate-50 px-2 py-1 rounded">
               <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
-              </svg>Remove
+              </svg>
             </button>
           </td>
         </tr>
@@ -87,38 +87,3 @@
     </tbody>
   </table>
 </div>
-
-
-<!-- Memorias -->
-{{-- <div id="memory-section" class="mb-4">
-  <label class="block text-sm font-medium text-gray-700">Memories</label>
-  <button type="button" id="add-memory-btn" class="bg-blue-500 text-white px-4 py-2 rounded mt-2">
-      Add Memory
-  </button>
-
-  <div id="memory-fields" class="space-y-4">
-      @foreach($selectedMemories as $index => $memory)
-      <div class="memory-item flex items-center space-x-4">
-          <div>
-              <label for="memories[{{ $index }}][id]">Memory:</label>
-              <select name="memories[{{ $index }}][id]" class="border border-gray-300 rounded p-2" required>
-                  @foreach($memories as $availableMemory)
-                      <option value="{{ $availableMemory->id }}" 
-                          {{ $memory['id'] == $availableMemory->id ? 'selected' : '' }}>
-                          {{ $availableMemory->serial }} - {{ $availableMemory->capacity }}GB
-                      </option>
-                  @endforeach
-              </select>
-          </div>
-          <div>
-              <label for="memories[{{ $index }}][quantity]">Quantity:</label>
-              <input type="number" name="memories[{{ $index }}][quantity]" 
-                  value="{{ $memory['quantity'] }}" class="border border-gray-300 rounded p-2" min="1" required>
-          </div>
-          <button type="button" class="remove-memory-btn bg-red-500 text-white px-2 py-1 rounded">Remove</button>
-          <button type="button" class="undo-memory-btn hidden bg-gray-500 text-white px-2 py-1 rounded">Undo</button>
-          <input type="hidden" name="memories[{{ $index }}][deleted]" value="0" class="deleted-flag">
-      </div>
-      @endforeach
-  </div>
-</div> --}}
