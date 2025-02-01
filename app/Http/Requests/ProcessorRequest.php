@@ -21,7 +21,7 @@ class ProcessorRequest extends FormRequest
       'prototype_id'        => ['required', 'exists:prototypes,id'],
       'memories'            => ['nullable', 'array'],
       'memories.*.id'       => ['required', 'exists:memories,id', 'distinct'],
-      'memories.*.quantity' => ['required', 'integer', 'min:1'],
+      'memories.*.quantity' => ['required', 'integer', 'min:1']
     ];
 
     // Reglas adicionales para editar (omitir validación de unicidad en el ID actual)
@@ -30,6 +30,9 @@ class ProcessorRequest extends FormRequest
 
       $rules['mac']        = "required|unique:processors,mac,{$processorId}";
       $rules['servicetag'] = "required|unique:processors,servicetag,{$processorId}";
+
+      $rules['memories_to_delete'] = 'nullable|array';
+      $rules['memories_to_delete.*'] = 'exists:memory_processor,memory_id';
     }
 
     return $rules;
