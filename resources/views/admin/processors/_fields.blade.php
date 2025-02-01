@@ -40,10 +40,10 @@
   </div>
 </div>
 
-{{-- <div id="memory-fields" class="max-w-lg mt-5 space-y-4">
+<div id="memory-fields" class="max-w-lg mt-5 space-y-4">
   <label>Memorias RAM:</label>
   <button type="button" id="add-memory-btn" class="bg-blue-500 text-slate-50 px-4 py-2 rounded">
-    Adicionar Memoria
+    Agregar
   </button>
 
   <table class="table-auto w-full">
@@ -57,78 +57,51 @@
     </thead>
     <tbody>
       @foreach($selectedMemories as $index => $memory)
-      <tr>
-        <td>
-          <select name="memories[{{ $index }}][id]" class="select--control sm:w-80 md:w-60 p-2">
-            <option value="">Seleccionar</option>
-            @foreach($memories as $availableMemory)
-              <option value="{{ $availableMemory->id }}" {{ $memory['id'] == $availableMemory->id ? 'selected' : '' }}>
-                {{ $availableMemory->serial }} - {{ $availableMemory->technology }} - {{ $availableMemory->capacity }}
-              </option>
-            @endforeach
-          </select>
-        </td>
-        @error('memories[{{ $index }}][id]')
-          <p class="text-sm text-red-600 dark:text-rose-400">
-            {{ $message }}
-          </p>
-        @enderror
-        <td>
-          <input type="number" name="memories[{{ $index }}][quantity]]" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer text-center" min="1" value="{{ $memory['quantity'] }}" required>
-        </td>
-        <td class="inline">
-          <button type="button" class="remove-memory-btn bg-red-500 text-slate-50 px-2 py-1 rounded">Eliminar</button>
-        </td>
+        <tr>
+          <td>
+            <select name="memories[{{ $index }}][id]" class="select--control sm:w-80 md:w-60 p-2">
+              <option value="">Seleccionar</option>
+              @foreach($memories as $availableMemory)
+                <option value="{{ $availableMemory->id }}" {{ $memory['id'] == $availableMemory->id ? 'selected' : '' }}>
+                  {{ $availableMemory->serial }} - {{ $availableMemory->technology }} - {{ $availableMemory->capacity }}
+                </option>
+              @endforeach
+            </select>
+          </td>
+          @error('memories[{{ $index }}][id]')
+            <p class="text-sm text-red-600 dark:text-rose-400">
+              {{ $message }}
+            </p>
+          @enderror
+          <td>
+            <input type="number" name="memories[{{ $index }}][quantity]]" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer text-center" min="1" value="{{ $memory['quantity'] }}" required>
+          </td>
+          <td class="inline">
+            <button type="button" class="remove-memory-btn bg-red-500 text-slate-50 px-2 py-1 rounded">Eliminar</button>
+          </td>
+        </tr>
       @endforeach
     </tbody>
   </table>
-</div> --}}
+</div>
 
 
-        <!-- Memorias -->
-        <div id="memory-section" class="mb-4">
-          <label class="block text-sm font-medium text-gray-700">Memories</label>
-          <button type="button" id="add-memory-btn" class="bg-blue-500 text-white px-4 py-2 rounded mt-2">
-              Add Memory
-          </button>
+<!-- Memorias -->
+{{-- <div id="memory-section" class="mb-4">
+  <label class="block text-sm font-medium text-gray-700">Memories</label>
+  <button type="button" id="add-memory-btn" class="bg-blue-500 text-white px-4 py-2 rounded mt-2">
+      Add Memory
+  </button>
 
-          <div id="memory-fields" class="space-y-4">
-              @foreach($selectedMemories as $index => $memory)
-              <div class="memory-item flex items-center space-x-4">
-                  <div>
-                      <label for="memories[{{ $index }}][id]">Memory:</label>
-                      <select name="memories[{{ $index }}][id]" class="border border-gray-300 rounded p-2" required>
-                          @foreach($memories as $availableMemory)
-                              <option value="{{ $availableMemory->id }}" 
-                                  {{ $memory['id'] == $availableMemory->id ? 'selected' : '' }}>
-                                  {{ $availableMemory->serial }} - {{ $availableMemory->capacity }}GB
-                              </option>
-                          @endforeach
-                      </select>
-                  </div>
-                  <div>
-                      <label for="memories[{{ $index }}][quantity]">Quantity:</label>
-                      <input type="number" name="memories[{{ $index }}][quantity]" 
-                          value="{{ $memory['quantity'] }}" class="border border-gray-300 rounded p-2" min="1" required>
-                  </div>
-                  <button type="button" class="remove-memory-btn bg-red-500 text-white px-2 py-1 rounded">Remove</button>
-                  <button type="button" class="undo-memory-btn hidden bg-gray-500 text-white px-2 py-1 rounded">Undo</button>
-                  <input type="hidden" name="memories[{{ $index }}][deleted]" value="0" class="deleted-flag">
-              </div>
-              @endforeach
-          </div>
-      </div>
-
-
-
-  {{-- <div id="memory-fields" class="space-y-4">
+  <div id="memory-fields" class="space-y-4">
       @foreach($selectedMemories as $index => $memory)
-      <div class="flex items-center space-x-4">
+      <div class="memory-item flex items-center space-x-4">
           <div>
               <label for="memories[{{ $index }}][id]">Memory:</label>
-              <select name="memories[{{ $index }}][id]" class="border border-slate-300 rounded p-2" required>
+              <select name="memories[{{ $index }}][id]" class="border border-gray-300 rounded p-2" required>
                   @foreach($memories as $availableMemory)
-                      <option value="{{ $availableMemory->id }}" {{ $memory['id'] == $availableMemory->id ? 'selected' : '' }}>
+                      <option value="{{ $availableMemory->id }}" 
+                          {{ $memory['id'] == $availableMemory->id ? 'selected' : '' }}>
                           {{ $availableMemory->serial }} - {{ $availableMemory->capacity }}GB
                       </option>
                   @endforeach
@@ -136,10 +109,13 @@
           </div>
           <div>
               <label for="memories[{{ $index }}][quantity]">Quantity:</label>
-              <input type="number" name="memories[{{ $index }}][quantity]]" class="border border-slate-300 rounded p-2"
-                  min="1" value="{{ $memory['quantity'] }}" required>
+              <input type="number" name="memories[{{ $index }}][quantity]" 
+                  value="{{ $memory['quantity'] }}" class="border border-gray-300 rounded p-2" min="1" required>
           </div>
-          <button type="button" class="remove-memory-btn bg-red-500 text-slate-50 px-2 py-1 rounded">Remove</button>
+          <button type="button" class="remove-memory-btn bg-red-500 text-white px-2 py-1 rounded">Remove</button>
+          <button type="button" class="undo-memory-btn hidden bg-gray-500 text-white px-2 py-1 rounded">Undo</button>
+          <input type="hidden" name="memories[{{ $index }}][deleted]" value="0" class="deleted-flag">
       </div>
       @endforeach
-  </div> --}}
+  </div>
+</div> --}}
