@@ -61,6 +61,9 @@
             <x-dropdown--link :href="route('users.index')">
               Eliminación masiva
             </x-dropdown--link>
+            <x-dropdown--link :href="route('users.select2JQ')">
+              Select2 Simple y Múltiple
+            </x-dropdown--link>
             <li aria-labelledby="dropdownNavbarLink">
               <button id="doubleDropdownButton" data-dropdown-toggle="doubleDropdown" data-dropdown-placement="right-start" type="button" class="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                 DataTables
@@ -76,16 +79,13 @@
                   <x-dropdown--link :href="route('users.dtTailwindcss')">
                     DataTables.Net y Tailwind CSS
                   </x-dropdown--link>
-                  <x-dropdown--link :href="route('users.select2JQ')">
-                    Select2 Simple y Múltiple
-                  </x-dropdown--link>
                 </ul>
               </div>
             </li>
           </ul>
         </div>
         <x-nav-link :href="route('processors.index')" :active="request()->routeIs('processors.index')">
-          Importar - ToMany
+          CRUD e Importar Procesadores
         </x-nav-link>
         <x-nav-link :href="route('memories.index')" :active="request()->routeIs('memories.index')">
           Selects | Constantes
