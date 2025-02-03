@@ -80,7 +80,7 @@
     
           memoryField.innerHTML = `
             <td>
-              <select name="memories[${index}][id]" class="memory-select select--control sm:w-80 md:w-60 p-2" required>
+              <select name="memories[${index}][id]" class="memory-select select--control sm:w-80 md:w-60 p-2">
                 <option value="">Seleccionar</option>
                 @foreach($memories as $memory)
                   <option value="{{ $memory->id }}">
@@ -90,7 +90,7 @@
               </select>
             </td>
             <td>
-              <input type="number" name="memories[${index}][quantity]" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer text-center" min="1" required>
+              <input type="number" name="memories[${index}][quantity]" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer text-center" min="1">
             </td>
             <td class="flex justify-center items-center">
               <button type="button" class="remove-memory-btn bg-red-500 text-white px-2 py-1 rounded">

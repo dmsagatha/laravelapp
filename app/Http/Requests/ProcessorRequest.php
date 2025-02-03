@@ -15,8 +15,8 @@ class ProcessorRequest extends FormRequest
   public function rules(): array
   {
     $rules = [
-      'mac'                 => ['required', 'string', 'max:255', 'unique:processors'],
-      'servicetag'          => ['required', 'string', 'max:255', 'unique:processors'],
+      'mac'                 => ['required', 'string', 'without_spaces', 'max:255', 'unique:processors'],
+      'servicetag'          => ['required', 'string', 'without_spaces', 'max:255', 'unique:processors'],
       'user_id'             => ['required', 'exists:users,id'],
       'prototype_id'        => ['required', 'exists:prototypes,id'],
       'memories'            => ['nullable', 'array'],
@@ -41,17 +41,11 @@ class ProcessorRequest extends FormRequest
   public function messages()
   {
     return [
-      'mac.required'                 => 'El campo MAC es obligatorio.',
-      'mac.unique'                   => 'El MAC ya está registrado.',
-      'servicetag.required'          => 'El campo Service Tag es obligatorio.',
-      'servicetag.unique'            => 'El Service Tag ya está registrado.',
-      'user_id.required'             => 'El campo Usuario es obligatorio.',
       'user_id.exists'               => 'El usuario seleccionado no es válido.',
-      'prototype_id.required'        => 'El campo Prototipo es obligatorio.',
       'prototype_id.exists'          => 'El prototipo seleccionado no es válido.',
       'memories.required'            => 'Debe seleccionar al menos una memoria.',
       'memories.*.id.required'       => 'Debe seleccionar una memoria válida.',
-      'memories.*.quantity.required' => 'Debe especificar la cantidad.',
+      'memories.*.quantity.required' => 'Debe especificar la cantidad de memorias.',
       'memories.*.quantity.integer'  => 'La cantidad debe ser un número entero.',
       'memories.*.quantity.min'      => 'La cantidad debe ser al menos 1.',
     ];

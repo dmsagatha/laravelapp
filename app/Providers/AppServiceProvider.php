@@ -34,8 +34,8 @@ class AppServiceProvider extends ServiceProvider
       return preg_match('/^\S*$/u', $value); // Rechaza valores con espacios
     });
 
-    Validator::replacer('without_spaces', function ($message, $attribute) {
+    /* Validator::replacer('without_spaces', function ($message, $attribute) {
       return __('El campo :attribute no debe contener espacios en blanco.');
-    });
+    }); */
   }
 }
