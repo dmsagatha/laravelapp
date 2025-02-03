@@ -5,7 +5,7 @@
     </h2>
   </x-slot>
   
-  <div class="flow-root w-full mx-auto md:w-full lg:w-4/5 shadow px-6 py-4 rounded sm:px-1 sm:py-2 bg-slate-50 dark:bg-slate-800 overflow-hidden sm:rounded-lg text-slate-900 dark:text-slate-100 my-12">
+  <div class="flow-root w-full mx-auto md:w-full lg:w-4/5 shadow px-6 py-4 rounded sm:px-1 sm:py-2 bg-slate-50 dark:bg-slate-800 overflow-hidden sm:rounded-lg text-slate-900 dark:text-slate-100 my-6">
     {{-- Títulos --}}
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div class="px-4 py-5 mx-auto text-center max-w-7xl sm:px-6 lg:py-2 lg:px-8">

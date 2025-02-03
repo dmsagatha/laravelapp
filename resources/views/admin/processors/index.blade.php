@@ -5,7 +5,7 @@
     </h2>
   </x-slot>
 
-  <div class="flow-root mx-auto w-full max-w-7xl">
+  <div class="flow-root mx-auto w-full max-w-7xl sm:px-1 sm:py-2 my-6">
     <div class="text-slate-900 bg-slate-50 dark:text-slate-100 dark:bg-slate-800 p-4 m-2 sm:p-4 shadow rounded">
       <div class="relative overflow-x-auto w-full mx-auto text-center p-4 m-4 sm:px-6 lg:py-2 lg:px-8">
         <h2 class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-2xl">
