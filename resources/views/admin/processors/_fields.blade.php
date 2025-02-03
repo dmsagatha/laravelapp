@@ -19,27 +19,29 @@
     </div>
   </div>
 
-  <div class="col-span-6 sm:col-span-3 md:col-span-2">
+  <div class="col-span-6 sm:col-span-3">
     <div class="relative form-group">
-      <label for="prototype_id" class="select--label required">Prototipos</label>
-      <select name="prototype_id" id="prototype_id" class="select--control">
-        <option selected value="">Seleccionar</option>
-        @foreach ($prototypes as $id => $label)
-          <option value="{{ $id }}" @selected(old('prototype_id', $processor->prototype->id ?? '') == $id)>
-          {{-- <option value="{{ $id }}" @selected(old('prototype_id', $processor->prototype->id ?? $processor->prototype_id) == $id)> --}}
+      <x-select-label name="model_type" id="model_type" label="Tipo de Modelo">
+        @foreach (\App\Models\Prototype::MODEL_TYPE_SELECT as $value => $label)
+          <option value="{{ $value }}" 
+            {{ old('model_type') == $label ? 'selected' : ($processor->prototype->model_type == $label ? 'selected' : '') }}>
             {{ $label }}
           </option>
         @endforeach
-      </select>
-      @error('prototype_id')
-        <p class="text-sm text-red-600 dark:text-rose-400">
-          {{ $message }}
-        </p>
-      @enderror
+      </x-select-label>
+    </div>
+  </div>
+
+  <div class="col-span-6 sm:col-span-3">
+    <div class="relative form-group">
+      <x-select-label name="prototype_id" id="reference" label="Referencia de Modelo" disabled data-selected="{{ old('prototype_id', $processor->prototype_id ?? '') }}">
+      <option value="">Seleccionar Referencia</option>
+      </x-select-label>
     </div>
   </div>
 </div>
 
+{{-- Memorias adicionales --}}
 <div id="memory-fields" class="max-w-lg mt-5 space-y-4">
   <label>Memorias RAM:</label>
   <button type="button" id="add-memory-btn" class="bg-blue-500 text-slate-50 px-4 py-2 rounded">

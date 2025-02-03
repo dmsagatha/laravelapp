@@ -80,7 +80,7 @@
                     <div class="relative form-group">
                       <x-select-label name="model_type" id="model_type" label="Tipo de Modelo">
                         @foreach (\App\Models\Prototype::MODEL_TYPE_SELECT as $value => $label)
-                        <option value="{{ $value }}">{{ $label }}</option>
+                          <option value="{{ $value }}">{{ $label }}</option>
                         @endforeach
                       </x-select-label>
                     </div>

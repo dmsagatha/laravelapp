@@ -54,6 +54,64 @@
   </div>
 
   @push('scripts')
+    {{-- Seleccionar el Tipo del Modelo del Prototipo --}}
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const modelTypeSelect = document.getElementById('model_type');
+        const referenceSelect = document.getElementById('reference');
+        const form = referenceSelect.closest('form'); // Obtiene el formulario padre
+        const selectedPrototypeId = referenceSelect.getAttribute('data-selected'); // Para edición
+    
+        // Función para cargar referencias basadas en el model_type
+        function loadReferences(modelType, selectedReference = null) {
+          referenceSelect.innerHTML = '<option value="">Seleccionar Referencia</option>';
+          referenceSelect.disabled = true;
+    
+          if (modelType) {
+            fetch(`/procesadores/prototipos/tipo?model_type=${encodeURIComponent(modelType)}`)
+              .then(response => response.json())
+              .then(data => {
+                Object.entries(data).forEach(([id, reference]) => {
+                  const option = document.createElement('option');
+                  option.value = id;
+                  option.textContent = reference;
+                  if (selectedReference && id == selectedReference) {
+                    option.selected = true;
+                  }
+                  referenceSelect.appendChild(option);
+                });
+    
+                referenceSelect.disabled = false;
+              })
+              .catch(error => console.error('Error al obtener referencias:', error));
+          }
+        }
+    
+        // Evento cuando cambia el tipo de modelo
+        modelTypeSelect.addEventListener('change', function () {
+          loadReferences(modelTypeSelect.value);
+        });
+    
+        // En edición, cargar automáticamente las referencias
+        if (selectedPrototypeId) {
+          loadReferences(modelTypeSelect.value, selectedPrototypeId);
+        }
+    
+        // Habilitar el select antes de enviar el formulario
+        form.addEventListener('submit', function (event) {
+          if (!referenceSelect.value) {
+            event.preventDefault();
+            alert('Por favor selecciona una referencia de modelo antes de enviar el formulario.');
+            return;
+          }
+    
+          referenceSelect.disabled = false; // Asegurar que se envíe el valor
+          console.log('Enviando prototype_id:', referenceSelect.value);
+        });
+      });
+    </script>
+    
+    {{-- Memorias adicionales --}}
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const container = document.getElementById("memory-fields");
