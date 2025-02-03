@@ -5,7 +5,7 @@
     </h2>
   </x-slot>
 
-  <div class="flow-root mx-auto w-full max-w-7xl sm:px-1 sm:py-2 my-6">
+  <div class="flow-root mx-auto w-full max-w-7xl">
     <div class="text-slate-900 bg-slate-50 dark:text-slate-100 dark:bg-slate-800 p-4 m-2 sm:p-4 shadow rounded">
       <div class="relative overflow-x-auto w-full mx-auto text-center p-4 m-4 sm:px-6 lg:py-2 lg:px-8">
         <h2 class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-2xl">
@@ -16,24 +16,6 @@
             </a>
           </span>
         </h2>
-      </div>
-
-      {{-- Filtros, Crear --}}
-      <div class="flex justify-between flex-wrap flex-grow">
-        {{-- Filtros --}}
-        <div class="flex items-center p-2 space-x-2 text-slate-800 dark:text-slate-50"></div>
-
-        {{-- Crear --}}
-        <div class="flex items-center p-2 space-x-2 text-slate-800 dark:text-slate-50">
-          <div class="row">
-            <a href="{{ route('processors.create') }}" class="relative inline-flex items-center justify-center p-2 mr-2 mb-2 text-blue-600 border border-blue-500 hover:bg-blue-500 hover:text-slate-50 active:bg-blue-600 font-medium rounded-lg outline-none focus:outline-none ease-linear transition-all duration-150">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-              </svg>
-            </a>
-          </div>
-        </div>
       </div>
       
       {{-- Importar y Selects Dependientes (JavaScript) --}}
@@ -80,7 +62,7 @@
                     <div class="relative form-group">
                       <x-select-label name="model_type" id="model_type" label="Tipo de Modelo">
                         @foreach (\App\Models\Prototype::MODEL_TYPE_SELECT as $value => $label)
-                          <option value="{{ $value }}">{{ $label }}</option>
+                        <option value="{{ $value }}">{{ $label }}</option>
                         @endforeach
                       </x-select-label>
                     </div>
@@ -100,6 +82,24 @@
         </div>
       </div>
 
+      {{-- Filtros, Crear --}}
+      <div class="flex justify-between flex-wrap flex-grow">
+        {{-- Filtros --}}
+        <div class="flex items-center p-2 space-x-2 text-slate-800 dark:text-slate-50"></div>
+
+        {{-- Crear --}}
+        <div class="flex items-center mt-2 p-2 space-x-2 text-slate-800 dark:text-slate-50">
+          <div class="row">
+            <a href="{{ route('processors.create') }}" class="relative inline-flex items-center justify-center p-2 mr-2 mb-2 text-blue-600 border border-blue-500 hover:bg-blue-500 hover:text-slate-50 active:bg-blue-600 font-medium rounded-lg outline-none focus:outline-none ease-linear transition-all duration-150">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
       {{-- Listado --}}
       <div class="relative overflow-x-auto max-w-6xl mx-auto p-4 m-4 shadow-sm shadow-slate-300 sm:rounded-lg">
         @include('partials.failures')
@@ -109,9 +109,33 @@
     </div>
   </div>
 
-  @include('partials.dataTables')
+  @push('styles')
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.7/css/dataTables.dataTables.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.dataTables.css">
+  @endpush
 
   @push('scripts')
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.dataTables.js"></script>
+
+    {{-- DataTables --}}
+    <script>
+      let table = new DataTable('#dtTheme', {
+          responsive: true,
+          lengthMenu: [
+            [10, 15, 25, 50, 100, -1],
+            [10, 15, 25, 50, 100, "Todos"]
+          ],
+          pageLength: 25,
+          processing: true,
+          language: {
+            url: 'https://cdn.datatables.net/plug-ins/2.1.8/i18n/es-ES.json'
+          }
+        });
+    </script>
+
     {{-- Seleccionar el Tipo del Modelo del Prototipo --}}
     <script>
       document.addEventListener('DOMContentLoaded', function () {

@@ -3,10 +3,14 @@ import focus from '@alpinejs/focus'
 import 'flowbite'
 import moment from 'moment'
 import Pikaday from 'pikaday'
+import Swal from 'sweetalert2'
+import 'sweetalert2/dist/sweetalert2.min.css'
 
 window.Alpine = Alpine
 window.moment = moment
 window.Pikaday = Pikaday
+
+window.Swal = Swal
 
 Alpine.plugin(focus)
 Alpine.start()

@@ -20,7 +20,7 @@
     let table = new DataTable('#dtTailwindcss', {
       responsive: true,
       lengthMenu: [[5, 10, 15, 25, 50, 100, -1], [5, 10, 15, 25, 50, 100, "Todos"]],
-      pageLength: 5,
+      pageLength: 10,
       processing: true,
       language: {
         url: 'https://cdn.datatables.net/plug-ins/2.1.8/i18n/es-ES.json'
@@ -29,5 +29,5 @@
   </script>
 
   {{-- <script src="{{ asset('js/bulkDelete.js') }}"></script> --}}
-  <script src="{{ asset('js/massElimination.js') }}"></script>
+  {{-- <script src="{{ asset('js/massElimination.js') }}"></script> --}}
 @endpush

@@ -135,6 +135,8 @@
   @include('partials.dataTables')
 
   @push('scripts')
+    <script src="{{ asset('js/massElimination.js') }}"></script>
+    
     <script>
       const checkbox = document.getElementById('myCheckbox');
       const button = document.getElementById('myButton');
@@ -161,18 +163,19 @@
         button.classList.toggle('hidden');
       }); */
     </script>
+
     <script>
       document.getElementById('toggleButtonCheckbox').addEventListener('change', function () {
-    const button = document.getElementById('actionButton');
-    if (this.checked) {
-        button.classList.remove('hidden');
-        button.classList.add('flex');
-    } else {
-        button.classList.add('hidden');
-        button.classList.remove('flex');
-    }
-});
-
+        const button = document.getElementById('actionButton');
+        
+        if (this.checked) {
+          button.classList.remove('hidden');
+          button.classList.add('flex');
+        } else {
+          button.classList.add('hidden');
+          button.classList.remove('flex');
+        }
+      });
     </script>
   @endpush
 </x-app-layout>

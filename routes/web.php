@@ -41,10 +41,15 @@ Route::group(['middleware' => ['auth', 'verified']], function ()
     ->only(['index'])
     ->parameters(['usuarios' => 'user'])
     ->names('users');
+  
+  Route::resource('procesadores', ProcessorController::class)
+    ->parameters(['procesadores' => 'processor'])
+    ->names('processors');
 
   Route::prefix('procesadores')->name('processors.')->controller(ProcessorController::class)->group(function () {
-    Route::get('/', 'index')->name('index');
+    // Route::get('/', 'index')->name('index');
     Route::post('importar', 'import')->name('import');
+    Route::get('prototipos/tipo', 'getReferences')->name('references');
   });
 
   Route::resource('memorias', MemoryController::class)

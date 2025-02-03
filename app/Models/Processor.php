@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,9 +11,7 @@ class Processor extends Model
   use HasFactory;
 
   protected $fillable = [
-    'mac',
-    'servicetag',
-    'user_id'
+    'mac', 'servicetag', 'user_id', 'prototype_id'
   ];
 
   public function getRouteKeyName()
@@ -25,8 +24,15 @@ class Processor extends Model
     return $this->belongsTo(User::class);
   }
 
-  public function addMemories()
+  public function prototype(): BelongsTo
   {
-    return $this->belongsToMany(AddMemory::class, 'add_memory_processor')->withPivot('quantity_addmem');
+    return $this->belongsTo(Prototype::class)->withDefault();
+  }
+
+  public function memories()
+  {
+    return $this->belongsToMany(Memory::class, 'memory_processor')
+                ->withPivot('quantity')
+                ->withTimestamps();
   }
 }

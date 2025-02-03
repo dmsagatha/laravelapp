@@ -46,4 +46,19 @@ class User extends Authenticatable
   {
     return $this->hasMany(Processor::class);
   }
+
+  // Accessor
+  public function getFormattedNameAttribute()
+  {
+    return "{$this->id} - {$this->name}";
+  }
+  
+	public function scopeFullUsers($query)
+	{
+    return $query->where('id', '!=', '1')
+        ->select('id', 'name') // Seleccionar solo lo necesario
+        ->orderBy('name')
+        ->get()
+        ->pluck('formatted_name', 'id'); // Usar el accessor
+  }
 }
