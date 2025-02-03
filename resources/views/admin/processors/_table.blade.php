@@ -1,4 +1,4 @@
-<table id="dtTheme" class="display compact nowrap row-border stripe">
+<table id="dtTailwindcss" class="display compact nowrap row-border stripe" style="width:100%">
   <thead>
     <tr>
       <th width="1%">N°</th>
