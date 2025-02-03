@@ -46,7 +46,7 @@
       @include('partials.failures')
       
       @if ($memories->count())
-        <table id="dtTheme" class="display compact nowrap row-border stripe" style="width:100%">
+        <table id="dtTailwindcss" class="display compact nowrap row-border stripe" style="width:100%">
           <thead>
             <tr>
               <th rowspan="2" width="1%">N°</th>
@@ -96,30 +96,5 @@
     </div>
   </div>
 
-  @push('styles')
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.7/css/dataTables.dataTables.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.dataTables.css">
-  @endpush
-
-  @push('scripts')
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
-    <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
-    <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.dataTables.js"></script>
-
-    <script>
-      let table = new DataTable('#dtTheme', {
-        responsive: true,
-        lengthMenu: [
-          [10, 15, 25, 50, 100, -1],
-          [10, 15, 25, 50, 100, "Todos"]
-        ],
-        pageLength: 25,
-        processing: true,
-        language: {
-          url: 'https://cdn.datatables.net/plug-ins/2.1.8/i18n/es-ES.json'
-        }
-      });
-    </script>
-  @endpush
+  @include('partials.dataTables')
 </x-app-layout>

@@ -135,6 +135,8 @@
   @include('partials.dataTables')
 
   @push('scripts')
+    <script src="{{ asset('js/massElimination.js') }}"></script>
+    
     <script>
       const checkbox = document.getElementById('myCheckbox');
       const button = document.getElementById('myButton');

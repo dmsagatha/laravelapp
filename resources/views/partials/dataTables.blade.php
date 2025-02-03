@@ -29,5 +29,5 @@
   </script>
 
   {{-- <script src="{{ asset('js/bulkDelete.js') }}"></script> --}}
-  <script src="{{ asset('js/massElimination.js') }}"></script>
+  {{-- <script src="{{ asset('js/massElimination.js') }}"></script> --}}
 @endpush
