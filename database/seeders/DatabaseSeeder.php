@@ -20,12 +20,12 @@ class DatabaseSeeder extends Seeder
     $this->call(UserSeeder::class);
 
     DB::table('memories')->insert([
-      ['serial' => 'SN001', 'capacity' => '8 GB', 'technology' => 'DDR3', 'velocity' => '1Rx8', 'initial_warranty' => '2022-01-01', 'final_warranty' => '2023-12-31'],
-      ['serial' => 'SN002', 'capacity' => '32 GB', 'technology' => 'DDR4', 'velocity' => '1Rx8', 'initial_warranty' => '2022-01-01', 'final_warranty' => '2023-12-31'],
-      ['serial' => 'SN003', 'capacity' => '16 GB', 'technology' => 'DDR3', 'velocity' => '1Rx8', 'initial_warranty' => '2022-01-01', 'final_warranty' => '2023-12-31'],
-      ['serial' => 'SN004', 'capacity' => '32 GB', 'technology' => 'DDR5', 'velocity' => '1Rx8', 'initial_warranty' => '2022-01-01', 'final_warranty' => '2023-12-31'],
-      ['serial' => 'SN005', 'capacity' => '64 GB', 'technology' => 'DDR4', 'velocity' => '1Rx8', 'initial_warranty' => '2022-01-01', 'final_warranty' => '2023-12-31'],
-      ['serial' => 'SN006', 'capacity' => '16 GB', 'technology' => 'DDR3', 'velocity' => '1Rx8', 'initial_warranty' => '2022-01-01', 'final_warranty' => '2023-12-31']
+      ['serial' => 'SN001', 'capacity' => '8 GB', 'technology'  => 'DDR3', 'velocity' => '1066', 'initial_warranty' => '2022-01-01', 'final_warranty' => '2024-12-31', 'days_warranty' => 365],
+      ['serial' => 'SN002', 'capacity' => '32 GB', 'technology' => 'DDR4', 'velocity' => '1866', 'initial_warranty' => '2022-01-01', 'final_warranty' => '2024-12-31', 'days_warranty' => 365],
+      ['serial' => 'SN003', 'capacity' => '16 GB', 'technology' => 'DDR3', 'velocity' => '1600', 'initial_warranty' => '2022-01-01', 'final_warranty' => '2024-12-31', 'days_warranty' => 365],
+      ['serial' => 'SN004', 'capacity' => '32 GB', 'technology' => 'DDR5', 'velocity' => '5120', 'initial_warranty' => '2022-01-01', 'final_warranty' => '2024-12-31', 'days_warranty' => 365],
+      ['serial' => 'SN005', 'capacity' => '64 GB', 'technology' => 'DDR4', 'velocity' => '2666', 'initial_warranty' => '2022-01-01', 'final_warranty' => '2024-12-31', 'days_warranty' => 365],
+      ['serial' => 'SN006', 'capacity' => '16 GB', 'technology' => 'DDR3', 'velocity' => '2133', 'initial_warranty' => '2022-01-01', 'final_warranty' => '2024-12-31', 'days_warranty' => 365]
     ]);
 
     DB::table('prototypes')->insert([
