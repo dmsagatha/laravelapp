@@ -9,7 +9,6 @@
       <th>Service Tag</th>
       <th>Memorias</th>
       <th>Prototipos</th>
-      <th>Memorias Adicionales</th>
     </tr>
   </thead>
   <tbody>
@@ -48,15 +47,6 @@
           @endif
         </td>
         <td>{{ $item->prototype->reference }}</td>
-        <td class="text-xs">
-          @if(!$item->addMemories->isEmpty())
-            <p><span class="underline">Adicionales:</span></p>
-            @foreach($item->addMemories as $addMemory)
-              {{ $addMemory->brand }} - {{ $addMemory->technology }} - {{ $addMemory->velocity }} MHz - {{
-              $addMemory->capacity }} x {{ $addMemory->pivot->quantity_addmem }}<br>
-            @endforeach
-          @endif
-        </td>
       </tr>
     @endforeach
   </tbody>

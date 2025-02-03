@@ -82,7 +82,7 @@
   <div class="col-span-6 sm:col-span-3 md:col-span-2">
     <div class="relative z-0 group mt-3">
       <x-input type="text" id="birthdate" name="birthdate" value="{{ old('birthdate', $memory->birthdate) }}" />
-      <x-label for="birthdate" class="required" value="Fecha de nacimiento" />
+      <x-label for="birthdate" value="Fecha de nacimiento" />
       <p id="ageError" class="text-red-500 text-sm mt-2 hidden">Debes tener al menos 18 años.</p>
     </div>
   </div>

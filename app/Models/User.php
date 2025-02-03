@@ -56,9 +56,9 @@ class User extends Authenticatable
 	public function scopeFullUsers($query)
 	{
     return $query->where('id', '!=', '1')
-        ->select('id', 'name') // Selecciona solo lo necesario
+        ->select('id', 'name') // Seleccionar solo lo necesario
         ->orderBy('name')
         ->get()
-        ->pluck('formatted_name', 'id'); // Usa el accessor
+        ->pluck('formatted_name', 'id'); // Usar el accessor
   }
 }

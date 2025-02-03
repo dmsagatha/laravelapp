@@ -2,7 +2,7 @@
 
 namespace App\Imports;
 
-use App\Models\{Processor, User, AddMemory, Prototype};
+use App\Models\{Processor, User, Memory, Prototype};
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\{Importable, SkipsErrors, SkipsOnError, SkipsFailures, SkipsOnFailure, WithHeadingRow, WithValidation, WithBatchInserts, WithChunkReading};
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -39,13 +39,13 @@ class ProcessorsImport implements ToCollection,
         ]
       );
 
-      // Manejar AddMemory y la tabla pivote solo si están presentes `slug` y `quantity_addmem`
+      // Manejar Memory y la tabla pivote solo si están presentes `serial` y `quantity`
       // Archivo de ejemplo: public/importar/processors.xlsx
-      if (!is_null($row['memories_add'])) {
-        $addMemories = AddMemory::whereIn('slug', explode(',', $row['memories_add']))->get();
+      if (!is_null($row['memories'])) {
+        $memories = Memory::whereIn('serial', explode(',', $row['memories']))->get();
 
-        foreach ($addMemories as $addMemory) {
-          $processorData->addMemories()->attach($addMemory->id, ['quantity_addmem' => $row['quantity_addmem']]);
+        foreach ($memories as $memory) {
+          $processorData->memories()->attach($memory->id, ['quantity' => $row['quantity']]);
         }
       }
     }

@@ -60,9 +60,9 @@ class Prototype extends Model
   
 	public function scopeFullPrototypes($query)
 	{
-    return $query->select('id', 'reference', 'model_type') // Selecciona solo lo necesario
+    return $query->select('id', 'reference', 'model_type') // Seleccionar solo lo necesario
       ->orderBy('reference')
       ->get()
-      ->pluck('formatted_reference', 'id'); // Usa el accessor
+      ->pluck('formatted_reference', 'id'); // Usar el accessor
   }
 }

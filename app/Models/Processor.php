@@ -24,11 +24,6 @@ class Processor extends Model
     return $this->belongsTo(User::class);
   }
 
-  public function addMemories()
-  {
-    return $this->belongsToMany(AddMemory::class, 'add_memory_processor')->withPivot('quantity_addmem');
-  }
-
   public function prototype(): BelongsTo
   {
     return $this->belongsTo(Prototype::class)->withDefault();
@@ -36,7 +31,7 @@ class Processor extends Model
 
   public function memories()
   {
-    return $this->belongsToMany(Memory::class)
+    return $this->belongsToMany(Memory::class, 'memory_processor')
                 ->withPivot('quantity')
                 ->withTimestamps();
   }
