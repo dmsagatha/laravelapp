@@ -79,6 +79,9 @@ class ProcessorController extends Controller
       $processor->memories()->detach($request->validated(['memories_to_delete']));
     }
 
+    // Continúa con la actualización
+    $processor->update($request->validated());
+
     return redirect()->route('processors.index')->with('success', 'Registro actualizado correctamente.');
   }
 
