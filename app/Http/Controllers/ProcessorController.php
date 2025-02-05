@@ -44,7 +44,8 @@ class ProcessorController extends Controller
     return view('admin.processors.createUpdate', [
         'processor'        => new Processor(),
         'users'            => User::fullUsers(),
-        'prototypes'       => Prototype::fullPrototypes(),
+        // 'prototypes'       => Prototype::fullPrototypes(),
+        'model_types'      => array_filter(Prototype::MODEL_TYPE_SELECT, fn($value) => $value !== 'Tableta'),
         'memories'         => Memory::orderBy('serial')->get(),
         'selectedMemories' => [], // Vacío en creación
     ]);
