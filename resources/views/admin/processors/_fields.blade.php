@@ -22,7 +22,7 @@
   <div class="col-span-6 sm:col-span-3">
     <div class="relative form-group">
       <x-select-label name="model_type" id="model_type" label="Tipo de Modelo">
-        @foreach (\App\Models\Prototype::MODEL_TYPE_SELECT as $value => $label)
+        @foreach ($model_types as $value => $label)
           <option value="{{ $value }}" 
             {{ old('model_type') == $label ? 'selected' : ($processor->prototype->model_type == $label ? 'selected' : '') }}>
             {{ $label }}
