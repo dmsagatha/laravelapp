@@ -71,11 +71,14 @@
             fetch(`/procesadores/prototipos/tipo?model_type=${encodeURIComponent(modelType)}`)
               .then(response => response.json())
               .then(data => {
-                Object.entries(data).forEach(([id, reference]) => {
+                console.log('Datos recibidos:', data); // Verificar qué devuelve la API
+
+                data.forEach(prototype => {
                   const option = document.createElement('option');
-                  option.value = id;
-                  option.textContent = reference;
-                  if (selectedReference && id == selectedReference) {
+                  option.value = prototype.id; // Asegurar que el ID sea correcto
+                  option.textContent = `${prototype.reference} - ${prototype.brand}`;
+                  
+                  if (selectedReference && prototype.id == selectedReference) {
                     option.selected = true;
                   }
                   referenceSelect.appendChild(option);

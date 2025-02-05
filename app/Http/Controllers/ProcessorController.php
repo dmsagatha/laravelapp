@@ -18,6 +18,27 @@ class ProcessorController extends Controller
     return view('admin.processors.index', compact('processors'));
   }
 
+  public function getReferencesByModelType(Request $request)
+  {
+    $modelType = $request->input('model_type');
+
+    if (!$modelType) {
+      return response()->json([], 400);
+    }
+
+    // Crear una clave única para el caché basada en el tipo de modelo
+    $cacheKey = "references_{$modelType}";
+
+    // Recuperar datos de caché o consulta y almacena
+    $references = Cache::remember($cacheKey, now()->addMinutes(10), function () use ($modelType) {
+      return Prototype::where('model_type', $modelType)
+        ->select('id', 'reference', 'brand')
+        ->get();
+    });
+
+    return response()->json($references);
+  }
+
   public function create()
   {
     return view('admin.processors.createUpdate', [
@@ -90,25 +111,6 @@ class ProcessorController extends Controller
     $processor->delete();
 
     return redirect()->route('processors.index')->with('success', 'Registro eliminado satisfactoriamente!');
-  }
-
-  public function getReferences(Request $request)
-  {
-    $modelType = $request->input('model_type');
-
-    if (!$modelType) {
-      return response()->json([], 400);
-    }
-
-    // Crear una clave única para el caché basada en el tipo de modelo
-    $cacheKey = "references_{$modelType}";
-
-    // Recuperar datos de caché o consulta y almacena
-    $references = Cache::remember($cacheKey, now()->addMinutes(10), function () use ($modelType) {
-      return Prototype::where('model_type', $modelType)->pluck('reference', 'id'); // Devuelve id y referencia
-    });
-
-    return response()->json($references);
   }
 
   public function updateReference(Request $request, Prototype $prototype)
