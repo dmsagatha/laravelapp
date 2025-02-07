@@ -15,7 +15,7 @@ class ProcessorRequest extends FormRequest
   public function rules(): array
   {
     $rules = [
-      'mac'                 => ['required', 'string', 'without_spaces', 'max:255', 'unique:processors'],
+      'mac'                 => ['required', 'string', 'without_spaces', 'max:17', 'unique:processors'],
       'servicetag'          => ['required', 'string', 'without_spaces', 'max:255', 'unique:processors'],
       'user_id'             => ['required', 'exists:users,id'],
       'prototype_id'        => ['required', 'exists:prototypes,id'],
