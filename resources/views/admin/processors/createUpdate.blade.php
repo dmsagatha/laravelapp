@@ -133,7 +133,7 @@
     </script>
     
     {{-- Memorias adicionales --}}
-    <script>
+    <!-- <script>
       document.addEventListener("DOMContentLoaded", function () {
         const container = document.getElementById("memory-fields");
         const addMemoryBtn = document.getElementById("add-memory-btn");
@@ -244,6 +244,6 @@
           }
         });
       });
-    </script>
+    </script> -->
   @endpush
 </x-app-layout>
