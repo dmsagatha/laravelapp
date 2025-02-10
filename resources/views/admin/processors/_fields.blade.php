@@ -1,7 +1,7 @@
 <div class="grid grid-cols-6 gap-x-10 gap-y-8">
   <div class="col-span-6 sm:col-span-3 md:col-span-2">
     <div class="relative z-0 group mt-3">
-      <x-input name="mac" id="inputMac" value="{{ old('mac', $processor->mac) }}" autocomplete="mac" autofocus />
+      <x-input name="mac" id="inputMac" value="{{ old('mac', $processor->mac) }}" autocomplete="mac" autofocus maxlength='17' />
       <x-label for="mac" class="required" value="Mac" />
     </div>
   </div>
@@ -22,7 +22,7 @@
   <div class="col-span-6 sm:col-span-3">
     <div class="relative form-group">
       <x-select-label name="model_type" id="model_type" label="Tipo de Modelo">
-        @foreach (\App\Models\Prototype::MODEL_TYPE_SELECT as $value => $label)
+        @foreach ($model_types as $value => $label)
           <option value="{{ $value }}" 
             {{ old('model_type') == $label ? 'selected' : ($processor->prototype->model_type == $label ? 'selected' : '') }}>
             {{ $label }}
@@ -75,7 +75,7 @@
             </p>
           @enderror
           <td>
-            <input type="number" name="memories[{{ $index }}][quantity]]" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer text-center" min="1" value="{{ $memory['quantity'] }}" required>
+            <input type="number" name="memories[{{ $index }}][quantity]" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer text-center" min="1" value="{{ $memory['quantity'] }}" required>
           </td>
           <td class="flex justify-center items-center">
             <button type="button" class="remove-memory-btn bg-red-500 text-slate-50 px-2 py-1 rounded">

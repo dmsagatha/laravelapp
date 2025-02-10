@@ -113,6 +113,24 @@
         });
       });
     </script>
+
+    {{-- Manejo del Service Tag, en proceso de baja y el formato de la MAC --}}
+    <script>
+      document.querySelector('#inputServicetag').addEventListener('change', function() {
+        this.value = this.value.replace(/\s/gi, '');
+      });
+
+      document.getElementById('inputMac').addEventListener('change', macFormat);
+      document.getElementById('inputMac').addEventListener('keyup', macFormat);
+
+      function macFormat(e) {
+        this.value =
+          (this.value.toUpperCase()
+            .replace(/[^A-F0-9]/g, '')
+            .match(/.{1,2}/g) || [])
+          .join(':');
+      }
+    </script>
     
     {{-- Memorias adicionales --}}
     <script>
