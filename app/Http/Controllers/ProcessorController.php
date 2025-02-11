@@ -42,11 +42,10 @@ class ProcessorController extends Controller
   public function create()
   {
     return view('admin.processors.createUpdate', [
-        'processor'        => new Processor(),
-        'users'            => User::fullUsers(),
-        'model_types'      => array_filter(Prototype::MODEL_TYPE_SELECT, fn($value) => $value !== 'Tableta'),
-        'memories'         => Memory::orderBy('serial')->get(),
-        'selectedMemories' => [], // Vacío en creación
+      'processor'        => new Processor(),
+      'users'            => User::fullUsers(),
+      'model_types'      => array_filter(Prototype::MODEL_TYPE_SELECT, fn($value) => $value !== 'Tableta'),
+      'memories'         => Memory::orderBy('serial')->get(),
     ]);
   }
 
@@ -55,12 +54,11 @@ class ProcessorController extends Controller
     try {
       $processor = Processor::create($request->validated());
 
-      if ($request->filled('memories')) {
-        $memories = [];
-        foreach ($request->memories as $memory) {
-          $memories[$memory['id']] = ['quantity' => $memory['quantity']];
-        }
-        $processor->memories()->attach($memories);
+      $memories = $request->input('memories', []);
+      $quantities = $request->input('quantity_mem', []);
+
+      foreach ($memories as $memoryId) {
+        $processor->memories()->attach($memoryId, ['quantity_mem' => $quantities[$memoryId]]);
       }
 
       return redirect()->route('processors.index')->with('success', 'Registro creado satisfactoriamente!');
@@ -73,17 +71,17 @@ class ProcessorController extends Controller
   {
     $selectedMemories = $processor->memories->map(function ($memory) {
       return [
-          'id'       => $memory->id,
-          'quantity' => $memory->pivot->quantity,
+        'id'       => $memory->id,
+        'quantity' => $memory->pivot->quantity,
       ];
     });
 
     return view('admin.processors.createUpdate', [
-        'processor'        => $processor,
-        'users'            => User::fullUsers(),
-        'model_types'      => array_filter(Prototype::MODEL_TYPE_SELECT, fn($value) => $value!== 'Tableta'),
-        'memories'         => Memory::orderBy('serial')->get(),
-        'selectedMemories' => $selectedMemories
+      'processor'        => $processor,
+      'users'            => User::fullUsers(),
+      'model_types'      => array_filter(Prototype::MODEL_TYPE_SELECT, fn($value) => $value !== 'Tableta'),
+      'memories'         => Memory::orderBy('serial')->get(),
+      'selectedMemories' => $selectedMemories
     ]);
   }
 
@@ -91,7 +89,7 @@ class ProcessorController extends Controller
   {
     // Sincronizar las memorias nuevas
     $memories = collect($request->validated(['memories']) ?? [])
-        ->mapWithKeys(fn ($memory) => [$memory['id'] => ['quantity' => $memory['quantity']]]);
+      ->mapWithKeys(fn($memory) => [$memory['id'] => ['quantity' => $memory['quantity']]]);
 
     $processor->memories()->sync($memories);
 

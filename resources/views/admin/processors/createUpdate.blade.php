@@ -40,7 +40,7 @@
         @endif
 
         @include('admin.processors._fields')
-        @include('admin.processors.partials.maximize')
+        <!-- @include('admin.processors.partials.maximize') -->
 
         <div class="py-3 bg-slate-50 dark:bg-slate-800 text-center space-x-2">
           <button type="submit" class="w-36 inline-flex items-center justify-center bg-green-600 border border-transparent rounded-md font-medium p-2 mr-2 mb-2 text-center text-sm text-slate-50 hover:bg-green-500 focus:outline-none focus:border-green-700 focus:ring-0 focus:ring-green-200 active:bg-green-600 disabled:opacity-25 transition">
@@ -55,6 +55,38 @@
   </div>
 
   @push('scripts')
+  <script>
+    document.getElementById('add-memory').addEventListener('click', function () {
+      const memorySelect = document.getElementById('memory');
+      const selectedMemoryId = memorySelect.value;
+      const selectedMemoryText = memorySelect.options[memorySelect.selectedIndex].text;
+  
+      if (!selectedMemoryId) return;
+  
+      const selectedMemoriesContainer = document.getElementById('selected-memories');
+      const existingMemory = document.querySelector(`input[name="memories[]"][value="${selectedMemoryId}"]`);
+  
+      if (existingMemory) return;
+  
+      const memoryDiv = document.createElement('div');
+      memoryDiv.classList.add('flex', 'items-center', 'mb-2');
+      memoryDiv.innerHTML = `
+          <input type="hidden" name="memories[]" value="${selectedMemoryId}">
+          <span class="mr-2">${selectedMemoryText}</span>
+          <input type="number" name="quantity_mem[${selectedMemoryId}]" class="mt-1 block w-full mr-2" placeholder="Quantity for ${selectedMemoryText}">
+          <button type="button" class="remove-memory bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Remove</button>
+      `;
+  
+      selectedMemoriesContainer.appendChild(memoryDiv);
+  
+      memoryDiv.querySelector('.remove-memory').addEventListener('click', function () {
+          memoryDiv.remove();
+      });
+    });
+  </script>
+
+
+
     {{-- Seleccionar el Tipo del Modelo del Prototipo --}}
     <script>
       document.addEventListener('DOMContentLoaded', function () {
@@ -248,7 +280,7 @@
     </script> --}}
     
     {{-- Memorias adicionales --}}
-    <script>
+    <!-- <script>
       document.addEventListener("DOMContentLoaded", function () {
         let field_selected = [];
 
@@ -311,6 +343,6 @@
           }
         });
       });
-    </script>
+    </script> -->
   @endpush
 </x-app-layout>

@@ -89,3 +89,37 @@
     </tbody>
   </table>
 </div> --}}
+
+
+<div class="my-6">
+  <label for="memories" class="block text-gray-700 dark:text-slate-50">Memories</label>
+  <!-- <select name="memories[]" id="memories" class="select--control sm:w-80 md:w-60 p-2 mt-1 block w-full">
+      @foreach ($memories as $memory)
+          <option value="{{ $memory->id }}">
+            {{ $memory->serial }} - {{ $memory->technology }} - {{ $memory->capacity }}
+          </option>
+      @endforeach
+  </select> -->
+  <select id="memory" class="select--control sm:w-80 md:w-60 p-2 mt-1 block w-full">
+    <option value="">Seleccionar</option>
+      @foreach ($memories as $memory)
+          <option value="{{ $memory->id }}">
+            {{ $memory->serial }} - {{ $memory->technology }} - {{ $memory->capacity }}
+          </option>
+      @endforeach
+  </select>
+  <button type="button" id="add-memory" class="mt-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Add Memory</button>
+  @error('memories')
+      <div class="text-red-500 text-sm">{{ $message }}</div>
+  @enderror
+</div>
+<div id="selected-memories" class="mb-4"></div>
+<!-- <div class="mb-4">
+  <label for="quantity_mem" class="block text-gray-700 dark:text-slate-50">Quantity</label>
+  @foreach ($memories as $memory)
+      <input type="number" name="quantity_mem[{{ $memory->id }}]" id="quantity_mem_{{ $memory->id }}" class="mt-1 block w-full dark:text-slate-50 dark:bg-slate-800" placeholder="Quantity for {{ $memory->type }}">
+      @error('quantity_mem.' . $memory->id)
+          <div class="text-red-500 text-sm">{{ $message }}</div>
+      @enderror
+  @endforeach
+</div> -->
