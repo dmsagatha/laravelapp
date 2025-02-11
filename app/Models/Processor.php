@@ -32,7 +32,7 @@ class Processor extends Model
   public function memories()
   {
     return $this->belongsToMany(Memory::class, 'memory_processor')
-                ->withPivot('quantity')
+                ->withPivot('quantity_mem')
                 ->withTimestamps();
   }
 }

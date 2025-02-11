@@ -25,7 +25,7 @@ return new class extends Migration
       $table->id();
       $table->foreignId('processor_id')->constrained()->onDelete('cascade');
       $table->foreignId('memory_id')->constrained()->onDelete('cascade');
-      $table->integer('quantity');
+      $table->integer('quantity_mem');
       $table->timestamps();
     });
   }

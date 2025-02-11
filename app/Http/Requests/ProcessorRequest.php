@@ -19,10 +19,12 @@ class ProcessorRequest extends FormRequest
       'servicetag'          => ['required', 'string', 'without_spaces', 'max:255', 'unique:processors'],
       'user_id'             => ['required', 'exists:users,id'],
       'prototype_id'        => ['required', 'exists:prototypes,id'],
-      // 'memories'            => ['nullable', 'array'],
-      'memories'            => 'nullable|exists:memories,id|max:4',
-      /* 'memories.*.id'       => ['required', 'exists:memories,id', 'distinct'],
-      'memories.*.quantity' => ['required', 'integer', 'min:1'] */
+
+      // Relación Muchos a Muchos memory_processor
+      'memories'            => ['nullable', 'array'],
+      'memories.*'          => ['exists:memories,id', 'distinct'],
+      'quantity_mem'        => ['required', 'array'],
+      'quantity_mem.*'      => ['integer', 'min:1'],
     ];
 
     // Reglas adicionales para editar (omitir validación de unicidad en el ID actual)
@@ -42,13 +44,13 @@ class ProcessorRequest extends FormRequest
   public function messages()
   {
     return [
-      'user_id.exists'               => 'El usuario seleccionado no es válido.',
-      'prototype_id.exists'          => 'El prototipo seleccionado no es válido.',
-      'memories.required'            => 'Debe seleccionar al menos una memoria.',
-      'memories.*.id.required'       => 'Debe seleccionar una memoria válida.',
-      'memories.*.quantity.required' => 'Debe especificar la cantidad de memorias.',
-      'memories.*.quantity.integer'  => 'La cantidad debe ser un número entero.',
-      'memories.*.quantity.min'      => 'La cantidad debe ser al menos 1.',
+      'user_id.exists'                   => 'El usuario seleccionado no es válido.',
+      'prototype_id.exists'              => 'El prototipo seleccionado no es válido.',
+      'memories.required'                => 'Debe seleccionar al menos una memoria.',
+      'memories.*.id.required'           => 'Debe seleccionar una memoria válida.',
+      'memories.*.quantity_mem.required' => 'Debe especificar la cantidad de memorias.',
+      'memories.*.quantity_mem.integer'  => 'La cantidad debe ser un número entero.',
+      'memories.*.quantity_mem.min'      => 'La cantidad debe ser al menos 1.',
     ];
   }
 }
