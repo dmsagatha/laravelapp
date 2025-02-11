@@ -54,34 +54,182 @@
   </div>
 
   @push('scripts')
-    {{-- <script src="{{ asset('js/dynamicSelection.js') }}"></script> --}}
+    {{-- Seleccionar el Tipo del Modelo del Prototipo --}}
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const modelTypeSelect = document.getElementById('model_type');
+        const referenceSelect = document.getElementById('reference');
+        const form = referenceSelect.closest('form'); // Obtiene el formulario padre
+        const selectedPrototypeId = referenceSelect.getAttribute('data-selected'); // Para edición
+    
+        // Función para cargar referencias basadas en el model_type
+        function loadReferences(modelType, selectedReference = null) {
+          referenceSelect.innerHTML = '<option value="">Seleccionar Referencia</option>';
+          referenceSelect.disabled = true;
+    
+          if (modelType) {
+            fetch(`/procesadores/prototipos/tipo?model_type=${encodeURIComponent(modelType)}`)
+              .then(response => response.json())
+              .then(data => {
+                console.log('Datos recibidos:', data); // Verificar qué devuelve la API
+
+                data.forEach(prototype => {
+                  const option = document.createElement('option');
+                  option.value = prototype.id; // Asegurar que el ID sea correcto
+                  option.textContent = `${prototype.reference} - ${prototype.brand}`;
+                  
+                  if (selectedReference && prototype.id == selectedReference) {
+                    option.selected = true;
+                  }
+                  referenceSelect.appendChild(option);
+                });
+    
+                referenceSelect.disabled = false;
+              })
+              .catch(error => console.error('Error al obtener referencias:', error));
+          }
+        }
+    
+        // Evento cuando cambia el tipo de modelo
+        modelTypeSelect.addEventListener('change', function () {
+          loadReferences(modelTypeSelect.value);
+        });
+    
+        // En edición, cargar automáticamente las referencias
+        if (selectedPrototypeId) {
+          loadReferences(modelTypeSelect.value, selectedPrototypeId);
+        }
+    
+        // Habilitar el select antes de enviar el formulario
+        form.addEventListener('submit', function (event) {
+          if (!referenceSelect.value) {
+            event.preventDefault();
+            alert('Por favor selecciona una referencia de modelo antes de enviar el formulario.');
+            return;
+          }
+    
+          referenceSelect.disabled = false; // Asegurar que se envíe el valor
+          console.log('Enviando prototype_id:', referenceSelect.value);
+        });
+      });
+    </script>
+
+    {{-- Manejo del Service Tag, en proceso de baja y el formato de la MAC --}}
+    <script>
+      document.querySelector('#inputServicetag').addEventListener('change', function() {
+        this.value = this.value.replace(/\s/gi, '');
+      });
+
+      document.getElementById('inputMac').addEventListener('change', macFormat);
+      document.getElementById('inputMac').addEventListener('keyup', macFormat);
+
+      function macFormat(e) {
+        this.value =
+          (this.value.toUpperCase()
+            .replace(/[^A-F0-9]/g, '')
+            .match(/.{1,2}/g) || [])
+          .join(':');
+      }
+    </script>
+    
+    {{-- Memorias adicionales --}}
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const container = document.getElementById("memory-fields");
         const addMemoryBtn = document.getElementById("add-memory-btn");
-
+        const memoryTable = document.getElementById("memory-table");
+        const memoryList = document.getElementById("memory-list");
+    
+        // Ocultar la tabla si no hay memorias cargadas
+        function checkTableVisibility() {
+          if (memoryList.children.length === 0) {
+            memoryTable.classList.add("hidden");
+          } else {
+            memoryTable.classList.remove("hidden");
+          }
+        }
+        checkTableVisibility();
+    
+        addMemoryBtn.addEventListener("click", function () {
+          console.log("🟡 Botón de agregar memoria clickeado");
+    
+          const index = memoryList.children.length;
+          const memoryField = document.createElement("tr");
+          memoryField.classList.add("memory-item");
+    
+          memoryField.innerHTML = `
+            <td>
+              <select name="memories[${index}][id]" class="memory-select select--control sm:w-80 md:w-60 p-2">
+                <option value="">Seleccionar</option>
+                @foreach($memories as $memory)
+                  <option value="{{ $memory->id }}">
+                    {{ $memory->serial }} - {{ $memory->technology }} - {{ $memory->capacity }}
+                  </option>
+                @endforeach
+              </select>
+            </td>
+            <td>
+              <input type="number" name="memories[${index}][quantity]" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer text-center" min="1">
+            </td>
+            <td class="flex justify-center items-center">
+              <button type="button" class="remove-memory-btn bg-red-500 text-white px-2 py-1 rounded">
+                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                </svg>
+              </button>
+            </td>
+          `;
+          memoryList.appendChild(memoryField);
+          checkTableVisibility();
+        });
+    
+        // Validación de referencias duplicadas
+        container.addEventListener("change", function (event) {
+          if (event.target.classList.contains("memory-select")) {
+            const selectedValues = Array.from(document.querySelectorAll(".memory-select"))
+              .map(select => select.value)
+              .filter(value => value !== "");
+    
+            const uniqueValues = new Set(selectedValues);
+    
+            if (selectedValues.length !== uniqueValues.size) {
+              Swal.fire({
+                icon: "warning",
+                title: "Referencia duplicada",
+                text: "Esta referencia ya ha sido seleccionada. Por favor, elegir otra.",
+                confirmButtonColor: "#d33",
+              });
+    
+              // Restablecer la selección
+              event.target.value = "";
+            }
+          }
+        });
+    
+        // Eliminación de memorias
         container.addEventListener("click", function (event) {
-          if (event.target.classList.contains("remove-memory-btn")) {
+          if (event.target.closest(".remove-memory-btn")) {
             console.log("🔴 Botón de eliminar clickeado");
-
-            // Buscar la memoria en una fila `<tr>` si es una memoria guardada
-            let memoryField = event.target.closest("tr") || event.target.closest(".memory-item") || event.target.closest(".flex");
-
+    
+            let memoryField = event.target.closest("tr");
+    
             if (memoryField) {
               console.log("✅ Elemento encontrado para eliminar:", memoryField);
-
-              const hiddenInput = memoryField.querySelector('input[name^="memories"][name$="[id]"]');
-              if (hiddenInput && hiddenInput.value) {
-                console.log("🔵 Memoria existente detectada con ID:", hiddenInput.value);
-
-                memoryField.style.display = "none";
-
-                let deleteInput = document.querySelector(`input[name="memories_to_delete[]"][value="${hiddenInput.value}"]`);
+    
+              const selectInput = memoryField.querySelector('select[name^="memories"][name$="[id]"]');
+    
+              if (selectInput && selectInput.value) {
+                console.log("🔵 Memoria existente detectada con ID:", selectInput.value);
+    
+                memoryField.style.display = "none"; // Ocultar visualmente en edición
+    
+                let deleteInput = document.querySelector(`input[name="memories_to_delete[]"][value="${selectInput.value}"]`);
+    
                 if (!deleteInput) {
                   deleteInput = document.createElement("input");
                   deleteInput.type = "hidden";
                   deleteInput.name = "memories_to_delete[]";
-                  deleteInput.value = hiddenInput.value;
+                  deleteInput.value = selectInput.value;
                   container.appendChild(deleteInput);
                   console.log("🟢 Input hidden creado para marcar la memoria como eliminada:", deleteInput);
                 }
@@ -89,156 +237,13 @@
                 console.log("🟠 Memoria nueva eliminada completamente del DOM");
                 memoryField.remove();
               }
-            } else {
-              console.log("⚠️ No se encontró el contenedor de la memoria. Probando con `event.target.parentElement`...");
-              console.log("📌 Parent Element:", event.target.parentElement);
             }
+    
+            // Revisar si la tabla debe ocultarse
+            setTimeout(checkTableVisibility, 200);
           }
-        });
-
-        addMemoryBtn.addEventListener("click", function () {
-          console.log("🟡 Botón de agregar memoria clickeado");
-
-          const index = container.children.length;
-
-          const memoryField = document.createElement("div");
-          memoryField.classList.add("memory-item", "flex", "items-center", "space-x-4");
-          memoryField.innerHTML = `
-                <div>
-                    <label for="memories[${index}][id]">Memory:</label>
-                    <select name="memories[${index}][id]" class="border border-gray-300 rounded p-2" required>
-                        @foreach($memories as $memory)
-                            <option value="{{ $memory->id }}">{{ $memory->serial }} - {{ $memory->capacity }}GB</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div>
-                    <label for="memories[${index}][quantity]">Quantity:</label>
-                    <input type="number" name="memories[${index}][quantity]" class="border border-gray-300 rounded p-2" min="1" required>
-                </div>
-                <button type="button" class="remove-memory-btn bg-red-500 text-white px-2 py-1 rounded">Remove</button>
-            `;
-          container.appendChild(memoryField);
         });
       });
     </script>
-
-    {{-- <script>
-      document.getElementById('add-memory-btn').addEventListener('click', function () {
-        const container = document.getElementById('memory-fields');
-        const index = container.children.length;
-    
-        const memoryField = document.createElement('div');
-        memoryField.classList.add('flex', 'items-center', 'space-x-4');
-        memoryField.innerHTML = `
-          <td>
-            <select name="memories[${index}][id]" class="select--control sm:w-80 md:w-60 p-2" required>
-              <option value="">Seleccionar una</option>
-              @foreach($memories as $memory)
-                <option value="{{ $memory->id }}">
-                  {{ $memory->serial }} - {{ $memory->technology }} - {{ $memory->capacity }}
-                </option>
-              @endforeach
-            </select>
-          </td>
-          <td>
-            <input type="number" name="memories[${index}][quantity]" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer text-center" min="1" required>
-          </td>
-          <button type="button" class="remove-memory-btn bg-red-500 text-slate-50 px-2 py-1 rounded">Eliminar</button>
-        `;
-        container.appendChild(memoryField);
-    
-        // Agregar evento para eliminar memoria
-        memoryField.querySelector('.remove-memory-btn').addEventListener('click', function () {
-          memoryField.remove();
-        });
-      });
-    </script> --}}
-
-    {{-- <script>
-      document.getElementById('add-memory-btn').addEventListener('click', function () {
-        const container = document.getElementById('memory-fields');
-        const index = container.children.length;
-
-        // Crear nuevos campos dinámicamente
-        const memoryField = document.createElement('div');
-        memoryField.innerHTML = `
-            <div>
-                <label for="memories[${index}][id]">Memory:</label>
-                <select name="memories[${index}][id]" required>
-                    @foreach($memories as $memory)
-                        <option value="{{ $memory->id }}">{{ $memory->serial }} - {{ $memory->capacity }}GB</option>
-                    @endforeach
-                </select>
-                <label for="memories[${index}][quantity]">Quantity:</label>
-                <input type="number" name="memories[${index}][quantity]" min="1" required>
-            </div>
-        `;
-        container.appendChild(memoryField);
-      });
-    </script> --}}
-    {{-- <script>
-      document.addEventListener('DOMContentLoaded', () => {
-          const addMemoryBtn = document.getElementById('add-memory-btn');
-          const memoryList = document.getElementById('memory-list');
-  
-          // Memorias disponibles (esto se puede cargar dinámicamente desde el backend si es necesario)
-          const memories = @json($memories); // Desde el controlador (memorias disponibles)
-  
-          // Lógica para agregar una memoria
-          addMemoryBtn.addEventListener('click', () => {
-              // Crear una nueva fila
-              const row = document.createElement('tr');
-  
-              // Columna de selección de memoria
-              const memoryCell = document.createElement('td');
-              const memorySelect = document.createElement('select');
-              memorySelect.name = 'memories[][id]';
-              memorySelect.required = true;
-  
-              // Opciones del select
-              const defaultOption = document.createElement('option');
-              defaultOption.textContent = 'Seleccione una memoria';
-              defaultOption.disabled = true;
-              defaultOption.selected = true;
-              memorySelect.appendChild(defaultOption);
-  
-              memories.forEach(memory => {
-                  const option = document.createElement('option');
-                  option.value = memory.id;
-                  option.textContent = `${memory.serial} - ${memory.capacity} (${memory.technology})`;
-                  memorySelect.appendChild(option);
-              });
-  
-              memoryCell.appendChild(memorySelect);
-              row.appendChild(memoryCell);
-  
-              // Columna para cantidad
-              const quantityCell = document.createElement('td');
-              const quantityInput = document.createElement('input');
-              quantityInput.type = 'number';
-              quantityInput.name = 'memories[][quantity]';
-              quantityInput.min = 1;
-              quantityInput.required = true;
-              quantityCell.appendChild(quantityInput);
-              row.appendChild(quantityCell);
-  
-              // Columna para eliminar
-              const actionCell = document.createElement('td');
-              const deleteBtn = document.createElement('button');
-              deleteBtn.type = 'button';
-              deleteBtn.textContent = 'Eliminar';
-              deleteBtn.addEventListener('click', () => {
-                  row.remove();
-              });
-              actionCell.appendChild(deleteBtn);
-              row.appendChild(actionCell);
-  
-              // Agregar la fila a la tabla
-              memoryList.appendChild(row);
-              console.log(memoryList);
-          });
-      });
-    </script> --}}
   @endpush
 </x-app-layout>

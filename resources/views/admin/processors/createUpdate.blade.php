@@ -40,6 +40,7 @@
         @endif
 
         @include('admin.processors._fields')
+        @include('admin.processors.partials.maximize')
 
         <div class="py-3 bg-slate-50 dark:bg-slate-800 text-center space-x-2">
           <button type="submit" class="w-36 inline-flex items-center justify-center bg-green-600 border border-transparent rounded-md font-medium p-2 mr-2 mb-2 text-center text-sm text-slate-50 hover:bg-green-500 focus:outline-none focus:border-green-700 focus:ring-0 focus:ring-green-200 active:bg-green-600 disabled:opacity-25 transition">
@@ -133,7 +134,7 @@
     </script>
     
     {{-- Memorias adicionales --}}
-    <script>
+    {{-- <script>
       document.addEventListener("DOMContentLoaded", function () {
         const container = document.getElementById("memory-fields");
         const addMemoryBtn = document.getElementById("add-memory-btn");
@@ -241,6 +242,72 @@
     
             // Revisar si la tabla debe ocultarse
             setTimeout(checkTableVisibility, 200);
+          }
+        });
+      });
+    </script> --}}
+    
+    {{-- Memorias adicionales --}}
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        let field_selected = [];
+
+        // Agregar y eliminar campos dinámicos
+        document.addEventListener("click", function (e) {
+          if (e.target.closest(".btn-add-field")) {
+            e.preventDefault();
+            
+            let controlForm = document.querySelector(".controlsField div:first-child");
+            let currentEntry = e.target.closest(".entryField");
+            let newEntry = currentEntry.cloneNode(true);
+            
+            newEntry.querySelectorAll("input").forEach(input => input.value = "");
+            controlForm.appendChild(newEntry);
+            
+            let removeButton = newEntry.querySelector(".btn-add-field");
+            removeButton.classList.remove("btn-add-field", "btn-success");
+            removeButton.classList.add("btn-remove", "bg-red-600", "hover:bg-red-500", "focus:border-red-700", "focus:ring-red-200");
+            removeButton.innerHTML = '<i class="fas fa-minus"></i>';
+          }
+
+          if (e.target.closest(".btn-remove")) {
+            e.preventDefault();
+            e.target.closest(".entryField").remove();
+          }
+        });
+
+        // Agregar filas en la tabla
+        document.querySelectorAll(".addBtn").forEach(button => {
+          button.addEventListener("click", function (e) {
+            let rowHtml = e.target.closest("tr").cloneNode(true);
+            rowHtml.querySelectorAll("input, select").forEach(el => el.value = el.value = "");
+            e.target.closest("tr").insertAdjacentElement("afterend", rowHtml);
+          });
+        });
+
+        // Eliminar filas en la tabla
+        document.querySelectorAll(".removeBtn").forEach(button => {
+          button.addEventListener("click", function (e) {
+            e.target.closest("tr").remove();
+          });
+        });
+
+        // Validación de referencias duplicadas
+        document.addEventListener("change", function (e) {
+          if (e.target.classList.contains("fielDouble")) {
+            let selected = e.target.value;
+
+            if (!field_selected.includes(selected)) {
+              field_selected.push(selected);
+            } else {
+              Swal.fire({
+                  icon: 'error',
+                  title: 'El registro ya ha sido seleccionado!',
+                  text: 'Por favor seleccione otro!',
+                  button: 'Ok!',
+              });
+              e.target.value = "";
+            }
           }
         });
       });

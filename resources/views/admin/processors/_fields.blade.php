@@ -42,7 +42,7 @@
 </div>
 
 {{-- Memorias adicionales --}}
-<div id="memory-fields" class="max-w-lg mt-5 space-y-4">
+{{-- <div id="memory-fields" class="max-w-lg mt-5 space-y-4">
   <label>Memorias RAM:</label>
   <button type="button" id="add-memory-btn" class="bg-blue-500 text-slate-50 px-4 py-2 rounded">
     Agregar
@@ -88,4 +88,4 @@
       @endforeach
     </tbody>
   </table>
-</div>
+</div> --}}
