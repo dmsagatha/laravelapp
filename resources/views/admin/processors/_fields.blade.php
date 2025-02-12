@@ -42,37 +42,37 @@
 </div>
 
 {{-- Memorias adicionales --}}
-<div class="my-4">
-  <label for="memory" class="block text-gray-700">Memories</label>
-  <select id="memory" class="select--control sm:w-80 md:w-60 p-2">
-      @foreach ($memories as $memory)
-          <option value="{{ $memory->id }}">{{ $memory->type }}</option>
-      @endforeach
-  </select>
-  <button type="button" id="add-memory" class="mt-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Add Memory</button>
-  @error('memories')
-      <div class="text-red-500 text-sm">{{ $message }}</div>
-  @enderror
-</div>
-<div id="selected-memories" class="mb-4">
-  <table class="table-auto w-full">
-      <thead>
-          <tr>
-              <th class="px-4 py-2">Memory Type</th>
-              <th class="px-4 py-2">Quantity</th>
-              <th class="px-4 py-2">Actions</th>
-          </tr>
-      </thead>
-      <tbody>
-          @if(isset($processor))
-              @foreach ($processor->memories as $memory)
-                  <tr>
-                      <td class="border px-4 py-2"><input type="hidden" name="memories[]" value="{{ $memory->id }}">{{ $memory->type }}</td>
-                      <td class="border px-4 py-2"><input type="number" name="quantity_mem[{{ $memory->id }}]" class="select--control sm:w-80 md:w-60 p-2" value="{{ old('quantity_mem.' . $memory->id, $memory->pivot->quantity_mem) }}" placeholder="Quantity for {{ $memory->type }}"></td>
-                      <td class="border px-4 py-2"><button type="button" class="remove-memory bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Remove</button></td>
-                  </tr>
+        <div class="mb-4">
+          <label for="memory" class="block text-gray-700">Memories</label>
+          <select id="memory" class="mt-1 block w-full">
+              @foreach ($memories as $memory)
+                  <option value="{{ $memory->id }}">{{ $memory->type }}</option>
               @endforeach
-          @endif
-      </tbody>
-  </table>
-</div>
+          </select>
+          <button type="button" id="add-memory" class="mt-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Add Memory</button>
+          @error('memories')
+              <div class="text-red-500 text-sm">{{ $message }}</div>
+          @enderror
+      </div>
+      <div id="selected-memories" class="mb-4">
+          <table class="table-auto w-full">
+              <thead>
+                  <tr>
+                      <th class="px-4 py-2">Memory Type</th>
+                      <th class="px-4 py-2">Quantity</th>
+                      <th class="px-4 py-2">Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  @if(isset($processor))
+                      @foreach ($processor->memories as $memory)
+                          <tr>
+                              <td class="border px-4 py-2"><input type="hidden" name="memories[]" value="{{ $memory->id }}">{{ $memory->type }}</td>
+                              <td class="border px-4 py-2"><input type="number" name="quantity_mem[{{ $memory->id }}]" class="mt-1 block w-full" value="{{ old('quantity_mem.' . $memory->id, $memory->pivot->quantity_mem) }}" placeholder="Quantity for {{ $memory->type }}"></td>
+                              <td class="border px-4 py-2"><button type="button" class="remove-memory bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Remove</button></td>
+                          </tr>
+                      @endforeach
+                  @endif
+              </tbody>
+          </table>
+      </div>
