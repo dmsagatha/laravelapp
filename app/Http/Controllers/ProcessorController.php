@@ -42,10 +42,10 @@ class ProcessorController extends Controller
   public function create()
   {
     return view('admin.processors.createUpdate', [
-      'processor'        => new Processor(),
-      'users'            => User::fullUsers(),
-      'model_types'      => array_filter(Prototype::MODEL_TYPE_SELECT, fn($value) => $value !== 'Tableta'),
-      'memories'         => Memory::orderBy('serial')->get(),
+      'processor'   => new Processor(),
+      'users'       => User::fullUsers(),
+      'model_types' => array_filter(Prototype::MODEL_TYPE_SELECT, fn ($value) => $value !== 'Tableta'),
+      'memories'    => Memory::orderBy('serial')->get(),
     ]);
   }
 
@@ -54,7 +54,7 @@ class ProcessorController extends Controller
     try {
       $processor = Processor::create($request->validated());
 
-      $memories = $request->input('memories', []);
+      $memories   = $request->input('memories', []);
       $quantities = $request->input('quantity_mem', []);
 
       foreach ($memories as $memoryId) {
@@ -69,37 +69,25 @@ class ProcessorController extends Controller
 
   public function edit(Processor $processor)
   {
-    $selectedMemories = $processor->memories->map(function ($memory) {
-      return [
-        'id'       => $memory->id,
-        'quantity' => $memory->pivot->quantity,
-      ];
-    });
-
     return view('admin.processors.createUpdate', [
-      'processor'        => $processor,
-      'users'            => User::fullUsers(),
-      'model_types'      => array_filter(Prototype::MODEL_TYPE_SELECT, fn($value) => $value !== 'Tableta'),
-      'memories'         => Memory::orderBy('serial')->get(),
-      'selectedMemories' => $selectedMemories
+      'processor'   => $processor,
+      'users'       => User::fullUsers(),
+      'model_types' => array_filter(Prototype::MODEL_TYPE_SELECT, fn ($value) => $value !== 'Tableta'),
+      'memories'    => Memory::orderBy('serial')->get(),
     ]);
   }
 
   public function update(ProcessorRequest $request, Processor $processor)
   {
-    // Sincronizar las memorias nuevas
-    $memories = collect($request->validated(['memories']) ?? [])
-      ->mapWithKeys(fn($memory) => [$memory['id'] => ['quantity' => $memory['quantity']]]);
-
-    $processor->memories()->sync($memories);
-
-    // Eliminar memorias que se marcaron para borrar
-    if (!empty($request->validated(['memories_to_delete']))) {
-      $processor->memories()->detach($request->validated(['memories_to_delete']));
-    }
-
-    // Continúa con la actualización
     $processor->update($request->validated());
+
+    $memories   = $request->input('memories', []);
+    $quantities = $request->input('quantity_mem', []);
+
+    $processor->memories()->sync([]);
+    foreach ($memories as $memoryId) {
+      $processor->memories()->attach($memoryId, ['quantity_mem' => $quantities[$memoryId]]);
+    }
 
     return redirect()->route('processors.index')->with('success', 'Registro actualizado correctamente.');
   }
