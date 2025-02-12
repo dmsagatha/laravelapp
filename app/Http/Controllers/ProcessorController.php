@@ -86,12 +86,13 @@ class ProcessorController extends Controller
     $memories = $request->input('memories', []);
     $quantities = $request->input('quantity_mem', []);
 
-    $processor->memories()->sync([]);
+    $syncData = [];
     foreach ($memories as $index => $memoryId) {
         if (isset($quantities[$index])) {
-            $processor->memories()->attach($memoryId, ['quantity_mem' => $quantities[$index]]);
+            $syncData[$memoryId] = ['quantity_mem' => $quantities[$index]];
         }
     }
+    $processor->memories()->sync($syncData);
 
     return redirect()->route('processors.index')->with('success', 'Registro actualizado correctamente.');
   }
