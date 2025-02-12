@@ -82,15 +82,15 @@ class ProcessorController extends Controller
   public function update(ProcessorRequest $request, Processor $processor)
   {
     $processor->update($request->validated());
-
-    $memories   = $request->input('memories', []);
+    
+    $memories = $request->input('memories', []);
     $quantities = $request->input('quantity_mem', []);
 
     $processor->memories()->sync([]);
     foreach ($memories as $index => $memoryId) {
-      if (isset($quantities[$index])) {
-        $processor->memories()->attach($memoryId, ['quantity_mem' => $quantities[$index]]);
-      }
+        if (isset($quantities[$index])) {
+            $processor->memories()->attach($memoryId, ['quantity_mem' => $quantities[$index]]);
+        }
     }
 
     return redirect()->route('processors.index')->with('success', 'Registro actualizado correctamente.');

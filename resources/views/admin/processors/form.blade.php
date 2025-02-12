@@ -52,7 +52,7 @@
         <div class="text-red-500 text-sm">{{ $message }}</div>
     @enderror
 </div>
-<div id="selected-memories" class="mb-4" style="display: none;">
+<div id="selected-memories" class="mb-4" @if(empty($processor->memories)) style="display: none;" @endif>
     <table class="table-auto w-full">
         <thead>
             <tr>
