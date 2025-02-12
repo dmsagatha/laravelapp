@@ -39,7 +39,7 @@
               @method('PUT')
           @endif
 
-        @include('admin.processors._fields')
+        @include('admin.processors.form')
 
         <div class="py-3 bg-slate-50 dark:bg-slate-800 text-center space-x-2">
           <button type="submit" class="w-36 inline-flex items-center justify-center bg-green-600 border border-transparent rounded-md font-medium p-2 mr-2 mb-2 text-center text-sm text-slate-50 hover:bg-green-500 focus:outline-none focus:border-green-700 focus:ring-0 focus:ring-green-200 active:bg-green-600 disabled:opacity-25 transition">
@@ -69,7 +69,7 @@
   
       const memoryRow = document.createElement('tr');
       memoryRow.innerHTML = `
-          <td class="border px-4 py-2"><input type="hidden" name="memories[]" value="${selectedMemoryId}">${selectedMemoryText}</td>
+          <td class="border px-4 py-2"><input name="memories[]" value="${selectedMemoryId}">${selectedMemoryText}</td>
           <td class="border px-4 py-2"><input type="number" name="quantity_mem[${selectedMemoryId}]" class="mt-1 block w-full" placeholder="Quantity for ${selectedMemoryText}"></td>
           <td class="border px-4 py-2"><button type="button" class="remove-memory bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Remove</button></td>
       `;
