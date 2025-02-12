@@ -56,15 +56,24 @@
           const memoryRow = document.createElement('tr');
       
           memoryRow.innerHTML = `
-              <td class="border px-4 py-2">
-                  <select name="memories[]" class="block w-full">
-                      @foreach ($memories as $memory)
-                          <option value="{{ $memory->id }}">{{ $memory->type }}</option>
-                      @endforeach
-                  </select>
+              <td class="px-4 py-2">
+                <select name="memories[]" class="select--control sm:w-80 md:w-60 p-2">
+                  <option value="">Seleccionar</option>
+                  @foreach ($memories as $memory)
+                    <option value="{{ $memory->id }}">
+                      {{ $memory->serial }} - {{ $memory->technology }} - {{ $memory->capacity }}
+                    </option>
+                  @endforeach
+                </select>
               </td>
-              <td class="border px-4 py-2"><input type="number" name="quantity_mem[]" class="mt-1 block w-full" placeholder="Quantity"></td>
-              <td class="border px-4 py-2"><button type="button" class="remove-memory bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Remove</button></td>
+              <td class="px-4 py-2">
+                <input type="number" name="quantity_mem[]" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer text-center" placeholder="Quantity">
+              </td>
+              <td class="px-4 py-2">
+                <button type="button" class="remove-memory bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                  Borrar Crear
+                </button>
+              </td>
           `;
       
           selectedMemoriesContainer.appendChild(memoryRow);
