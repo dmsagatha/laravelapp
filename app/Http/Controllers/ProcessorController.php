@@ -92,6 +92,7 @@ class ProcessorController extends Controller
             $syncData[$memoryId] = ['quantity_mem' => $quantities[$index]];
         }
     }
+    
     $processor->memories()->sync($syncData);
 
     return redirect()->route('processors.index')->with('success', 'Registro actualizado correctamente.');
