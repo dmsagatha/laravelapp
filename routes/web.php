@@ -42,9 +42,11 @@ Route::group(['middleware' => ['auth', 'verified']], function ()
     ->parameters(['usuarios' => 'user'])
     ->names('users');
   
-  Route::resource('procesadores', ProcessorController::class)
+  /* Route::resource('procesadores', ProcessorController::class)
     ->parameters(['procesadores' => 'processor'])
-    ->names('processors');
+    ->names('processors'); */
+  
+  Route::resource('processors', ProcessorController::class);
 
   Route::prefix('procesadores')->name('processors.')->controller(ProcessorController::class)->group(function () {
     // Route::get('/', 'index')->name('index');

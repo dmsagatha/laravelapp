@@ -57,8 +57,10 @@ class ProcessorController extends Controller
       $memories   = $request->input('memories', []);
       $quantities = $request->input('quantity_mem', []);
 
-      foreach ($memories as $memoryId) {
-        $processor->memories()->attach($memoryId, ['quantity_mem' => $quantities[$memoryId]]);
+      foreach ($memories as $index => $memoryId) {
+        if (isset($quantities[$index])) {
+          $processor->memories()->attach($memoryId, ['quantity_mem' => $quantities[$index]]);
+        }
       }
 
       return redirect()->route('processors.index')->with('success', 'Registro creado satisfactoriamente!');
@@ -85,8 +87,10 @@ class ProcessorController extends Controller
     $quantities = $request->input('quantity_mem', []);
 
     $processor->memories()->sync([]);
-    foreach ($memories as $memoryId) {
-      $processor->memories()->attach($memoryId, ['quantity_mem' => $quantities[$memoryId]]);
+    foreach ($memories as $index => $memoryId) {
+      if (isset($quantities[$index])) {
+        $processor->memories()->attach($memoryId, ['quantity_mem' => $quantities[$index]]);
+      }
     }
 
     return redirect()->route('processors.index')->with('success', 'Registro actualizado correctamente.');

@@ -12,11 +12,7 @@
       <div class="px-4 py-5 mx-auto text-center max-w-7xl sm:px-6 lg:py-2 lg:px-8">
         <h2 class="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 sm:text-3xl">
           <span class="block">
-            @if (isset($processor->id))
-              Actualizar - Procesadores - Selects dependientes
-            @else
-              Crear - Procesadores - Selects dependientes
-            @endif
+            {{ isset($processor->id) ? 'Actualizar - ' : 'Crear - ' }} Procesadores - Selects dependientes
           </span>
         </h2>
       </div>
@@ -35,7 +31,7 @@
     <div class="p-10">
       <form action="{{ isset($processor->id) ? route('processors.update', $processor) : route('processors.store') }}" method="POST">
           @csrf
-          @if(isset($processor))
+          @if(isset($processor->id))
               @method('PUT')
           @endif
 
@@ -54,33 +50,34 @@
   </div>
 
   @push('scripts')
-  <script>
-  document.getElementById('add-memory').addEventListener('click', function () {
-      const memorySelect = document.getElementById('memory');
-      const selectedMemoryId = memorySelect.value;
-      const selectedMemoryText = memorySelect.options[memorySelect.selectedIndex].text;
-  
-      if (!selectedMemoryId) return;
-  
-      const selectedMemoriesContainer = document.querySelector('#selected-memories tbody');
-      const existingMemory = document.querySelector(`input[name="memories[]"][value="${selectedMemoryId}"]`);
-  
-      if (existingMemory) return;
-  
-      const memoryRow = document.createElement('tr');
-      memoryRow.innerHTML = `
-          <td class="border px-4 py-2"><input name="memories[]" value="${selectedMemoryId}">${selectedMemoryText}</td>
-          <td class="border px-4 py-2"><input type="number" name="quantity_mem[${selectedMemoryId}]" class="mt-1 block w-full" placeholder="Quantity for ${selectedMemoryText}"></td>
-          <td class="border px-4 py-2"><button type="button" class="remove-memory bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Remove</button></td>
-      `;
-  
-      selectedMemoriesContainer.appendChild(memoryRow);
-  
-      memoryRow.querySelector('.remove-memory').addEventListener('click', function () {
-          memoryRow.remove();
+    <script>
+      document.getElementById('add-memory').addEventListener('click', function () {
+          const selectedMemoriesContainer = document.querySelector('#selected-memories tbody');
+          const memoryRow = document.createElement('tr');
+      
+          memoryRow.innerHTML = `
+              <td class="border px-4 py-2">
+                  <select name="memories[]" class="block w-full">
+                      @foreach ($memories as $memory)
+                          <option value="{{ $memory->id }}">{{ $memory->type }}</option>
+                      @endforeach
+                  </select>
+              </td>
+              <td class="border px-4 py-2"><input type="number" name="quantity_mem[]" class="mt-1 block w-full" placeholder="Quantity"></td>
+              <td class="border px-4 py-2"><button type="button" class="remove-memory bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Remove</button></td>
+          `;
+      
+          selectedMemoriesContainer.appendChild(memoryRow);
+          document.getElementById('selected-memories').style.display = 'block';
+      
+          memoryRow.querySelector('.remove-memory').addEventListener('click', function () {
+              memoryRow.remove();
+              if (selectedMemoriesContainer.children.length === 0) {
+                  document.getElementById('selected-memories').style.display = 'none';
+              }
+          });
       });
-  });
-  </script>
+    </script>
 
     {{-- Seleccionar el Tipo del Modelo del Prototipo --}}
     <script>
