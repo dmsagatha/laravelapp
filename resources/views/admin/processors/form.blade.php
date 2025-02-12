@@ -47,7 +47,7 @@
 
 {{-- Memorias adicionales --}}
 <div class="mb-4">
-  <button type="button" id="add-memory" class="mt-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Agregar Memoria</button>
+  <button type="button" id="add-memory" class="mt-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Agregar Memorias</button>
   @error('memories')
     <div class="text-red-500 text-sm">{{ $message }}</div>
   @enderror
@@ -76,7 +76,7 @@
                 </select>
             </td>
             <td class="px-4 py-2">
-              <input type="number" name="quantity_mem[{{ $memory->id }}]" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer text-center" value="{{ old('quantity_mem.' . $memory->id, $memory->pivot->quantity_mem) }}" placeholder="Quantity for {{ $memory->type }}">
+              <input type="number" name="quantity_mem[{{ $memory->id }}]" class="block py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer text-center" value="{{ old('quantity_mem.' . $memory->id, $memory->pivot->quantity_mem) }}"  placeholder="Quantity for {{ $memory->type }}">
             </td>
             <td class="px-4 py-2">
               <button type="button" class="remove-memory bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
